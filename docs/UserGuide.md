@@ -60,7 +60,7 @@ Format: `add DESCRIPTION [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [t
 > 3. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (min, hr, day, week, mo), e.g. 6d, 1w
 > 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (min, hr, day, week, mo), e.g. 6d, 1w
 > 5. `p/` Priority: Specifies the priority of a task (high/3/h, med/2/m, low/1/l)
-> 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.<br> 
+> 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
 **Note**
 * A task can be dated (has time, date, length), or floating.<br> 
 * Both time and date must be specified (dated), or both left out (floating). Tasks with only time or date specified will give an error.<br> 
