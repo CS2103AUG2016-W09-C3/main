@@ -68,9 +68,9 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 > * Tags specifies any tags that are associated with this task. Tasks can have any number of tags (including 0)
 
 **Example**
-> You have a CS2101 Lecture weekly, starting from 7th Oct at 2pm. However, the lecture is webcasted so you don't always have to attend, thus making it low priority. You simply have to run: <br>
-> * `add CS2101 Lecture h/1400 d/07102016 l/2hr r/1w p/low t/got-webcast` <br>
-> This will add a CS2101 Lecture task which recurs every week starting with 2pm on 7th Oct, marks it as low priority and tags it with the `got-webcast` tag.
+> * You have a CS2101 Lecture weekly, starting from 7th Oct at 2pm. However, the lecture is webcasted so you don't always have to attend, thus making it low priority. You simply have to run: <br>
+>   `add CS2101 Lecture h/1400 d/07102016 l/2hr r/1w p/low t/got-webcast` <br>
+> * This will add a CS2101 Lecture task which recurs every week starting with 2pm on 7th Oct, marks it as low priority and tags it with the `got-webcast` tag.
 
 ---
 
@@ -91,7 +91,7 @@ Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [d/]`
 **Example**
 > * You want to view all upcoming tasks ordered by date, so you know what needs to be done. <br>
 >   `list ds/ s/date`
-> * You want to see all the tasks you have completed in the past year, to celebrate what you've done with your life. Simply run the following command:<br>
+> * You want to see all the tasks you have completed in the past year, to celebrate what you've done with your life. <br>
 >   `list ds/01012016 de/ d/`
 
 ---
@@ -111,9 +111,9 @@ Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]`
     e.g. `Stuff` will match `Do stuff`
 
 **Example**
-> * You've tagged all your homework tasks with the `homework` tag, and you want to view all homework that needs to be done. Simply run the following command:<br>
+> * You've tagged all your homework tasks with the `homework` tag, and you want to view all homework that needs to be done. <br>
 >   `find homework s/tags`<br>
-> * You want to find all tasks that relate to your family. Simply run the following command:<br>
+> * You want to find all tasks that relate to your family. <br>
 >   `find brother sister mother father family`
 
 ---
@@ -129,10 +129,10 @@ Format: `delete INDEX`
 > * This action is irreversible.
 
 **Example**
-> * Having displayed all tasks, you want to remove the one in the second position. Simply run the following command:
+> * Having displayed all tasks, you want to remove the one in the second position. 
 >   `tasks`<br>
     `delete 2`<br>
-> * After retrieving all work related tasks, you want to delete the first one. Simply run the following command:
+> * After retrieving all work related tasks, you want to delete the first one. 
 > * `find work`<br> 
     `delete 1`<br>
     Deletes the 1st task in the results of the `find` command.
@@ -171,13 +171,13 @@ Format: `edit INDEX [desc/DESCRIPTION] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p
 
 **Example**
 > * Your boss just changed the date of a meeting on the 3rd October to the 2nd. Simply find your meeting task, then run the following command:
-> * `find meeting`<br> 
+>   `find meeting`<br> 
     `edit 1 d/02102016`<br>
 
 ---
   
 ### Reschduling a task: `reschedule`
-ToDoIt doesn't expect you to be the perfect worker. Sometimes you're too busy or tired to do a task. If you're not feeling up to it right now, simply reschedule it for another day. .<br>
+ToDoIt doesn't expect you to be the perfect worker. Sometimes you're too busy or tired to do a task. If you're not feeling up to it right now, simply reschedule it for another day.<br>
 Format: `reschedule INDEX INTERVAL` 
 
 **Notes**
@@ -189,7 +189,7 @@ Format: `reschedule INDEX INTERVAL`
  
 **Example**
 > * You need to get some homework done, but you just got back from school and you need a break. Simply find your homework task, then run the following command:
-> * `find homework`<br> 
+>   `find homework`<br> 
     `reschedule 1 1hr`<br>
 
 ---
@@ -207,7 +207,7 @@ Format: `done INDEX`
  
 **Example**
 > * You just completed your homework. Simply find your homework task, then run the following command:
-> * `find homework`<br> 
+>   `find homework`<br> 
     `done 1`<br>
 	
 ---
