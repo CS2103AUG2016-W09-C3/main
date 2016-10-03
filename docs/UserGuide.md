@@ -30,7 +30,7 @@
 
 ## Features
 
-**Command Format**
+###Command Format
 * Each command consists of a command word (such as find, or help), followed by additional modifiers. A modifier is a word or character followed by a forward slash (e.g. a/, desc/ etc.).
 * A modifier may require additional data, specified after the forward slash (e.g. desc/Go to Work). `UPPER_CASE` words in the format describe the data to input.
 * Modifiers in `SQUARE_BRACKETS` are optional.
@@ -61,7 +61,6 @@ Format: `add DESCRIPTION [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [t
 > 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (min, hr, day, week, mo), e.g. 6d, 1w
 > 5. `p/` Priority: Specifies the priority of a task (high/3/h, med/2/m, low/1/l)
 > 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.<br> 
-> <br> 
 **Note**
 * A task can be dated (has time, date, length), or floating.<br> 
 * Both time and date must be specified (dated), or both left out (floating). Tasks with only time or date specified will give an error.<br> 
