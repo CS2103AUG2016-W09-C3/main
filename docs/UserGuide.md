@@ -31,174 +31,195 @@
 ## Features
 
 ###Command Format
-* Each command consists of a command word (such as find, or help), followed by additional modifiers. A modifier is a word or character followed by a forward slash (e.g. a/, desc/ etc.).
-* A modifier may require additional data, specified after the forward slash (e.g. desc/Go to Work). `UPPER_CASE` words in the format describe the data to input.
-* Modifiers in `SQUARE_BRACKETS` are optional.
-* Modifiers with `...` after them can be specified multiple times (e.g. t/Work t/School t/CS2103).
-* The order of modifiers to specify for each command is fixed.
+* Each command consists of a command word (such as find, or help), followed by additional options. An option is a word or character followed by a forward slash (e.g. a/, desc/ etc.).
+* An option may require additional data, specified after the forward slash (e.g. desc/Go to Work). `UPPER_CASE` words in the format describe the data to input.
+* Options in `SQUARE_BRACKETS` are optional.
+* Options with `...` after them can be specified multiple times (e.g. t/Work t/School t/CS2103).
+* The order of options to specify for each command is fixed.
 
-
-
+---
 
 ### Viewing help : `help`
 Format: `help`
 
 The help command provides you with a detailed explanation of the available commands within the program.
 
-> Help is also shown if you enter an incorrect command e.g. `abcd`
+**Notes**
+> * Help is also shown if you enter an incorrect command e.g. `abcd`
 
 ---
 
 ### Adding a task: `add`
-Adds a task to the to do list.<br>
-Format: `add DESCRIPTION [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [t/TAG]...` 
+Format: `add DESCRIPTION [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [t/TAG]...`
 
-**Modifiers**
+ToDoIt compiles your tasks for the day efficiently with a simple line of text. The `add` command adds your tasks to the to do list, allowing you to view them any time you want.
+
+**Options**
 > 1. `h/` Time: Time in 24 hour HHMM format
 > 2. `d/` Date: Date in DDMMYY format
-> 3. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (min, hr, day, week, mo), e.g. 6d, 1w
-> 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (min, hr, day, week, mo), e.g. 6d, 1w
-> 5. `p/` Priority: Specifies the priority of a task (high/3/h, med/2/m, low/1/l)
+> 3. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
+> 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
+> 5. `p/` Priority: Specifies the priority of a task (`high`/`3`/`h`, `med`/`2`/`m`, `low`/`1`/`l`)
 > 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
 
 **Notes**
-* A task can be dated (has time, date, length), or floating.<br> 
-* Both time and date must be specified (dated), or both left out (floating). Tasks with only time or date specified will give an error.<br> 
-* Tags specifies any tags that are associated with this task. Tasks can have any number of tags (including 0)
+> * A task can be dated (has time, date, length), or floating.<br> 
+> * Both time and date must be specified (dated), or both left out (floating). Tasks with only time or date specified will give an error.<br> 
+> * Tags specifies any tags that are associated with this task. Tasks can have any number of tags (including 0)
 
-**Examples**
-* `add Do stuff h/1100 d/10102016 l/1hr p/high`
-* `add CS2101 Lecture h/1400 d/07102016 l/2hr r/1w p/low t/got-webcast`
+**Example**
+> You have a CS2101 Lecture weekly, starting from 7th Oct at 2pm. However, the lecture is webcasted so you don't always have to attend, thus making it low priority. You simply have to run: <br>
+> * `add CS2101 Lecture h/1400 d/07102016 l/2hr r/1w p/low t/got-webcast` <br>
+> This will add a CS2101 Lecture task which recurs every week starting with 2pm on 7th Oct, marks it as low priority and tags it with the `got-webcast` tag.
 
 ---
 
 ### Listing tasks : `list`
-Shows a list of tasks in ToDoIt specified by the search terms.<br>
+ToDoIt displays your tasks easily with a simple command. The tasks to list can be customized to your liking simply with a few keywords.<br>
 Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [d/]`
 
-> **Modifiers**
-> * `ds/` Date start: If a start date is specified, program will only display tasks after this date.
-> * `de/` Date end: If an end date is specified, program will only display tasks before this date.
-> * `s/` Sort by: Sorts the tasks in the order specified (date, time, alpha, priority).
-> * `d/` Done tasks: If this flag is specified, tasks that are marked done will be shown.<br> 
-> <br> 
-> Dates are in DDMMYY format.
+**Options**
+> 1. `ds/` Date start: If a start date is specified, program will only display tasks after this date. If the option is used without a specified date, it will use today's date.
+> 2. `de/` Date end: If an end date is specified, program will only display tasks before this date. If the option is used without a specified date, , it will use today's date.
+> 3. `s/` Sort by: Sorts the tasks in the order specified (`date`, `time`, `alpha`, `priority`).
+> 4. `d/` Done tasks: If this flag is specified, tasks that are marked done will be shown.
 
-Examples: 
-* `list ds/02102016 de/09102016 s/date d/`
+**Notes**
+> * Dates are in DDMMYY format.
+> * Tasks marked done will be hidden. To view done tasks, include the d/ option.
+
+**Example**
+> * You want to view all upcoming tasks ordered by date, so you know what needs to be done. <br>
+>   `list ds/ s/date`
+> * You want to see all the tasks you have completed in the past year, to celebrate what you've done with your life. Simply run the following command:<br>
+>   `list ds/01012016 de/ d/`
 
 ---
 
 ### Finding all task containing a keyword: `find`
-Finds tasks that contain any of the given keywords.<br>
+ToDoIt searches and finds the tasks you need, while filtering out the clutter. Keep your mind focused on what's important.<br>
 Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]`
 
-> **Modifiers**
-> * `s/` Scope: The scope in which to search (all, desc, tags). Defaults to all.<br> 
-> <br> 
-> The search is not case sensitive. e.g `stuff` will match `Stuff`<br> 
-> The order of the keywords does not matter. e.g. `Do stuff` will match `Stuff do`<br> 
-> Only full words will be matched e.g. `Work` will not match `Workout`<br> 
-> Tasks matching at least one keyword will be returned (i.e. `OR` search).
+**Options**
+> 1. `s/` Scope: The scope in which to search (`all`, `desc`, `tags`). Defaults to `all`.
+
+**Notes**
+> * The search is not case sensitive. e.g `stuff` will match `Stuff`<br> 
+> * The order of the keywords does not matter. e.g. `Do stuff` will match `Stuff do`<br> 
+> * Only full words will be matched e.g. `Work` will not match `Workout`<br> 
+> * Tasks matching at least one keyword will be returned (i.e. `OR` search).<br>
     e.g. `Stuff` will match `Do stuff`
 
-Examples: 
-* `find work <br>
-  Returns `Do work` but not `Do homework`
-* `find work s/tags <br>
-  Returns tasks contained with the `work` tag.
+**Example**
+> * You've tagged all your homework tasks with the `homework` tag, and you want to view all homework that needs to be done. Simply run the following command:<br>
+>   `find homework s/tags`<br>
+> * You want to find all tasks that relate to your family. Simply run the following command:<br>
+>   `find brother sister mother father family`
 
-  
-  
+---
   
 ### Deleting a task : `delete`
-Deletes the specified task from the to do list. Irreversible.<br>
+Made a mistake? No worries, ToDoIt is forgiving. Simply remove tasks you don't need with a simple command.<br>
 Format: `delete INDEX`
 
-> Deletes the task at the specified `INDEX`. <br>
-  The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...
+**Notes**
+> * This deletes the task at the specified `INDEX`. <br>
+    The index refers to the index number shown in the most recent listing.<br>
+    The index **must be a positive integer** `1`, `2`, `3`, ...
+> * This action is irreversible.
 
-Examples: 
-* `tasks`<br>
-  `delete 2`<br>
-  Deletes the 2nd task in the to do list.
-* `find work`<br> 
-  `delete 1`<br>
-  Deletes the 1st task in the results of the `find` command.
+**Example**
+> * Having displayed all tasks, you want to remove the one in the second position. Simply run the following command:
+>   `tasks`<br>
+    `delete 2`<br>
+> * After retrieving all work related tasks, you want to delete the first one. Simply run the following command:
+> * `find work`<br> 
+    `delete 1`<br>
+    Deletes the 1st task in the results of the `find` command.
 
-
-
+---
 
 ### Clear all tasks : `clear`
-Deletes all tasks from the to do list. Irreversible.<br>
+Sometimes you just have to start fresh. Remove everything in your task list with one command.<br>
 Format: `clear`
 
+**Notes**
+> * This action is irreversible.
 
-
+---
 
 ### Editing a task: `edit`
-Edits a task in the to do list.<br>
+You never know when things change. Life is unpredictable. ToDoIt knows this, and lets you adapt to the erratic changes you may have in your schedule. Modify your tasks with a simple command.<br>
 Format: `edit INDEX [desc/DESCRIPTION] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIORITY] [t/TAG]...` 
 
-> Edits the task at the specified `INDEX`. <br>
-  The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ... <br>
-> Replaces the current task data with the specified task data. Irreversible. <br>
-> For more information regarding the parameters, refer to `add` commmand
+**Options**
+> 1. `desc/` Description: The new description of the task.
+> 2. `h/` Time: Time in 24 hour HHMM format
+> 3. `d/` Date: Date in DDMMYY format
+> 4. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
+> 5. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
+> 6. `p/` Priority: Specifies the priority of a task (`high`/`3`/`h`, `med`/`2`/`m`, `low`/`1`/`l`)
+> 7. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
 
-Examples: 
-* `find stuff`<br> 
-  `edit 1 desc/Do stuff`<br>
+**Notes**
+> * This edits the task at the specified `INDEX`. <br>
+    The index refers to the index number shown in the most recent listing.<br>
+    The index **must be a positive integer** `1`, `2`, `3`, ... <br>
+> * Replaces the current task data with the specified task data.<br>
+> * This action is irreversible.
+> * For more information regarding the options, refer to `add` commmand.
 
-  
-  
+**Example**
+> * Your boss just changed the date of a meeting on the 3rd October to the 2nd. Simply find your meeting task, then run the following command:
+> * `find meeting`<br> 
+    `edit 1 d/02102016`<br>
+
+---
   
 ### Reschduling a task: `reschedule`
-Reschedules a task in the to do list.<br>
+ToDoIt doesn't expect you to be the perfect worker. Sometimes you're too busy or tired to do a task. If you're not feeling up to it right now, simply reschedule it for another day. .<br>
 Format: `reschedule INDEX INTERVAL` 
 
-> Reschedules the task at the specified `INDEX`.  <br>
-  The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ... <br>
-> For interval, use a number followed by a time interval (min, hr, day, week, mo), e.g. 6d, 1w. <br>
-> Negative numbers are not supported. To reschedule earlier, consider using edit instead.
+**Notes**
+> * This reschedules the task at the specified `INDEX`.  <br>
+    The index refers to the index number shown in the most recent listing.<br>
+    The index **must be a positive integer** `1`, `2`, `3`, ... <br>
+> * For interval, use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
+> * Negative numbers are not supported. To reschedule to an earlier time, consider using `edit` instead.
  
-Examples: 
-* `find stuff`<br> 
-  `reschedule 1 1hr`<br>
+**Example**
+> * You need to get some homework done, but you just got back from school and you need a break. Simply find your homework task, then run the following command:
+> * `find homework`<br> 
+    `reschedule 1 1hr`<br>
 
-  
-  
+---
   
 ### Mark a task as done : `done`
-Marks the specified task from the to do list as done.<br>
+Hooray! You've just completed a task! Celebrate your accomplisment by marking it as done.<br>
 Format: `done INDEX`
 
-> Marks task at the specified `INDEX` as done. <br>
-  The index refers to the index number shown in the most recent listing.<br>
-  The index **must be a positive integer** 1, 2, 3, ...<br>
-> If the task is already done, marks the task as undone.
-
-
-
-
-### Clearing all entries : `clear`
-Clears all entries from the address book.<br>
-Format: `clear`  
-
-
-
+**Notes**
+> * This marks task at the specified `INDEX` as done. <br>
+    The index refers to the index number shown in the most recent listing.<br>
+    The index **must be a positive integer** `1`, `2`, `3`, ...<br>
+> * If the task is already done, marks the task as undone.
+> * Marking a task as done will stop it from showing up in any `list` command, unless the `\d` option is used.
+ 
+**Example**
+> * You just completed your homework. Simply find your homework task, then run the following command:
+> * `find homework`<br> 
+    `done 1`<br>
+	
+---
 
 ### Exiting the program : `exit`
-Exits the program.<br>
+ToDoIt is sad to see you go.<br>
 Format: `exit`  
 
-
-
+---
 
 ### Saving the data 
-Task data are saved in the hard disk automatically after any command that changes the data.<br>
+ToDoIt saves your precious data in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
 ## FAQ
