@@ -12,14 +12,14 @@ We are a team based in the [School of Computing, National University of Singapor
 
 #### [Yang Suwei](https://github.com/swxsw)
 <img src="images/YangSuwei.jpg" width="150"><br>
-Role: Developer <br>  
+Role: Developer <br>
 Responsibilities: Model
 
 -----
 
 #### [Jamos Tay](https://github.com/jamos-tay) 
 <img src="images/JamosTay.png" width="150"><br>
-Role: Developer <br>  
+Role: Developer <br>
 Responsibilities: Logic
 
 -----
