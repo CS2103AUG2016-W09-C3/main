@@ -1,20 +1,20 @@
 [![Build Status](https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master)](https://travis-ci.org/se-edu/addressbook-level4)
 [![Coverage Status](https://coveralls.io/repos/github/se-edu/addressbook-level4/badge.svg?branch=master)](https://coveralls.io/github/se-edu/addressbook-level4?branch=master)
 
-# Address Book (Level 4)
+# ToDoIt Task Manager
 
-<img src="docs/images/Ui.png" width="600"><br>
+<img src="docs/images/prototypeUI.png" width="600"><br>
 
-* This is a desktop Address Book application. It has a GUI but most of the user interactions happen using 
-  a CLI (Command Line Interface).
-* It is a Java sample application intended for students learning Software Engineering while using Java as 
-  the main programming language. 
-* It is **written in OOP fashion**. It provides a **reasonably well-written** code example that is 
-  **significantly bigger** (around 6 KLoC)than what students usually write in beginner-level SE modules. 
-* What's different from [level 3](https://github.com/se-edu/addressbook-level3):
-    * A more sophisticated GUI that includes a list panel and an in-built Browser.
-    * More test cases, including automated GUI testing.
-    * Support for *Build Automation* using Gradle and for *Continuous Integration* using Travis CI.
+Always forgetting what to do? If you would like to plan your day efficiently, then we have got just the app just for you, ToDoIt!<br>
+<br>
+ToDoIt is a task manager that keeps your daily activities in check. 
+It will notify you what is the upcoming activities for the day or the week.<br>
+<br>
+Unlike other task managers, ToDoIt is a simple task manager where everything is done in just one line. 
+It has the capabilities of any calendar, but with a more user-friendly interface.
+The interface is simple requiring minimal number of steps to accomplish everything.<br>
+<br>
+Are you ready? Let's start now!<br>
 
   
 #### Site Map
