@@ -18,7 +18,7 @@ Responsibilities: Model
 -----
 
 #### [Jamos Tay](https://github.com/jamos-tay) 
-<img src="images/JamosTay.jpg" width="150"><br>
+<img src="images/JamosTay.png" width="150"><br>
 Role: Developer <br>  
 Responsibilities: Logic
 
@@ -26,14 +26,14 @@ Responsibilities: Logic
 
 #### [Goh Qi Wei](https://github.com/qiwei24)
 <img src="images/GohQiWei.jpg" width="150"><br>
-Role: Developer <br>  
+Role: Developer <br>
 Responsibilities: Storage
 
 -----
 
 #### [Shaun Chee](https://github.com/ShaunChee) 
-<img src="images/ShaunChee.jpg" width="150"><br>
- Role: Developer <br>  
+<img src="images/ShaunChee.JPG" width="150"><br>
+ Role: Developer <br>
  Responsibilities: UI
 
 
