@@ -47,8 +47,7 @@ The help command provides you with a detailed explanation of the available comma
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
 
-
-
+---
 
 ### Adding a task: `add`
 Adds a task to the to do list.<br>
@@ -62,17 +61,16 @@ Format: `add DESCRIPTION [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [t
 > 5. `p/` Priority: Specifies the priority of a task (high/3/h, med/2/m, low/1/l)
 > 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
 
-**Note**
+**Notes**
 * A task can be dated (has time, date, length), or floating.<br> 
 * Both time and date must be specified (dated), or both left out (floating). Tasks with only time or date specified will give an error.<br> 
 * Tags specifies any tags that are associated with this task. Tasks can have any number of tags (including 0)
 
-Examples: 
+**Examples**
 * `add Do stuff h/1100 d/10102016 l/1hr p/high`
 * `add CS2101 Lecture h/1400 d/07102016 l/2hr r/1w p/low t/got-webcast`
 
-
-
+---
 
 ### Listing tasks : `list`
 Shows a list of tasks in ToDoIt specified by the search terms.<br>
@@ -89,8 +87,7 @@ Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [d/]`
 Examples: 
 * `list ds/02102016 de/09102016 s/date d/`
 
-
-
+---
 
 ### Finding all task containing a keyword: `find`
 Finds tasks that contain any of the given keywords.<br>
