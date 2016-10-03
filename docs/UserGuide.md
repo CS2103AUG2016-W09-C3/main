@@ -27,25 +27,34 @@
 6. Refer to the [Features](#features) section below for details of each command.<br>
 
 
+
 ## Features
 
 > **Command Format**
-> * Words in `UPPER_CASE` are the parameters.
-> * Items in `SQUARE_BRACKETS` are optional.
-> * Items with no parameter specified require no parameter.
-> * Items with `...` after them can have multiple instances.
-> * The order of parameters is fixed.
+> * Each command consists of a command word (such as find, or help), followed by additional modifiers. A modifier is a word or character followed by a forward slash (e.g. a/, desc/ etc.).
+> * A modifier may require additional data, specified after the forward slash (e.g. desc/Go to Work). `UPPER_CASE` words in the format describe the data to input.
+> * Modifiers in `SQUARE_BRACKETS` are optional.
+> * Modifiers with `...` after them can be specified multiple times (e.g. t/Work t/School t/CS2103).
+> * The order of modifiers to specify for each command is fixed.
 
-#### Viewing help : `help`
+
+
+
+### Viewing help : `help`
 Format: `help`
 
+The help command provides you with a detailed explanation of the available commands within the program.
+
 > Help is also shown if you enter an incorrect command e.g. `abcd`
- 
-#### Adding a task: `add`
+
+
+
+
+### Adding a task: `add`
 Adds a task to the to do list.<br>
 Format: `add DESCRIPTION [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [t/TAG]...` 
 
-> **Flags**
+> **Items**
 > * `h/` Time: Time in 24 hour HHMM format
 > * `d/` Date: Date in DDMMYY format
 > * `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (min, hr, day, week, mo), e.g. 6d, 1w
@@ -61,11 +70,14 @@ Examples:
 * `add Do stuff h/1100 d/10102016 l/1hr p/high`
 * `add CS2101 Lecture h/1400 d/07102016 l/2hr r/1w p/low t/got-webcast`
 
-#### Listing tasks : `list`
+
+
+
+### Listing tasks : `list`
 Shows a list of tasks in ToDoIt specified by the search terms.<br>
 Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [d/]`
 
-> **Flags**
+> **Items**
 > * `ds/` Date start: If a start date is specified, program will only display tasks after this date.
 > * `de/` Date end: If an end date is specified, program will only display tasks before this date.
 > * `s/` Sort by: Sorts the tasks in the order specified (date, time, alpha, priority).
@@ -76,11 +88,14 @@ Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [d/]`
 Examples: 
 * `list ds/02102016 de/09102016 s/date d/`
 
-#### Finding all task containing a keyword: `find`
+
+
+
+### Finding all task containing a keyword: `find`
 Finds tasks that contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]`
 
-> **Flags**
+> **Items**
 > * `s/` Scope: The scope in which to search (all, desc, tags). Defaults to all.<br> 
 > <br> 
 > The search is not case sensitive. e.g `stuff` will match `Stuff`<br> 
@@ -95,7 +110,10 @@ Examples:
 * `find work s/tags <br>
   Returns tasks contained with the `work` tag.
 
-#### Deleting a task : `delete`
+  
+  
+  
+### Deleting a task : `delete`
 Deletes the specified task from the to do list. Irreversible.<br>
 Format: `delete INDEX`
 
@@ -111,11 +129,17 @@ Examples:
   `delete 1`<br>
   Deletes the 1st task in the results of the `find` command.
 
-#### Clear all tasks : `clear`
+
+
+
+### Clear all tasks : `clear`
 Deletes all tasks from the to do list. Irreversible.<br>
 Format: `clear`
-  
-#### Editing a task: `edit`
+
+
+
+
+### Editing a task: `edit`
 Edits a task in the to do list.<br>
 Format: `edit INDEX [desc/DESCRIPTION] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIORITY] [t/TAG]...` 
 
@@ -129,7 +153,10 @@ Examples:
 * `find stuff`<br> 
   `edit 1 desc/Do stuff`<br>
 
-#### Reschduling a task: `reschedule`
+  
+  
+  
+### Reschduling a task: `reschedule`
 Reschedules a task in the to do list.<br>
 Format: `reschedule INDEX INTERVAL` 
 
@@ -142,8 +169,11 @@ Format: `reschedule INDEX INTERVAL`
 Examples: 
 * `find stuff`<br> 
   `reschedule 1 1hr`<br>
+
   
-#### Mark a task as done : `done`
+  
+  
+### Mark a task as done : `done`
 Marks the specified task from the to do list as done.<br>
 Format: `done INDEX`
 
@@ -152,15 +182,24 @@ Format: `done INDEX`
   The index **must be a positive integer** 1, 2, 3, ...<br>
 > If the task is already done, marks the task as undone.
 
-#### Clearing all entries : `clear`
+
+
+
+### Clearing all entries : `clear`
 Clears all entries from the address book.<br>
 Format: `clear`  
 
-#### Exiting the program : `exit`
+
+
+
+### Exiting the program : `exit`
 Exits the program.<br>
 Format: `exit`  
 
-#### Saving the data 
+
+
+
+### Saving the data 
 Task data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
