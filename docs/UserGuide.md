@@ -30,12 +30,12 @@
 
 ## Features
 
-> **Command Format**
-> * Each command consists of a command word (such as find, or help), followed by additional modifiers. A modifier is a word or character followed by a forward slash (e.g. a/, desc/ etc.).
-> * A modifier may require additional data, specified after the forward slash (e.g. desc/Go to Work). `UPPER_CASE` words in the format describe the data to input.
-> * Modifiers in `SQUARE_BRACKETS` are optional.
-> * Modifiers with `...` after them can be specified multiple times (e.g. t/Work t/School t/CS2103).
-> * The order of modifiers to specify for each command is fixed.
+**Command Format**
+* Each command consists of a command word (such as find, or help), followed by additional modifiers. A modifier is a word or character followed by a forward slash (e.g. a/, desc/ etc.).
+* A modifier may require additional data, specified after the forward slash (e.g. desc/Go to Work). `UPPER_CASE` words in the format describe the data to input.
+* Modifiers in `SQUARE_BRACKETS` are optional.
+* Modifiers with `...` after them can be specified multiple times (e.g. t/Work t/School t/CS2103).
+* The order of modifiers to specify for each command is fixed.
 
 
 
@@ -54,17 +54,18 @@ The help command provides you with a detailed explanation of the available comma
 Adds a task to the to do list.<br>
 Format: `add DESCRIPTION [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [t/TAG]...` 
 
-> **Items**
-> * `h/` Time: Time in 24 hour HHMM format
-> * `d/` Date: Date in DDMMYY format
-> * `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (min, hr, day, week, mo), e.g. 6d, 1w
-> * `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (min, hr, day, week, mo), e.g. 6d, 1w
-> * `p/` Priority: Specifies the priority of a task (high/3/h, med/2/m, low/1/l)
-> * `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.<br> 
+**Modifiers**
+> 1. `h/` Time: Time in 24 hour HHMM format
+> 2. `d/` Date: Date in DDMMYY format
+> 3. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (min, hr, day, week, mo), e.g. 6d, 1w
+> 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (min, hr, day, week, mo), e.g. 6d, 1w
+> 5. `p/` Priority: Specifies the priority of a task (high/3/h, med/2/m, low/1/l)
+> 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.<br> 
 > <br> 
-> A task can be dated (has time, date, length), or floating.<br> 
-> Both time and date must be specified (dated), or both left out (floating). Tasks with only time or date specified will give an error.<br> 
-> Tags specifies any tags that are associated with this task. Tasks can have any number of tags (including 0)
+**Note**
+* A task can be dated (has time, date, length), or floating.<br> 
+* Both time and date must be specified (dated), or both left out (floating). Tasks with only time or date specified will give an error.<br> 
+* Tags specifies any tags that are associated with this task. Tasks can have any number of tags (including 0)
 
 Examples: 
 * `add Do stuff h/1100 d/10102016 l/1hr p/high`
@@ -77,7 +78,7 @@ Examples:
 Shows a list of tasks in ToDoIt specified by the search terms.<br>
 Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [d/]`
 
-> **Items**
+> **Modifiers**
 > * `ds/` Date start: If a start date is specified, program will only display tasks after this date.
 > * `de/` Date end: If an end date is specified, program will only display tasks before this date.
 > * `s/` Sort by: Sorts the tasks in the order specified (date, time, alpha, priority).
@@ -95,7 +96,7 @@ Examples:
 Finds tasks that contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]`
 
-> **Items**
+> **Modifiers**
 > * `s/` Scope: The scope in which to search (all, desc, tags). Defaults to all.<br> 
 > <br> 
 > The search is not case sensitive. e.g `stuff` will match `Stuff`<br> 
