@@ -28,21 +28,24 @@
 1. Download the latest `ToDoIt.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your ToDoIt task file.
 3. Double-click the ToDoIt.jar to start the app. The GUI should appear in a few seconds. 
-   > <img src="images/Ui.png" width="600">
-
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
-5. Some example commands you can try:
-   * **`list`** : lists all tasks
-   * **`add`**` Meeting with John h/14:00 d/05-09-2016 l/2 p/5 a/no r/no i/Meeting with John regarding sales` : 
-     adds a task named `Meeting with John` to the task list.
-   * **`delete`**` 3` : deletes the 3rd task shown in the current list
-   * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+5. Refer to the [Features](#features) section below for details of each command.<br>
 
 
 
 ## Features
+
+<img src="images/prototypeUI.png" width="600"><br>
+
+Ensure you've followed the quick start guide to downloading this program. Simply double click the app to run it. As you can see, the prototype User Interface will be shown above.
+
+When the program is started, you will see 4 controls:
+
+1. The command box. This is where commands are entered. Simply type the command you want to execute, and press enter to execute it.
+2. The result summary. Once a command is entered, relevant information will be logged in this box. You can view it to ensure the command has been executed correctly.
+3. The task box. This displays the tasks you have entered. Tasks retrieved from the `list` or `find` command will also be reflected here.
+4. The Google Calendar Window. Tasks entered will be automatically synced to your google calendar. Disclaimer: This is still a work in progress, and may not be in the final release.
 
 ###Command Format
 * Each command consists of a command word (such as find, or help), followed by additional options. An option is a word or character followed by a forward slash (e.g. a/, desc/ etc.).
