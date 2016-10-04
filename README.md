@@ -3,7 +3,7 @@
 
 # ToDoIt Task Manager
 
-<img src="docs/images/prototypeUI.png" width="600"><br>
+<img src="docs/images/prototype.png" width="600"><br>
 
 Always forgetting what to do? If you would like to plan your day efficiently, then we have got just the app just for you, ToDoIt!<br>
 <br>
