@@ -26,13 +26,23 @@ public class Parser {
     private static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
-    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+/*    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
                     + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-
+*/
+    private static final Pattern TASK_DATA_ARGS_FORMAT = 
+            Pattern.compile("(?<name>[^/]+)"
+                    + " (?<isTimePrivate>p?)h/(?<time>[^/]+)"
+                    + " (?<isDatePrivate>p?)d/(?<date>[^/]+)"
+                    + " (?<isLengthPrivate>p?)l/(?<length>[^/]+)"
+                    + " (?<isRecurringPrivate>p?)r/(?<recurring>[^/]+)"
+                    + " (?<isPriorityPrivate>p?)p/(?<priority>[^/]+)"
+                    + " (?<isInformationPrivate>p?)i/(?<information>[^/]+)"
+                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+    
     public Parser() {}
 
     /**
@@ -95,9 +105,12 @@ public class Parser {
         try {
             return new AddCommand(
                     matcher.group("name"),
-                    matcher.group("phone"),
-                    matcher.group("email"),
-                    matcher.group("address"),
+                    matcher.group("time"),
+                    matcher.group("date"),
+                    matcher.group("length"),
+                    matcher.group("recurring"),
+                    matcher.group("priority"),
+                    matcher.group("information"),
                     getTagsFromArgs(matcher.group("tagArguments"))
             );
         } catch (IllegalValueException ive) {
