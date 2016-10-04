@@ -8,16 +8,15 @@
 
 ## About
 
-   Always forgetting what to do? Can't If you would like to plan your day efficiently, then we have got just the app just for you, ToDoIt!<br>
+   Always forgetting what to do? Have difficulties managing your hectic timetable? If you want to plan your day efficiently, then we have got just the app just for you, ToDoIt!<br>
    <br>
    ToDoIt is a task manager that keeps your daily activities in check. 
-   It will notify you what are the upcoming activities for the day or the week.<br>
+   It will notify you of the upcoming activities for the day or the week.<br>
    <br>
-   Unlike other task managers, ToDoIt is a simple task manager where everything is done in just one line. 
-   It has the capabilities of any calendar, but with a more user-friendly interface.
-   The interface is simple requiring minimal number of steps to accomplish everything.<br>
+   Unlike other task managers, ToDoIt offers a minimalistic task manager where all your tasks can be managed effortlessly in just one line. 
+   It also functions as a calendar, but with a more user-friendly, intuitive interface that allows you to accomplish everything with a minimal number of steps.<br>
    <br>
-   Are you ready? Let's start now!<br>
+   Are you ready? Let's get started!<br>
 
 ## Quick Start
 
