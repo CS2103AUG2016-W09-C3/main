@@ -56,7 +56,7 @@ When the program is started, you will see 4 controls:
 * Each command consists of a command word (such as find, or help), followed by additional options. An option is a word or character followed by a forward slash (e.g. a/, ds/ etc.).
 * An option may require additional data, specified after the forward slash (e.g. desc/Go to Work). `UPPER_CASE` words in the format describe the data to input.
 * Options in `SQUARE_BRACKETS` are optional.
-* Options with `...` after them can be specified multiple times (e.g. t/Work t/School t/CS2103).
+* Options with `...` after them can be specified multiple times (e.g. `t/Work t/School t/CS2103`).
 * The order of options to specify for each command is fixed.
 
 ---
@@ -89,7 +89,7 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 **Notes**
 > * A task can be dated (has time, date, length), or floating.<br> 
 > * Both time and date must be specified (dated), or both left out (floating). Tasks with only time or date specified will give an error.<br> 
-> * Tasks can have any number of tags (including 0). Simply repeat the t/ option (e.g. t/work t/school t/CS2103).
+> * Tasks can have any number of tags (including 0). Simply repeat the t/ option (e.g. `t/work t/school t/CS2103`).
 
 **Example**
 > * You have a CS2101 Lecture weekly, starting from 7th Oct at 2pm. However, the lecture is webcasted so you don't always have to attend, thus making it low priority. You simply have to run: <br>
