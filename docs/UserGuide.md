@@ -260,7 +260,7 @@ There is no need to save manually.
        
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with 
-       the file that contains the data of your previous Address Book folder.<br>
+       the file that contains the data of your previous to do list folder.<br>
        <br>
        
 **Q**: How do I uninstall ToDoIt?<br>
@@ -275,15 +275,15 @@ There is no need to save manually.
        
 ## Command Summary
 
-Command | Format  
--------- | :-------- 
-Add | `add TASK_NAME [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
-Edit | `edit INDEX [n/TASK_NAME] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` 
-Clear | `clear`
-Delete | `delete INDEX`
-Done | `done INDEX`
-List | `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [d/]`
-Reschedule | `reschedule INDEX INTERVAL`
-Find | `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]`
-Help | `help`
-Exit | `exit`
+| Command | Format |
+| -------- | :-------- |
+| Add | `add TASK_NAME [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...` |
+| Edit | `edit INDEX [n/TASK_NAME] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` |
+| Clear | `clear` |
+| Delete | `delete INDEX` |
+| Done | `done INDEX` |
+| List | `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [d/]` |
+| Reschedule | `reschedule INDEX INTERVAL` |
+| Find | `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]` |
+| Help | `help` |
+| Exit | `exit` |
