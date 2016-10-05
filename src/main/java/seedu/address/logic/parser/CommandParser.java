@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
@@ -14,7 +15,7 @@ public class CommandParser implements ParsedCommand{
     
     private String commandName = "";
     private ArrayList<String> values = new ArrayList<>();
-    private HashMap<String, String> params = new HashMap<>();
+    private HashMap<String, ArrayList<String>> params = new HashMap<>();
     
     public CommandParser(String command){
         loadFromString(command);
@@ -63,7 +64,10 @@ public class CommandParser implements ParsedCommand{
 
     private void addParam(String currentParam, String currentParamValue) {
         if(currentParam != null){
-            params.put(currentParam, currentParamValue);
+            if(!params.containsKey(params)){
+                params.put(currentParam, new ArrayList<>());
+            }
+            params.get(currentParam).add(currentParamValue);
         }
     }
     
@@ -73,18 +77,26 @@ public class CommandParser implements ParsedCommand{
 
     @Override
     public String getParam(String paramName) throws IllegalValueException {
-        if(!params.containsKey(paramName)){
+        if(!params.containsKey(paramName) || params.get(paramName).size() == 0){
             throw new IllegalValueException(String.format(VALUE_OUT_OF_BOUNDS_MESSAGE, paramName));
         }
-        return params.get(paramName);
+        return params.get(paramName).get(0);
     }
 
     @Override
     public String getParamOrDefault(String paramName, String defaultParam)  {
-        if(!params.containsKey(paramName)){
+        if(!params.containsKey(paramName) || params.get(paramName).size() == 0){
             return defaultParam;
         }
-        return params.get(paramName);
+        return params.get(paramName).get(0);
+    }
+    
+    @Override
+    public Iterator<String> getParamList(String paramName) throws IllegalValueException  {
+        if(!params.containsKey(paramName) || params.get(paramName).size() == 0){
+            throw new IllegalValueException(String.format(VALUE_OUT_OF_BOUNDS_MESSAGE, paramName));
+        }
+        return params.get(paramName).iterator();
     }
     
     @Override
@@ -103,6 +115,16 @@ public class CommandParser implements ParsedCommand{
         return values.get(index);
     }
 
+    @Override
+    public Iterator<String> getAllValues(){
+        return values.iterator();
+    }
+    
+    @Override
+    public Iterator<String> getAllParams(){
+        return params.keySet().iterator();
+    }
+    
     @Override
     public String getCommandName() {
         return commandName;
