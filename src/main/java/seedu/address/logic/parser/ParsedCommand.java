@@ -6,7 +6,7 @@ public interface ParsedCommand {
 
     String getParam(String paramName) throws IllegalValueException;
 
-    String getParamOrDefault(String paramName, String defaultParam) throws IllegalValueException;
+    String getParamOrDefault(String paramName, String defaultParam);
     
     String getValue() throws IllegalValueException;
     
