@@ -9,7 +9,9 @@ public class CommandParser implements ParsedCommand{
     
     private static final String COMMAND_DELIMITER = " ";
     private static final String PARAM_DELIMITER = "/";
-    
+    public static final String VALUE_OUT_OF_BOUNDS_MESSAGE = "Value index out of bounds: %1$s";
+    public static final String NO_PARAM_MESSAGE = "Could not find param: %1$s";
+    public static final String NO_COMMAND_NAME_MESSAGE = "No command name available";
     
     private String commandName = null;
     private ArrayList<String> values = new ArrayList<>();
@@ -78,7 +80,7 @@ public class CommandParser implements ParsedCommand{
     @Override
     public String getParam(String paramName) throws IllegalValueException {
         if(!params.containsKey(paramName)){
-            throw new IllegalValueException("Could not find param " + paramName);
+            throw new IllegalValueException(String.format(VALUE_OUT_OF_BOUNDS_MESSAGE, paramName));
         }
         return params.get(paramName);
     }
@@ -94,7 +96,7 @@ public class CommandParser implements ParsedCommand{
     @Override
     public String getValue() throws IllegalValueException {
         if(values.isEmpty()){
-            throw new IllegalValueException("No value available");
+            throw new IllegalValueException(String.format(VALUE_OUT_OF_BOUNDS_MESSAGE, 0));
         }
         return values.get(0);
     }
@@ -102,7 +104,7 @@ public class CommandParser implements ParsedCommand{
     @Override
     public String getValue(int index) throws IllegalValueException {
         if(index >= values.size()){
-            throw new IllegalValueException("Index out of bounds for values: " + index);
+            throw new IllegalValueException(String.format(VALUE_OUT_OF_BOUNDS_MESSAGE, index));
         }
         return values.get(index);
     }
@@ -110,7 +112,7 @@ public class CommandParser implements ParsedCommand{
     @Override
     public String getCommandName() throws IllegalValueException {
         if(commandName == null){
-            throw new IllegalValueException("No command name available");
+            throw new IllegalValueException(NO_COMMAND_NAME_MESSAGE);
         }
         return commandName;
     }
