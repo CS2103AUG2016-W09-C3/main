@@ -101,10 +101,7 @@ public class CommandParser implements ParsedCommand{
     
     @Override
     public String getValue() throws IllegalValueException {
-        if(values.isEmpty()){
-            throw new IllegalValueException(String.format(VALUE_OUT_OF_BOUNDS_MESSAGE, 0));
-        }
-        return values.get(0);
+        return getValue(0);
     }
 
     @Override
