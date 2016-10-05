@@ -41,7 +41,7 @@
 
 ## Features
 
-<img src="images/prototypeUI.png" width="600"><br>
+<img src="images/prototype.png" width="600"><br>
 
 Ensure you've followed the quick start guide to downloading this program. Simply double click the app to run it. As you can see, the prototype User Interface will be shown above.
 
@@ -105,7 +105,7 @@ Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [d/]`
 **Options**
 > 1. `ds/` Date start: If a start date is specified, program will only display tasks after this date. If the option is used without a specified date, it will use today's date.
 > 2. `de/` Date end: If an end date is specified, program will only display tasks before this date. If the option is used without a specified date, , it will use today's date.
-> 3. `s/` Sort by: Sorts the tasks in the order specified (`date`, `time`, `alpha`, `priority`).
+> 3. `s/` Sort by: Sorts the tasks in the order specified (`date`, `time`, `alphabetical`, `priority`).
 > 4. `d/` Done tasks: If this flag is specified, tasks that are marked done will be shown.
 
 **Notes**
@@ -201,7 +201,7 @@ Format: `edit INDEX [n/TASK_NAME] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIO
 
 ---
   
-### Reschduling a task: `reschedule`
+### Rescheduling a task: `reschedule`
 ToDoIt doesn't expect you to be the perfect worker. Sometimes you're too busy or tired to do a task. If you're not feeling up to it right now, simply reschedule it for another day.<br>
 Format: `reschedule INDEX INTERVAL` 
 
