@@ -13,27 +13,27 @@ public class CommandParserTest {
     @Test
     public void nullCommand() {
         ParsedCommand command = new CommandParser(null);
-        assertEquals(command.getCommandName(), "");
         assertNoParams(command);
         assertNoValues(command);
     }
     
     @Test
-    public void simpleCommand() {
-        ParsedCommand command = new CommandParser("test");
-        assertEquals(command.getCommandName(), "test");
+    public void noExtraArgsCommand() {
+        ParsedCommand command = new CommandParser("");
+        assertNoParams(command);
+        assertNoValues(command);
     }
     
     @Test
     public void oneValue() {
-        ParsedCommand command = new CommandParser("test value");
+        ParsedCommand command = new CommandParser("value");
         assertNoParams(command);
         assertValue(command, 0, "value");
     }
     
     @Test
     public void multipleValues() {
-        ParsedCommand command = new CommandParser("test value1 value2 value3");
+        ParsedCommand command = new CommandParser("value1 value2 value3");
         assertValue(command, 0, "value1");
         assertValue(command, 0, "value1");
         assertValue(command, 1, "value2");
@@ -43,7 +43,7 @@ public class CommandParserTest {
     
     @Test
     public void valueOutOfRange() {
-        ParsedCommand command = new CommandParser("test value1 value2 value3");
+        ParsedCommand command = new CommandParser("value1 value2 value3");
         int outOfBoundsIndex = 3;
         String errMsg = String.format(CommandParser.VALUE_OUT_OF_BOUNDS_MESSAGE, outOfBoundsIndex);
         try {
@@ -57,78 +57,78 @@ public class CommandParserTest {
     
     @Test
     public void oneParamNoValue() {
-        ParsedCommand command = new CommandParser("test param/");
+        ParsedCommand command = new CommandParser("param/");
         assertNoValues(command);
         assertParam(command, "param", "");
     }
     
     @Test
     public void oneParamNoName() {
-        ParsedCommand command = new CommandParser("test /paramValue");
+        ParsedCommand command = new CommandParser("/paramValue");
         assertParam(command, "", "paramValue");
     }
     
     @Test
     public void oneParam() {
-        ParsedCommand command = new CommandParser("test param/paramValue");
+        ParsedCommand command = new CommandParser("param/paramValue");
         assertParam(command, "param", "paramValue");
     }
 
     @Test
     public void emptyParam() {
-        ParsedCommand command = new CommandParser("test /");
+        ParsedCommand command = new CommandParser("/");
         assertParam(command, "", "");
     }
     
     @Test
     public void spacedParam() {
-        ParsedCommand command = new CommandParser("test param/param value");
+        ParsedCommand command = new CommandParser("param/param value");
         assertParam(command, "param", "param value");
     }
 
     @Test
     public void multipleParamDelimiters() {
-        ParsedCommand command = new CommandParser("test param/param/value");
+        ParsedCommand command = new CommandParser("param/param/value");
         assertParam(command, "param", "param/value");
     }
     
     @Test
     public void leadingSpaceParam() {
-        ParsedCommand command = new CommandParser("test param/ value");
+        ParsedCommand command = new CommandParser("param/ value");
         assertParam(command, "param", " value");
     }
     
     @Test
     public void sameParams() {
-        ParsedCommand command = new CommandParser("test param1/paramValue1 param1/paramValue2");
+        ParsedCommand command = new CommandParser("param1/paramValue1 param1/paramValue2");
         assertParam(command, "param1", "paramValue1");
         assertParamList(command, "param1", "paramValue1", "paramValue2");
     }
     
     @Test
     public void mixedSameParams() {
-        ParsedCommand command = new CommandParser("test param1/paramValue1 param2/paramValue1 param1/paramValue2 param2/paramValue2");
+        ParsedCommand command = new CommandParser("param1/paramValue1 param2/paramValue1 param1/paramValue2 param2/paramValue2");
         assertParamList(command, "param1", "paramValue1", "paramValue2");
         assertParamList(command, "param2", "paramValue1", "paramValue2");
     }
     
     @Test
     public void multipleParams() {
-        ParsedCommand command = new CommandParser("test param1/paramValue1 param2/paramValue2");
+        ParsedCommand command = new CommandParser("param1/paramValue1 param2/paramValue2");
         assertParam(command, "param1", "paramValue1");
         assertParam(command, "param2", "paramValue2");
     }
 
     @Test
     public void multipleSpacedParams() {
-        ParsedCommand command = new CommandParser("test param1/param Value 1 param2/param Value 2");
+        ParsedCommand command = new CommandParser("param1/param Value 1 param2/param Value 2");
         assertParam(command, "param1", "param Value 1");
         assertParam(command, "param2", "param Value 2");
     }
     
     @Test
     public void invalidParam() {
-        ParsedCommand command = new CommandParser("test param1/paramValue1 param2/paramValue2");
+        ParsedCommand command = new CommandParser("param1/paramValue1 param2/paramValue2");
         String invalidParam = "param3";
         String errMsg = String.format(CommandParser.NO_PARAM_MESSAGE, invalidParam);
         try {
@@ -141,26 +141,26 @@ public class CommandParserTest {
     
     @Test
     public void getDefaultParam() {
-        ParsedCommand command = new CommandParser("test param1/paramValue1 param2/paramValue2");
+        ParsedCommand command = new CommandParser("param1/paramValue1 param2/paramValue2");
         assertEquals(command.getParamOrDefault("param3", "-1"), "-1");
     }
 
     @Test
     public void ignoreDefaultParam() {
-        ParsedCommand command = new CommandParser("test param1/paramValue1 param2/paramValue2");
+        ParsedCommand command = new CommandParser("param1/paramValue1 param2/paramValue2");
         assertEquals(command.getParamOrDefault("param2", "-1"), "paramValue2");
     }
     
     @Test
     public void valueAndParam() {
-        ParsedCommand command = new CommandParser("test value param/paramValue");
+        ParsedCommand command = new CommandParser("value param/paramValue");
         assertValue(command, 0, "value");
         assertParam(command, "param", "paramValue");
     }
 
     @Test
     public void multipleValuesAndParams() {
-        ParsedCommand command = new CommandParser("test value1 value2 param1/param Value 1 param2/param Value 2");
+        ParsedCommand command = new CommandParser("value1 value2 param1/param Value 1 param2/param Value 2");
         assertValue(command, 0, "value1");
         assertValue(command, 0, "value1");
         assertValue(command, 1, "value2");
@@ -170,7 +170,7 @@ public class CommandParserTest {
     
     @Test
     public void getAllParams() {
-        ParsedCommand command = new CommandParser("test param1/paramValue1 param2/paramValue1 param1/paramValue2 param2/paramValue1");
+        ParsedCommand command = new CommandParser("param1/paramValue1 param2/paramValue1 param1/paramValue2 param2/paramValue1");
         String[] result = {"param1", "param2"};
         ArrayList<String> paramList = command.getAllParams();
         assertEqualValues(paramList, result);
@@ -178,7 +178,7 @@ public class CommandParserTest {
 
     @Test
     public void getAllValues() {
-        ParsedCommand command = new CommandParser("test value1 value2 value3");
+        ParsedCommand command = new CommandParser("value1 value2 value3");
         String[] result = {"value1", "value2", "value3"};
         ArrayList<String> valueList = command.getAllValues();
         assertEqualValues(valueList, result);
