@@ -1,12 +1,16 @@
 package seedu.address.logic.parser;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+
 public interface ParsedCommand {
 
-    String getParam(String paramName);
+    String getParam(String paramName) throws IllegalValueException;
 
-    String getValue();
+    String getParamOrDefault(String paramName, String defaultParam) throws IllegalValueException;
     
-    String getValue(int index);
+    String getValue() throws IllegalValueException;
     
-    String getCommandName();
+    String getValue(int index) throws IllegalValueException;
+    
+    String getCommandName() throws IllegalValueException;
 }

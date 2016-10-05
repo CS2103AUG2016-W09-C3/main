@@ -5,19 +5,17 @@ import java.util.HashMap;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
-public class CommandParser {
+public class CommandParser implements ParsedCommand{
     
     private static final String COMMAND_DELIMITER = " ";
     private static final String PARAM_DELIMITER = "/";
     
     
-    private String baseCommand = null;
     private String commandName = null;
     private ArrayList<String> values = new ArrayList<>();
     private HashMap<String, String> params = new HashMap<>();
     
     public CommandParser(String command) throws IllegalValueException{
-        baseCommand = command;
         loadFromString(command);
     }
     
@@ -25,16 +23,18 @@ public class CommandParser {
         String[] splitted = command.split(COMMAND_DELIMITER);
         
         int index = 0;
-        if(index < splitted.length){
-            commandName = splitted[index];
-        }else{
-            return;
-        }
-        index++;
-        
+        index = loadCommandName(splitted, index);
         index = loadValues(splitted, index);
         loadParams(splitted, index);
         
+    }
+
+    private int loadCommandName(String[] splitted, int index) {
+        if(index < splitted.length){
+            commandName = splitted[index];
+        }
+        index++;
+        return index;
     }
 
     private int loadValues(String[] splitted, int index) {
@@ -73,5 +73,45 @@ public class CommandParser {
     
     private boolean isParamToken(String token){
         return token.contains(PARAM_DELIMITER);
+    }
+
+    @Override
+    public String getParam(String paramName) throws IllegalValueException {
+        if(!params.containsKey(paramName)){
+            throw new IllegalValueException("Could not find param " + paramName);
+        }
+        return params.get(paramName);
+    }
+
+    @Override
+    public String getParamOrDefault(String paramName, String defaultParam)  {
+        if(!params.containsKey(paramName)){
+            return defaultParam;
+        }
+        return params.get(paramName);
+    }
+    
+    @Override
+    public String getValue() throws IllegalValueException {
+        if(values.isEmpty()){
+            throw new IllegalValueException("No value available");
+        }
+        return values.get(0);
+    }
+
+    @Override
+    public String getValue(int index) throws IllegalValueException {
+        if(index >= values.size()){
+            throw new IllegalValueException("Index out of bounds for values: " + index);
+        }
+        return values.get(index);
+    }
+
+    @Override
+    public String getCommandName() throws IllegalValueException {
+        if(commandName == null){
+            throw new IllegalValueException("No command name available");
+        }
+        return commandName;
     }
 }
