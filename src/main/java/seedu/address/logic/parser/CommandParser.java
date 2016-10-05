@@ -13,7 +13,6 @@ public class CommandParser implements ParsedCommand{
     public static final String VALUE_OUT_OF_BOUNDS_MESSAGE = "Value index out of bounds: %1$s";
     public static final String NO_PARAM_MESSAGE = "Could not find param: %1$s";
     
-    private String commandName = "";
     private ArrayList<String> values = new ArrayList<>();
     private HashMap<String, ArrayList<String>> params = new HashMap<>();
     
@@ -22,13 +21,12 @@ public class CommandParser implements ParsedCommand{
     }
     
     private void loadFromString(String command){
-        if(command == null){
+        if(command == null || command.isEmpty()){
             return;
         }
         String[] splitted = command.split(COMMAND_DELIMITER);
         
-        commandName = splitted[0];
-        int index = 1;
+        int index = 0;
         index = loadValues(splitted, index);
         loadParams(splitted, index);
         
@@ -123,10 +121,5 @@ public class CommandParser implements ParsedCommand{
     public ArrayList<String> getAllParams(){
         ArrayList<String> readOnlyParams = new ArrayList<> (params.keySet());
         return readOnlyParams;
-    }
-    
-    @Override
-    public String getCommandName() {
-        return commandName;
     }
 }

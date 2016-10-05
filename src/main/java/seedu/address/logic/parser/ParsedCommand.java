@@ -18,8 +18,6 @@ public interface ParsedCommand {
     String getValue(int index) throws IllegalValueException;
 
     ArrayList<String> getAllValues();
-    
-    String getCommandName();
 
     ArrayList<String> getParamList(String paramName) throws IllegalValueException;
 
