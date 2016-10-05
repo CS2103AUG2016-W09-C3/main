@@ -34,7 +34,7 @@ public class CommandParserTest {
     public void multipleValues() {
         ParsedCommand command = new CommandParser("test value1 value2 value3");
         try {
-            assertEquals(command.getValue(), "value");
+            assertEquals(command.getValue(), "value1");
             assertEquals(command.getValue(0), "value1");
             assertEquals(command.getValue(1), "value2");
             assertEquals(command.getValue(2), "value3");
@@ -42,17 +42,6 @@ public class CommandParserTest {
             fail("Cannot get 1 value.");
         }
     }
-    
-    @Test
-    public void emptyValues() {
-        ParsedCommand command = new CommandParser("test   value");
-        try {
-            assertEquals(command.getValue(), "value");
-        } catch (IllegalValueException e) {
-            fail("Cannot get 1 value.");
-        }
-    }
-    
     
     @Test
     public void oneParamNoValue() {
