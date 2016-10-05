@@ -16,7 +16,7 @@ public class Task implements ReadOnlyTask {
     private Email email;
     private Address address;
     
-    private Description name;
+    private TaskName name;
     private Recurrance recurring;
     private Priority priority;
     private boolean autoschedule;
