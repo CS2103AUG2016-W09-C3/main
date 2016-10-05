@@ -8,16 +8,15 @@
 
 ## About
 
-   Always forgetting what to do? If you would like to plan your day efficiently, then we have got just the app just for you, ToDoIt!<br>
+   Always forgetting what to do? Have difficulties managing your hectic timetable? If you want to plan your day efficiently, then we have got just the app just for you, ToDoIt!<br>
    <br>
    ToDoIt is a task manager that keeps your daily activities in check. 
-   It will notify you what is the upcoming activities for the day or the week.<br>
+   It will notify you of the upcoming activities for the day or the week.<br>
    <br>
-   Unlike other task managers, ToDoIt is a simple task manager where everything is done in just one line. 
-   It has the capabilities of any calendar, but with a more user-friendly interface.
-   The interface is simple requiring minimal number of steps to accomplish everything.<br>
+   Unlike other task managers, ToDoIt offers a minimalistic task manager where all your tasks can be managed effortlessly in just one line. 
+   It also functions as a calendar, but with a more user-friendly, intuitive interface that allows you to accomplish everything with a minimal number of steps.<br>
    <br>
-   Are you ready? Let's start now!<br>
+   Are you ready? Let's get started!<br>
 
 ## Quick Start
 
@@ -28,27 +27,36 @@
 1. Download the latest `ToDoIt.jar` from the [releases](../../../releases) tab.
 2. Copy the file to the folder you want to use as the home folder for your ToDoIt task file.
 3. Double-click the ToDoIt.jar to start the app. The GUI should appear in a few seconds. 
-   > <img src="images/Ui.png" width="600">
-
 4. Type the command in the command box and press <kbd>Enter</kbd> to execute it. <br>
    e.g. typing **`help`** and pressing <kbd>Enter</kbd> will open the help window. 
-5. Some example commands you can try:
+6. Some example commands you can try:
    * **`list`** : lists all tasks
-   * **`add`**` Meeting with John h/14:00 d/05-09-2016 l/2 p/5 a/no r/no i/Meeting with John regarding sales` : 
+   * **`add`**` Meeting with John h/14:00 d/05-09-2016 l/2 p/3 i/Meeting with John regarding sales` : 
      adds a task named `Meeting with John` to the task list.
    * **`delete`**` 3` : deletes the 3rd task shown in the current list
    * **`exit`** : exits the app
-6. Refer to the [Features](#features) section below for details of each command.<br>
+7. Refer to the [Features](#features) section below for details of each command.<br>
 
 
 
 ## Features
 
+<img src="images/prototypeUI.png" width="600"><br>
+
+Ensure you've followed the quick start guide to downloading this program. Simply double click the app to run it. As you can see, the prototype User Interface will be shown above.
+
+When the program is started, you will see 4 controls:
+
+1. The command box. This is where commands are entered. Simply type the command you want to execute, and press enter to execute it.
+2. The result summary. Once a command is entered, relevant information will be logged in this box. You can view it to ensure the command has been executed correctly.
+3. The task box. This displays the tasks you have entered. Tasks retrieved from the `list` or `find` command will also be reflected here.
+4. The Google Calendar Window. Tasks entered will be automatically synced to your google calendar. Disclaimer: This is still a work in progress, and may not be in the final release.
+
 ###Command Format
-* Each command consists of a command word (such as find, or help), followed by additional options. An option is a word or character followed by a forward slash (e.g. a/, desc/ etc.).
+* Each command consists of a command word (such as find, or help), followed by additional options. An option is a word or character followed by a forward slash (e.g. a/, ds/ etc.).
 * An option may require additional data, specified after the forward slash (e.g. desc/Go to Work). `UPPER_CASE` words in the format describe the data to input.
 * Options in `SQUARE_BRACKETS` are optional.
-* Options with `...` after them can be specified multiple times (e.g. t/Work t/School t/CS2103).
+* Options with `...` after them can be specified multiple times (e.g. `t/Work t/School t/CS2103`).
 * The order of options to specify for each command is fixed.
 
 ---
@@ -64,7 +72,7 @@ The help command provides you with a detailed explanation of the available comma
 ---
 
 ### Adding a task: `add`
-Format: `add DESCRIPTION [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [t/TAG]...`
+Format: `add TASK_NAME [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
 
 ToDoIt compiles your tasks for the day efficiently with a simple line of text. The `add` command adds your tasks to the to do list, allowing you to view them any time you want.
 
@@ -75,16 +83,18 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 > 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
 > 5. `p/` Priority: Specifies the priority of a task (`high`/`3`/`h`, `med`/`2`/`m`, `low`/`1`/`l`)
 > 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
+> 7. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
+> 8. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
 
 **Notes**
 > * A task can be dated (has time, date, length), or floating.<br> 
 > * Both time and date must be specified (dated), or both left out (floating). Tasks with only time or date specified will give an error.<br> 
-> * Tags specifies any tags that are associated with this task. Tasks can have any number of tags (including 0)
+> * Tasks can have any number of tags (including 0). Simply repeat the t/ option (e.g. `t/work t/school t/CS2103`).
 
 **Example**
 > * You have a CS2101 Lecture weekly, starting from 7th Oct at 2pm. However, the lecture is webcasted so you don't always have to attend, thus making it low priority. You simply have to run: <br>
 >   `add CS2101 Lecture h/1400 d/07102016 l/2hr r/1w p/low t/got-webcast` <br>
-> * This will add a CS2101 Lecture task which recurs every week starting with 2pm on 7th Oct, marks it as low priority and tags it with the `got-webcast` tag.
+>   This will add a CS2101 Lecture task which recurs every week starting with 2pm on 7th Oct, marks it as low priority and tags it with the `got-webcast` tag.
 
 ---
 
@@ -147,7 +157,7 @@ Format: `delete INDEX`
 >   `tasks`<br>
     `delete 2`<br>
 > * After retrieving all work related tasks, you want to delete the first one. 
-> * `find work`<br> 
+>   `find work`<br> 
     `delete 1`<br>
     Deletes the 1st task in the results of the `find` command.
 
@@ -164,16 +174,17 @@ Format: `clear`
 
 ### Editing a task: `edit`
 You never know when things change. Life is unpredictable. ToDoIt knows this, and lets you adapt to the erratic changes you may have in your schedule. Modify your tasks with a simple command.<br>
-Format: `edit INDEX [desc/DESCRIPTION] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIORITY] [t/TAG]...` 
+Format: `edit INDEX [n/TASK_NAME] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` 
 
 **Options**
-> 1. `desc/` Description: The new description of the task.
-> 2. `h/` Time: Time in 24 hour HHMM format
-> 3. `d/` Date: Date in DDMMYY format
-> 4. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
-> 5. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
-> 6. `p/` Priority: Specifies the priority of a task (`high`/`3`/`h`, `med`/`2`/`m`, `low`/`1`/`l`)
-> 7. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
+> 1. `n/` Name: The new name of the task.
+> 1. `h/` Time: Time in 24 hour HHMM format
+> 2. `d/` Date: Date in DDMMYY format
+> 3. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
+> 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
+> 5. `p/` Priority: Specifies the priority of a task (`high`/`3`/`h`, `med`/`2`/`m`, `low`/`1`/`l`)
+> 6. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
+> 7. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
 
 **Notes**
 > * This edits the task at the specified `INDEX`. <br>
@@ -184,9 +195,9 @@ Format: `edit INDEX [desc/DESCRIPTION] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p
 > * For more information regarding the options, refer to `add` commmand.
 
 **Example**
-> * Your boss just changed the date of a meeting on the 3rd October to the 2nd. Simply find your meeting task, then run the following command:
+> * Your boss just changed the date of a meeting on the 3rd October to the 2nd. Simply find your meeting task, then run the following command: <br>
 >   `find meeting`<br> 
-    `edit 1 d/02102016`<br>
+    `edit 1 d/02102016`
 
 ---
   
@@ -202,9 +213,9 @@ Format: `reschedule INDEX INTERVAL`
 > * Negative numbers are not supported. To reschedule to an earlier time, consider using `edit` instead.
  
 **Example**
-> * You need to get some homework done, but you just got back from school and you need a break. Simply find your homework task, then run the following command:
+> * You need to get some homework done, but you just got back from school and you need a break. Simply find your homework task, then run the following command: <br>
 >   `find homework`<br> 
-    `reschedule 1 1hr`<br>
+    `reschedule 1 1hr`
 
 ---
   
@@ -220,9 +231,9 @@ Format: `done INDEX`
 > * Marking a task as done will stop it from showing up in any `list` command, unless the `\d` option is used.
  
 **Example**
-> * You just completed your homework. Simply find your homework task, then run the following command:
+> * You just completed your homework. Simply find your homework task, then run the following command: <br>
 >   `find homework`<br> 
-    `done 1`<br>
+    `done 1`
 	
 ---
 
@@ -266,8 +277,8 @@ There is no need to save manually.
 
 Command | Format  
 -------- | :-------- 
-Add | `add DESCRIPTION [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [t/TAG]...`
-Edit | `edit INDEX [desc/DESCRIPTION] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIORITY] [t/TAG]...`
+Add | `add TASK_NAME [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
+Edit | `edit INDEX [n/TASK_NAME] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` 
 Clear | `clear`
 Delete | `delete INDEX`
 Done | `done INDEX`
