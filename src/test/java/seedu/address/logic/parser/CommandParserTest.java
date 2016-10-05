@@ -40,6 +40,23 @@ public class CommandParserTest {
         assertValue(command, 2, "value3");
     }
     
+    @Test
+    public void noValuesAsString() {
+        ParsedCommand command = new CommandParser("");
+        assertEquals(command.getValuesAsString(), "");
+    }
+    
+    @Test
+    public void oneValueAsString() {
+        ParsedCommand command = new CommandParser("value1");
+        assertEquals(command.getValuesAsString(), "value1");
+    }
+    
+    @Test
+    public void multipleValuesAsString() {
+        ParsedCommand command = new CommandParser("value1 value2 value3");
+        assertEquals(command.getValuesAsString(), "value1 value2 value3");
+    }
     
     @Test
     public void valueOutOfRange() {
@@ -103,6 +120,12 @@ public class CommandParserTest {
         ParsedCommand command = new CommandParser("param1/paramValue1 param1/paramValue2");
         assertParam(command, "param1", "paramValue1");
         assertParamList(command, "param1", "paramValue1", "paramValue2");
+    }
+    
+    @Test
+    public void emptySameParams() {
+        ParsedCommand command = new CommandParser("param1/paramValue1 param1/paramValue2");
+        assertParamList(command, "param2");
     }
     
     @Test
@@ -201,12 +224,8 @@ public class CommandParserTest {
     }
     
     private void assertParamList(ParsedCommand command, String param, String... paramValues){
-        try {
-            ArrayList<String> paramList = command.getParamList(param);
-            assertEqualValues(paramList, paramValues);
-        } catch (IllegalValueException e) {
-            fail(e.getMessage());
-        }
+        ArrayList<String> paramList = command.getParamList(param);
+        assertEqualValues(paramList, paramValues);
     }
 
     private void assertEqualValues(ArrayList<String> paramList, String[] paramValues){
