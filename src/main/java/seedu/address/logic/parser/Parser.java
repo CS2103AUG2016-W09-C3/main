@@ -89,19 +89,8 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareAdd(String args){
-        /*
-        final Matcher matcher = TASK_DATA_ARGS_FORMAT.matcher(args.trim());
-        // Validate arg string format
-        if (!matcher.matches()) {
-            
-        }*/
         ParsedCommand command = new CommandParser(args);
-        try{
-            command.getValue();
-            command.getParam("p");
-            command.getParam("e");
-            command.getParam("a");
-        }  catch (IllegalValueException ive) {
+        if(!command.hasValue() || !command.hasParams(AddCommand.REQUIRED_PARAMS)){
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         try {
