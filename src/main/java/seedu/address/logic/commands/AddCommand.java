@@ -15,6 +15,8 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
+    public static final String[] REQUIRED_PARAMS = {"p", "e", "a"};
+    
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
             + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
