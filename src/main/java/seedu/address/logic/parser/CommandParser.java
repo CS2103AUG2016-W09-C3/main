@@ -64,7 +64,7 @@ public class CommandParser implements ParsedCommand{
 
     private void addParam(String currentParam, String currentParamValue) {
         if(currentParam != null){
-            if(!params.containsKey(params)){
+            if(!params.containsKey(currentParam)){
                 params.put(currentParam, new ArrayList<>());
             }
             params.get(currentParam).add(currentParamValue);
@@ -78,7 +78,7 @@ public class CommandParser implements ParsedCommand{
     @Override
     public String getParam(String paramName) throws IllegalValueException {
         if(!params.containsKey(paramName) || params.get(paramName).size() == 0){
-            throw new IllegalValueException(String.format(VALUE_OUT_OF_BOUNDS_MESSAGE, paramName));
+            throw new IllegalValueException(String.format(NO_PARAM_MESSAGE, paramName));
         }
         return params.get(paramName).get(0);
     }

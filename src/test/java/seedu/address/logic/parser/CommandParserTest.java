@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -37,6 +39,21 @@ public class CommandParserTest {
         assertValue(command, 1, "value2");
         assertValue(command, 2, "value3");
     }
+    
+    
+    @Test
+    public void valueOutOfRange() {
+        ParsedCommand command = new CommandParser("test value1 value2 value3");
+        int outOfBoundsIndex = 3;
+        String errMsg = String.format(CommandParser.VALUE_OUT_OF_BOUNDS_MESSAGE, outOfBoundsIndex);
+        try {
+            command.getValue(outOfBoundsIndex);
+            fail("Expected " + errMsg);
+        } catch (IllegalValueException e) {
+            assertEquals(e.getMessage(), errMsg);
+        }
+    }
+    
     
     @Test
     public void oneParamNoValue() {
@@ -84,10 +101,15 @@ public class CommandParserTest {
     @Test
     public void sameParams() {
         ParsedCommand command = new CommandParser("test param1/paramValue1 param1/paramValue2");
-        StringBuilder sb = new StringBuilder();
-        
-        assertParam(command, "param1", "param Value 1");
-        assertParam(command, "param2", "param Value 2");
+        assertParam(command, "param1", "paramValue1");
+        assertParamList(command, "param1", "paramValue1", "paramValue2");
+    }
+    
+    @Test
+    public void mixedSameParams() {
+        ParsedCommand command = new CommandParser("test param1/paramValue1 param2/paramValue1 param1/paramValue2 param2/paramValue2");
+        assertParamList(command, "param1", "paramValue1", "paramValue2");
+        assertParamList(command, "param2", "paramValue1", "paramValue2");
     }
     
     @Test
@@ -102,6 +124,31 @@ public class CommandParserTest {
         ParsedCommand command = new CommandParser("test param1/param Value 1 param2/param Value 2");
         assertParam(command, "param1", "param Value 1");
         assertParam(command, "param2", "param Value 2");
+    }
+    
+    @Test
+    public void invalidParam() {
+        ParsedCommand command = new CommandParser("test param1/paramValue1 param2/paramValue2");
+        String invalidParam = "param3";
+        String errMsg = String.format(CommandParser.NO_PARAM_MESSAGE, invalidParam);
+        try {
+            command.getParam(invalidParam);
+            fail("Expected " + errMsg);
+        } catch (IllegalValueException e) {
+            assertEquals(e.getMessage(), errMsg);
+        }
+    }
+    
+    @Test
+    public void getDefaultParam() {
+        ParsedCommand command = new CommandParser("test param1/paramValue1 param2/paramValue2");
+        assertEquals(command.getParamOrDefault("param3", "-1"), "-1");
+    }
+
+    @Test
+    public void ignoreDefaultParam() {
+        ParsedCommand command = new CommandParser("test param1/paramValue1 param2/paramValue2");
+        assertEquals(command.getParamOrDefault("param2", "-1"), "paramValue2");
     }
     
     @Test
@@ -121,6 +168,22 @@ public class CommandParserTest {
         assertParam(command, "param2", "param Value 2");
     }
     
+    @Test
+    public void getAllParams() {
+        ParsedCommand command = new CommandParser("test param1/paramValue1 param2/paramValue1 param1/paramValue2 param2/paramValue1");
+        String[] result = {"param1", "param2"};
+        ArrayList<String> paramList = command.getAllParams();
+        assertEqualValues(paramList, result);
+    }
+
+    @Test
+    public void getAllValues() {
+        ParsedCommand command = new CommandParser("test value1 value2 value3");
+        String[] result = {"value1", "value2", "value3"};
+        ArrayList<String> valueList = command.getAllValues();
+        assertEqualValues(valueList, result);
+    } 
+    
     private void assertValue(ParsedCommand command, int index, String value){
         try {
             assertEquals(command.getValue(index), value);
@@ -137,6 +200,21 @@ public class CommandParserTest {
         }
     }
     
+    private void assertParamList(ParsedCommand command, String param, String... paramValues){
+        try {
+            ArrayList<String> paramList = command.getParamList(param);
+            assertEqualValues(paramList, paramValues);
+        } catch (IllegalValueException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    private void assertEqualValues(ArrayList<String> paramList, String[] paramValues){
+        for(int i = 0; i < paramValues.length; i++){
+            assertEquals(paramValues[i], paramList.get(i));
+        }
+    }
+
     private void assertNoValues(ParsedCommand command){
         assert(command.getAllValues().size() == 0);
     }
