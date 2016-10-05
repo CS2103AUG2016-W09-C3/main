@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
-public class ParsedCommand {
+public class CommandParser {
     
     private static final String COMMAND_DELIMITER = " ";
     private static final String PARAM_DELIMITER = "/";
@@ -16,7 +16,7 @@ public class ParsedCommand {
     private ArrayList<String> values = new ArrayList<>();
     private HashMap<String, String> params = new HashMap<>();
     
-    public ParsedCommand(String command) throws IllegalValueException{
+    public CommandParser(String command) throws IllegalValueException{
         baseCommand = command;
         loadFromString(command);
     }
