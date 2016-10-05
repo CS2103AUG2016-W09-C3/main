@@ -12,6 +12,8 @@ public class CommandParserTest {
     public void nullCommand() {
         ParsedCommand command = new CommandParser(null);
         assertEquals(command.getCommandName(), "");
+        assertNoParams(command);
+        assertNoValues(command);
     }
     
     @Test
@@ -23,6 +25,7 @@ public class CommandParserTest {
     @Test
     public void oneValue() {
         ParsedCommand command = new CommandParser("test value");
+        assertNoParams(command);
         assertValue(command, 0, "value");
     }
     
@@ -38,7 +41,7 @@ public class CommandParserTest {
     @Test
     public void oneParamNoValue() {
         ParsedCommand command = new CommandParser("test param/");
-        assert(!command.getAllValues().hasNext());
+        assertNoValues(command);
         assertParam(command, "param", "");
     }
     
@@ -78,6 +81,14 @@ public class CommandParserTest {
         assertParam(command, "param", " value");
     }
     
+    @Test
+    public void sameParams() {
+        ParsedCommand command = new CommandParser("test param1/paramValue1 param1/paramValue2");
+        StringBuilder sb = new StringBuilder();
+        
+        assertParam(command, "param1", "param Value 1");
+        assertParam(command, "param2", "param Value 2");
+    }
     
     @Test
     public void multipleParams() {
@@ -93,7 +104,6 @@ public class CommandParserTest {
         assertParam(command, "param2", "param Value 2");
     }
     
-
     @Test
     public void valueAndParam() {
         ParsedCommand command = new CommandParser("test value param/paramValue");
@@ -102,7 +112,7 @@ public class CommandParserTest {
     }
 
     @Test
-    public void multipleValuseAndParams() {
+    public void multipleValuesAndParams() {
         ParsedCommand command = new CommandParser("test value1 value2 param1/param Value 1 param2/param Value 2");
         assertValue(command, 0, "value1");
         assertValue(command, 0, "value1");
@@ -125,5 +135,13 @@ public class CommandParserTest {
         } catch (IllegalValueException e) {
             fail(e.getMessage());
         }
+    }
+    
+    private void assertNoValues(ParsedCommand command){
+        assert(command.getAllValues().size() == 0);
+    }
+
+    private void assertNoParams(ParsedCommand command){
+        assert(command.getAllParams().size() == 0);
     }
 }

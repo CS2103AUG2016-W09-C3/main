@@ -92,11 +92,12 @@ public class CommandParser implements ParsedCommand{
     }
     
     @Override
-    public Iterator<String> getParamList(String paramName) throws IllegalValueException  {
+    public ArrayList<String> getParamList(String paramName) throws IllegalValueException  {
         if(!params.containsKey(paramName) || params.get(paramName).size() == 0){
-            throw new IllegalValueException(String.format(VALUE_OUT_OF_BOUNDS_MESSAGE, paramName));
+            throw new IllegalValueException(String.format(NO_PARAM_MESSAGE, paramName));
         }
-        return params.get(paramName).iterator();
+        ArrayList<String> readOnlyParamData = new ArrayList<> (params.get(paramName));
+        return readOnlyParamData;
     }
     
     @Override
@@ -113,13 +114,15 @@ public class CommandParser implements ParsedCommand{
     }
 
     @Override
-    public Iterator<String> getAllValues(){
-        return values.iterator();
+    public ArrayList<String> getAllValues(){
+        ArrayList<String> readOnlyValues = new ArrayList<> (values);
+        return readOnlyValues;
     }
     
     @Override
-    public Iterator<String> getAllParams(){
-        return params.keySet().iterator();
+    public ArrayList<String> getAllParams(){
+        ArrayList<String> readOnlyParams = new ArrayList<> (params.keySet());
+        return readOnlyParams;
     }
     
     @Override

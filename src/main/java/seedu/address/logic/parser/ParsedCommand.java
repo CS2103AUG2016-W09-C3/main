@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -10,16 +11,16 @@ public interface ParsedCommand {
 
     String getParamOrDefault(String paramName, String defaultParam);
 
-    Iterator<String> getAllParams();
+    ArrayList<String> getAllParams();
     
     String getValue() throws IllegalValueException;
     
     String getValue(int index) throws IllegalValueException;
 
-    Iterator<String> getAllValues();
+    ArrayList<String> getAllValues();
     
     String getCommandName();
 
-    Iterator<String> getParamList(String paramName) throws IllegalValueException;
+    ArrayList<String> getParamList(String paramName) throws IllegalValueException;
 
 }
