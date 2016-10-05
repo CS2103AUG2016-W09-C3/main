@@ -52,7 +52,7 @@ public class CommandParser implements ParsedCommand{
                 int paramDelimIndex = token.indexOf(PARAM_DELIMITER);
                 currentParam = token.substring(0, paramDelimIndex);
                 currentParamValue = new StringBuilder();
-                currentParamValue.append(token.substring(paramDelimIndex, token.length()));
+                currentParamValue.append(token.substring(paramDelimIndex + 1, token.length()));
             }else{
                 currentParamValue.append(COMMAND_DELIMITER);
                 currentParamValue.append(token);
