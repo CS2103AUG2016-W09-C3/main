@@ -11,32 +11,26 @@ public class CommandParser implements ParsedCommand{
     private static final String PARAM_DELIMITER = "/";
     public static final String VALUE_OUT_OF_BOUNDS_MESSAGE = "Value index out of bounds: %1$s";
     public static final String NO_PARAM_MESSAGE = "Could not find param: %1$s";
-    public static final String NO_COMMAND_NAME_MESSAGE = "No command name available";
     
-    private String commandName = null;
+    private String commandName = "";
     private ArrayList<String> values = new ArrayList<>();
     private HashMap<String, String> params = new HashMap<>();
     
-    public CommandParser(String command) throws IllegalValueException{
+    public CommandParser(String command){
         loadFromString(command);
     }
     
-    private void loadFromString(String command) throws IllegalValueException{
+    private void loadFromString(String command){
+        if(command == null){
+            return;
+        }
         String[] splitted = command.split(COMMAND_DELIMITER);
         
-        int index = 0;
-        index = loadCommandName(splitted, index);
+        commandName = splitted[0];
+        int index = 1;
         index = loadValues(splitted, index);
         loadParams(splitted, index);
         
-    }
-
-    private int loadCommandName(String[] splitted, int index) {
-        if(index < splitted.length){
-            commandName = splitted[index];
-        }
-        index++;
-        return index;
     }
 
     private int loadValues(String[] splitted, int index) {
@@ -110,10 +104,7 @@ public class CommandParser implements ParsedCommand{
     }
 
     @Override
-    public String getCommandName() throws IllegalValueException {
-        if(commandName == null){
-            throw new IllegalValueException(NO_COMMAND_NAME_MESSAGE);
-        }
+    public String getCommandName() {
         return commandName;
     }
 }

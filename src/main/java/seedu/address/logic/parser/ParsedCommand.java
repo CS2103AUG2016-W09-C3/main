@@ -12,5 +12,5 @@ public interface ParsedCommand {
     
     String getValue(int index) throws IllegalValueException;
     
-    String getCommandName() throws IllegalValueException;
+    String getCommandName();
 }
