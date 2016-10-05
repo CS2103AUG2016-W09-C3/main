@@ -13,6 +13,10 @@ public interface ParsedCommand {
 
     ArrayList<String> getAllParams();
     
+    boolean hasParams(String[] params);
+
+    boolean hasValue();
+    
     String getValue() throws IllegalValueException;
     
     String getValue(int index) throws IllegalValueException;

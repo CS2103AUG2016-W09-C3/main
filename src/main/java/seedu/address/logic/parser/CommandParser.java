@@ -127,4 +127,19 @@ public class CommandParser implements ParsedCommand{
     public String getValuesAsString() {
         return String.join(" ", values);
     }
+
+    @Override
+    public boolean hasParams(String[] requiredParams) {
+        for(String param : requiredParams){
+            if(!params.containsKey(param)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean hasValue() {
+        return values.size() != 0;
+    }
 }

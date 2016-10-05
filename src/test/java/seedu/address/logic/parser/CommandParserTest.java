@@ -14,20 +14,21 @@ public class CommandParserTest {
     public void nullCommand() {
         ParsedCommand command = new CommandParser(null);
         assertNoParams(command);
-        assertNoValues(command);
+        assert(!command.hasValue());
     }
     
     @Test
     public void noExtraArgsCommand() {
         ParsedCommand command = new CommandParser("");
         assertNoParams(command);
-        assertNoValues(command);
+        assert(!command.hasValue());
     }
     
     @Test
     public void oneValue() {
         ParsedCommand command = new CommandParser("value");
         assertNoParams(command);
+        assert(command.hasValue());
         assertValue(command, 0, "value");
     }
     
@@ -75,7 +76,7 @@ public class CommandParserTest {
     @Test
     public void oneParamNoValue() {
         ParsedCommand command = new CommandParser("param/");
-        assertNoValues(command);
+        assert(!command.hasValue());
         assertParam(command, "param", "");
     }
     
@@ -206,6 +207,15 @@ public class CommandParserTest {
         ArrayList<String> valueList = command.getAllValues();
         assertEqualValues(valueList, result);
     } 
+
+    @Test
+    public void hasParams() {
+        ParsedCommand command = new CommandParser("param1/paramValue1 param2/paramValue1");
+        String[] params = {"param1", "param2"};
+        assert(command.hasParams(params));
+        String[] params2 = {"param1", "param2", "param3"};
+        assert(!command.hasParams(params2));
+    } 
     
     private void assertValue(ParsedCommand command, int index, String value){
         try {
@@ -232,10 +242,6 @@ public class CommandParserTest {
         for(int i = 0; i < paramValues.length; i++){
             assertEquals(paramValues[i], paramList.get(i));
         }
-    }
-
-    private void assertNoValues(ParsedCommand command){
-        assert(command.getAllValues().size() == 0);
     }
 
     private void assertNoParams(ParsedCommand command){
