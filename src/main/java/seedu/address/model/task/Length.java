@@ -2,6 +2,10 @@ package seedu.address.model.task;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
+/**
+ * Represents a Task's length in the task book.
+ * Guarantees: immutable; is valid as declared in {@link #isValidLength(String)}
+ */
 public class Length {
     
     public static final String MESSAGE_LENGTH_CONSTRAINTS = "Task length should be alphanumeric characters, "
@@ -10,6 +14,12 @@ public class Length {
     public static final String LENGTH_VALIDATION_REGEX = "\\d+";
     
     public final int length;
+    
+    /**
+     * Validates given length.
+     *
+     * @throws IllegalValueException if given length string is invalid.
+     */
 
     public Length(String givenLength) throws IllegalValueException {
         assert givenLength != null;

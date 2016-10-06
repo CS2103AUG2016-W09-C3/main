@@ -38,7 +38,12 @@ public class Priority {
             return false;
         }
     }
-
+    
+    /**
+     * Validates given priority.
+     *
+     * @throws IllegalValueException if given priority string is not in valid set of enum.
+     */
     public Priority(String priority) throws IllegalValueException{
         assert priority != null;
         priority = priority.trim();
