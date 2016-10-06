@@ -19,6 +19,7 @@ public class Task implements ReadOnlyTask {
     private TaskName name;
     private Recurrance recurring;
     private Priority priority;
+    private Information information;
     private boolean autoschedule;
     
 
