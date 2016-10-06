@@ -278,16 +278,31 @@ Priority | As a ... | I want to ... | So that I can...
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-#### Use case: Delete person
+(For all use cases below, the **System** is the `ToDoIt` and the **Actor** is the `user`, unless specified otherwise)
+#### Use case: Add task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add task
+2. ToDoIt add the task
+3. ToDoIt shows a list of task including the added task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The added task is the same
+
+> 2a1. ToDoIt shows an error message <br>
+  Use case ends
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. ToDoIt shows a list of tasks
+3. User requests to delete a specific task in the list
+4. ToDoIt deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -298,7 +313,28 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. ToDoIt shows an error message <br>
+  Use case resumes at step 2
+  
+#### Use case: Edit task
+
+**MSS**
+
+1. User requests to edit task
+2. ToDoIt shows a list of persons
+3. User requests to edit a specific person in the list
+4. ToDoIt edits the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. ToDoIt shows an error message <br>
   Use case resumes at step 2
 
 {More to be added}
