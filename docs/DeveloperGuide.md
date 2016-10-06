@@ -339,15 +339,18 @@ Document product survey:
 
 Application | Pros & Cons | Summary
 -------- | :-------- | :-----------
-Google Calendar | Pros: <br>Integration with all of google's existing products including google now voice assistant<br>
-<br>Shortcuts available from within gmail <br>
-<br>Available on all platforms <br>
-<br>Can sync calendar with other people <br>
-<br>Notifications and reminders about tasks <br>
-<br>Automatic addition of events from gmail <br>
-<br>Cons: <br>Needs to be accessed with browsers mainly or phone applications<br>
-<br>Needs internet connection to keep updated<br>
-<br>Not much support for tasks without a clear deadline or timing | Google calendar might fit Jim’s requirements to a certain extend. Since most of Jim’s tasks arrive in email, if he uses gmail, it would be a lot easier using the automatic addition feature in gmail. However, the web-based solution may not be the fastest to work with. There is still a lack of support for tasks with no clear timings, even though Jim can make a list of the tasks without timings in google tasks. There is also a lack of command line input, which is a feature preferred by Jim.
+Google Calendar | Pros: <br>
+1. Integration with all of google's existing products including google now voice assistant <br>
+2.Shortcuts available from within gmail <br>
+3. Available on all platforms <br>
+4. Can sync calendar with other people <br>
+5. Notifications and reminders about tasks <br>
+6. Automatic addition of events from gmail <br>
+Cons: <br>
+1. Needs to be accessed with browsers mainly or phone applications <br>
+2. Needs internet connection to keep updated <br>
+3. Not much support for tasks without a clear deadline or timing | 
+Google Calendar fits the requirements as if the user uses gmail, it would be a lot easier using the automatic addition feature in gmail. However, a web-based solution may not be the fastest to work with due to the lack of support for tasks.
 Todo.txt | |
 Wunderlist | |
 Fantastical | |
