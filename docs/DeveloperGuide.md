@@ -337,18 +337,17 @@ Use case ends.
 
 Document product survey:
 
-Application | Pros & Cons | Summary
--------- | :-------- | :-----------
-Google Calendar | Pros: <br>
-1. Integration with all of google's existing products including google now voice assistant <br>
-2.Shortcuts available from within gmail <br>
-3. Available on all platforms <br>
-4. Can sync calendar with other people <br>
-5. Notifications and reminders about tasks <br>
-6. Automatic addition of events from gmail <br>
-Cons: <br>
-1. Needs to be accessed with browsers mainly or phone applications <br>
-2. Needs internet connection to keep updated <br>
+Application | Pros | Cons | Summary
+-------- | :-------- | :-------- | :-----------
+Google Calendar | 
+1. Integration with all of google's existing products including google now voice assistant
+2. Shortcuts available from within gmail
+3. Available on all platforms
+4. Can sync calendar with other people
+5. Notifications and reminders about tasks
+6. Automatic addition of events from gmail |
+1. Needs to be accessed with browsers mainly or phone applications
+2. Needs internet connection to keep updated
 3. Not much support for tasks without a clear deadline or timing | 
 Google Calendar fits the requirements as if the user uses gmail, it would be a lot easier using the automatic addition feature in gmail. However, a web-based solution may not be the fastest to work with due to the lack of support for tasks.
 Todo.txt | |
