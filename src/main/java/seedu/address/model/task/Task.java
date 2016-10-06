@@ -11,12 +11,8 @@ import java.util.Objects;
  */
 public class Task implements ReadOnlyTask {
 
-    private Name name;
-    private Phone phone;
-    private Email email;
-    private Address address;
     
-    private TaskName name;
+    private Name name;
     private Recurrance recurring;
     private Priority priority;
     private Information information;
@@ -28,12 +24,12 @@ public class Task implements ReadOnlyTask {
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, phone, email, address, tags);
+    public Task(Name name, Recurrance recurring, Priority priority, Information information, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, recurring, priority, information, tags);
         this.name = name;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+        this.recurring = recurring;
+        this.priority = priority;
+        this.information = information;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
 
@@ -41,7 +37,7 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getName(), source.getRecurrance(), source.getPriority(), source.getInformation(), source.getTags());
     }
 
     @Override
@@ -50,18 +46,18 @@ public class Task implements ReadOnlyTask {
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public Recurrance getRecurrance() {
+        return this.recurring;
     }
 
     @Override
-    public Email getEmail() {
-        return email;
+    public Priority getPriority() {
+        return this.priority;
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public Information getInformation() {
+        return this.information;
     }
 
     @Override
@@ -86,7 +82,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, this.recurring, this.priority, this.information, tags);
     }
 
     @Override
