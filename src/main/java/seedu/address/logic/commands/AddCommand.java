@@ -15,12 +15,14 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String[] REQUIRED_PARAMS = {"p", "e", "a"};
+    public static final String[] REQUIRED_PARAMS = {"r", "p", "i"};
+    
+    public static final String[] DATED_TASK_PARAMS = {"h", "d", "l"};
     
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
-            + "Parameters: NAME p/PHONE e/EMAIL a/ADDRESS  [t/TAG]...\n"
+            + "Parameters: NAME [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
+            + " Meet John h/14:00 d/12-12-2016 l/2 r/NO p/3 i/Meeting for lunch";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
@@ -28,7 +30,7 @@ public class AddCommand extends Command {
     private final Task toAdd;
 
     /**
-     * Convenience constructor using raw values.
+     * Convenience constructor using raw values for adding 
      *
      * @throws IllegalValueException if any of the raw values are invalid
      */
@@ -39,11 +41,29 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
+        this.toAdd = (Task) new DatedTask(
+                new Name(name),
+                new Time(time),
+                new Date(date),
+                new Length(length),
+                new Recurrance(recurring),
+                new Priority(priority),
+                new Information(information),
+                new UniqueTagList(tagSet)
+        );
+    }
+
+    public AddCommand(String name, String recurring, String priority, String information, Set<String> tagsFromArgs) 
+            throws IllegalValueException {
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tagsFromArgs) {
+            tagSet.add(new Tag(tagName));
+        }
         this.toAdd = new Task(
                 new Name(name),
-                new Phone(time),
-                new Email(date),
-                new Address(length),
+                new Recurrance(recurring),
+                new Priority(priority),
+                new Information(information),
                 new UniqueTagList(tagSet)
         );
     }
