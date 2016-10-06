@@ -16,7 +16,7 @@ public class Task implements ReadOnlyTask {
     private Recurrance recurring;
     private Priority priority;
     private Information information;
-    private boolean autoschedule;
+    private boolean autoSchedule;
     
 
     private UniqueTagList tags;
@@ -38,6 +38,12 @@ public class Task implements ReadOnlyTask {
      */
     public Task(ReadOnlyTask source) {
         this(source.getName(), source.getRecurrance(), source.getPriority(), source.getInformation(), source.getTags());
+    }
+    /**
+     * Default constructor for DatedTask subclass, should not be used.
+     */
+    protected Task(){
+        ;
     }
 
     @Override
