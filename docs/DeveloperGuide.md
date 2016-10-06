@@ -337,7 +337,7 @@ Use case ends.
 
 Document product survey:
 
-Application | Pros | Cons | Summary
+Product | Pros | Cons | Summary
 -------- | :----------- | :----------- | :-----------
 Google Calendar | 1. Integration with all of google's existing products including google now voice assistant<br><br>2. Shortcuts available from within gmail<br><br>3. Available on all platforms<br><br>4. Can sync calendar with other people<br><br>5. Notifications and reminders about tasks<br><br>6. Automatic addition of events from gmail<br><br> | 1. Needs to be accessed with browsers mainly or phone applications<br><br>2. Needs internet connection to keep updated<br><br>3. Not much support for tasks without a clear deadline or timing<br><br> | Google Calendar fits the requirements as if the user uses gmail, it would be a lot easier using the automatic addition feature in gmail. However, a web-based solution may not be the fastest to work with due to the lack of support for tasks.
 Todo.txt | 1. Simple and fast<br><br>2. Able to set different priorities for task<br><br>3. Able to group task into a particular project so that we can see all tasks related to the project<br><br>4. Todo.txt supports dropbox, so the user can sync easily sync task between mobile on both Android and Apple phones with the computers | 1. No support for recurring task<br><br>2. Only for users that prefer command line input | Todo.txt will cater to users like Jim to a large extend. Todo.txt is perfect for Jim as it uses command line inputs, and ToDo.txt meets a lot of our requirements for our program so we can use this application as a gauge.
