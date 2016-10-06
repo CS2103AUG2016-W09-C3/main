@@ -19,30 +19,22 @@ public class Parser {
     /**
      * Used for initial separation of command word and args.
      */
-    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
+    private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+) ?(?<arguments>.*)");
 
     private static final Pattern TASK_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
 
     private static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
-
-/*    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+    /*
+    Deprecated
+    
+    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<name>[^/]+)"
                     + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-*/
-    private static final Pattern TASK_DATA_ARGS_FORMAT = 
-            Pattern.compile("(?<name>[^/]+)"
-                    + " (?<isTimePrivate>p?)h/(?<time>[^/]+)"
-                    + " (?<isDatePrivate>p?)d/(?<date>[^/]+)"
-                    + " (?<isLengthPrivate>p?)l/(?<length>[^/]+)"
-                    + " (?<isRecurringPrivate>p?)r/(?<recurring>[^/]+)"
-                    + " (?<isPriorityPrivate>p?)p/(?<priority>[^/]+)"
-                    + " (?<isInformationPrivate>p?)i/(?<information>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-    
+    */
     public Parser() {}
 
     /**
@@ -97,21 +89,17 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareAdd(String args){
-        final Matcher matcher = TASK_DATA_ARGS_FORMAT.matcher(args.trim());
-        // Validate arg string format
-        if (!matcher.matches()) {
+        ParsedCommand command = new CommandParser(args);
+        if(!command.hasValue() || !command.hasParams(AddCommand.REQUIRED_PARAMS)){
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         try {
             return new AddCommand(
-                    matcher.group("name"),
-                    matcher.group("time"),
-                    matcher.group("date"),
-                    matcher.group("length"),
-                    matcher.group("recurring"),
-                    matcher.group("priority"),
-                    matcher.group("information"),
-                    getTagsFromArgs(matcher.group("tagArguments"))
+                    command.getValuesAsString(),
+                    command.getParam("p"),
+                    command.getParam("e"),
+                    command.getParam("a"),
+                    getTagsFromArgs(command.getParamList("t"))
             );
         } catch (IllegalValueException ive) {
             return new IncorrectCommand(ive.getMessage());
@@ -122,14 +110,12 @@ public class Parser {
      * Extracts the new task's tags from the add command's tag arguments string.
      * Merges duplicate tag strings.
      */
-    private static Set<String> getTagsFromArgs(String tagArguments) throws IllegalValueException {
-        // no tags
-        if (tagArguments.isEmpty()) {
-            return Collections.emptySet();
+    private static Set<String> getTagsFromArgs(ArrayList<String> tagArguments) throws IllegalValueException {
+        HashSet<String> tagStrings = new HashSet<>();
+        for(String tag : tagArguments){
+            tagStrings.add(tag);
         }
-        // replace first delimiter prefix, then split
-        final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
-        return new HashSet<>(tagStrings);
+        return tagStrings;
     }
 
     /**
