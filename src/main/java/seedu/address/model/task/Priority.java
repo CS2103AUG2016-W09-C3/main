@@ -12,7 +12,7 @@ public class Priority {
     
     public final acceptedPriority priority;
     
-    public static final String TASK_PRIORITY_CONSTRAINTS = "Task priority should either veryhigh, high, medium, low or verylow./n"
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should either veryhigh, high, medium, low or verylow./n"
                                                             + "It is case insensitive";
     
     
@@ -41,11 +41,12 @@ public class Priority {
 
     public Priority(String priority) throws IllegalValueException{
         assert priority != null;
+        priority = priority.trim();
         String upperPriority = priority.toUpperCase();
         if(acceptedPriority.Contains(upperPriority)){
             this.priority = acceptedPriority.valueOf(upperPriority);
         } else {
-            throw new IllegalValueException(TASK_PRIORITY_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
     }
     
