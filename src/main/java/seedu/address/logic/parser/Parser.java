@@ -94,14 +94,27 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         try {
-            return new AddCommand(
-                    command.getValuesAsString(),
-                    command.getParam("p"),
-                    command.getParam("e"),
-                    command.getParam("a"),
-                    getTagsFromArgs(command.getParamList("t"))
-            );
-        } catch (IllegalValueException ive) {
+            if(command.hasParams(AddCommand.DATED_TASK_PARAMS)){
+                return new AddCommand(
+                        command.getValuesAsString(),
+                        command.getParamOrDefault("h", "-1"),
+                        command.getParamOrDefault("d", "-1"),
+                        command.getParamOrDefault("l", "-1"),
+                        command.getParam("r"),
+                        command.getParam("p"),
+                        command.getParam("i"),
+                        getTagsFromArgs(command.getParamList("t"))
+                );
+            } else {
+                return new AddCommand(
+                        command.getValuesAsString(),
+                        command.getParam("r"),
+                        command.getParam("p"),
+                        command.getParam("i"),
+                        getTagsFromArgs(command.getParamList("t"))
+                );
+            }
+        } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
         }
     }
