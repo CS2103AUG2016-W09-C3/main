@@ -314,10 +314,12 @@ Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons.
-3. Should come with automated unit tests and open source code.
-4. Should favor DOS style commands over Unix-style commands.
+1. Should be able to hold up to 1000 tasks
+2. Should contain a user guide on how to use the product
+3. Should have a back-up memory
+4. Should be able to work without internet connection
+5. Should come with automated unit tests
+6. Should favor DOS style commands over Unix-style commands
 
 {More to be added}
 
