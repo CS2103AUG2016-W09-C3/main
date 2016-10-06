@@ -335,5 +335,20 @@ Use case ends.
 
 ## Appendix E : Product Survey
 
-{TODO: Add a summary of competing products}
+Document product survey:
+
+Application | Pros & Cons | Summary
+-------- | :-------- | :-----------
+Google Calendar | Pros: <br>Integration with all of google's existing products including google now voice assistant<br>
+<br>Shortcuts available from within gmail <br>
+<br>Available on all platforms <br>
+<br>Can sync calendar with other people <br>
+<br>Notifications and reminders about tasks <br>
+<br>Automatic addition of events from gmail <br>
+<br>Cons: <br>Needs to be accessed with browsers mainly or phone applications<br>
+<br>Needs internet connection to keep updated<br>
+<br>Not much support for tasks without a clear deadline or timing | Google calendar might fit Jim’s requirements to a certain extend. Since most of Jim’s tasks arrive in email, if he uses gmail, it would be a lot easier using the automatic addition feature in gmail. However, the web-based solution may not be the fastest to work with. There is still a lack of support for tasks with no clear timings, even though Jim can make a list of the tasks without timings in google tasks. There is also a lack of command line input, which is a feature preferred by Jim.
+Todo.txt | |
+Wunderlist | |
+Fantastical | |
 
