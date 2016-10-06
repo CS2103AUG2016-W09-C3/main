@@ -267,12 +267,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | schedule task into the calendar | 
+`* * *` | user | mark a task as done after i do the task | 
+`* * *` | user | remove a task from my list of tasks | 
+`* * *` | user | view all available commands | know how to use the commands
+`* * *` | user | reschedule a task | make changes if there are changes in my schedule
+`* * *` | user | add a task without setting deadlines | 
+`* *` | user | set recurring tasks that occur repeatedly after a set interval | easily manage my weekly/monthly tasks
+`* *` | user | have the ability to share my tasks with my friends | 
+`* *` | user | print my to-do schedule | 
+`* *` | user | list all tasks that needs to be done in a specific timeframe | 
+`* *` | user | set reminders or notifications for important events | remind myself of my schedule
+`* *` | user | import an existing task list from another file | conveniently move my task list from one computer to another
+`* *` | user | sort my tasks in order based on date or priority | see what needs to be done based on priority
+`*` | user | input my tasks in different languages | 
+`*` | user | customise the command words for the program | use the program in the way I want to use it
 
 {More to be added}
 
