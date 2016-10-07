@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 
 public class PersonCard extends UiPart{
@@ -17,11 +18,15 @@ public class PersonCard extends UiPart{
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label priority;
     @FXML
-    private Label address;
+    private Label information;
     @FXML
-    private Label email;
+    private Label datetime;
+    @FXML
+    private Label length;
+    @FXML
+    private Label recurrance;
     @FXML
     private Label tags;
 
@@ -43,9 +48,14 @@ public class PersonCard extends UiPart{
     public void initialize() {
         name.setText(person.getName().fullName);
         id.setText(displayedIndex + ". ");
-        phone.setText(person.getPhone().value);
-        address.setText(person.getAddress().value);
-        email.setText(person.getEmail().value);
+        priority.setText(person.getPriority().toString());
+        information.setText(person.getInformation().fullInformation);
+        if(person.isDated()){
+            ReadOnlyDatedTask datedTask = (ReadOnlyDatedTask) person;
+            datetime.setText(datedTask.getDateTime().toString());
+            length.setText(datedTask.getLength().toString());
+            recurrance.setText(datedTask.getRecurrance().toString());
+        }
         tags.setText(person.tagsString());
     }
 
