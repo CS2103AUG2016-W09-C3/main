@@ -37,7 +37,7 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
         this.recurrance = recurring;
     }
     
-    public DateTime getTime(){
+    public DateTime getDateTime(){
         return this.dateTime;
     }
     

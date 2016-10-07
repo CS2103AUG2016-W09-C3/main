@@ -44,6 +44,15 @@ public class DateTime {
         }
     }
 
+
+    public DateTime(String datetimeString) throws IllegalValueException {
+        try{
+            datetime = LocalDateTime.parse(datetimeString);
+        }catch(DateTimeParseException ex){
+            throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
+        }
+    }
+    
     /**
      * Returns true if a given string is a valid task date field.
      */
@@ -57,12 +66,16 @@ public class DateTime {
     private boolean isValidTime(String time) {
         return time.matches(TIME_VALIDATION_REGEX);
     }
+
+    public String toXMLString() {
+        return datetime.format(DATE_FORMATTER);
+    }
     
     @Override
     public String toString() {
         return datetime.format(DATE_DISPLAY_FORMATTER);
     }
-
+    
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

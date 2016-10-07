@@ -6,7 +6,7 @@ package seedu.address.model.task;
  */
 public interface ReadOnlyDatedTask extends ReadOnlyTask {
     
-    DateTime getTime();
+    DateTime getDateTime();
     Length getLength();
     Recurrance getRecurrance();
     
@@ -21,7 +21,7 @@ public interface ReadOnlyDatedTask extends ReadOnlyTask {
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
                 && other.getInformation().equals(this.getInformation())
-                && ((ReadOnlyDatedTask) other).getTime().equals(this.getTime())
+                && ((ReadOnlyDatedTask) other).getDateTime().equals(this.getDateTime())
                 && ((ReadOnlyDatedTask) other).getLength().equals(this.getLength())
                 && ((ReadOnlyDatedTask) other).getRecurrance().equals(this.getRecurrance()));
     }
@@ -34,7 +34,7 @@ public interface ReadOnlyDatedTask extends ReadOnlyTask {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
                 .append(" Time: ")
-                .append(getTime())
+                .append(getDateTime())
                 .append(" Length: ")
                 .append(getLength())
                 .append(" Recurrance: ")
