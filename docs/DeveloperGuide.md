@@ -331,7 +331,7 @@ Use case ends.
 
 1. User requests to edit task
 2. ToDoIt shows a list of persons
-3. User requests to edit a specific person in the list
+3. User requests to edit a specific task in the list
 4. ToDoIt edits the task <br>
 Use case ends.
 
@@ -365,9 +365,7 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
+{More to be added}
 
 ## Appendix E : Product Survey
 
