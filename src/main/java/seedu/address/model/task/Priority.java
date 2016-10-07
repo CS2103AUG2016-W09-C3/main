@@ -31,7 +31,7 @@ public class Priority {
         
         public static boolean Contains(String test){
             for(acceptedPriority enumValue : acceptedPriority.values()){
-                if(enumValue.name() == test){
+                if(enumValue.name().equals(test)){
                     return true;
                 }
             }
