@@ -12,11 +12,9 @@ import seedu.address.model.tag.UniqueTagList;
 
 public class DatedTask extends Task {
     
-    private DateTime time;
+    private DateTime dateTime;
     private Length length;
-    private Recurrance recurring;
-    
-    private boolean autoSchedule;
+    private Recurrance recurrance;
     
     private UniqueTagList tags;
     
@@ -34,13 +32,13 @@ public class DatedTask extends Task {
             Information information, UniqueTagList uniqueTagList) {
         super(name, priority, information, uniqueTagList);
         assert !CollectionUtil.isAnyNull(name, recurring, priority, information, tags);
-        this.time = time;
+        this.dateTime = time;
         this.length = length;
-        this.recurring = recurring;
+        this.recurrance = recurring;
     }
     
     public DateTime getTime(){
-        return this.time;
+        return this.dateTime;
     }
     
     public Length getLength(){
@@ -48,7 +46,7 @@ public class DatedTask extends Task {
     }
 
     public Recurrance getRecurrance() {
-        return this.recurring;
+        return this.recurrance;
     }
 
     @Override
@@ -81,8 +79,8 @@ public class DatedTask extends Task {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.name, this.time, this.length, 
-                            this.recurring, this.priority, this.information, tags);
+        return Objects.hash(this.name, this.dateTime, this.length, 
+                            this.recurrance, this.priority, this.information, tags);
     }
     
 }
