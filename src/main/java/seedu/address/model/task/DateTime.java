@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Represents a DatedTask's date and time in the task book.
  * Guarantees: immutable; is valid as declared in {@link #isValidLength(String)}
  */
-public class Time {
+public class DateTime {
     
     public static final String MESSAGE_INFORMATION_CONSTRAINTS = "Date should be in DDMMYYYY or DDMM format,"
             + " Time should be in HHMM format, in 24h time." +
@@ -29,7 +29,7 @@ public class Time {
      *
      * @throws IllegalValueException if given date or time string is invalid.
      */
-    public Time(String timeString, String dateString) throws IllegalValueException {
+    public DateTime(String timeString, String dateString) throws IllegalValueException {
         assert timeString != null;
         assert dateString != null;
         timeString = timeString.trim();
@@ -66,8 +66,8 @@ public class Time {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Time // instanceof handles nulls
-                && this.datetime.equals(((Time) other).datetime)); // state check
+                || (other instanceof DateTime // instanceof handles nulls
+                && this.datetime.equals(((DateTime) other).datetime)); // state check
     }
 
     @Override

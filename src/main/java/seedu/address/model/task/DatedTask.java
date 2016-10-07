@@ -12,7 +12,7 @@ import seedu.address.model.tag.UniqueTagList;
 
 public class DatedTask extends Task {
     
-    private Time time;
+    private DateTime time;
     private Length length;
     private Recurrance recurring;
     
@@ -30,7 +30,7 @@ public class DatedTask extends Task {
     /**
      * Every field must be present and not null.
      */
-    public DatedTask(Name name, Time time, Length length, Recurrance recurring, Priority priority,
+    public DatedTask(Name name, DateTime time, Length length, Recurrance recurring, Priority priority,
             Information information, UniqueTagList uniqueTagList) {
         super(name, priority, information, uniqueTagList);
         assert !CollectionUtil.isAnyNull(name, recurring, priority, information, tags);
@@ -39,7 +39,7 @@ public class DatedTask extends Task {
         this.recurring = recurring;
     }
     
-    public Time getTime(){
+    public DateTime getTime(){
         return this.time;
     }
     

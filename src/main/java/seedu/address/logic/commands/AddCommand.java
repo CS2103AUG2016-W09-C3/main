@@ -43,8 +43,7 @@ public class AddCommand extends Command {
         }
         this.toAdd = (Task) new DatedTask(
                 new Name(name),
-                new Time(time),
-                new Date(date),
+                new DateTime(date, time),
                 new Length(length),
                 new Recurrance(recurring),
                 new Priority(priority),
@@ -61,7 +60,6 @@ public class AddCommand extends Command {
         }
         this.toAdd = new Task(
                 new Name(name),
-                new Recurrance(recurring),
                 new Priority(priority),
                 new Information(information),
                 new UniqueTagList(tagSet)
