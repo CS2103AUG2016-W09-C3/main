@@ -81,7 +81,7 @@ public class DatedTask extends Task {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.name, this.time, this.date, this.length, 
+        return Objects.hash(this.name, this.time, this.length, 
                             this.recurring, this.priority, this.information, tags);
     }
     
