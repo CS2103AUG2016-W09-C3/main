@@ -11,7 +11,7 @@ public class Information {
     public static final String MESSAGE_INFORMATION_CONSTRAINTS = "Task infomation should be alphanumeric characters, "
             + "used to denote additional information related to task.";
 
-    public static final String INFORMATION_VALIDATION_REGEX = "[\\p{Alnum} ]*";
+    public static final String INFORMATION_VALIDATION_REGEX = "[\\p{Alnum} ]+";
     
     public final String fullInformation;
     

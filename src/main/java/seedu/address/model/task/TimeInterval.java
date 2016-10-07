@@ -12,7 +12,7 @@ public class TimeInterval {
             "Acceptable time units are h (hour), d (day), w(week)";
 
     //public static final String INTERVAL_VALIDATION_REGEX = "\\d+\\c";
-    private static final Pattern INTERVAL_VALIDATION_REGEX = Pattern.compile("(?<length>\\d+)(?<unit>[a-zA-Z])");
+    private static final Pattern INTERVAL_VALIDATION_REGEX = Pattern.compile("(?<length>[\\d]+)(?<unit>\\c)");
     public static HashMap<String, Integer> INTERVAL_TO_HOURS = new HashMap<>();
     static
     {
@@ -34,21 +34,24 @@ public class TimeInterval {
     public TimeInterval(String intervalString) throws IllegalValueException {
         assert intervalString != null;
         intervalString = intervalString.toLowerCase().trim();
-
-        this.intervalString = intervalString;
+        
+        if(!isValidInterval(intervalString)){
+            throw new IllegalValueException(MESSAGE_TIME_INTERVAL_CONSTRAINTS);
+        }
         
         final Matcher matcher = INTERVAL_VALIDATION_REGEX.matcher(intervalString);
-        if (!matcher.matches()) {
-            throw new IllegalValueException(MESSAGE_TIME_INTERVAL_CONSTRAINTS);
-        }
         length = Integer.parseInt(matcher.group("length"));
         unit = matcher.group("unit");
-        if(!isValidInterval(length, unit)){
-            throw new IllegalValueException(MESSAGE_TIME_INTERVAL_CONSTRAINTS);
-        }
+        this.intervalString = intervalString;
     }
     
-    private boolean isValidInterval(int length, String unit){
+    private boolean isValidInterval(String interval){
+        final Matcher matcher = INTERVAL_VALIDATION_REGEX.matcher(intervalString);
+        if (!matcher.matches()) {
+            return false;
+        }
+        int length = Integer.parseInt(matcher.group("length"));
+        String unit = matcher.group("unit");
         if(!INTERVAL_TO_HOURS.containsKey(unit)){
             return false;
         }

@@ -55,10 +55,6 @@ public class PersonCard extends UiPart{
             datetime.setText(datedTask.getDateTime().toString());
             length.setText(datedTask.getLength().toString());
             recurrance.setText(datedTask.getRecurrance().toString());
-        }else{
-            datetime.setText("");
-            length.setText("");
-            recurrance.setText("");
         }
         tags.setText(person.tagsString());
     }

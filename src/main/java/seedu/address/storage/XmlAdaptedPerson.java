@@ -30,8 +30,7 @@ public class XmlAdaptedPerson {
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
-    @XmlElement
-    private boolean isDated;
+    private boolean isDated = false;
     
     /**
      * No-arg constructor for JAXB use.
@@ -77,12 +76,13 @@ public class XmlAdaptedPerson {
         final Information information = new Information(this.information);
         final UniqueTagList tags = new UniqueTagList(personTags);
         if(isDated){
+            return new Task(name, priority, information, tags);
+        }else{
+
             final DateTime dateTime = new DateTime(this.dateTime);
             final Length length = new Length(this.length);
             final Recurrance recurrance = new Recurrance(this.recurrance);
             return new DatedTask(name, dateTime, length, recurrance, priority, information, tags);
-        }else{
-            return new Task(name, priority, information, tags);
         }
     }
 }

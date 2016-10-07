@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.*;
-import seedu.address.model.task.Recurrance;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.exceptions.IllegalValueException;
 
@@ -101,16 +100,17 @@ public class Parser {
                         command.getParamOrDefault("h", "-1"),
                         command.getParamOrDefault("d", "-1"),
                         command.getParamOrDefault("l", "-1"),
-                        command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
-                        command.getParamOrDefault("p", "medium"),
-                        command.getParamOrDefault("i", ""),
+                        command.getParam("r"),
+                        command.getParam("p"),
+                        command.getParam("i"),
                         getTagsFromArgs(command.getParamList("t"))
                 );
             } else {
                 return new AddCommand(
                         command.getValuesAsString(),
-                        command.getParamOrDefault("p", "medium"),
-                        command.getParamOrDefault("i", ""),
+                        command.getParam("r"),
+                        command.getParam("p"),
+                        command.getParam("i"),
                         getTagsFromArgs(command.getParamList("t"))
                 );
             }
