@@ -15,7 +15,7 @@ public class DateTime {
             + " Time should be in HHMM format, in 24h time." +
     " Also, check if your date and time inputs are valid.";
 
-    public static final String DATE_VALIDATION_REGEX = "\\d?[\\d]{5}";
+    public static final String DATE_VALIDATION_REGEX = "\\d?[\\d]{7}";
     public static final String TIME_VALIDATION_REGEX = "\\d?[\\d]{4}";
     
     public static final String PARAM_NOT_SPECIFIED = "-1";
@@ -29,7 +29,7 @@ public class DateTime {
      *
      * @throws IllegalValueException if given date or time string is invalid.
      */
-    public DateTime(String timeString, String dateString) throws IllegalValueException {
+    public DateTime(String dateString, String timeString) throws IllegalValueException {
         assert timeString != null;
         assert dateString != null;
         timeString = timeString.trim();
@@ -38,7 +38,7 @@ public class DateTime {
             throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
         }
         try{
-            datetime = LocalDateTime.parse(dateString + timeString);
+            datetime = LocalDateTime.parse(dateString + timeString, DATE_FORMATTER);
         }catch(DateTimeParseException ex){
             throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
         }
@@ -47,7 +47,7 @@ public class DateTime {
 
     public DateTime(String datetimeString) throws IllegalValueException {
         try{
-            datetime = LocalDateTime.parse(datetimeString);
+            datetime = LocalDateTime.parse(datetimeString, DATE_FORMATTER);
         }catch(DateTimeParseException ex){
             throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
         }
