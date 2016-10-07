@@ -192,7 +192,7 @@ Format: `edit INDEX [n/TASK_NAME] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIO
     The index **must be a positive integer** `1`, `2`, `3`, ... <br>
 > * Replaces the current task data with the specified task data.<br>
 > * This action is irreversible.
-> * For more information regarding the options, refer to `add` commmand.
+> * For more information regarding the options, refer to `add` command.
 
 **Example**
 > * Your boss just changed the date of a meeting on the 3rd October to the 2nd. Simply find your meeting task, then run the following command: <br>
@@ -220,7 +220,7 @@ Format: `reschedule INDEX INTERVAL`
 ---
   
 ### Mark a task as done : `done`
-Hooray! You've just completed a task! Celebrate your accomplisment by marking it as done.<br>
+Hooray! You've just completed a task! Celebrate your accomplishment by marking it as done.<br>
 Format: `done INDEX`
 
 **Notes**
