@@ -10,7 +10,7 @@ import seedu.address.model.tag.UniqueTagList;
  * Guarantees: details are present and not null, field values are validated.
  */
 
-public class DatedTask extends Task {
+public class DatedTask extends Task implements ReadOnlyDatedTask {
     
     private DateTime dateTime;
     private Length length;
@@ -54,27 +54,7 @@ public class DatedTask extends Task {
         return getAsText();
     }
     
-    /**
-     * Formats the task as text, showing all contact details.
-     */
-    @Override
-    public String getAsText(){
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Time: ")
-                .append(getTime())
-                .append(" Length: ")
-                .append(getLength())
-                .append(" Recurrance: ")
-                .append(getRecurrance())
-                .append(" Priority: ")
-                .append(getPriority())
-                .append(" Information: ")
-                .append(getInformation())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
-        return builder.toString();
-    }
+
     
     @Override
     public int hashCode() {
