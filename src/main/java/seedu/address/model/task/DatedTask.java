@@ -10,15 +10,11 @@ import seedu.address.model.tag.UniqueTagList;
  * Guarantees: details are present and not null, field values are validated.
  */
 
-public class DatedTask extends Task implements ReadOnlyTask{
+public class DatedTask extends Task {
     
-    private Name name;
     private Time time;
-    private Date date;
     private Length length;
     private Recurrance recurring;
-    private Priority priority;
-    private Information information;
     
     private boolean autoSchedule;
     
@@ -34,56 +30,27 @@ public class DatedTask extends Task implements ReadOnlyTask{
     /**
      * Every field must be present and not null.
      */
-    public DatedTask(Name name, Time time, Date date, Length length, Recurrance recurring, Priority priority,
+    public DatedTask(Name name, Time time, Length length, Recurrance recurring, Priority priority,
             Information information, UniqueTagList uniqueTagList) {
+        super(name, priority, information, uniqueTagList);
         assert !CollectionUtil.isAnyNull(name, recurring, priority, information, tags);
-        this.name = name;
         this.time = time;
-        this.date = date;
         this.length = length;
         this.recurring = recurring;
-        this.priority = priority;
-        this.information = information;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
     
     public Time getTime(){
         return this.time;
     }
     
-    public Date getDate(){
-        return this.date;
-    }
-    
     public Length getLength(){
         return this.length;
     }
-    
-    @Override
-    public Name getName() {
-        return this.name;
-    }
 
-    @Override
     public Recurrance getRecurrance() {
         return this.recurring;
     }
 
-    @Override
-    public Priority getPriority() {
-        return this.priority;
-    }
-
-    @Override
-    public Information getInformation() {
-        return this.information;
-    }
-
-    @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
-    }
-    
     @Override
     public String toString() {
         return getAsText();
@@ -98,8 +65,6 @@ public class DatedTask extends Task implements ReadOnlyTask{
         builder.append(getName())
                 .append(" Time: ")
                 .append(getTime())
-                .append(" Date: ")
-                .append(getDate())
                 .append(" Length: ")
                 .append(getLength())
                 .append(" Recurrance: ")
