@@ -15,14 +15,14 @@ public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String[] REQUIRED_PARAMS = {"r", "p", "i"};
+    public static final String[] REQUIRED_PARAMS = {};
     
     public static final String[] DATED_TASK_PARAMS = {"h", "d", "l"};
     
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
             + "Parameters: NAME [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...\n"
             + "Example: " + COMMAND_WORD
-            + " Meet John h/14:00 d/12-12-2016 l/2 r/NO p/3 i/Meeting for lunch";
+            + " Meet John h/1400 d/12122016 l/2 r/1d p/medium i/Meeting for lunch";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
@@ -52,7 +52,7 @@ public class AddCommand extends Command {
         );
     }
 
-    public AddCommand(String name, String recurring, String priority, String information, Set<String> tagsFromArgs) 
+    public AddCommand(String name, String priority, String information, Set<String> tagsFromArgs) 
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tagsFromArgs) {

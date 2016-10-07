@@ -10,7 +10,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 public class Recurrance {
 
     public final TimeInterval timeInterval;
-    
+    public final static String NO_INTERVAL = "";
+    public final static String DEFAULT_INTERVAL = "1h";
+    public boolean hasInterval = true;
     /**
      * Stores given interval. Validation of interval is done by TimeInterval class.
      *
@@ -20,13 +22,22 @@ public class Recurrance {
         assert interval != null;
         interval = interval.trim();
         
+        if(interval.equals(NO_INTERVAL)){
+            hasInterval = false;
+            interval = DEFAULT_INTERVAL;
+            
+        }
         this.timeInterval = new TimeInterval(interval);
     }
 
     
     @Override
     public String toString() {
-        return this.timeInterval.toString();
+        if(!hasInterval){
+            return NO_INTERVAL;
+        }else{
+            return this.timeInterval.toString();
+        }
     }
 
     @Override
