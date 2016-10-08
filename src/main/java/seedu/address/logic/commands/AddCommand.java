@@ -35,7 +35,7 @@ public class AddCommand extends Command {
      * @throws IllegalValueException if any of the raw values are invalid
      */
     public AddCommand(String name, String time, String date, String length, String recurring, 
-                      String priority, String information, Set<String> tags)
+                      String priority, String information, String doneFlag, Set<String> tags)
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
@@ -48,11 +48,12 @@ public class AddCommand extends Command {
                 new Recurrance(recurring),
                 new Priority(priority),
                 new Information(information),
+                new DoneFlag(doneFlag),
                 new UniqueTagList(tagSet)
         );
     }
 
-    public AddCommand(String name, String priority, String information, Set<String> tagsFromArgs) 
+    public AddCommand(String name, String priority, String information, String doneFlag, Set<String> tagsFromArgs) 
             throws IllegalValueException {
         final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tagsFromArgs) {
@@ -62,6 +63,7 @@ public class AddCommand extends Command {
                 new Name(name),
                 new Priority(priority),
                 new Information(information),
+                new DoneFlag(doneFlag),
                 new UniqueTagList(tagSet)
         );
     }

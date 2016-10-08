@@ -16,6 +16,8 @@ public class PersonCard extends UiPart{
     @FXML
     private Label name;
     @FXML
+    private Label done;
+    @FXML
     private Label id;
     @FXML
     private Label priority;
@@ -50,6 +52,7 @@ public class PersonCard extends UiPart{
         id.setText(displayedIndex + ". ");
         priority.setText(person.getPriority().toString());
         information.setText(person.getInformation().fullInformation);
+        done.setText(person.getDoneFlag().toString());
         if(person.isDated()){
             ReadOnlyDatedTask datedTask = (ReadOnlyDatedTask) person;
             datetime.setText(datedTask.getDateTime().toString());
