@@ -7,12 +7,12 @@ import seedu.address.model.task.*;
 /**
  *
  */
-public class TypicalTestPersons {
+public class TypicalTestTasks {
 
     public static TestTask aliceMeeting, breadShopping, lorryMaintainance, danielLunch, fetchElle, 
                            researchPaper, mumLunch, neiceBirhdayMeal, surveyResults;
 
-    public TypicalTestPersons() {
+    public TypicalTestTasks() {
         try {
             aliceMeeting =  new TaskBuilder().withName("Meeting with Alice Pauline").withPriority("medium")
                     .withInformation("To pitch business idea").withDoneFlag("Not done")
