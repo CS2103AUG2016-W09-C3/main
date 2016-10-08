@@ -9,41 +9,41 @@ import seedu.address.model.task.*;
  */
 public class PersonBuilder {
 
-    private TestTask person;
+    private TestTask task;
 
     public PersonBuilder() {
-        this.person = new TestTask();
+        this.task = new TestTask();
     }
 
     public PersonBuilder withName(String name) throws IllegalValueException {
-        this.person.setName(new Name(name));
+        this.task.setName(new Name(name));
         return this;
     }
 
     public PersonBuilder withTags(String ... tags) throws IllegalValueException {
         for (String tag: tags) {
-            person.getTags().add(new Tag(tag));
+            this.task.getTags().add(new Tag(tag));
         }
         return this;
     }
 
-    public PersonBuilder withAddress(String address) throws IllegalValueException {
-        this.person.setAddress(new Address(address));
+    public PersonBuilder withPriority(String priority) throws IllegalValueException {
+        this.task.setPriority(new Priority(priority));
         return this;
     }
 
-    public PersonBuilder withPhone(String phone) throws IllegalValueException {
-        this.person.setPhone(new Phone(phone));
+    public PersonBuilder withInformation(String information) throws IllegalValueException {
+        this.task.setInformation(new Information(information));
         return this;
     }
 
-    public PersonBuilder withEmail(String email) throws IllegalValueException {
-        this.person.setEmail(new Email(email));
+    public PersonBuilder withDoneFlag(String doneFlag) throws IllegalValueException {
+        this.task.setDoneFlag(new DoneFlag(doneFlag));
         return this;
     }
 
     public TestTask build() {
-        return this.person;
+        return this.task;
     }
 
 }
