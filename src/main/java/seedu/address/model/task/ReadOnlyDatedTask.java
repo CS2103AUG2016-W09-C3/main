@@ -21,6 +21,7 @@ public interface ReadOnlyDatedTask extends ReadOnlyTask {
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
                 && other.getInformation().equals(this.getInformation())
+                && other.getDoneFlag().equals(this.getDoneFlag())
                 && ((ReadOnlyDatedTask) other).getDateTime().equals(this.getDateTime())
                 && ((ReadOnlyDatedTask) other).getLength().equals(this.getLength())
                 && ((ReadOnlyDatedTask) other).getRecurrance().equals(this.getRecurrance()));
@@ -43,6 +44,8 @@ public interface ReadOnlyDatedTask extends ReadOnlyTask {
                 .append(getPriority())
                 .append(" Information: ")
                 .append(getInformation())
+                .append(" Done: ")
+                .append(getDoneFlag())
                 .append(" Tags: ");
         getTags().forEach(builder::append);
         return builder.toString();
