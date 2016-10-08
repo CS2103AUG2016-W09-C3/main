@@ -7,37 +7,37 @@ import seedu.address.model.task.*;
 /**
  *
  */
-public class PersonBuilder {
+public class TaskBuilder {
 
     private TestTask task;
 
-    public PersonBuilder() {
+    public TaskBuilder() {
         this.task = new TestTask();
     }
 
-    public PersonBuilder withName(String name) throws IllegalValueException {
+    public TaskBuilder withName(String name) throws IllegalValueException {
         this.task.setName(new Name(name));
         return this;
     }
 
-    public PersonBuilder withTags(String ... tags) throws IllegalValueException {
+    public TaskBuilder withTags(String ... tags) throws IllegalValueException {
         for (String tag: tags) {
             this.task.getTags().add(new Tag(tag));
         }
         return this;
     }
 
-    public PersonBuilder withPriority(String priority) throws IllegalValueException {
+    public TaskBuilder withPriority(String priority) throws IllegalValueException {
         this.task.setPriority(new Priority(priority));
         return this;
     }
 
-    public PersonBuilder withInformation(String information) throws IllegalValueException {
+    public TaskBuilder withInformation(String information) throws IllegalValueException {
         this.task.setInformation(new Information(information));
         return this;
     }
 
-    public PersonBuilder withDoneFlag(String doneFlag) throws IllegalValueException {
+    public TaskBuilder withDoneFlag(String doneFlag) throws IllegalValueException {
         this.task.setDoneFlag(new DoneFlag(doneFlag));
         return this;
     }
