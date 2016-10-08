@@ -6,7 +6,7 @@ import seedu.address.model.task.*;
 /**
  * A mutable person object. For testing only.
  */
-public class TestPerson implements ReadOnlyTask {
+public class TestTask implements ReadOnlyTask {
 
     private Name name;
     private Address address;
@@ -14,7 +14,7 @@ public class TestPerson implements ReadOnlyTask {
     private Phone phone;
     private UniqueTagList tags;
 
-    public TestPerson() {
+    public TestTask() {
         tags = new UniqueTagList();
     }
 
@@ -72,5 +72,17 @@ public class TestPerson implements ReadOnlyTask {
         sb.append("a/" + this.getAddress().value + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
+    }
+
+    @Override
+    public Priority getPriority() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Information getInformation() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }
