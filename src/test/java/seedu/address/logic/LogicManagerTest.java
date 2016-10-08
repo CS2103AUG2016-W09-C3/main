@@ -383,14 +383,14 @@ public class LogicManagerTest {
     class TestDataHelper{
 
         Task adam() throws Exception {
-            Name name = new Name("Adam Brown");
-            Phone privatePhone = new Phone("111111");
-            Email email = new Email("adam@gmail.com");
-            Address privateAddress = new Address("111, alpha street");
+            Name name = new Name("sample task name");
+            Priority privatePriority = new Priority("high");
+            Information information = new Information("sample information");
+            DoneFlag privateAddress = new DoneFlag("Not done");
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
-            return new Task(name, privatePhone, email, privateAddress, tags);
+            return new Task(name, privatePriority, information, privateAddress, tags);
         }
 
         /**
@@ -403,23 +403,23 @@ public class LogicManagerTest {
         Task generatePerson(int seed) throws Exception {
             return new Task(
                     new Name("Task " + seed),
-                    new Phone("" + Math.abs(seed)),
-                    new Email(seed + "@email"),
-                    new Address("House of " + seed),
+                    new Priority("" + Math.abs(seed)),
+                    new Information(seed + "@email"),
+                    new DoneFlag("House of " + seed),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
         }
 
-        /** Generates the correct add command based on the person given */
+        /** Generates the correct add command based on the task given */
         String generateAddCommand(Task p) {
             StringBuffer cmd = new StringBuffer();
 
             cmd.append("add ");
 
             cmd.append(p.getName().toString());
-            cmd.append(" p/").append(p.getPhone());
-            cmd.append(" e/").append(p.getEmail());
-            cmd.append(" a/").append(p.getAddress());
+            cmd.append(" p/").append(p.getPriority());
+            cmd.append(" i/").append(p.getInformation());
+            //cmd.append(" a/").append(p.getDoneFlag()); DoneFlag has default value of not done. Cannot input when adding tasks.
 
             UniqueTagList tags = p.getTags();
             for(Tag t: tags){
@@ -502,9 +502,9 @@ public class LogicManagerTest {
         Task generatePersonWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new Phone("1"),
-                    new Email("1@email"),
-                    new Address("House of 1"),
+                    new Priority("1"),
+                    new Information("1@email"),
+                    new DoneFlag("House of 1"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
