@@ -10,17 +10,11 @@ import seedu.address.model.tag.UniqueTagList;
  * Guarantees: details are present and not null, field values are validated.
  */
 
-public class DatedTask extends Task implements ReadOnlyTask{
+public class DatedTask extends Task implements ReadOnlyDatedTask {
     
-    private Name name;
-    private Time time;
-    private Date date;
+    private DateTime dateTime;
     private Length length;
-    private Recurrance recurring;
-    private Priority priority;
-    private Information information;
-    
-    private boolean autoSchedule;
+    private Recurrance recurrance;
     
     private UniqueTagList tags;
     
@@ -34,90 +28,47 @@ public class DatedTask extends Task implements ReadOnlyTask{
     /**
      * Every field must be present and not null.
      */
-    public DatedTask(Name name, Time time, Date date, Length length, Recurrance recurring, Priority priority,
+    public DatedTask(Name name, DateTime time, Length length, Recurrance recurring, Priority priority,
             Information information, UniqueTagList uniqueTagList) {
+        super(name, priority, information, uniqueTagList);
         assert !CollectionUtil.isAnyNull(name, recurring, priority, information, tags);
-        this.name = name;
-        this.time = time;
-        this.date = date;
+        this.dateTime = time;
         this.length = length;
-        this.recurring = recurring;
-        this.priority = priority;
-        this.information = information;
-        this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
+        this.recurrance = recurring;
     }
     
-    public Time getTime(){
-        return this.time;
+    /**
+     * Copy constructor.
+     */
+    public DatedTask(ReadOnlyDatedTask source) {
+        this(source.getName(), source.getDateTime(), source.getLength(), 
+             source.getRecurrance(), source.getPriority(), source.getInformation(), source.getTags());
     }
     
-    public Date getDate(){
-        return this.date;
+    public DateTime getDateTime(){
+        return this.dateTime;
     }
     
     public Length getLength(){
         return this.length;
     }
-    
-    @Override
-    public Name getName() {
-        return this.name;
-    }
 
-    @Override
     public Recurrance getRecurrance() {
-        return this.recurring;
+        return this.recurrance;
     }
 
-    @Override
-    public Priority getPriority() {
-        return this.priority;
-    }
-
-    @Override
-    public Information getInformation() {
-        return this.information;
-    }
-
-    @Override
-    public UniqueTagList getTags() {
-        return new UniqueTagList(tags);
-    }
-    
     @Override
     public String toString() {
         return getAsText();
     }
     
-    /**
-     * Formats the task as text, showing all contact details.
-     */
-    @Override
-    public String getAsText(){
-        final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
-                .append(" Time: ")
-                .append(getTime())
-                .append(" Date: ")
-                .append(getDate())
-                .append(" Length: ")
-                .append(getLength())
-                .append(" Recurrance: ")
-                .append(getRecurrance())
-                .append(" Priority: ")
-                .append(getPriority())
-                .append(" Information: ")
-                .append(getInformation())
-                .append(" Tags: ");
-        getTags().forEach(builder::append);
-        return builder.toString();
-    }
+
     
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(this.name, this.time, this.date, this.length, 
-                            this.recurring, this.priority, this.information, tags);
+        return Objects.hash(this.name, this.dateTime, this.length, 
+                            this.recurrance, this.priority, this.information, tags);
     }
     
 }

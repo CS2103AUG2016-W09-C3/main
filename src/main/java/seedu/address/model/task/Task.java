@@ -12,22 +12,19 @@ import java.util.Objects;
 public class Task implements ReadOnlyTask {
 
     
-    private Name name;
-    private Recurrance recurring;
-    private Priority priority;
-    private Information information;
-    private boolean autoSchedule;
+    protected Name name;
+    protected Priority priority;
+    protected Information information;
     
 
-    private UniqueTagList tags;
+    protected UniqueTagList tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Task(Name name, Recurrance recurring, Priority priority, Information information, UniqueTagList tags) {
-        assert !CollectionUtil.isAnyNull(name, recurring, priority, information, tags);
+    public Task(Name name, Priority priority, Information information, UniqueTagList tags) {
+        assert !CollectionUtil.isAnyNull(name, priority, information, tags);
         this.name = name;
-        this.recurring = recurring;
         this.priority = priority;
         this.information = information;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
@@ -37,7 +34,7 @@ public class Task implements ReadOnlyTask {
      * Copy constructor.
      */
     public Task(ReadOnlyTask source) {
-        this(source.getName(), source.getRecurrance(), source.getPriority(), source.getInformation(), source.getTags());
+        this(source.getName(), source.getPriority(), source.getInformation(), source.getTags());
     }
     /**
      * Default constructor for DatedTask subclass, should not be used.
@@ -49,11 +46,6 @@ public class Task implements ReadOnlyTask {
     @Override
     public Name getName() {
         return name;
-    }
-
-    @Override
-    public Recurrance getRecurrance() {
-        return this.recurring;
     }
 
     @Override
@@ -88,7 +80,7 @@ public class Task implements ReadOnlyTask {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, this.recurring, this.priority, this.information, tags);
+        return Objects.hash(name, this.priority, this.information, tags);
     }
 
     @Override
