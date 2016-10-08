@@ -9,9 +9,9 @@ import seedu.address.model.task.*;
 public class TestTask implements ReadOnlyTask {
 
     private Name name;
-    private Address address;
-    private Email email;
-    private Phone phone;
+    protected Priority priority;
+    protected Information information;
+    protected DoneFlag doneFlag;
     private UniqueTagList tags;
 
     public TestTask() {
@@ -22,41 +22,41 @@ public class TestTask implements ReadOnlyTask {
         this.name = name;
     }
 
-    public void setAddress(Address address) {
-        this.address = address;
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 
-    public void setEmail(Email email) {
-        this.email = email;
+    public void setInformation(Information information) {
+        this.information = information;
     }
 
-    public void setPhone(Phone phone) {
-        this.phone = phone;
+    public void setDoneFlag(DoneFlag doneFlag) {
+        this.doneFlag = doneFlag;
     }
 
     @Override
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     @Override
-    public Phone getPhone() {
-        return phone;
+    public Priority getPriority() {
+        return this.priority;
     }
 
     @Override
-    public Email getEmail() {
-        return email;
+    public Information getInformation() {
+        return this.information;
     }
 
     @Override
-    public Address getAddress() {
-        return address;
+    public DoneFlag getDoneFlag() {
+        return this.doneFlag;
     }
 
     @Override
     public UniqueTagList getTags() {
-        return tags;
+        return this.tags;
     }
 
     @Override
@@ -67,22 +67,10 @@ public class TestTask implements ReadOnlyTask {
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
         sb.append("add " + this.getName().fullName + " ");
-        sb.append("p/" + this.getPhone().value + " ");
-        sb.append("e/" + this.getEmail().value + " ");
-        sb.append("a/" + this.getAddress().value + " ");
+        sb.append("p/" + this.getPriority().toString() + " ");
+        sb.append("e/" + this.getInformation().toString() + " ");
+        sb.append("a/" + this.getDoneFlag().toString() + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
-    }
-
-    @Override
-    public Priority getPriority() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    @Override
-    public Information getInformation() {
-        // TODO Auto-generated method stub
-        return null;
     }
 }
