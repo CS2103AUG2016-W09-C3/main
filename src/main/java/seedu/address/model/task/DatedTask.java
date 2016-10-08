@@ -29,8 +29,8 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
      * Every field must be present and not null.
      */
     public DatedTask(Name name, DateTime time, Length length, Recurrance recurring, Priority priority,
-            Information information, UniqueTagList uniqueTagList) {
-        super(name, priority, information, uniqueTagList);
+            Information information, DoneFlag doneFlag, UniqueTagList uniqueTagList) {
+        super(name, priority, information, doneFlag, uniqueTagList);
         assert !CollectionUtil.isAnyNull(name, recurring, priority, information, tags);
         this.dateTime = time;
         this.length = length;
@@ -42,7 +42,7 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
      */
     public DatedTask(ReadOnlyDatedTask source) {
         this(source.getName(), source.getDateTime(), source.getLength(), 
-             source.getRecurrance(), source.getPriority(), source.getInformation(), source.getTags());
+             source.getRecurrance(), source.getPriority(), source.getInformation(), source.getDoneFlag(), source.getTags());
     }
     
     public DateTime getDateTime(){
