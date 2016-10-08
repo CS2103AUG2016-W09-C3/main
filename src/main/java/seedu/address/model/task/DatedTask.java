@@ -37,6 +37,14 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
         this.recurrance = recurring;
     }
     
+    /**
+     * Copy constructor.
+     */
+    public DatedTask(ReadOnlyDatedTask source) {
+        this(source.getName(), source.getDateTime(), source.getLength(), 
+             source.getRecurrance(), source.getPriority(), source.getInformation(), source.getTags());
+    }
+    
     public DateTime getDateTime(){
         return this.dateTime;
     }
