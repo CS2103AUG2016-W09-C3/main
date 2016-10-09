@@ -152,9 +152,7 @@ public class LogicManagerTest {
         assertCommandBehavior(
                 "add p/MEDIUM i/Do stuff", expectedMessage);
         assertCommandBehavior(
-                "add task p/wrong priority", Priority.MESSAGE_PRIORITY_CONSTRAINTS);
-        assertCommandBehavior(
-                "add task p/MEDIUM i/////Do stuff", Information.MESSAGE_INFORMATION_CONSTRAINTS);
+                "add //", expectedMessage);
         assertCommandBehavior(
                 "add task p/MEDIUM io/Wrong param", expectedMessage);
     }
@@ -162,13 +160,11 @@ public class LogicManagerTest {
     @Test
     public void execute_add_invalidPersonData() throws Exception {
         assertCommandBehavior(
-                "add []\\[;] p/12345 e/valid@e.mail a/valid, address", Name.MESSAGE_NAME_CONSTRAINTS);
+                "add task p/wrong priority", Priority.MESSAGE_PRIORITY_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Name p/not_numbers e/valid@e.mail a/valid, address", Phone.MESSAGE_PHONE_CONSTRAINTS);
+                "add task p/MEDIUM i/////Illegal characters", Information.MESSAGE_INFORMATION_CONSTRAINTS);
         assertCommandBehavior(
-                "add Valid Name p/12345 e/notAnEmail a/valid, address", Email.MESSAGE_EMAIL_CONSTRAINTS);
-        assertCommandBehavior(
-                "add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
+                "add task p/MEDIUM i/Valid name t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
 
