@@ -67,4 +67,6 @@ public interface ParsedCommand {
      */
     boolean hasValue();
 
+    boolean hasUnnecessaryParams(String[] possibleParams);
+
 }

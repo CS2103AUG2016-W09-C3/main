@@ -11,6 +11,9 @@ import seedu.address.model.Model;
 public abstract class Command {
     protected Model model;
 
+    public static final String[] REQUIRED_PARAMS = {};
+    public static final String[] POSSIBLE_PARAMS = {".*"};
+    
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
      *

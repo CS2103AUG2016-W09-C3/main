@@ -16,11 +16,13 @@ public class AddCommand extends Command {
     public static final String COMMAND_WORD = "add";
 
     public static final String[] REQUIRED_PARAMS = {};
+    public static final String[] POSSIBLE_PARAMS = {"h", "d", "l", "r", "p", "i", "t"};
     
     public static final String[] DATED_TASK_PARAMS = {"h", "d", "l"};
     
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
             + "Parameters: NAME [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...\n"
+            + "Parameters should not contain '/'s."
             + "Example: " + COMMAND_WORD
             + " Meet John h/1400 d/12122016 l/2 r/1d p/medium i/Meeting for lunch";
 
