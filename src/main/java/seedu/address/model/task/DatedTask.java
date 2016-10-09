@@ -31,7 +31,7 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
     public DatedTask(Name name, DateTime time, Length length, Recurrance recurring, Priority priority,
             Information information, DoneFlag doneFlag, UniqueTagList uniqueTagList) {
         super(name, priority, information, doneFlag, uniqueTagList);
-        assert !CollectionUtil.isAnyNull(name, recurring, priority, information, tags);
+        assert !CollectionUtil.isAnyNull(recurring, time, length);
         this.dateTime = time;
         this.length = length;
         this.recurrance = recurring;

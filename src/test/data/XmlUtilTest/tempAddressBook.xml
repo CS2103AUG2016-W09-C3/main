@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addressbook>
     <persons>
-        <id>1</id>
-        <firstName>John</firstName>
-        <lastName>Doe</lastName>
-        <githubUsername></githubUsername>
-        <street></street>
-        <postalCode></postalCode>
-        <city></city>
+        <name>Meet Jason</name>
+        <priority>LOW</priority>
+        <information>Don't be late</information>
+        <dateTime>121220161400</dateTime>
+        <length>2</length>
+        <recurrance></recurrance>
+        <done>Not done</done>
+        <isDated>true</isDated>
     </persons>
     <tags>
         <name>Friends</name>

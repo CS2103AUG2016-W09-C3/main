@@ -53,10 +53,12 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+        
+        ParsedCommand command = new CommandParser(arguments);
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return prepareAdd(arguments);
+            return prepareAdd(command);
 
         case SelectCommand.COMMAND_WORD:
             return prepareSelect(arguments);
@@ -90,9 +92,8 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareAdd(String args){
-        ParsedCommand command = new CommandParser(args);
-        if(!command.hasValue() || !command.hasParams(AddCommand.REQUIRED_PARAMS)){
+    private Command prepareAdd(ParsedCommand command){
+        if(!command.hasValue() || !command.hasParams(AddCommand.REQUIRED_PARAMS) || command.hasUnnecessaryParams(AddCommand.POSSIBLE_PARAMS)){
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         try {

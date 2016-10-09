@@ -43,7 +43,7 @@ public class DoneFlag {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DoneFlag // instanceof handles nulls
-                && this.done == (((DoneFlag) other).done)); // state check
+                && this.done.equals(((DoneFlag) other).done)); // state check
     }
 
     @Override
