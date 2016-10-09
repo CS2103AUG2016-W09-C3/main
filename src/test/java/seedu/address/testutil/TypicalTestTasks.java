@@ -20,14 +20,14 @@ public class TypicalTestTasks {
             breadShopping = new TaskBuilder().withName("Buy 2 packet of bread").withPriority("High")
                     .withInformation("On shopping trip wth friends").withDoneFlag("Not done")
                     .withTags("owesMoney", "friends").build();
-            lorryMaintainance = new TaskBuilder().withName("Send in lorry for maintainance").withDoneFlag("Done").withInformation("Take 10 month interest loan").withPriority("medium").build();
+            lorryMaintainance = new TaskBuilder().withName("Send in lorry for maintainance").withDoneFlag("Not done").withInformation("Take 10 month interest loan").withPriority("medium").build();
             danielLunch = new TaskBuilder().withName("Lunch with Daniel Meier").withDoneFlag("Not done").withInformation("Catch up").withPriority("medium").build();
             fetchElle = new TaskBuilder().withName("Fetch Elle Meyer from airport").withDoneFlag("Not done").withInformation("Returning flight yet to confirm").withPriority("low").build();
             researchPaper = new TaskBuilder().withName("Finish off research paper").withDoneFlag("Not done").withInformation("Missing appendix A and B").withPriority("veryHigh").build();
             mumLunch = new TaskBuilder().withName("Treat mum to lunch").withDoneFlag("Not done").withInformation("To celebrate retirement.").withPriority("VeryHigh").build();
 
             //Manually added
-            neiceBirhdayMeal = new TaskBuilder().withName("Bring neice out for a meal").withDoneFlag("Done").withInformation("Belated birthday treat").withPriority("High").build();
+            neiceBirhdayMeal = new TaskBuilder().withName("Bring neice out for a meal").withDoneFlag("Not done").withInformation("Belated birthday treat").withPriority("High").build();
             surveyResults = new TaskBuilder().withName("Collate customer survey results").withDoneFlag("Not done").withInformation("As soon as possible").withPriority("VeryHigh").build();
         } catch (IllegalValueException e) {
             e.printStackTrace();
