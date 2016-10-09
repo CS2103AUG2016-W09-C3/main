@@ -12,7 +12,7 @@ public class PersonCardHandle extends GuiHandle {
     private static final String NAME_FIELD_ID = "#name";
     private static final String PRIORITY_FIELD_ID = "#priority";
     private static final String INFORMATION_FIELD_ID = "#information";
-    private static final String DONEFLAG_FIELD_ID = "#doneflag";
+    private static final String DONEFLAG_FIELD_ID = "#done";
 
     private Node node;
 
