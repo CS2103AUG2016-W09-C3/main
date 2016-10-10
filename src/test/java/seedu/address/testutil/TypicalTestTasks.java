@@ -18,7 +18,7 @@ public class TypicalTestTasks {
                     .withInformation("To pitch business idea").withDoneFlag("Not done")
                     .withTags("boss").build();
             breadShopping = new TaskBuilder().withName("Buy 2 packet of bread").withPriority("High")
-                    .withInformation("On shopping trip wth friends").withDoneFlag("Not done")
+                    .withInformation("On shopping trip wth meier").withDoneFlag("Not done")
                     .withTags("owesMoney", "friends").build();
             lorryMaintainance = new TaskBuilder().withName("Send in lorry for maintainance").withDoneFlag("Not done").withInformation("Take 10 month interest loan").withPriority("medium").build();
             danielLunch = new TaskBuilder().withName("Lunch with Daniel Meier").withDoneFlag("Not done").withInformation("Catch up").withPriority("medium").build();
