@@ -39,4 +39,4 @@ Responsibilities: Storage
 
 # Contributors
 
-We welcome contributions. See [Contact Us](ContactUs.md) page for more info.
+We welcome all feedbacks on ToDoIt. Please see [Contact Us](ContactUs.md) page for more info.
