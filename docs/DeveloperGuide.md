@@ -87,16 +87,16 @@ interface and exposes its functionality using the `LogicManager.java` class.<br>
 <img src="images/LogicClassDiagram.png" width="800"><br>
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
-command `delete 3`.
+command `delete 1`.
 
-<img src="images\SDforDeletePerson.png" width="800">
+<img src="images\sd_for_delete_task.png" width="800">
 
 >Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
 being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time. <br>
-<img src="images\SDforDeletePersonEventHandling.png" width="800">
+<img src="images\sd_for_delete_task_event_handling.png" width="800">
 
 > Note how the event is propagated through the `EventsCenter` to the `Storage` and `UI` without `Model` having
   to be coupled to either of them. This is an example of how this Event Driven approach helps us reduce direct 
@@ -137,11 +137,11 @@ The `UI` component,
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
  API call.<br>
-<img src="images/DeletePersonSdForLogic.png" width="800"><br>
+<img src="images/delete_task_sequence_diagram.jpg" width="800"><br>
 
 ### Model component
 
-<img src="images/ModelClassDiagram.png" width="800"><br>
+<img src="images/model_diagram.jpg" width="800"><br>
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
@@ -154,7 +154,7 @@ The `Model`,
 
 ### Storage component
 
-<img src="images/StorageClassDiagram.png" width="800"><br>
+<img src="images/storage_diagram.jpg" width="800"><br>
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
@@ -272,27 +272,51 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
-`* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person |
-`* * *` | user | delete a person | remove entries that I no longer need
-`* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | schedule task into the calendar | 
+`* * *` | user | mark a task as done after i do the task | 
+`* * *` | user | remove a task from my list of tasks | 
+`* * *` | user | view all available commands | know how to use the commands
+`* * *` | user | reschedule a task | make changes if there are changes in my schedule
+`* * *` | user | add a task without setting deadlines | 
+`* *` | user | set recurring tasks that occur repeatedly after a set interval | easily manage my weekly/monthly tasks
+`* *` | user | have the ability to share my tasks with my friends | 
+`* *` | user | print my to-do schedule | 
+`* *` | user | list all tasks that needs to be done in a specific timeframe | 
+`* *` | user | set reminders or notifications for important events | remind myself of my schedule
+`* *` | user | import an existing task list from another file | conveniently move my task list from one computer to another
+`* *` | user | sort my tasks in order based on date or priority | see what needs to be done based on priority
+`*` | user | input my tasks in different languages | 
+`*` | user | customise the command words for the program | use the program in the way I want to use it
 
 {More to be added}
 
 ## Appendix B : Use Cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
-
-#### Use case: Delete person
+(For all use cases below, the **System** is the `ToDoIt` and the **Actor** is the `user`, unless specified otherwise)
+#### Use case: Add task
 
 **MSS**
 
-1. User requests to list persons
-2. AddressBook shows a list of persons
-3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
+1. User requests to add task
+2. ToDoIt add the task
+3. ToDoIt shows a list of task including the added task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The added task is the same
+
+> 2a1. ToDoIt shows an error message <br>
+  Use case ends
+
+#### Use case: Delete task
+
+**MSS**
+
+1. User requests to list tasks
+2. ToDoIt shows a list of tasks
+3. User requests to delete a specific task in the list
+4. ToDoIt deletes the task <br>
 Use case ends.
 
 **Extensions**
@@ -303,17 +327,40 @@ Use case ends.
 
 3a. The given index is invalid
 
-> 3a1. AddressBook shows an error message <br>
+> 3a1. ToDoIt shows an error message <br>
+  Use case resumes at step 2
+  
+#### Use case: Edit task
+
+**MSS**
+
+1. User requests to edit task
+2. ToDoIt shows a list of persons
+3. User requests to edit a specific task in the list
+4. ToDoIt edits the task <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. ToDoIt shows an error message <br>
   Use case resumes at step 2
 
 {More to be added}
 
 ## Appendix C : Non Functional Requirements
 
-1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java `1.8.0_60` or higher installed.
-2. Should be able to hold up to 1000 persons.
-3. Should come with automated unit tests and open source code.
-4. Should favor DOS style commands over Unix-style commands.
+1. Should be able to hold up to 1000 tasks
+2. Should contain a user guide on how to use the product
+3. Should have a back-up memory
+4. Should be able to work without internet connection
+5. Should come with automated unit tests
+6. Should favor DOS style commands over Unix-style commands
 
 {More to be added}
 
@@ -323,11 +370,16 @@ Use case ends.
 
 > Windows, Linux, Unix, OS-X
 
-##### Private contact detail
-
-> A contact detail that is not meant to be shared with others
+{More to be added}
 
 ## Appendix E : Product Survey
 
-{TODO: Add a summary of competing products}
+Document product survey:
+
+Product | Pros | Cons | Summary
+-------- | :----------- | :----------- | :-----------
+Google Calendar | 1. Integration with all of google's existing products including google now voice assistant<br><br>2. Shortcuts available from within gmail<br><br>3. Available on all platforms<br><br>4. Can sync calendar with other people<br><br>5. Notifications and reminders about tasks<br><br>6. Automatic addition of events from gmail<br><br> | 1. Needs to be accessed with browsers mainly or phone applications<br><br>2. Needs internet connection to keep updated<br><br>3. Not much support for tasks without a clear deadline or timing<br><br> | Google Calendar fits the requirements as if the user uses gmail, it would be a lot easier using the automatic addition feature in gmail. However, a web-based solution may not be the fastest to work with due to the lack of support for tasks.
+Todo.txt | 1. Simple and fast<br><br>2. Able to set different priorities for task<br><br>3. Able to group task into a particular project so that we can see all tasks related to the project<br><br>4. Todo.txt supports dropbox, so the user can sync easily sync task between mobile on both Android and Apple phones with the computers | 1. No support for recurring task<br><br>2. Only for users that prefer command line input | Todo.txt will cater to users like Jim to a large extend. Todo.txt is perfect for Jim as it uses command line inputs, and ToDo.txt meets a lot of our requirements for our program so we can use this application as a gauge.
+Wunderlist | 1. Aesthetically pleasing with a responsive interface<br><br>2. Self-explanatory UI<br><br>3. Able to add/delete in one click<br><br>4. Able to sync with other devices<br><br>5. Able to categorise tasks into different categories<br><br>6. Able to "star" tasks to priotise them<br><br>7. Able to view completed tasks and mark them as undone | 1. Date detection is dodgy (Detects only specific combinations of dates)<br><br>2. Task description and date has to be entered separately<br><br>3. No built in calendar | Wunderlist is an easy to use application, serving more as a to-do list than a calendar. It is geared towards users who wants a simple reminder of things they have to do rather than a full task scheduler application.
+Fantastical | 1. Simple interface with little to no distractions<br><br>2. Built in search and alarm functions for various tasks<br><br>3. Able to sync with other online calendars<br><br>4. Able to carry out most features without opening the actual calendar application | 1. Fantastical is only free for the first 21-days<br><br>2. Fantastical is an iPhone/MacBook friendly application (Only suits to Apple products) | Overall, Fantastical is a great calendar management application. Fantastical caters to Jim's needs and more, such as having alarm and search functions. Since this is a paid application, it is also well maintained with little to no distractions (no advertisements).
 
