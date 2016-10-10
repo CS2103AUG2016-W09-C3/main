@@ -29,6 +29,7 @@ public class DoneCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Task marked as %1$s: %2$s";
     public static final String MESSAGE_EXCEPTION = "Error executing command.";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_ALREADY_DONE_TASK = "Task is already done.";
 
     private final int targetIndex;
 
@@ -51,18 +52,21 @@ public class DoneCommand extends Command {
         }
 
         ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
-        String newFlag = taskToDelete.getDoneFlag().toString().equals(DoneFlag.DONE) ? DoneFlag.NOT_DONE : DoneFlag.DONE;
+        if(taskToDelete.getDoneFlag().isDone()){
+            return new CommandResult(MESSAGE_ALREADY_DONE_TASK);
+        }
         Task toAdd = null;
         try {
+            DoneFlag newFlag = new DoneFlag(DoneFlag.DONE);
             if(!taskToDelete.isDated()){
                 toAdd = new Task(taskToDelete.getName(), taskToDelete.getPriority(), taskToDelete.getInformation(), 
-                            new DoneFlag(newFlag), taskToDelete.getTags());
+                            newFlag, taskToDelete.getTags());
             }else{
                 ReadOnlyDatedTask datedTaskToDelete = (ReadOnlyDatedTask) taskToDelete;
                 toAdd = new DatedTask(datedTaskToDelete.getName(), datedTaskToDelete.getDateTime(),
                         datedTaskToDelete.getLength(), datedTaskToDelete.getRecurrance(),
                         datedTaskToDelete.getPriority(), datedTaskToDelete.getInformation(), 
-                        new DoneFlag(newFlag), datedTaskToDelete.getTags());
+                        newFlag, datedTaskToDelete.getTags());
             }
             model.deleteTask(taskToDelete);
             model.addTask(toAdd);

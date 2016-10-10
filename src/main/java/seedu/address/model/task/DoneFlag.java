@@ -50,4 +50,9 @@ public class DoneFlag {
     public int hashCode() {
         return done.hashCode();
     }
+    
+    public boolean isDone(){
+        return done.equals(DONE);
+    }
+
 }
