@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,6 +16,7 @@ public class FindCommand extends Command {
     
     public static final String[] REQUIRED_PARAMS = {};
     public static final String[] POSSIBLE_PARAMS = {"s"};
+    public static final HashSet<String> defaultSearchScope = new HashSet<String>(Arrays.asList("n", "i", "d"));;
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-sensitive) from the specified attributes and displays them as a list with index numbers.\n"
@@ -23,7 +25,7 @@ public class FindCommand extends Command {
             + "Take note s/d here means to search within time and date in the format dd-MM-yyyy HH:mm";
 
     private final Set<String> keywords;
-    private final HashSet<String> searchScope;
+    private HashSet<String> searchScope;
 
     public FindCommand(Set<String> keywords, HashSet<String> searchScope) throws IllegalValueException{
         if (keywords.isEmpty()){
@@ -31,6 +33,9 @@ public class FindCommand extends Command {
         }
         this.keywords = keywords;
         this.searchScope = searchScope;
+        if(this.searchScope.isEmpty()){
+            this.searchScope = defaultSearchScope;
+        }
     }
 
     @Override
