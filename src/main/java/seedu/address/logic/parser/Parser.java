@@ -197,7 +197,7 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         try{
-            return new FindCommand(new HashSet<String>(command.getAllValues()), new HashSet<String>(command.getAllParams()));
+            return new FindCommand(new HashSet<String>(command.getAllValues()), new HashSet<String>(command.getParamList("s")));
         } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
         }
