@@ -81,6 +81,11 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case DoneCommand.COMMAND_WORD:
+            return prepareDone(command);
+
+        case UndoneCommand.COMMAND_WORD:
+            return prepareUndone(command);
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -168,6 +173,48 @@ public class Parser {
         return new SelectCommand(index.get());
     }
 
+    /**
+     * Parses arguments in the context of the done task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareDone(ParsedCommand command) {
+        try{
+            Optional<Integer> index = parseIndex(command.getValue());
+            if(!index.isPresent()){
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+            }
+
+            return new DoneCommand(index.get());
+        }catch(IllegalValueException ex){
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        }
+    }
+    
+    /**
+     * Parses arguments in the context of the undone task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareUndone(ParsedCommand command) {
+        try{
+            Optional<Integer> index = parseIndex(command.getValue());
+            if(!index.isPresent()){
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+            }
+
+            return new UndoneCommand(index.get());
+        }catch(IllegalValueException ex){
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        }
+    }
+    
     /**
      * Returns the specified index in the {@code command} IF a positive unsigned integer is given as the index.
      *   Returns an {@code Optional.empty()} otherwise.
