@@ -347,7 +347,7 @@ public class LogicManagerTest {
         List<Task> expectedList = fourPersons;
         helper.addToModel(model, fourPersons);
 
-        assertCommandBehavior("find KEY",
+        assertCommandBehavior("find KEY s/n",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
@@ -500,9 +500,9 @@ public class LogicManagerTest {
         Task generatePersonWithName(String name) throws Exception {
             return new Task(
                     new Name(name),
-                    new Priority("1"),
+                    new Priority("medium"),
                     new Information("1@email"),
-                    new DoneFlag("House of 1"),
+                    new DoneFlag("Not done"),
                     new UniqueTagList(new Tag("tag"))
             );
         }
