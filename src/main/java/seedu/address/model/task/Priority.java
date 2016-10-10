@@ -12,7 +12,7 @@ public class Priority {
     
     public final acceptedPriority priority;
     
-    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should either veryhigh, high, medium, low or verylow./n"
+    public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should either veryhigh, high, medium, low or verylow.\n"
                                                             + "It is case insensitive";
     
     
