@@ -17,32 +17,44 @@ import seedu.address.testutil.TestUtil;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.DoneCommand.MESSAGE_SUCCESS;
 
-public class DoneCommandTest extends AddressBookGuiTest {
+public class DoneUndoneCommandTest extends AddressBookGuiTest {
 
 
     @Test
-    public void done() {
+    public void doneUndone() {
 
-        //delete the first in the list
+        //done the first task in the list
         TestTask[] currentList = td.getTypicalPersons();
         int targetIndex = 1;
         assertDoneSuccess(targetIndex, currentList);
-        currentList = doTask(targetIndex, currentList);
-        
-        //delete the last in the list
+        currentList = doTask(targetIndex, currentList, DoneFlag.DONE);
+
+        //check already done
         targetIndex = currentList.length;
-        commandBox.runCommand("done " + (targetIndex));
+        commandBox.runCommand("done " + targetIndex);
         assertResultMessage("Task is already done.");
 
-        //delete from the middle of the list
+        //undone the last task in the list
+        targetIndex = currentList.length;
+        assertUndoneSuccess(targetIndex, currentList);
+        currentList = doTask(targetIndex, currentList, DoneFlag.NOT_DONE);
+
+        //check already undone
+        commandBox.runCommand("undone " + targetIndex);
+        assertResultMessage("Task is already undone.");
+
+        //done from the middle of the list
         targetIndex = currentList.length/2;
         assertDoneSuccess(targetIndex, currentList);
 
         //invalid index
-        commandBox.runCommand("delete " + currentList.length + 1);
+        commandBox.runCommand("done " + currentList.length + 1);
         assertResultMessage("The task index provided is invalid");
 
+        commandBox.runCommand("undone " + currentList.length + 1);
+        assertResultMessage("The task index provided is invalid");
     }
+
 
     /**
      * Runs the done command to delete the person at specified index and confirms the result is correct.
@@ -51,7 +63,7 @@ public class DoneCommandTest extends AddressBookGuiTest {
      */
     private void assertDoneSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
         TestTask taskToDo = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
-        TestTask[] expectedRemainder = doTask(targetIndexOneIndexed, currentList);
+        TestTask[] expectedRemainder = doTask(targetIndexOneIndexed, currentList, DoneFlag.DONE);
         commandBox.runCommand("done " + targetIndexOneIndexed);
 
         //confirm the list now contains all previous persons except the deleted person
@@ -66,11 +78,33 @@ public class DoneCommandTest extends AddressBookGuiTest {
         }
     }
 
-    private TestTask[] doTask(int targetIndexOneIndexed, final TestTask[] currentList) {
+    /**
+     * Runs the undone command to delete the person at specified index and confirms the result is correct.
+     * @param targetIndexOneIndexed e.g. to delete the first person in the list, 1 should be given as the target index.
+     * @param currentList A copy of the current list of persons (before deletion).
+     */
+    private void assertUndoneSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
+        TestTask taskToDo = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
+        TestTask[] expectedRemainder = doTask(targetIndexOneIndexed, currentList, DoneFlag.NOT_DONE);
+        commandBox.runCommand("undone " + targetIndexOneIndexed);
+
+        //confirm the list now contains all previous persons except the deleted person
+        assertTrue(personListPanel.isListMatching(expectedRemainder));
+
+        //confirm the result message is correct
+        assertResultMessage(String.format(MESSAGE_SUCCESS, DoneFlag.NOT_DONE, taskToDo.getName()));
+        try {
+            taskToDo.setDoneFlag(new DoneFlag(DoneFlag.DONE) );
+        } catch (IllegalValueException e) {
+            assert(false);
+        }
+    }
+    
+    private TestTask[] doTask(int targetIndexOneIndexed, final TestTask[] currentList, String flag) {
         TestTask taskToDo = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
         try {
-            taskToDo.setDoneFlag(new DoneFlag(DoneFlag.DONE));
+            taskToDo.setDoneFlag(new DoneFlag(flag));
         } catch (IllegalValueException e) {
             assert(false);
         }
