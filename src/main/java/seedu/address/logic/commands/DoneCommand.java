@@ -1,0 +1,85 @@
+package seedu.address.logic.commands;
+
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagList;
+import seedu.address.model.task.*;
+import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
+import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
+
+import java.util.HashSet;
+import java.util.Set;
+
+/**
+ * Adds a tasks to the address book.
+ */
+public class DoneCommand extends Command {
+
+    public static final String COMMAND_WORD = "done";
+
+    public static final String[] REQUIRED_PARAMS = {};
+    public static final String[] POSSIBLE_PARAMS = {};
+    
+    
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as done.\n" + 
+    "If the task is already done, mark it as undone.";
+
+    public static final String MESSAGE_SUCCESS = "Task marked as %1$s: %2$s";
+    public static final String MESSAGE_EXCEPTION = "Error executing command.";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+
+    private final int targetIndex;
+
+    /**
+     * Convenience constructor using raw values for adding 
+     *
+     * @throws IllegalValueException if any of the raw values are invalid
+     */
+    public DoneCommand(int targetIndex) throws IllegalValueException {
+        this.targetIndex = targetIndex;
+    }
+
+    @Override
+    public CommandResult execute() {
+        UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
+
+        if (lastShownList.size() < targetIndex) {
+            indicateAttemptToExecuteIncorrectCommand();
+            return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
+        }
+
+        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        String newFlag = taskToDelete.getDoneFlag().toString().equals(DoneFlag.DONE) ? DoneFlag.NOT_DONE : DoneFlag.DONE;
+        Task toAdd = null;
+        try {
+            if(!taskToDelete.isDated()){
+                toAdd = new Task(taskToDelete.getName(), taskToDelete.getPriority(), taskToDelete.getInformation(), 
+                            new DoneFlag(newFlag), taskToDelete.getTags());
+            }else{
+                ReadOnlyDatedTask datedTaskToDelete = (ReadOnlyDatedTask) taskToDelete;
+                toAdd = new DatedTask(datedTaskToDelete.getName(), datedTaskToDelete.getDateTime(),
+                        datedTaskToDelete.getLength(), datedTaskToDelete.getRecurrance(),
+                        datedTaskToDelete.getPriority(), datedTaskToDelete.getInformation(), 
+                        new DoneFlag(newFlag), datedTaskToDelete.getTags());
+            }
+            model.deleteTask(taskToDelete);
+            model.addTask(toAdd);
+        } catch (DuplicateTaskException e) {
+            assert false : "Can't add a duplicate task.";
+            return new CommandResult(MESSAGE_EXCEPTION);
+        } catch (IllegalValueException e) {
+            // Should never happen
+            assert false : "DoneFlag class is corrupt. Call a programmer.";
+            return new CommandResult(MESSAGE_EXCEPTION);
+        } catch (TaskNotFoundException pnfe) {
+            assert false : "The target task cannot be missing";
+            return new CommandResult(MESSAGE_EXCEPTION);
+        } 
+        
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getDoneFlag().toString(), toAdd.getName()));
+
+    }
+
+}
