@@ -72,6 +72,9 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+            
+        case EditCommand.COMMAND_WORD:
+        	return prepareEdit(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -149,6 +152,35 @@ public class Parser {
         }
 
         return new DeleteCommand(index.get());
+    }
+    
+    /**
+     * Parses arguments in the context of the edit task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareEdit(String args) {
+    	ParsedCommand command = new CommandParser(args);
+    	if(!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS)){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+    	try {
+    		return new EditCommand(
+                        Integer.parseInt(command.getValuesAsString()),
+                        command.getParamOrDefault("n", ""),
+                        command.getParamOrDefault("h", "-1"),
+                        command.getParamOrDefault("d", "-1"),
+                        command.getParamOrDefault("l", "-1"),
+                        command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
+                        command.getParamOrDefault("p", ""),
+                        command.getParamOrDefault("i", ""),
+                        DoneFlag.NOT_DONE,
+                        getTagsFromArgs(command.getParamList("t"))
+                );
+        } catch (IllegalValueException ive){
+            return new IncorrectCommand(ive.getMessage());
+        }
     }
 
     /**
