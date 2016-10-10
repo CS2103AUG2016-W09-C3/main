@@ -70,7 +70,7 @@ public class Parser {
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return prepareFind(arguments);
+            return prepareFind(command);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -192,7 +192,16 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareFind(String args) {
+    private Command prepareFind(ParsedCommand command) {
+        if(!command.hasValue() || !command.hasParams(FindCommand.REQUIRED_PARAMS) || command.hasUnnecessaryParams(FindCommand.POSSIBLE_PARAMS)){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        try{
+            return new FindCommand(new HashSet<String>(command.getAllValues()), new HashSet<String>(command.getAllParams()));
+        } catch (IllegalValueException ive){
+            return new IncorrectCommand(ive.getMessage());
+        }
+        /* Deprecated
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -203,6 +212,7 @@ public class Parser {
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
+        */
     }
 
 }
