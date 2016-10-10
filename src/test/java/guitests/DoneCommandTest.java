@@ -26,17 +26,17 @@ public class DoneCommandTest extends AddressBookGuiTest {
         //delete the first in the list
         TestTask[] currentList = td.getTypicalPersons();
         int targetIndex = 1;
-        assertDoneSuccess(targetIndex, currentList, true);
+        assertDoneSuccess(targetIndex, currentList);
         currentList = doTask(targetIndex, currentList);
         
         //delete the last in the list
         targetIndex = currentList.length;
-        assertDoneSuccess(targetIndex, currentList, false);
-        currentList = doTask(targetIndex, currentList);
+        commandBox.runCommand("done " + (targetIndex));
+        assertResultMessage("Task is already done.");
 
         //delete from the middle of the list
         targetIndex = currentList.length/2;
-        assertDoneSuccess(targetIndex, currentList, true);
+        assertDoneSuccess(targetIndex, currentList);
 
         //invalid index
         commandBox.runCommand("delete " + currentList.length + 1);
@@ -49,7 +49,7 @@ public class DoneCommandTest extends AddressBookGuiTest {
      * @param targetIndexOneIndexed e.g. to delete the first person in the list, 1 should be given as the target index.
      * @param currentList A copy of the current list of persons (before deletion).
      */
-    private void assertDoneSuccess(int targetIndexOneIndexed, final TestTask[] currentList, boolean isDone) {
+    private void assertDoneSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
         TestTask taskToDo = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
         TestTask[] expectedRemainder = doTask(targetIndexOneIndexed, currentList);
         commandBox.runCommand("done " + targetIndexOneIndexed);
@@ -58,14 +58,22 @@ public class DoneCommandTest extends AddressBookGuiTest {
         assertTrue(personListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
-        assertResultMessage(String.format(MESSAGE_SUCCESS, isDone ? DoneFlag.DONE : DoneFlag.NOT_DONE, taskToDo.getName()));
-        taskToDo.setDoneFlag(taskToDo.getDoneFlag().flip());
+        assertResultMessage(String.format(MESSAGE_SUCCESS, DoneFlag.DONE, taskToDo.getName()));
+        try {
+            taskToDo.setDoneFlag(new DoneFlag(DoneFlag.NOT_DONE) );
+        } catch (IllegalValueException e) {
+            assert(false);
+        }
     }
 
     private TestTask[] doTask(int targetIndexOneIndexed, final TestTask[] currentList) {
         TestTask taskToDo = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
         TestTask[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
-        taskToDo.setDoneFlag(taskToDo.getDoneFlag().flip());
+        try {
+            taskToDo.setDoneFlag(new DoneFlag(DoneFlag.DONE));
+        } catch (IllegalValueException e) {
+            assert(false);
+        }
         expectedRemainder = TestUtil.addPersonsToList(expectedRemainder, taskToDo);
         return expectedRemainder;
     }
