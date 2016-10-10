@@ -13,7 +13,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Adds a tasks to the address book.
+ * Marks a task in the task list as done.
  */
 public class DoneCommand extends Command {
 
@@ -23,8 +23,9 @@ public class DoneCommand extends Command {
     public static final String[] POSSIBLE_PARAMS = {};
     
     
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as done.\n" + 
-    "If the task is already done, mark it as undone.";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Marks a task as done.\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_SUCCESS = "Task marked as %1$s: %2$s";
     public static final String MESSAGE_EXCEPTION = "Error executing command.";
