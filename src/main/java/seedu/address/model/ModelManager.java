@@ -5,12 +5,14 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.DatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.core.ComponentManager;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -90,8 +92,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void updateFilteredTaskList(Set<String> keywords){
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords)));
+    public void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope){
+        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, searchScope)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -131,17 +133,26 @@ public class ModelManager extends ComponentManager implements Model {
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
+        private HashSet<String> searchScope;
 
-        NameQualifier(Set<String> nameKeyWords) {
+        NameQualifier(Set<String> nameKeyWords, HashSet<String> searchScope) {
             this.nameKeyWords = nameKeyWords;
+            this.searchScope = searchScope;
         }
-
+        /**
+         * Tests if task contains any of the keywords in nameKeyWords in the possible specified searchScope of "n"(name) "i"(information) 
+         * and "d"(date and time).
+         */
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
-                    .findAny()
-                    .isPresent();
+            return nameKeyWords.stream()//takes in task returns true if matches keyword. Converts to stream, check task name contains keyword
+                    //.filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
+                    .filter(keyword -> (this.searchScope.contains("n") && StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
+                            || (this.searchScope.contains("i") && StringUtil.containsIgnoreCase(task.getInformation().fullInformation, keyword))
+                            || (this.searchScope.contains("d") && task.isDated() && StringUtil.containsIgnoreCase(((DatedTask) task).getDateTime().toString(), keyword))
+                            )
+                    .findAny()//finds first one
+                    .isPresent();//check if null
         }
 
         @Override

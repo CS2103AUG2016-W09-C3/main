@@ -4,6 +4,8 @@ import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.DatedTask;
+import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -59,7 +61,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void resetData(Collection<? extends ReadOnlyTask> newTasks, Collection<Tag> newTags) {
-        setTasks(newTasks.stream().map(Task::new).collect(Collectors.toList()));
+        setTasks(newTasks.stream().map(t -> t.isDated() ? new DatedTask((ReadOnlyDatedTask) t) : new Task(t)).collect(Collectors.toList()));
         setTags(newTags);
     }
 

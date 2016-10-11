@@ -1,43 +1,45 @@
 package seedu.address.model.task;
 
-import seedu.address.model.tag.UniqueTagList;
-
 /**
- * A read-only immutable interface for a Task in the addressbook(change to taskBook once refactor).
+ * A read-only immutable interface for a DatedTask in the addressbook(change to taskBook once refactor).
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
-public interface ReadOnlyTask {
-
-    Name getName();
-    Priority getPriority();
-    Information getInformation();
-    DoneFlag getDoneFlag();
-
-    /**
-     * The returned TagList is a deep copy of the internal TagList,
-     * changes on the returned list will not affect the task's internal tags.
-     */
-    UniqueTagList getTags();
-
+public interface ReadOnlyDatedTask extends ReadOnlyTask {
+    
+    DateTime getDateTime();
+    Length getLength();
+    Recurrance getRecurrance();
+    
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
      */
+    @Override
     default boolean isSameStateAs(ReadOnlyTask other) {
         return other == this // short circuit if same object
                 || (other != null // this is first to avoid NPE below
-                && !other.isDated()
+                && other.isDated()
                 && other.getName().equals(this.getName()) // state checks here onwards
                 && other.getPriority().equals(this.getPriority())
                 && other.getInformation().equals(this.getInformation())
-                && other.getDoneFlag().equals(this.getDoneFlag()));
+                && other.getDoneFlag().equals(this.getDoneFlag())
+                && ((ReadOnlyDatedTask) other).getDateTime().equals(this.getDateTime())
+                && ((ReadOnlyDatedTask) other).getLength().equals(this.getLength())
+                && ((ReadOnlyDatedTask) other).getRecurrance().equals(this.getRecurrance()));
     }
-
+    
     /**
      * Formats the task as text, showing all contact details.
      */
-    default String getAsText() {
+    @Override
+    default String getAsText(){
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
+                .append(" Time: ")
+                .append(getDateTime())
+                .append(" Length: ")
+                .append(getLength())
+                .append(" Recurrance: ")
+                .append(getRecurrance())
                 .append(" Priority: ")
                 .append(getPriority())
                 .append(" Information: ")
@@ -48,22 +50,9 @@ public interface ReadOnlyTask {
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
-    /**
-     * Returns a string representation of this Task's tags
-     */
-    default String tagsString() {
-        final StringBuffer buffer = new StringBuffer();
-        final String separator = ", ";
-        getTags().forEach(tag -> buffer.append(tag).append(separator));
-        if (buffer.length() == 0) {
-            return "";
-        } else {
-            return buffer.substring(0, buffer.length() - separator.length());
-        }
-    }
     
+    @Override
     default boolean isDated(){
-        return false;
+        return true;
     }
 }

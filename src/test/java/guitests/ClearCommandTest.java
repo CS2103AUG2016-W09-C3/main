@@ -14,8 +14,8 @@ public class ClearCommandTest extends AddressBookGuiTest {
         assertClearCommandSuccess();
 
         //verify other commands can work after a clear command
-        commandBox.runCommand(td.hoon.getAddCommand());
-        assertTrue(personListPanel.isListMatching(td.hoon));
+        commandBox.runCommand(td.nieceBirthdayMeal.getAddCommand());
+        assertTrue(personListPanel.isListMatching(td.nieceBirthdayMeal));
         commandBox.runCommand("delete 1");
         assertListSize(0);
 

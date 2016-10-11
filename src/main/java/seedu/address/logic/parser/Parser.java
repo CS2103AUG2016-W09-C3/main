@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.*;
+import seedu.address.model.task.DoneFlag;
+import seedu.address.model.task.Recurrance;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.exceptions.IllegalValueException;
 
@@ -51,10 +53,12 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+        
+        ParsedCommand command = new CommandParser(arguments);
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
-            return prepareAdd(arguments);
+            return prepareAdd(command);
 
         case SelectCommand.COMMAND_WORD:
             return prepareSelect(arguments);
@@ -66,10 +70,13 @@ public class Parser {
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
-            return prepareFind(arguments);
+            return prepareFind(command);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+            
+        case EditCommand.COMMAND_WORD:
+        	return prepareEdit(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -77,6 +84,11 @@ public class Parser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
+        case DoneCommand.COMMAND_WORD:
+            return prepareDone(command);
+
+        case UndoneCommand.COMMAND_WORD:
+            return prepareUndone(command);
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -88,20 +100,33 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareAdd(String args){
-        ParsedCommand command = new CommandParser(args);
-        if(!command.hasValue() || !command.hasParams(AddCommand.REQUIRED_PARAMS)){
+    private Command prepareAdd(ParsedCommand command){
+        if(!command.hasValue() || !command.hasParams(AddCommand.REQUIRED_PARAMS) || command.hasUnnecessaryParams(AddCommand.POSSIBLE_PARAMS)){
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
         try {
-            return new AddCommand(
-                    command.getValuesAsString(),
-                    command.getParam("p"),
-                    command.getParam("e"),
-                    command.getParam("a"),
-                    getTagsFromArgs(command.getParamList("t"))
-            );
-        } catch (IllegalValueException ive) {
+            if(command.hasParams(AddCommand.DATED_TASK_PARAMS)){
+                return new AddCommand(
+                        command.getValuesAsString(),
+                        command.getParamOrDefault("h", "-1"),
+                        command.getParamOrDefault("d", "-1"),
+                        command.getParamOrDefault("l", "-1"),
+                        command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
+                        command.getParamOrDefault("p", "medium"),
+                        command.getParamOrDefault("i", ""),
+                        DoneFlag.NOT_DONE,
+                        getTagsFromArgs(command.getParamList("t"))
+                );
+            } else {
+                return new AddCommand(
+                        command.getValuesAsString(),
+                        command.getParamOrDefault("p", "medium"),
+                        command.getParamOrDefault("i", ""),
+                        DoneFlag.NOT_DONE,
+                        getTagsFromArgs(command.getParamList("t"))
+                );
+            }
+        } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
         }
     }
@@ -134,6 +159,35 @@ public class Parser {
 
         return new DeleteCommand(index.get());
     }
+    
+    /**
+     * Parses arguments in the context of the edit task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareEdit(String args) {
+    	ParsedCommand command = new CommandParser(args);
+    	if(!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS)){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        }
+    	try {
+    		return new EditCommand(
+                        Integer.parseInt(command.getValuesAsString()),
+                        command.getParamOrDefault("n", ""),
+                        command.getParamOrDefault("h", "-1"),
+                        command.getParamOrDefault("d", "-1"),
+                        command.getParamOrDefault("l", "-1"),
+                        command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
+                        command.getParamOrDefault("p", ""),
+                        command.getParamOrDefault("i", ""),
+                        DoneFlag.NOT_DONE,
+                        getTagsFromArgs(command.getParamList("t"))
+                );
+        } catch (IllegalValueException ive){
+            return new IncorrectCommand(ive.getMessage());
+        }
+    }
 
     /**
      * Parses arguments in the context of the select task command.
@@ -151,6 +205,48 @@ public class Parser {
         return new SelectCommand(index.get());
     }
 
+    /**
+     * Parses arguments in the context of the done task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareDone(ParsedCommand command) {
+        try{
+            Optional<Integer> index = parseIndex(command.getValue());
+            if(!index.isPresent()){
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+            }
+
+            return new DoneCommand(index.get());
+        }catch(IllegalValueException ex){
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        }
+    }
+    
+    /**
+     * Parses arguments in the context of the undone task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareUndone(ParsedCommand command) {
+        try{
+            Optional<Integer> index = parseIndex(command.getValue());
+            if(!index.isPresent()){
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+            }
+
+            return new UndoneCommand(index.get());
+        }catch(IllegalValueException ex){
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        }
+    }
+    
     /**
      * Returns the specified index in the {@code command} IF a positive unsigned integer is given as the index.
      *   Returns an {@code Optional.empty()} otherwise.
@@ -175,7 +271,16 @@ public class Parser {
      * @param args full command args string
      * @return the prepared command
      */
-    private Command prepareFind(String args) {
+    private Command prepareFind(ParsedCommand command) {
+        if(!command.hasValue() || !command.hasParams(FindCommand.REQUIRED_PARAMS) || command.hasUnnecessaryParams(FindCommand.POSSIBLE_PARAMS)){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
+        }
+        try{
+            return new FindCommand(new HashSet<String>(command.getAllValues()), new HashSet<String>(command.getParamList("s")));
+        } catch (IllegalValueException ive){
+            return new IncorrectCommand(ive.getMessage());
+        }
+        /* Deprecated
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
@@ -186,6 +291,7 @@ public class Parser {
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
+        */
     }
 
 }

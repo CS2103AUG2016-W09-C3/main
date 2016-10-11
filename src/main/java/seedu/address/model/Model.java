@@ -5,6 +5,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -30,6 +31,6 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void updateFilteredTaskList(Set<String> keywords);
+    void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope);
 
 }
