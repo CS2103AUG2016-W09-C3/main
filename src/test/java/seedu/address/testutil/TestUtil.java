@@ -340,9 +340,16 @@ public class TestUtil {
         return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
     }
     
-    public static TestTask[] addPersonsToListIndex(final TestTask[] persons, TestTask personsToAdd, int index) {
+    /**
+     * Appends a person to the array of persons at the specified position.
+     * @param persons A array of persons.
+     * @param personToAdd The person that is to be to the original array at the specified position.
+     * @param index The index of the original array to which the person shall be added to.
+     * @return The modified array of persons.
+     */
+    public static TestTask[] addPersonsToListIndex(final TestTask[] persons, TestTask personToAdd, int index) {
         List<TestTask> listOfPersons = asList(persons);
-        listOfPersons.add(index, personsToAdd);
+        listOfPersons.add(index, personToAdd);
         return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
     }
     
