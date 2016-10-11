@@ -111,7 +111,7 @@ public class EditCommand extends Command {
 		
 		try {
 			model.deleteTask(taskToEdit);
-			model.addTask(toAdd);
+			model.addTaskToIndex(toAdd, targetIndex-1);
 		} catch (TaskNotFoundException e) {
 			assert false : "The target task cannot be missing"; }
 		 catch (DuplicateTaskException e) {
