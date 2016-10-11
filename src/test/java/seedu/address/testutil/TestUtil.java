@@ -60,24 +60,46 @@ public class TestUtil {
      */
     public static String SANDBOX_FOLDER = FileUtil.getPath("./src/test/data/sandbox/");
 
-    public static final Task[] samplePersonData = getSamplePersonData();
+    public static final Task[] sampleTaskData = getSampleTaskData();
 
-    private static Task[] getSamplePersonData() {
+    private static Task[] getSampleTaskData() {
         try {
             return new Task[]{
-                    new Task(new Name("Ali Muster"), new Phone("9482424"), new Email("hans@google.com"), new Address("4th street"), new UniqueTagList()),
-                    new Task(new Name("Boris Mueller"), new Phone("87249245"), new Email("ruth@google.com"), new Address("81th street"), new UniqueTagList()),
-                    new Task(new Name("Carl Kurz"), new Phone("95352563"), new Email("heinz@yahoo.com"), new Address("wall street"), new UniqueTagList()),
-                    new Task(new Name("Daniel Meier"), new Phone("87652533"), new Email("cornelia@google.com"), new Address("10th street"), new UniqueTagList()),
-                    new Task(new Name("Elle Meyer"), new Phone("9482224"), new Email("werner@gmail.com"), new Address("michegan ave"), new UniqueTagList()),
-                    new Task(new Name("Fiona Kunz"), new Phone("9482427"), new Email("lydia@gmail.com"), new Address("little tokyo"), new UniqueTagList()),
-                    new Task(new Name("George Best"), new Phone("9482442"), new Email("anna@google.com"), new Address("4th street"), new UniqueTagList()),
-                    new Task(new Name("Hoon Meier"), new Phone("8482424"), new Email("stefan@mail.com"), new Address("little india"), new UniqueTagList()),
-                    new Task(new Name("Ida Mueller"), new Phone("8482131"), new Email("hans@google.com"), new Address("chicago ave"), new UniqueTagList())
+                    new Task(new Name("Meet Ali Muster"), new Priority("high"), new Information("To arrange for meeting."), new DoneFlag(DoneFlag.NOT_DONE), new UniqueTagList()),
+                    new Task(new Name("Talk to Boris Mueller"), new Priority("LoW"), new Information("With regards to school."), new DoneFlag(DoneFlag.DONE), new UniqueTagList()),
+                    new Task(new Name("Call Carl Kurz"), new Priority("VERYHIGH"), new Information("To request for funds"), new DoneFlag(DoneFlag.NOT_DONE), new UniqueTagList()),
+                    new Task(new Name("Buy 5 packet of bread"), new Priority("medium"), new Information("2 packs from Brand A, rest from B"), new DoneFlag("Not done"), new UniqueTagList()),
+                    new Task(new Name("Send in car for maintainance"), new Priority("High"), new Information("Open from 1 - 7pm"), new DoneFlag("Done"), new UniqueTagList()),
+                    new Task(new Name("Finish assignments"), new Priority("VEryhigh"), new Information("Coding lab problem set"), new DoneFlag(DoneFlag.DONE), new UniqueTagList()),
+                    new Task(new Name("Walk the dog"), new Priority("medium"), new Information("Around the block"), new DoneFlag(DoneFlag.NOT_DONE), new UniqueTagList()),
+                    new Task(new Name("Clean the house"), new Priority("medium"), new Information("Cleaner on leave"), new DoneFlag(DoneFlag.DONE), new UniqueTagList()),
+                    new Task(new Name("Contact supplier for books"), new Priority("medium"), new Information("Mastering computing"), new DoneFlag(DoneFlag.NOT_DONE), new UniqueTagList())
             };
         } catch (IllegalValueException e) {
             assert false;
             //not possible
+            return null;
+        }
+    }
+    
+    private static DatedTask[] getSampleDatedTaskData(){
+        try{
+            return new DatedTask[]{
+                    new DatedTask(new Name ("Send in phone for repair"), new DateTime ("01011991", "1445"), new Length ("2"), new Recurrance (""), 
+                    new Priority ("high"), new Information ("Repair centre is at vivocity"), new DoneFlag (DoneFlag.DONE), new UniqueTagList()),
+                    
+                    new DatedTask(new Name ("Send in playstation for repair"), new DateTime ("1212", "2359"), new Length ("2"), new Recurrance (""), 
+                    new Priority ("low"), new Information ("Repair centre is at vivocity"), new DoneFlag ("Done"), new UniqueTagList()),
+                    
+                    new DatedTask(new Name ("Shareholder meeting"), new DateTime ("1510", "1000"), new Length ("1"), new Recurrance ("1w"), 
+                    new Priority ("veryhigh"), new Information ("Meeting room 5, level 21"), new DoneFlag ("Not done"), new UniqueTagList()),
+                    
+                    new DatedTask(new Name ("Lunch with Alvin"), new DateTime ("11102016", "1000"), new Length ("20"), new Recurrance ("5d"), 
+                    new Priority ("medium"), new Information ("Meeting room 5, level 21"), new DoneFlag (DoneFlag.NOT_DONE), new UniqueTagList())
+            };
+        } catch (IllegalValueException e){
+            assert false;
+            //not possible here too
             return null;
         }
     }
@@ -98,7 +120,7 @@ public class TestUtil {
     }
 
     public static List<Task> generateSamplePersonData() {
-        return Arrays.asList(samplePersonData);
+        return Arrays.asList(sampleTaskData);
     }
 
     /**
@@ -278,10 +300,10 @@ public class TestUtil {
      * @param personsToRemove The subset of persons.
      * @return The modified persons after removal of the subset from persons.
      */
-    public static TestPerson[] removePersonsFromList(final TestPerson[] persons, TestPerson... personsToRemove) {
-        List<TestPerson> listOfPersons = asList(persons);
+    public static TestTask[] removePersonsFromList(final TestTask[] persons, TestTask... personsToRemove) {
+        List<TestTask> listOfPersons = asList(persons);
         listOfPersons.removeAll(asList(personsToRemove));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
     }
 
 
@@ -290,7 +312,7 @@ public class TestUtil {
      * @param list original list to copy from
      * @param targetIndexInOneIndexedFormat e.g. if the first element to be removed, 1 should be given as index.
      */
-    public static TestPerson[] removePersonFromList(final TestPerson[] list, int targetIndexInOneIndexedFormat) {
+    public static TestTask[] removePersonFromList(final TestTask[] list, int targetIndexInOneIndexedFormat) {
         return removePersonsFromList(list, list[targetIndexInOneIndexedFormat-1]);
     }
 
@@ -301,7 +323,7 @@ public class TestUtil {
      * @param index The index of the person to be replaced.
      * @return
      */
-    public static TestPerson[] replacePersonFromList(TestPerson[] persons, TestPerson person, int index) {
+    public static TestTask[] replacePersonFromList(TestTask[] persons, TestTask person, int index) {
         persons[index] = person;
         return persons;
     }
@@ -312,12 +334,25 @@ public class TestUtil {
      * @param personsToAdd The persons that are to be appended behind the original array.
      * @return The modified array of persons.
      */
-    public static TestPerson[] addPersonsToList(final TestPerson[] persons, TestPerson... personsToAdd) {
-        List<TestPerson> listOfPersons = asList(persons);
+    public static TestTask[] addPersonsToList(final TestTask[] persons, TestTask... personsToAdd) {
+        List<TestTask> listOfPersons = asList(persons);
         listOfPersons.addAll(asList(personsToAdd));
-        return listOfPersons.toArray(new TestPerson[listOfPersons.size()]);
+        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
     }
-
+    
+    /**
+     * Appends a person to the array of persons at the specified position.
+     * @param persons A array of persons.
+     * @param personToAdd The person that is to be to the original array at the specified position.
+     * @param index The index of the original array to which the person shall be added to.
+     * @return The modified array of persons.
+     */
+    public static TestTask[] addPersonsToListIndex(final TestTask[] persons, TestTask personToAdd, int index) {
+        List<TestTask> listOfPersons = asList(persons);
+        listOfPersons.add(index, personToAdd);
+        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+    }
+    
     private static <T> List<T> asList(T[] objs) {
         List<T> list = new ArrayList<>();
         for(T obj : objs) {
@@ -326,8 +361,8 @@ public class TestUtil {
         return list;
     }
 
-    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask person) {
-        return card.isSamePerson(person);
+    public static boolean compareCardAndPerson(PersonCardHandle card, ReadOnlyTask task) {
+        return card.isSamePerson(task);
     }
 
     public static Tag[] getTagList(String tags) {

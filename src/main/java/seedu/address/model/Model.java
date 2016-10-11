@@ -5,6 +5,7 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -22,6 +23,9 @@ public interface Model {
 
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
+    
+    /** Adds the given task at the specific index*/
+    void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException;
 
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
@@ -30,6 +34,6 @@ public interface Model {
     void updateFilteredListToShowAll();
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
-    void updateFilteredTaskList(Set<String> keywords);
+    void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope);
 
 }

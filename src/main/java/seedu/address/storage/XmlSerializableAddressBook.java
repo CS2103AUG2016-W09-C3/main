@@ -61,7 +61,7 @@ public class XmlSerializableAddressBook implements ReadOnlyAddressBook {
             try {
                 lists.add(p.toModelType());
             } catch (IllegalValueException e) {
-                //TODO: better error handling
+                e.printStackTrace();
             }
         }
         return lists;

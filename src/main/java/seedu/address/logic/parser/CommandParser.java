@@ -75,7 +75,7 @@ public class CommandParser implements ParsedCommand{
                 addParam(currentParam, currentParamValue.toString());
                 
                 int paramDelimIndex = token.indexOf(PARAM_DELIMITER);
-                currentParam = token.substring(0, paramDelimIndex);
+                currentParam = token.substring(0, paramDelimIndex).toLowerCase();
                 currentParamValue = new StringBuilder();
                 currentParamValue.append(token.substring(paramDelimIndex + 1, token.length()));
             }else{
@@ -212,5 +212,24 @@ public class CommandParser implements ParsedCommand{
     @Override
     public boolean hasValue() {
         return values.size() > 0;
+    }
+
+    @Override
+    public boolean hasUnnecessaryParams(String[] possibleParams) {
+        for(String param : params.keySet()){
+            if(!matchingParam(param.toLowerCase(), possibleParams)){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private boolean matchingParam(String param, String[] possibleParams){
+        for(String possibleParam : possibleParams){
+            if(param.toLowerCase().matches(possibleParam)){
+                return true;
+            }
+        }
+        return false;
     }
 }

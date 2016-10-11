@@ -17,15 +17,24 @@ public class XmlAdaptedPerson {
     @XmlElement(required = true)
     private String name;
     @XmlElement(required = true)
-    private String phone;
+    private String priority;
     @XmlElement(required = true)
-    private String email;
-    @XmlElement(required = true)
-    private String address;
+    private String information;
+    @XmlElement
+    private String dateTime;
+    @XmlElement
+    private String length;
+    @XmlElement
+    private String recurrance;
+    @XmlElement
+    private String done;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
+    @XmlElement
+    private boolean isDated;
+    
     /**
      * No-arg constructor for JAXB use.
      */
@@ -39,12 +48,20 @@ public class XmlAdaptedPerson {
      */
     public XmlAdaptedPerson(ReadOnlyTask source) {
         name = source.getName().fullName;
-        phone = source.getPhone().value;
-        email = source.getEmail().value;
-        address = source.getAddress().value;
+        priority = source.getPriority().toString();
+        information = source.getInformation().fullInformation;
+        done = source.getDoneFlag().toString();
         tagged = new ArrayList<>();
         for (Tag tag : source.getTags()) {
             tagged.add(new XmlAdaptedTag(tag));
+        }
+        
+        isDated = source.isDated();
+        if(isDated){
+            ReadOnlyDatedTask datedSource = (ReadOnlyDatedTask) source;
+            dateTime = datedSource.getDateTime().toXMLString();
+            length = datedSource.getLength().toString();
+            recurrance = datedSource.getRecurrance().toString();
         }
     }
 
@@ -59,10 +76,17 @@ public class XmlAdaptedPerson {
             personTags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
-        final Phone phone = new Phone(this.phone);
-        final Email email = new Email(this.email);
-        final Address address = new Address(this.address);
+        final Priority priority = new Priority(this.priority);
+        final Information information = new Information(this.information);
+        final DoneFlag done = new DoneFlag(this.done);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Task(name, phone, email, address, tags);
+        if(isDated){
+            final DateTime dateTime = new DateTime(this.dateTime);
+            final Length length = new Length(this.length);
+            final Recurrance recurrance = new Recurrance(this.recurrance);
+            return new DatedTask(name, dateTime, length, recurrance, priority, information, done, tags);
+        }else{
+            return new Task(name, priority, information, done, tags);
+        }
     }
 }

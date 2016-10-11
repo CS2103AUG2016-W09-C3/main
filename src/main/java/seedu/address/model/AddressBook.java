@@ -4,6 +4,8 @@ import javafx.collections.ObservableList;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.DatedTask;
+import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 
@@ -59,7 +61,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     public void resetData(Collection<? extends ReadOnlyTask> newTasks, Collection<Tag> newTags) {
-        setTasks(newTasks.stream().map(Task::new).collect(Collectors.toList()));
+        setTasks(newTasks.stream().map(t -> t.isDated() ? new DatedTask((ReadOnlyDatedTask) t) : new Task(t)).collect(Collectors.toList()));
         setTags(newTags);
     }
 
@@ -79,6 +81,18 @@ public class AddressBook implements ReadOnlyAddressBook {
     public void addTask(Task p) throws UniqueTaskList.DuplicateTaskException {
         syncTagsWithMasterList(p);
         tasks.add(p);
+    }
+    
+    /**
+     * Adds a task to the address book at the specific index
+     * Also checks the new task's tags and updates {@link #tags} with any new tags found,
+     * and updates the Tag objects in the task to point to those in {@link #tags}.
+     *
+     * @throws UniqueTaskList.DuplicateTaskException if an equivalent task already exists.
+     */
+    public void addTaskToIndex(Task p, int index) throws UniqueTaskList.DuplicateTaskException {
+        syncTagsWithMasterList(p);
+        tasks.addToIndex(p, index);
     }
 
     /**
