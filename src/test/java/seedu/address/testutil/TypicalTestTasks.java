@@ -10,7 +10,9 @@ import seedu.address.model.task.*;
 public class TypicalTestTasks {
 
     public static TestTask aliceMeeting, breadShopping, lorryMaintainance, danielLunch, fetchElle, 
-                           researchPaper, mumLunch, neiceBirhdayMeal, surveyResults;
+                           researchPaper, mumLunch, nieceBirthdayMeal, surveyResults;
+    
+    public static TestTask lectureToAttend, meetNathan, cuttingHair;
 
     public TypicalTestTasks() {
         try {
@@ -26,9 +28,15 @@ public class TypicalTestTasks {
             researchPaper = new TaskBuilder().withName("Finish off research paper").withDoneFlag("Not done").withInformation("Missing appendix A and B").withPriority("veryHigh").build();
             mumLunch = new TaskBuilder().withName("Treat mum to lunch").withDoneFlag("Not done").withInformation("To celebrate retirement.").withPriority("VeryHigh").build();
 
-            //Manually added
-            neiceBirhdayMeal = new TaskBuilder().withName("Bring neice out for a meal").withDoneFlag("Not done").withInformation("Belated birthday treat").withPriority("High").build();
+            //Manually added (Not dated)
+            nieceBirthdayMeal = new TaskBuilder().withName("Bring neice out for a meal").withDoneFlag("Not done").withInformation("Belated birthday treat").withPriority("High").build();
             surveyResults = new TaskBuilder().withName("Collate customer survey results").withDoneFlag("Not done").withInformation("As soon as possible").withPriority("VeryHigh").build();
+            
+            //Manually added (dated)
+            lectureToAttend = new TaskBuilder().withName("Attend CS2103T lecture").withDoneFlag("Not done").withDateTime("10102016", "1400").withLength("2").withRecurrance("5d").withPriority("low").withInformation("There is webcast if you do not attend").build();
+            meetNathan = new TaskBuilder().withName("Meet Nathan for dinner").withDoneFlag("Not done").withDateTime("25112016", "1800").withLength("3").withPriority("medium").withInformation("Meeting nathan to catch up").build();
+            cuttingHair = new TaskBuilder().withName("Cut hair").withDoneFlag("Not done").withDateTime("11102016", "0900").withLength("1").withRecurrance("6d").withPriority("medium").withInformation("Cut hair so your hair will not be long").build();
+            
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
@@ -51,8 +59,12 @@ public class TypicalTestTasks {
     }
 
     public TestTask[] getTypicalPersons() {
-        return new TestTask[]{aliceMeeting, breadShopping, lorryMaintainance, 
+        return new TestTask[] {aliceMeeting, breadShopping, lorryMaintainance, 
                                 danielLunch, fetchElle,researchPaper, mumLunch};
+    }
+    
+    public TestTask[] getTypicalDatedTask() {
+        return new TestTask[] {lectureToAttend, meetNathan, cuttingHair};
     }
 
     public AddressBook getTypicalAddressBook(){
