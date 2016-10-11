@@ -78,6 +78,13 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
+    
+    @Override
+    public synchronized void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException {
+        addressBook.addTaskToIndex(task, index);
+        updateFilteredListToShowAll();
+        indicateAddressBookChanged();
+    }
 
     //=========== Filtered Task List Accessors ===============================================================
 
