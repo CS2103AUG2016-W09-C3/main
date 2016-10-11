@@ -92,7 +92,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         TestTask[] expected = TestUtil.removePersonFromList(list, index);
         
         try {
-            expected = testEdit(target, name, time, date, length, recurrance, priority, information, expected);
+            expected = testEdit(target, name, time, date, length, recurrance, priority, information, expected, index);
         } catch (IllegalValueException e) {
             assert(false);
         }
@@ -101,7 +101,7 @@ public class EditCommandTest extends AddressBookGuiTest {
 
     // Helper method to testEdit in doEdit(String args, TestTask[] list)
     private TestTask[] testEdit(TestTask target, String name, String time, String date, String length, String recurrance,
-            String priority, String information, TestTask[] expected) throws IllegalValueException {
+            String priority, String information, TestTask[] expected, int index) throws IllegalValueException {
         String timeTemp, dateTemp;
         boolean isChanged = false;
         
@@ -138,7 +138,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         if (isChanged) {
             target.setDateTime(new DateTime(date, time));
         }
-        expected = TestUtil.addPersonsToList(expected, target);
+        expected = TestUtil.addPersonsToListIndex(expected, target, index - 1);
         return expected;
     }
     

@@ -339,7 +339,13 @@ public class TestUtil {
         listOfPersons.addAll(asList(personsToAdd));
         return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
     }
-
+    
+    public static TestTask[] addPersonsToListIndex(final TestTask[] persons, TestTask personsToAdd, int index) {
+        List<TestTask> listOfPersons = asList(persons);
+        listOfPersons.add(index, personsToAdd);
+        return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+    }
+    
     private static <T> List<T> asList(T[] objs) {
         List<T> list = new ArrayList<>();
         for(T obj : objs) {
