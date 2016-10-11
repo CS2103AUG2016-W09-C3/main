@@ -38,7 +38,7 @@ public class EditCommand extends Command {
 			+ "Parameters: INDEX (must be a positive integer) [n/NAME] [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...\n"
 			+ "Example: " + COMMAND_WORD + " 1 d/02102016";
 
-	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Editted Task: %1$s";
+	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
 
 	public final int targetIndex;
