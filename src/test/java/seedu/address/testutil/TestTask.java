@@ -1,5 +1,6 @@
 package seedu.address.testutil;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.*;
 
@@ -13,6 +14,9 @@ public class TestTask implements ReadOnlyTask {
     protected Information information;
     protected DoneFlag doneFlag;
     private UniqueTagList tags;
+    private Length length;
+    private DateTime dateTime;
+    private Recurrance recurrance;
 
     public TestTask() {
         tags = new UniqueTagList();
@@ -32,6 +36,18 @@ public class TestTask implements ReadOnlyTask {
 
     public void setDoneFlag(DoneFlag doneFlag) {
         this.doneFlag = doneFlag;
+    }
+    
+    public void setLength(Length length) {
+        this.length = length; 
+    }
+    
+    public void setDateTime(DateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+    
+    public void setRecurrance(Recurrance recurrance) {
+        this.recurrance = recurrance; 
     }
 
     @Override
@@ -63,6 +79,18 @@ public class TestTask implements ReadOnlyTask {
     public String toString() {
         return getAsText();
     }
+    
+    public Length getLength() {
+        return this.length;
+    }
+    
+    public DateTime getDateTime() {
+        return this.dateTime;
+    }
+    
+    public Recurrance getRecurrance() {
+        return this.recurrance;
+    }
 
     public String getAddCommand() {
         StringBuilder sb = new StringBuilder();
@@ -71,5 +99,5 @@ public class TestTask implements ReadOnlyTask {
         sb.append("i/" + this.getInformation().toString() + " ");
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
-    }
+    }   
 }
