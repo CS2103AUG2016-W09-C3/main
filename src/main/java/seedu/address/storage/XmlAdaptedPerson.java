@@ -59,7 +59,7 @@ public class XmlAdaptedPerson {
         isDated = source.isDated();
         if(isDated){
             ReadOnlyDatedTask datedSource = (ReadOnlyDatedTask) source;
-            dateTime = datedSource.getDateTime().toXMLString();
+            dateTime = datedSource.getDateTime().toString();
             length = datedSource.getLength().toString();
             recurrance = datedSource.getRecurrance().toString();
         }
