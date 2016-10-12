@@ -33,18 +33,22 @@ public class DateTime {
     public DateTime(String dateString, boolean fromXML) throws IllegalValueException {
         assert dateString != null;
         dateString = dateString.trim();
-        try{
-            if(fromXML){
-                datetime = LocalDateTime.parse(dateString, DATE_DISPLAY_FORMATTER);
-            }else{
-                datetime = DateParser.parseDate(dateString);
-            }
-        }catch(IllegalValueException ex){
-            throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
+        if(fromXML){
+            datetime = LocalDateTime.parse(dateString, DATE_DISPLAY_FORMATTER);
+        }else{
+            datetime = DateParser.parseDate(dateString);
         }
     }
 
     
+    public DateTime(String dateString, DateTime oldDatetime) throws IllegalValueException {
+        assert dateString != null;
+        assert oldDatetime != null;
+        dateString = dateString.trim();
+        datetime = DateParser.editDate(dateString, oldDatetime.datetime);
+    }
+
+
     @Override
     public String toString() {
         return datetime.format(DATE_DISPLAY_FORMATTER);

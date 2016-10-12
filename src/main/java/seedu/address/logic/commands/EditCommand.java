@@ -36,7 +36,7 @@ public class EditCommand extends Command {
 	public static final String MESSAGE_USAGE = COMMAND_WORD
 			+ ": Edits the task identified by the index number used in the last task listing.\n"
 			+ "Parameters: INDEX (must be a positive integer) [n/NAME] [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...\n"
-			+ "Example: " + COMMAND_WORD + " 1 d/02102016";
+			+ "Example: " + COMMAND_WORD + " 1 d/next thurs 2pm";
 
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
@@ -45,6 +45,7 @@ public class EditCommand extends Command {
 	
 	private Task toAdd;
 	private ReadOnlyTask taskToEdit;
+	private DateTime oldDatetime;
 	private String name, datetime, length, recurring, priority, information, doneFlag;
 	private Set<Tag> tagSet;
 	private UniqueTagList tagList;
@@ -86,7 +87,7 @@ public class EditCommand extends Command {
 			if(isDated){
 				this.toAdd = new DatedTask(
 						new Name(name),
-				        new DateTime(datetime),
+				        new DateTime(datetime, oldDatetime),
 				        new Length(length),
 				        new Recurrance(recurring),
 				        new Priority(priority),
@@ -125,6 +126,7 @@ public class EditCommand extends Command {
 	 */
 	private void copyDatedTask(UnmodifiableObservableList<ReadOnlyTask> lastShownList){
 		ReadOnlyDatedTask datedTaskToEdit = (ReadOnlyDatedTask) lastShownList.get(targetIndex - 1);
+        this.oldDatetime = datedTaskToEdit.getDateTime();
 		if(this.datetime.equals("-1")){
 	        this.datetime = datedTaskToEdit.getDateTime().toString();
 		}
