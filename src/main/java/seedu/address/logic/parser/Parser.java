@@ -109,7 +109,6 @@ public class Parser {
             if(command.hasParams(AddCommand.DATED_TASK_PARAMS)){
                 return new AddCommand(
                         command.getValuesAsString(),
-                        command.getParamOrDefault("h", "-1"),
                         command.getParamOrDefault("d", "-1"),
                         command.getParamOrDefault("l", "-1"),
                         command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
@@ -189,7 +188,6 @@ public class Parser {
     		return new EditCommand(
                         Integer.parseInt(command.getValuesAsString()),
                         command.getParamOrDefault("n", ""),
-                        command.getParamOrDefault("h", "-1"),
                         command.getParamOrDefault("d", "-1"),
                         command.getParamOrDefault("l", "-1"),
                         command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
