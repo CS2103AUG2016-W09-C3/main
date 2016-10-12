@@ -33,9 +33,9 @@ public class TypicalTestTasks {
             surveyResults = new TaskBuilder().withName("Collate customer survey results").withDoneFlag("Not done").withInformation("As soon as possible").withPriority("VeryHigh").build();
             
             //Manually added (dated)
-            lectureToAttend = new TaskBuilder().withName("Attend CS2103T lecture").withDoneFlag("Not done").withDateTime("10102016 1400").withLength("2").withRecurrance("5d").withPriority("low").withInformation("There is webcast if you do not attend").build();
-            meetNathan = new TaskBuilder().withName("Meet Nathan for dinner").withDoneFlag("Not done").withDateTime("11252016 1800").withLength("3").withPriority("medium").withInformation("Meeting nathan to catch up").build();
-            cuttingHair = new TaskBuilder().withName("Cut hair").withDoneFlag("Not done").withDateTime("11102016 0900").withLength("1").withRecurrance("6d").withPriority("medium").withInformation("Cut hair so your hair will not be long").build();
+            lectureToAttend = new TaskBuilder().withName("Attend CS2103T lecture").withDoneFlag("Not done").withDateTime("10102016", "1400").withLength("2").withRecurrance("5d").withPriority("low").withInformation("There is webcast if you do not attend").build();
+            meetNathan = new TaskBuilder().withName("Meet Nathan for dinner").withDoneFlag("Not done").withDateTime("25112016", "1800").withLength("3").withPriority("medium").withInformation("Meeting nathan to catch up").build();
+            cuttingHair = new TaskBuilder().withName("Cut hair").withDoneFlag("Not done").withDateTime("11102016", "0900").withLength("1").withRecurrance("6d").withPriority("medium").withInformation("Cut hair so your hair will not be long").build();
             
         } catch (IllegalValueException e) {
             e.printStackTrace();
