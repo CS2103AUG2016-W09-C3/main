@@ -55,7 +55,6 @@ public class DateParser {
         Tree textGroups = dateGroup.getSyntaxTree().getChild(0);
         for(int i = 0; i < textGroups.getChildCount(); i++){
             String text = textGroups.getChild(i).getText();
-            System.out.println(text);
             if(text.equals(toSearch)){
                 return true;
             }
