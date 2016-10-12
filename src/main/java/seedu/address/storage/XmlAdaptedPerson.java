@@ -81,7 +81,7 @@ public class XmlAdaptedPerson {
         final DoneFlag done = new DoneFlag(this.done);
         final UniqueTagList tags = new UniqueTagList(personTags);
         if(isDated){
-            final DateTime dateTime = new DateTime(this.dateTime);
+            final DateTime dateTime = new DateTime(this.dateTime, true);
             final Length length = new Length(this.length);
             final Recurrance recurrance = new Recurrance(this.recurrance);
             return new DatedTask(name, dateTime, length, recurrance, priority, information, done, tags);

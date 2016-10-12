@@ -45,12 +45,12 @@ public class EditCommand extends Command {
 	
 	private Task toAdd;
 	private ReadOnlyTask taskToEdit;
-	private String name, time, date, length, recurring, priority, information, doneFlag;
+	private String name, datetime, length, recurring, priority, information, doneFlag;
 	private Set<Tag> tagSet;
 	private UniqueTagList tagList;
 
 
-	public EditCommand(int targetIndex, String name, String time, String date, String length, String recurring, 
+	public EditCommand(int targetIndex, String name, String datetime, String length, String recurring, 
             String priority, String information, String doneFlag, Set<String> tags) throws IllegalValueException {
 		this.targetIndex = targetIndex; 
 		final Set<Tag> tagSet = new HashSet<>();
@@ -58,8 +58,7 @@ public class EditCommand extends Command {
 			tagSet.add(new Tag(tagName));
 		}
 		this.name = name; 
-		this.time = time;
-		this.date = date;
+		this.datetime = datetime;
 		this.length = length;
 		this.recurring = recurring;
 		this.priority = priority;
@@ -87,7 +86,7 @@ public class EditCommand extends Command {
 			if(isDated){
 				this.toAdd = new DatedTask(
 						new Name(name),
-				        new DateTime(date, time),
+				        new DateTime(datetime),
 				        new Length(length),
 				        new Recurrance(recurring),
 				        new Priority(priority),
@@ -126,6 +125,16 @@ public class EditCommand extends Command {
 	 */
 	private void copyDatedTask(UnmodifiableObservableList<ReadOnlyTask> lastShownList){
 		ReadOnlyDatedTask datedTaskToEdit = (ReadOnlyDatedTask) lastShownList.get(targetIndex - 1);
+		if(this.datetime.equals("-1")){
+	        this.datetime = datedTaskToEdit.getDateTime().toString();
+		}
+        if(this.length.equals("-1")){
+            this.length = datedTaskToEdit.getLength().toString();
+        }
+        if(this.recurring.equals(Recurrance.NO_INTERVAL)){
+            this.recurring = datedTaskToEdit.getRecurrance().toString();
+        }
+		/*
 		String dateTime = datedTaskToEdit.getDateTime().toString();
 		String[] split = dateTime.split("\\s+");
 		String date = split[0];
@@ -143,7 +152,7 @@ public class EditCommand extends Command {
 		}
 		if(this.recurring.equals(Recurrance.NO_INTERVAL))
 			this.recurring = datedTaskToEdit.getRecurrance().toString();
-		
+		*/
 //		System.out.println(targetIndex + " " + 	name + " " +  priority + " " + information + " " + doneFlag + " " + time + " "  + date + " " +  length + " " + recurring);
 	}
 	

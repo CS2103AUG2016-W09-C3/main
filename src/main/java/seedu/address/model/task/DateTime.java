@@ -25,21 +25,23 @@ public class DateTime {
      *
      * @throws IllegalValueException if given date or time string is invalid.
      */
-    public DateTime(String dateString, String timeString) throws IllegalValueException {
-        assert timeString != null;
-        assert dateString != null;
-        timeString = timeString.trim();
-        dateString = dateString.trim();
-        try{
-            datetime = DateParser.parseDate(dateString + " " + timeString);
-        }catch(IllegalValueException ex){
-            throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
-        }
+    public DateTime(String dateString) throws IllegalValueException {
+        this(dateString, false);
     }
 
 
-    public DateTime(String xmlString) throws IllegalValueException {
-        datetime = LocalDateTime.parse(xmlString, DATE_DISPLAY_FORMATTER);
+    public DateTime(String dateString, boolean fromXML) throws IllegalValueException {
+        assert dateString != null;
+        dateString = dateString.trim();
+        try{
+            if(fromXML){
+                datetime = LocalDateTime.parse(dateString, DATE_DISPLAY_FORMATTER);
+            }else{
+                datetime = DateParser.parseDate(dateString);
+            }
+        }catch(IllegalValueException ex){
+            throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
+        }
     }
 
     
