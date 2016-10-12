@@ -85,16 +85,16 @@ public class TestUtil {
     private static DatedTask[] getSampleDatedTaskData(){
         try{
             return new DatedTask[]{
-                    new DatedTask(new Name ("Send in phone for repair"), new DateTime ("01-01-1991 1445"), new Length ("2"), new Recurrance (""), 
+                    new DatedTask(new Name ("Send in phone for repair"), new DateTime ("01011991", "1445"), new Length ("2"), new Recurrance (""), 
                     new Priority ("high"), new Information ("Repair centre is at vivocity"), new DoneFlag (DoneFlag.DONE), new UniqueTagList()),
                     
-                    new DatedTask(new Name ("Send in playstation for repair"), new DateTime ("12-12 2359"), new Length ("2"), new Recurrance (""), 
+                    new DatedTask(new Name ("Send in playstation for repair"), new DateTime ("1212", "2359"), new Length ("2"), new Recurrance (""), 
                     new Priority ("low"), new Information ("Repair centre is at vivocity"), new DoneFlag ("Done"), new UniqueTagList()),
                     
-                    new DatedTask(new Name ("Shareholder meeting"), new DateTime ("10-15 1000"), new Length ("1"), new Recurrance ("1w"), 
+                    new DatedTask(new Name ("Shareholder meeting"), new DateTime ("1510", "1000"), new Length ("1"), new Recurrance ("1w"), 
                     new Priority ("veryhigh"), new Information ("Meeting room 5, level 21"), new DoneFlag ("Not done"), new UniqueTagList()),
                     
-                    new DatedTask(new Name ("Lunch with Alvin"), new DateTime ("11-10-2016 1000"), new Length ("20"), new Recurrance ("5d"), 
+                    new DatedTask(new Name ("Lunch with Alvin"), new DateTime ("11102016", "1000"), new Length ("20"), new Recurrance ("5d"), 
                     new Priority ("medium"), new Information ("Meeting room 5, level 21"), new DoneFlag (DoneFlag.NOT_DONE), new UniqueTagList())
             };
         } catch (IllegalValueException e){

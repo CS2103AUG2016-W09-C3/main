@@ -36,7 +36,7 @@ public class EditCommand extends Command {
 	public static final String MESSAGE_USAGE = COMMAND_WORD
 			+ ": Edits the task identified by the index number used in the last task listing.\n"
 			+ "Parameters: INDEX (must be a positive integer) [n/NAME] [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...\n"
-			+ "Example: " + COMMAND_WORD + " 1 d/next thurs 2pm";
+			+ "Example: " + COMMAND_WORD + " 1 d/02102016";
 
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
@@ -45,13 +45,12 @@ public class EditCommand extends Command {
 	
 	private Task toAdd;
 	private ReadOnlyTask taskToEdit;
-	private DateTime oldDatetime;
-	private String name, datetime, length, recurring, priority, information, doneFlag;
+	private String name, time, date, length, recurring, priority, information, doneFlag;
 	private Set<Tag> tagSet;
 	private UniqueTagList tagList;
 
 
-	public EditCommand(int targetIndex, String name, String datetime, String length, String recurring, 
+	public EditCommand(int targetIndex, String name, String time, String date, String length, String recurring, 
             String priority, String information, String doneFlag, Set<String> tags) throws IllegalValueException {
 		this.targetIndex = targetIndex; 
 		final Set<Tag> tagSet = new HashSet<>();
@@ -59,7 +58,8 @@ public class EditCommand extends Command {
 			tagSet.add(new Tag(tagName));
 		}
 		this.name = name; 
-		this.datetime = datetime;
+		this.time = time;
+		this.date = date;
 		this.length = length;
 		this.recurring = recurring;
 		this.priority = priority;
@@ -87,7 +87,7 @@ public class EditCommand extends Command {
 			if(isDated){
 				this.toAdd = new DatedTask(
 						new Name(name),
-				        new DateTime(datetime, oldDatetime),
+				        new DateTime(date, time),
 				        new Length(length),
 				        new Recurrance(recurring),
 				        new Priority(priority),
@@ -126,17 +126,6 @@ public class EditCommand extends Command {
 	 */
 	private void copyDatedTask(UnmodifiableObservableList<ReadOnlyTask> lastShownList){
 		ReadOnlyDatedTask datedTaskToEdit = (ReadOnlyDatedTask) lastShownList.get(targetIndex - 1);
-        this.oldDatetime = datedTaskToEdit.getDateTime();
-		if(this.datetime.equals("-1")){
-	        this.datetime = datedTaskToEdit.getDateTime().toString();
-		}
-        if(this.length.equals("-1")){
-            this.length = datedTaskToEdit.getLength().toString();
-        }
-        if(this.recurring.equals(Recurrance.NO_INTERVAL)){
-            this.recurring = datedTaskToEdit.getRecurrance().toString();
-        }
-		/*
 		String dateTime = datedTaskToEdit.getDateTime().toString();
 		String[] split = dateTime.split("\\s+");
 		String date = split[0];
@@ -154,7 +143,7 @@ public class EditCommand extends Command {
 		}
 		if(this.recurring.equals(Recurrance.NO_INTERVAL))
 			this.recurring = datedTaskToEdit.getRecurrance().toString();
-		*/
+		
 //		System.out.println(targetIndex + " " + 	name + " " +  priority + " " + information + " " + doneFlag + " " + time + " "  + date + " " +  length + " " + recurring);
 	}
 	
