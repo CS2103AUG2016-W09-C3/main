@@ -67,7 +67,8 @@ public class Parser {
             return prepareDelete(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            //return new ClearCommand();
+            return prepareClear(command);
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(command);
@@ -158,6 +159,19 @@ public class Parser {
         }
 
         return new DeleteCommand(index.get());
+    }
+    
+    /**
+     * Checks if clear command has any other users input behind clear command word.
+     * 
+     * @param command
+     * @return clear command
+     */
+    private Command prepareClear(ParsedCommand command){
+        if(command.getAllValues().size() > 0){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
+        }
+        return new ClearCommand();
     }
     
     /**
