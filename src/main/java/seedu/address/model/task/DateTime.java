@@ -14,13 +14,9 @@ public class DateTime {
     public static final String MESSAGE_INFORMATION_CONSTRAINTS = "Date should be in DDMMYYYY or DDMM format,"
             + " Time should be in HHMM format, in 24h time." +
     " Also, check if your date and time inputs are valid.";
-
-    public static final String DATE_VALIDATION_REGEX = "\\d?[\\d]{7}";
-    public static final String TIME_VALIDATION_REGEX = "\\d?[\\d]{4}";
     
-    public static final String PARAM_NOT_SPECIFIED = "-1";
-    public static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("ddMMyyyyHHmm");
     public static final DateTimeFormatter DATE_DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+    public static final String PARAM_NOT_SPECIFIED = "-1";
 
     public final LocalDateTime datetime;
     
@@ -34,42 +30,18 @@ public class DateTime {
         assert dateString != null;
         timeString = timeString.trim();
         dateString = dateString.trim();
-        if (!isValidTime(timeString) || !isValidDate(dateString)) {
-            throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
-        }
         try{
-            datetime = LocalDateTime.parse(dateString + timeString, DATE_FORMATTER);
-        }catch(DateTimeParseException ex){
+            datetime = DateParser.parseDate(dateString + " " + timeString);
+        }catch(IllegalValueException ex){
             throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
         }
     }
 
 
-    public DateTime(String datetimeString) throws IllegalValueException {
-        try{
-            datetime = LocalDateTime.parse(datetimeString, DATE_FORMATTER);
-        }catch(DateTimeParseException ex){
-            throw new IllegalValueException(MESSAGE_INFORMATION_CONSTRAINTS);
-        }
-    }
-    
-    /**
-     * Returns true if a given string is a valid task date field.
-     */
-    private boolean isValidDate(String date) {
-        return date.matches(DATE_VALIDATION_REGEX);
+    public DateTime(String xmlString) throws IllegalValueException {
+        datetime = LocalDateTime.parse(xmlString, DATE_DISPLAY_FORMATTER);
     }
 
-    /**
-     * Returns true if a given string is a valid task time field.
-     */
-    private boolean isValidTime(String time) {
-        return time.matches(TIME_VALIDATION_REGEX);
-    }
-
-    public String toXMLString() {
-        return datetime.format(DATE_FORMATTER);
-    }
     
     @Override
     public String toString() {
