@@ -29,7 +29,7 @@ public interface Model {
     void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException;
 
     /** Saves the current state onto stack*/
-    void saveState();
+    void saveState(String commandText);
     
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
@@ -40,6 +40,7 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope);
 
-    void loadPreviousState() throws StateException;
+    /** Loads the previous state. Returns the command attached to the state to be printed. */
+    String loadPreviousState() throws StateException;
 
 }
