@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Lists all tasks in the address book to the user.
@@ -9,12 +11,36 @@ public class ListCommand extends Command {
     public static final String COMMAND_WORD = "list";
 
     public static final String MESSAGE_SUCCESS = "Listed all tasks";
+    
+    public static final String MESSAGE_SORT_SUCCESS = "";
 
+    public static final String[] REQUIRED_PARAMS = {};
+    public static final String[] POSSIBLE_PARAMS = {"ds", "de", "s", "d", "rev"};
+    
+    private HashMap<String, String> dateRange;
+    private ArrayList<String> sortByAttribute;
+    private String doneStatus;
+    private boolean reverse;
+    
     public ListCommand() {}
+    
+    public ListCommand(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse) {
+        assert dateRange != null : "dateRange given is a null object";
+        assert sortByAttribute != null : "sortByAttribute given is a null object";
+        this.dateRange = dateRange;
+        this.sortByAttribute = sortByAttribute;
+        this.doneStatus = doneStatus;
+        this.reverse = reverse;
+    }
 
     @Override
     public CommandResult execute() {
-        model.updateFilteredListToShowAll();
-        return new CommandResult(MESSAGE_SUCCESS);
+        if(dateRange.isEmpty() && sortByAttribute.isEmpty() && doneStatus == "Not done"){
+            model.updateFilteredListToShowAll();
+            return new CommandResult(MESSAGE_SUCCESS);
+        } else {
+            model.updateSortTaskList(dateRange, sortByAttribute, doneStatus, reverse);
+            return new CommandResult(MESSAGE_SORT_SUCCESS);
+        }
     }
 }
