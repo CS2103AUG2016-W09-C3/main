@@ -14,6 +14,7 @@ public abstract class Command {
     public static final String[] REQUIRED_PARAMS = {};
     public static final String[] POSSIBLE_PARAMS = {".*"};
     
+    public abstract boolean modifiesData();
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
      *
@@ -46,4 +47,5 @@ public abstract class Command {
     protected void indicateAttemptToExecuteIncorrectCommand() {
         EventsCenter.getInstance().post(new IncorrectCommandAttemptedEvent(this));
     }
+
 }

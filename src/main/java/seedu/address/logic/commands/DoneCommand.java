@@ -88,4 +88,9 @@ public class DoneCommand extends Command {
 
     }
 
+
+    @Override
+    public boolean modifiesData() {
+        return true;
+    }
 }

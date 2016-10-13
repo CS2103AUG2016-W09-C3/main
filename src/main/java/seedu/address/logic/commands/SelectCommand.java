@@ -40,5 +40,11 @@ public class SelectCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SELECT_TASK_SUCCESS, targetIndex));
 
     }
+    
+
+    @Override
+    public boolean modifiesData() {
+        return false;
+    }
 
 }

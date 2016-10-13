@@ -82,4 +82,9 @@ public class AddCommand extends Command {
 
     }
 
+    @Override
+    public boolean modifiesData() {
+        return true;
+    }
+
 }

@@ -181,4 +181,10 @@ public class EditCommand extends Command {
 			tagList = new UniqueTagList(tagSet);
 		}
 	}
+	
+
+    @Override
+    public boolean modifiesData() {
+        return true;
+    }
 }

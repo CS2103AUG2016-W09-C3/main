@@ -23,4 +23,9 @@ public class ClearCommand extends Command {
         model.resetData(AddressBook.getEmptyAddressBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
+    
+    @Override
+    public boolean modifiesData() {
+        return true;
+    }
 }
