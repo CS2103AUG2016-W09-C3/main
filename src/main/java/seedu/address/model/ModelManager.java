@@ -10,6 +10,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.exceptions.StateException;
 import seedu.address.commons.core.ComponentManager;
 
 import java.util.HashSet;
@@ -40,7 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook = new AddressBook(src);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
-        states = new StateManager();
+        states = new StateManager(addressBook);
     }
 
     public ModelManager() {
@@ -50,7 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyAddressBook initialData, UserPrefs userPrefs) {
         addressBook = new AddressBook(initialData);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
-        states = new StateManager();
+        states = new StateManager(addressBook);
     }
 
     @Override
@@ -66,7 +67,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        states.saveState(addressBook);
         raise(new AddressBookChangedEvent(addressBook));
     }
 
@@ -170,6 +170,18 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+
+    @Override
+    public void saveState() {
+        states.saveState(addressBook);
+    }
+
+    @Override
+    public void loadPreviousState() throws StateException {
+            AddressBook newState = states.loadPreviousState();
+            addressBook.resetData(newState);
+            indicateAddressBookChanged();
     }
 
 }

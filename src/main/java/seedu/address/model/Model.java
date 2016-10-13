@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.StateException;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
@@ -27,6 +28,9 @@ public interface Model {
     /** Adds the given task at the specific index*/
     void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException;
 
+    /** Saves the current state onto stack*/
+    void saveState();
+    
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
@@ -35,5 +39,7 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope);
+
+    void loadPreviousState() throws StateException;
 
 }

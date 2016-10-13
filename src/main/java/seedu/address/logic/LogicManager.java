@@ -31,7 +31,11 @@ public class LogicManager extends ComponentManager implements Logic {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
-        return command.execute();
+        CommandResult cr = command.execute();
+        if(command.createsNewState()){
+            model.saveState();
+        }
+        return cr;
     }
 
     @Override
