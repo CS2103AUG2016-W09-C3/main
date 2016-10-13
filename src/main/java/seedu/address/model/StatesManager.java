@@ -11,6 +11,7 @@ public class StatesManager implements States{
     private ArrayList<AddressBookState> states = new ArrayList<>();
     private int currentState = 0;
     
+    private final int MAX_STATES = 10; // Does not include initial state
     private final String MESSAGE_NO_PREV_STATE = "No previous state to load";
     
     public StatesManager(AddressBookState initialState){
@@ -24,7 +25,11 @@ public class StatesManager implements States{
             states.remove(states.size() - 1);
         }
         states.add(newState);
-        currentState++;
+        if(currentState == MAX_STATES){
+            states.remove(0);
+        }else{
+            currentState++;
+        }
     }
 
 
