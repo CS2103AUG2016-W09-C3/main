@@ -1,0 +1,62 @@
+package seedu.address.model.task;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+
+public class CustomTaskComparator implements Comparator<Task>{
+    
+    private ArrayList<String> attributes;
+    private HashMap<String, Comparer> comparerMap;
+    
+    public CustomTaskComparator(ArrayList<String> sortByAttributes){
+        this.comparerMap = new HashMap<String, Comparer>();
+        this.comparerMap.put("name", new AlphabetComparer());
+        this.comparerMap.put("priority", new PriorityComparer());
+        this.comparerMap.put("date", new DateComparer());
+    }
+
+
+    public int compare(Task t1, Task t2) {
+        for(String attribute : attributes){
+            Comparer attributeComparer = this.comparerMap.get(attribute);
+            int compareResult = attributeComparer.compare(t1, t2);
+            if(compareResult != 0){
+                return compareResult;
+            }
+        }
+        
+        return 0;
+    }
+    
+    interface Comparer {
+        public int compare(Task t1, Task t2);
+    }
+    
+    private class AlphabetComparer implements Comparer{
+        public int compare(Task t1, Task t2){
+            return t1.getName().toString().compareTo(t2.getName().toString());
+        }
+    }
+    
+    private class PriorityComparer implements Comparer{
+        public int compare(Task t1, Task t2){
+            return ((Integer) t1.getPriority().getEnumPriority()).compareTo((Integer) t2.getPriority().getEnumPriority());
+        }
+    }
+    
+    private class DateComparer implements Comparer{
+        public int compare(Task t1, Task t2){
+            assert (t1.isDated() && t2.isDated());
+            DatedTask datedT1 = (DatedTask) t1;
+            DatedTask datedT2 = (DatedTask) t2;
+            LocalDateTime time1 = datedT1.getDateTime().datetime;
+            LocalDateTime time2 = datedT2.getDateTime().datetime;
+            
+            return time1.compareTo(time2);
+        }
+    }
+
+    
+}
