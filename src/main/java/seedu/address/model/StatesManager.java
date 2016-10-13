@@ -48,4 +48,12 @@ public class StatesManager implements States{
         return new AddressBookState(states.get(currentState).getState(), commandString);
     }
     
+    public AddressBookState loadNextState() throws StateException{
+        if(currentState == states.size() - 1){
+            throw new StateException(MESSAGE_NO_NEXT_STATE);
+        }
+        String commandString = states.get(currentState).getCommand();
+        currentState--;
+        return new AddressBookState(states.get(currentState).getState(), commandString);
+    }
 }

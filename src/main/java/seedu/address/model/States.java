@@ -9,7 +9,10 @@ public interface States {
     /** Saves a state to the state list. */
     public void saveState(AddressBookState newState);
     
-    /** Loads the previous state. Note: does not return the state. */
+    /** Loads the previous state. */
     public AddressBookState loadPreviousState() throws StateException;
+
+    /** Loads the next state. */
+    public AddressBookState loadNextState() throws StateException;
     
 }

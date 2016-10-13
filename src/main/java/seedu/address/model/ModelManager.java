@@ -179,10 +179,18 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public String loadPreviousState() throws StateException {
-            AddressBookState newState = states.loadPreviousState();
-            addressBook.resetData(newState.getState());
-            indicateAddressBookChanged();
-            return newState.getCommand();
+        AddressBookState newState = states.loadPreviousState();
+        addressBook.resetData(newState.getState());
+        indicateAddressBookChanged();
+        return newState.getCommand();
+    }
+
+    @Override
+    public String loadNextState() throws StateException {
+        AddressBookState newState = states.loadNextState();
+        addressBook.resetData(newState.getState());
+        indicateAddressBookChanged();
+        return newState.getCommand();
     }
 
 }

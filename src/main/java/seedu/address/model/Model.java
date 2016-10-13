@@ -43,4 +43,7 @@ public interface Model {
     /** Loads the previous state. Returns the command attached to the state to be printed. */
     String loadPreviousState() throws StateException;
 
+    /** Loads the next state. Returns the command attached to the state to be printed. */
+    String loadNextState() throws StateException;
+
 }
