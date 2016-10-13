@@ -59,4 +59,8 @@ public class UndoCommand extends Command {
 
     }
 
+    @Override
+    public boolean createsNewState() {
+        return false; 
+    }
 }

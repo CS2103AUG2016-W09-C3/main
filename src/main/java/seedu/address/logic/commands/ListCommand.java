@@ -19,7 +19,7 @@ public class ListCommand extends Command {
     }
     
     @Override
-    public boolean modifiesData() {
+    public boolean createsNewState() {
         return false;
     }
 }

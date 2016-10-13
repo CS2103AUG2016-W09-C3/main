@@ -83,7 +83,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public boolean modifiesData() {
+    public boolean createsNewState() {
         return true;
     }
 
