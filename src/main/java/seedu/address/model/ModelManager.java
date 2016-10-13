@@ -25,6 +25,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<Task> filteredTasks;
+    private final StateManager states;
 
     /**
      * Initializes a ModelManager with the given AddressBook
@@ -39,6 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook = new AddressBook(src);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        states = new StateManager();
     }
 
     public ModelManager() {
@@ -48,6 +50,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyAddressBook initialData, UserPrefs userPrefs) {
         addressBook = new AddressBook(initialData);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        states = new StateManager();
     }
 
     @Override
@@ -63,6 +66,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
+        states.saveState(addressBook);
         raise(new AddressBookChangedEvent(addressBook));
     }
 
