@@ -102,28 +102,31 @@ public class Parser {
      * 
      * @param command
      * @return
-     * @throws IllegalValueException 
      */
-    private Command prepareList(ParsedCommand command) throws IllegalValueException {
+    private Command prepareList(ParsedCommand command) {
         HashMap<String, String> dateRange = new HashMap<String, String>();
         ArrayList<String> sortByAttribute = new ArrayList<String>();
         boolean reverse = false;
-        if(command.hasParams(ListCommand.START_AND_END_DATE_PARAM)){
-            dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
-            dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
-        } else if(command.hasParams(ListCommand.START_DATE_PARAM)){
-            dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
-        } else if(command.hasParams(ListCommand.END_DATE_PARAM)){
-            dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
-        } else {
+        try{
+            if(command.hasParams(ListCommand.START_AND_END_DATE_PARAM)){
+                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
+                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
+            } else if(command.hasParams(ListCommand.START_DATE_PARAM)){
+                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
+            } else if(command.hasParams(ListCommand.END_DATE_PARAM)){
+                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
+            } else {
+                
+            }
             
-        }
-        
-        if(command.hasParams(ListCommand.SORT_PARAM)){
-            sortByAttribute = new ArrayList<String>(Arrays.asList(command.getParam("s").split(" ")));
-        }
-        if(command.hasParams(ListCommand.REVERSE_PARAM)){
-            reverse = true;
+            if(command.hasParams(ListCommand.SORT_PARAM)){
+                sortByAttribute = new ArrayList<String>(Arrays.asList(command.getParam("s").split(" ")));
+            }
+            if(command.hasParams(ListCommand.REVERSE_PARAM)){
+                reverse = true;
+            }
+        } catch (IllegalValueException ive){
+            return new IncorrectCommand(ive.getMessage());
         }
         
         return new ListCommand(
