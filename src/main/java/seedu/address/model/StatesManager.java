@@ -25,7 +25,6 @@ public class StatesManager implements States{
         }
         states.add(newState);
         currentState++;
-        System.out.println(currentState);
     }
 
 
@@ -35,7 +34,6 @@ public class StatesManager implements States{
         }
         String commandString = states.get(currentState).getCommand();
         currentState--;
-        System.out.println(currentState);
         return new AddressBookState(states.get(currentState).getState(), commandString);
     }
     
