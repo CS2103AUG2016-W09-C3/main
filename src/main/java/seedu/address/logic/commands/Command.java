@@ -14,6 +14,14 @@ public abstract class Command {
     public static final String[] REQUIRED_PARAMS = {};
     public static final String[] POSSIBLE_PARAMS = {".*"};
     
+    /**
+     * Returns true if the command creates a new state of the model.
+     * The command creates a new state if the command has the potential to modify the model data (e.g. add, delete)
+     * Commands that do not modify data return false (e.g. list, help).
+     * The only exceptions are the "undo" and "redo" command, which modify data but do not create new states.
+     * 
+     * @return whether or not the command creates a new state
+     */
     public abstract boolean createsNewState();
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
