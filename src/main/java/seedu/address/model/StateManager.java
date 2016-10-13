@@ -20,7 +20,6 @@ public class StateManager {
         }
         states.add(new AddressBook(newState));
         currentState++;
-        System.out.println(currentState);
     }
 
 
@@ -29,7 +28,6 @@ public class StateManager {
             throw new StateException(MESSAGE_NO_PREV_STATE);
         }
         currentState--;
-        System.out.println(currentState);
         return states.get(currentState);
     }
 }
