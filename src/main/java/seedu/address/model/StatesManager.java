@@ -12,7 +12,9 @@ public class StatesManager implements States{
     private int currentState = 0;
     
     private final int MAX_STATES = 10; // Does not include initial state
-    private final String MESSAGE_NO_PREV_STATE = "No previous state to load";
+    private final String MESSAGE_NO_PREV_STATE = "No previous state to load.";
+    private final String MESSAGE_MAX_STATES_EXCEEDED = "Maximum undos exceeded.";
+    private final String MESSAGE_NO_NEXT_STATE = "No next state to load.";
     
     public StatesManager(AddressBookState initialState){
         states.add(initialState);
@@ -35,7 +37,11 @@ public class StatesManager implements States{
 
     public AddressBookState loadPreviousState() throws StateException{
         if(currentState == 0){
-            throw new StateException(MESSAGE_NO_PREV_STATE);
+            if(states.get(0).getCommand().equals(AddressBookState.INITIAL_STATE)){
+                throw new StateException(MESSAGE_NO_PREV_STATE);
+            }else{
+                throw new StateException(MESSAGE_MAX_STATES_EXCEEDED);
+            }
         }
         String commandString = states.get(currentState).getCommand();
         currentState--;

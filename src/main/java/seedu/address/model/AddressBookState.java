@@ -10,9 +10,9 @@ package seedu.address.model;
 public class AddressBookState {
     private final AddressBook state;
     private final String command;
-    
+    public static final String INITIAL_STATE = "Initial state";
     public AddressBookState(AddressBook state){
-        this(state, null);
+        this(state, INITIAL_STATE);
     }
     
     public AddressBookState(AddressBook state, String command){
