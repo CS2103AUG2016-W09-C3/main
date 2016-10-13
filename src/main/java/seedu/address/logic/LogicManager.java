@@ -33,7 +33,7 @@ public class LogicManager extends ComponentManager implements Logic {
         command.setData(model);
         CommandResult cr = command.execute();
         if(command.createsNewState()){
-            model.saveState();
+            model.saveState(commandText);
         }
         return cr;
     }
