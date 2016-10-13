@@ -13,33 +13,30 @@ public class StatesManager implements States{
     
     private final String MESSAGE_NO_PREV_STATE = "No previous state to load";
     
-    public StatesManager(AddressBook initialState){
-        states.add(new AddressBookState(initialState, null));
+    public StatesManager(AddressBookState initialState){
+        states.add(initialState);
     }
 
 
-    public void saveState(AddressBook newState, String commandString){
+    public void saveState(AddressBookState newState){
         // When a state is saved, all "future states" i.e. states that have been undone are overwritten.
         while(states.size() - 1 > currentState){
             states.remove(states.size() - 1);
         }
-        states.add(new AddressBookState(newState, commandString));
+        states.add(newState);
         currentState++;
+        System.out.println(currentState);
     }
 
 
-    public void loadPreviousState() throws StateException{
+    public AddressBookState loadPreviousState() throws StateException{
         if(currentState == 0){
             throw new StateException(MESSAGE_NO_PREV_STATE);
         }
+        String commandString = states.get(currentState).getCommand();
         currentState--;
+        System.out.println(currentState);
+        return new AddressBookState(states.get(currentState).getState(), commandString);
     }
     
-    public AddressBook getAddressBook(){
-        return states.get(currentState).getState();
-    }
-    
-    public String getCommand(){
-        return states.get(currentState).getCommand();
-    }
 }
