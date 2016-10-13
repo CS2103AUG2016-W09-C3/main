@@ -3,6 +3,9 @@ package seedu.address.model;
 /**
  * Represents a state of the address book.
  * 
+ * An address book state consists of a state and a command.
+ * The state stores the state of the address book at the point the command was executed.
+ * The command stores the command that was executed to achieve this state.
  */
 public class AddressBookState {
     private final AddressBook state;
