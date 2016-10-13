@@ -15,7 +15,12 @@ public class ListCommand extends Command {
     public static final String MESSAGE_SORT_SUCCESS = "";
 
     public static final String[] REQUIRED_PARAMS = {};
-    public static final String[] POSSIBLE_PARAMS = {"ds", "de", "s", "d", "rev"};
+    public static final String[] POSSIBLE_PARAMS = {"ds", "de", "s", "df", "rev"};
+    public static final String[] START_DATE_PARAM = {"ds"};
+    public static final String[] END_DATE_PARAM = {"de"};
+    public static final String[] START_AND_END_DATE_PARAM = {"ds", "de"};
+    public static final String[] SORT_PARAM = {"s"};
+    public static final String[] REVERSE_PARAM = {"rev"};
     
     private HashMap<String, String> dateRange;
     private ArrayList<String> sortByAttribute;
@@ -35,7 +40,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if(dateRange.isEmpty() && sortByAttribute.isEmpty() && doneStatus == "Not done"){
+        if(dateRange.isEmpty() && sortByAttribute.isEmpty() && doneStatus.equals("Not done")){
             model.updateFilteredListToShowAll();
             return new CommandResult(MESSAGE_SUCCESS);
         } else {
