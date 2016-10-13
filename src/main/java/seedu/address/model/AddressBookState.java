@@ -11,8 +11,12 @@ public class AddressBookState {
     private final AddressBook state;
     private final String command;
     
+    public AddressBookState(AddressBook state){
+        this(state, null);
+    }
+    
     public AddressBookState(AddressBook state, String command){
-        this.state = state;
+        this.state = new AddressBook(state);
         this.command = command;
     }
     
