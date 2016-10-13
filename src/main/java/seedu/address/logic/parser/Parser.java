@@ -90,6 +90,10 @@ public class Parser {
 
         case UndoneCommand.COMMAND_WORD:
             return prepareUndone(command);
+            
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+            
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
