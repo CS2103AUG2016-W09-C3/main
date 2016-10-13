@@ -5,16 +5,25 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.DateParser;
 import seedu.address.model.task.DatedTask;
+import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.address.model.task.CustomTaskComparator;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.core.ComponentManager;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -106,6 +115,25 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+    
+    public void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse){
+        sortList(sortByAttribute, reverse);
+        updateSortTaskList(new PredicateExpression(new SortQualifier(dateRange, doneStatus)));
+    }
+    
+    private void updateSortTaskList(Expression expression){
+        filteredTasks.setPredicate(expression::satisfies);
+    }
+    
+    //========== Inner classes/interfaces used for sorting ====================================================
+    
+    private void sortList(ArrayList<String> sortByAttribute, boolean reverse){
+        Collections.sort(filteredTasks, new CustomTaskComparator(sortByAttribute));
+        if(reverse){
+            Collections.reverse(filteredTasks);
+        }
+    }
+    
 
     //========== Inner classes/interfaces used for filtering ==================================================
 
@@ -136,6 +164,61 @@ public class ModelManager extends ComponentManager implements Model {
     interface Qualifier {
         boolean run(ReadOnlyTask task);
         String toString();
+    }
+    
+    private class SortQualifier implements Qualifier{
+        private HashMap<String, String> dateRange;
+        private ArrayList<String> sortByAttribute;
+        private String doneStatus;
+        
+        SortQualifier(HashMap<String, String> dateRange, String doneStatus){
+            this.dateRange = dateRange;
+            this.doneStatus = doneStatus;
+        }
+
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if(!doneStatus.equals("all")){
+                if(!doneStatus.equals(task.getDoneFlag().toString())){
+                    return false;
+                }
+            }
+            
+            if(!dateRange.isEmpty()){
+                if(!task.isDated()){
+                    return false;
+                } else {
+                    ReadOnlyDatedTask datedTask = (DatedTask) task;
+                    LocalDateTime currentTaskDateTime = datedTask.getDateTime().datetime;
+                    try {
+                        LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
+                        if(currentTaskDateTime.isBefore(startDateTime)){
+                            return false;
+                        }
+                    } catch (IllegalValueException e1) {
+                        System.out.println("Start date and time given is not a valid string");
+                        e1.printStackTrace();
+                    }
+                    try {
+                        LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end"));
+                        if(currentTaskDateTime.isAfter(endDateTime)){
+                            return false;
+                        }
+                    } catch (IllegalValueException e) {
+                        System.out.println("End date and time given is not a valid string");
+                        e.printStackTrace();
+                    }
+                }
+            }
+            
+            return true;
+        }
+        
+        @Override
+        public String toString(){
+            return "";
+        }
+        
     }
 
     private class NameQualifier implements Qualifier {
