@@ -16,12 +16,6 @@ public class RedoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Redoes a command that was undone. ";
     public static final String MESSAGE_SUCCESS = "Redid previous command \"%1$s\"";
 
-
-    /**
-     * Convenience constructor using raw values for adding 
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
     public RedoCommand(){
     }
 

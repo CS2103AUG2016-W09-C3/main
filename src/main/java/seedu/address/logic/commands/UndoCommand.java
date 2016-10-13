@@ -16,12 +16,6 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Undoes the previous command. ";
     public static final String MESSAGE_SUCCESS = "Undid previous command \"%1$s\"";
 
-
-    /**
-     * Convenience constructor using raw values for adding 
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
     public UndoCommand(){
     }
 
