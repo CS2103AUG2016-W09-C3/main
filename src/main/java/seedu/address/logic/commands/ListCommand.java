@@ -41,7 +41,7 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute() {
         if(dateRange.isEmpty() && sortByAttribute.isEmpty() && doneStatus.equals("Not done")){
-            model.updateFilteredListToShowAll();
+            model.updateFilteredListToShowUndone();
             return new CommandResult(MESSAGE_SUCCESS);
         } else {
             model.updateSortTaskList(dateRange, sortByAttribute, doneStatus, reverse);
