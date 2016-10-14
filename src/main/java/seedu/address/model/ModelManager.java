@@ -117,7 +117,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     public void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse){
-        sortList(sortByAttribute, reverse);
+        //sortList(sortByAttribute, reverse);
+        filteredTasks.sorted(new CustomTaskComparator(sortByAttribute));
         updateSortTaskList(new PredicateExpression(new SortQualifier(dateRange, doneStatus)));
     }
     
