@@ -15,6 +15,7 @@ public class CustomTaskComparator implements Comparator<Task>{
         this.comparerMap.put("name", new AlphabetComparer());
         this.comparerMap.put("priority", new PriorityComparer());
         this.comparerMap.put("date", new DateComparer());
+        this.attributes = sortByAttributes;
     }
 
 
