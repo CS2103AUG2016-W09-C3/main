@@ -40,5 +40,11 @@ public interface Model {
     
     /** Sorts the filter of the filtered task list to */
     void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse);
+    
+    /** Updates the filter of the filtered task list to show not done tasks*/
+    void updateFilteredListToShowUndone();
+    
+    /** Updates the filter of the filtered task list to show not done tasks*/
+    void updateFilteredListToShowDone();
 
 }
