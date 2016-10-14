@@ -7,6 +7,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.DateParser;
 import seedu.address.model.task.DatedTask;
+import seedu.address.model.task.DoneFlag;
 import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
@@ -116,6 +117,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks.setPredicate(expression::satisfies);
     }
     
+    @Override
     public void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse){
         sortList(sortByAttribute, reverse);
         //filteredTasks.sorted(new CustomTaskComparator(sortByAttribute));
@@ -123,6 +125,23 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     private void updateSortTaskList(Expression expression){
+        filteredTasks.setPredicate(expression::satisfies);
+    }
+    @Override
+    public void updateFilteredListToShowUndone() {
+        updateFilteredListToShowUndone(new PredicateExpression(new UndoneQualifier()));
+    }
+    
+    private void updateFilteredListToShowUndone(Expression expression){
+        filteredTasks.setPredicate(expression::satisfies);
+    }
+    
+    @Override
+    public void updateFilteredListToShowDone() {
+        updateFilteredListToShowUndone(new PredicateExpression(new DoneQualifier()));
+    }
+    
+    private void updateFilteredListToShowDone(Expression expression){
         filteredTasks.setPredicate(expression::satisfies);
     }
     
@@ -174,11 +193,14 @@ public class ModelManager extends ComponentManager implements Model {
             this.dateRange = dateRange;
             this.doneStatus = doneStatus;
         }
-
+        
+        /**
+         * Tests if task is within the date range if specified, is with the correct DoneFlag status if specified 
+         */
         @Override
         public boolean run(ReadOnlyTask task) {
-            if(!doneStatus.equals("all")){
-                if(!doneStatus.equals(task.getDoneFlag().toString())){
+            if(!doneStatus.equalsIgnoreCase("all")){
+                if(!doneStatus.equalsIgnoreCase(task.getDoneFlag().toString())){
                     return false;
                 }
             }
@@ -199,7 +221,7 @@ public class ModelManager extends ComponentManager implements Model {
                         e1.printStackTrace();
                     }
                     try {
-                        LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end"));
+                        LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end")).plusDays(1);
                         if(currentTaskDateTime.isAfter(endDateTime)){
                             return false;
                         }
@@ -213,10 +235,6 @@ public class ModelManager extends ComponentManager implements Model {
             return true;
         }
         
-        @Override
-        public String toString(){
-            return "";
-        }
         
     }
 
@@ -234,8 +252,7 @@ public class ModelManager extends ComponentManager implements Model {
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()//takes in task returns true if matches keyword. Converts to stream, check task name contains keyword
-                    //.filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
+            return nameKeyWords.stream()
                     .filter(keyword -> (this.searchScope.contains("n") && StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
                             || (this.searchScope.contains("i") && StringUtil.containsIgnoreCase(task.getInformation().fullInformation, keyword))
                             || (this.searchScope.contains("d") && task.isDated() && StringUtil.containsIgnoreCase(((DatedTask) task).getDateTime().toString(), keyword))
@@ -248,6 +265,46 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+    
+    private class UndoneQualifier implements Qualifier {
+        private Set<String> undoneKeyword;
+
+        UndoneQualifier(){
+            this.undoneKeyword.add(DoneFlag.NOT_DONE);
+        }
+        /**
+         * Tests if task's doneFlag is undone
+         */
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return undoneKeyword.stream()
+                    .filter(keyword -> (StringUtil.containsIgnoreCase(task.getDoneFlag().toString(), keyword))
+                            )
+                    .findAny()//finds first one
+                    .isPresent();//check if null
+        }
+
+    }
+    
+    private class DoneQualifier implements Qualifier {
+        private Set<String> doneKeyword;
+
+        DoneQualifier(){
+            this.doneKeyword.add(DoneFlag.DONE);
+        }
+        /**
+         * Tests if task's doneFlag is done.
+         */
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            return doneKeyword.stream()
+                    .filter(keyword -> (StringUtil.containsIgnoreCase(task.getDoneFlag().toString(), keyword))
+                            )
+                    .findAny()//finds first one
+                    .isPresent();//check if null
+        }
+
     }
 
 }
