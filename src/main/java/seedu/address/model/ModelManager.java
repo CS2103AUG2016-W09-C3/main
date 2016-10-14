@@ -117,8 +117,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     public void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse){
-        //sortList(sortByAttribute, reverse);
-        filteredTasks.sorted(new CustomTaskComparator(sortByAttribute));
+        sortList(sortByAttribute, reverse);
+        //filteredTasks.sorted(new CustomTaskComparator(sortByAttribute));
         updateSortTaskList(new PredicateExpression(new SortQualifier(dateRange, doneStatus)));
     }
     
@@ -129,10 +129,8 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for sorting ====================================================
     
     private void sortList(ArrayList<String> sortByAttribute, boolean reverse){
-        Collections.sort(filteredTasks, new CustomTaskComparator(sortByAttribute));
-        if(reverse){
-            Collections.reverse(filteredTasks);
-        }
+        addressBook.sortTasks(sortByAttribute, reverse);
+        
     }
     
 
