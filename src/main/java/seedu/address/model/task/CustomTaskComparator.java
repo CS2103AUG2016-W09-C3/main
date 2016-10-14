@@ -43,7 +43,8 @@ public class CustomTaskComparator implements Comparator<Task>{
     
     private class PriorityComparer implements Comparer{
         public int compare(Task t1, Task t2){
-            return ((Integer) t1.getPriority().getEnumPriority()).compareTo((Integer) t2.getPriority().getEnumPriority());
+            //highest priority is of value 5, lowest is of value 1.
+            return ((Integer) t2.getPriority().getEnumPriority()).compareTo((Integer) t1.getPriority().getEnumPriority());
         }
     }
     
