@@ -40,7 +40,7 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if(dateRange.isEmpty() && sortByAttribute.isEmpty() && doneStatus.equals("Not done")){
+        if(dateRange.isEmpty() && sortByAttribute.isEmpty() && doneStatus.equalsIgnoreCase("Not done") && !reverse){
             model.updateFilteredListToShowUndone();
             return new CommandResult(MESSAGE_SUCCESS);
         } else {

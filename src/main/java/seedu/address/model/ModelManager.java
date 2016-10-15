@@ -85,14 +85,16 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTask(task);
-        updateFilteredListToShowAll();
+        //updateFilteredListToShowAll();
+        updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
     
     @Override
     public synchronized void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTaskToIndex(task, index);
-        updateFilteredListToShowAll();
+        //updateFilteredListToShowAll();
+        updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
 
@@ -268,41 +270,37 @@ public class ModelManager extends ComponentManager implements Model {
     }
     
     private class UndoneQualifier implements Qualifier {
-        private Set<String> undoneKeyword;
 
         UndoneQualifier(){
-            this.undoneKeyword.add(DoneFlag.NOT_DONE);
         }
         /**
          * Tests if task's doneFlag is undone
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            return undoneKeyword.stream()
-                    .filter(keyword -> (StringUtil.containsIgnoreCase(task.getDoneFlag().toString(), keyword))
-                            )
-                    .findAny()//finds first one
-                    .isPresent();//check if null
+            if(task.getDoneFlag().isDone()){
+                return false;
+            } else {
+                return true;
+            }
         }
 
     }
     
     private class DoneQualifier implements Qualifier {
-        private Set<String> doneKeyword;
 
         DoneQualifier(){
-            this.doneKeyword.add(DoneFlag.DONE);
         }
         /**
          * Tests if task's doneFlag is done.
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            return doneKeyword.stream()
-                    .filter(keyword -> (StringUtil.containsIgnoreCase(task.getDoneFlag().toString(), keyword))
-                            )
-                    .findAny()//finds first one
-                    .isPresent();//check if null
+            if(task.getDoneFlag().isDone()){
+                return true;
+            } else {
+                return false;
+            }
         }
 
     }
