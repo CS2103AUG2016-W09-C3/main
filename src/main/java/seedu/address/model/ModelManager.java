@@ -85,16 +85,16 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTask(task);
-        //updateFilteredListToShowAll();
-        updateFilteredListToShowUndone();
+        updateFilteredListToShowAll();
+        //updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
     
     @Override
     public synchronized void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTaskToIndex(task, index);
-        //updateFilteredListToShowAll();
-        updateFilteredListToShowUndone();
+        updateFilteredListToShowAll();
+        //updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
 
