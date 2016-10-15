@@ -205,6 +205,12 @@ public class Parser {
         }
     }
     
+    /**
+     * Parses arguments in the context of the reschedule task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
     private Command prepareReschedule(ParsedCommand command){
     	if(!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS)){
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE));
