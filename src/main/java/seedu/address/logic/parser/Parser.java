@@ -90,6 +90,10 @@ public class Parser {
 
         case UndoneCommand.COMMAND_WORD:
             return prepareUndone(command);
+            
+        case RescheduleCommand.COMMAND_WORD:
+        	return prepareReschedule(command);
+        	
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -196,6 +200,19 @@ public class Parser {
                         DoneFlag.NOT_DONE,
                         getTagsFromArgs(command.getParamList("t"))
                 );
+        } catch (IllegalValueException ive){
+            return new IncorrectCommand(ive.getMessage());
+        }
+    }
+    
+    private Command prepareReschedule(ParsedCommand command){
+    	if(!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS)){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE));
+        }
+    	try {
+    		return new RescheduleCommand(
+                        Integer.parseInt(command.getValue()),
+                        command.getValue(1));
         } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
         }
