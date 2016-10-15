@@ -88,4 +88,9 @@ public class DoneCommand extends Command {
 
     }
 
+
+    @Override
+    public boolean createsNewState() {
+        return true;
+    }
 }
