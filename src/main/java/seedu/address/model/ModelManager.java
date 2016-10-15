@@ -15,6 +15,7 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.address.model.task.CustomTaskComparator;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.exceptions.StateException;
 import seedu.address.commons.core.ComponentManager;
 
 import java.time.LocalDateTime;
@@ -35,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<Task> filteredTasks;
+    private final States states;
 
     /**
      * Initializes a ModelManager with the given AddressBook
@@ -49,6 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook = new AddressBook(src);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        states = new StatesManager(new AddressBookState(addressBook));
     }
 
     public ModelManager() {
@@ -58,6 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyAddressBook initialData, UserPrefs userPrefs) {
         addressBook = new AddressBook(initialData);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        states = new StatesManager(new AddressBookState(addressBook));
     }
 
     @Override
@@ -303,6 +307,27 @@ public class ModelManager extends ComponentManager implements Model {
             }
         }
 
+    }
+
+    @Override
+    public void saveState(String commandText) {
+        states.saveState(new AddressBookState(addressBook, commandText));
+    }
+
+    @Override
+    public String loadPreviousState() throws StateException {
+        return loadState(states.loadPreviousState());
+    }
+
+    @Override
+    public String loadNextState() throws StateException {
+        return loadState(states.loadNextState());
+    }
+    
+    private String loadState(AddressBookState newState) {
+        addressBook.resetData(newState.getState());
+        indicateAddressBookChanged();
+        return newState.getCommand();
     }
 
 }
