@@ -10,9 +10,9 @@ public class ListCommand extends Command {
 
     public static final String COMMAND_WORD = "list";
 
-    public static final String MESSAGE_SUCCESS = "Listed all tasks";
+    public static final String MESSAGE_SUCCESS = "Listed all tasks according to given input.";
     
-    public static final String MESSAGE_SORT_SUCCESS = "";
+    //public static final String MESSAGE_SORT_SUCCESS = "";
 
     public static final String[] REQUIRED_PARAMS = {};
     public static final String[] POSSIBLE_PARAMS = {"ds", "de", "s", "df", "rev"};
@@ -45,7 +45,7 @@ public class ListCommand extends Command {
             return new CommandResult(MESSAGE_SUCCESS);
         } else {
             model.updateSortTaskList(dateRange, sortByAttribute, doneStatus, reverse);
-            return new CommandResult(MESSAGE_SORT_SUCCESS);
+            return new CommandResult(MESSAGE_SUCCESS);
         }
     }
 }
