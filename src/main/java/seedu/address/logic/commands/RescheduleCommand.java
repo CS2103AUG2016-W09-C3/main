@@ -94,4 +94,9 @@ public class RescheduleCommand extends Command{
         
 		return new CommandResult(String.format(MESSAGE_RESCHEDULE_TASK_SUCCESS, toAdd));
 	}
+
+	@Override
+	public boolean createsNewState() {
+		return true;
+	}
 }

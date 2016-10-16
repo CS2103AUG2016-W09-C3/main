@@ -5,16 +5,27 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.model.task.Task;
+import seedu.address.model.task.DateParser;
 import seedu.address.model.task.DatedTask;
+import seedu.address.model.task.DoneFlag;
+import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
+import seedu.address.model.task.CustomTaskComparator;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.exceptions.StateException;
 import seedu.address.commons.core.ComponentManager;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
+
+import edu.emory.mathcs.backport.java.util.Collections;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<Task> filteredTasks;
+    private final States states;
 
     /**
      * Initializes a ModelManager with the given AddressBook
@@ -39,6 +51,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook = new AddressBook(src);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        states = new StatesManager(new AddressBookState(addressBook));
     }
 
     public ModelManager() {
@@ -48,6 +61,7 @@ public class ModelManager extends ComponentManager implements Model {
     public ModelManager(ReadOnlyAddressBook initialData, UserPrefs userPrefs) {
         addressBook = new AddressBook(initialData);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        states = new StatesManager(new AddressBookState(addressBook));
     }
 
     @Override
@@ -76,6 +90,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTask(task);
         updateFilteredListToShowAll();
+        //updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
     
@@ -83,6 +98,7 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTaskToIndex(task, index);
         updateFilteredListToShowAll();
+        //updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
 
@@ -106,6 +122,42 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
+    
+    @Override
+    public void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse){
+        sortList(sortByAttribute, reverse);
+        //filteredTasks.sorted(new CustomTaskComparator(sortByAttribute));
+        updateSortTaskList(new PredicateExpression(new SortQualifier(dateRange, doneStatus)));
+    }
+    
+    private void updateSortTaskList(Expression expression){
+        filteredTasks.setPredicate(expression::satisfies);
+    }
+    @Override
+    public void updateFilteredListToShowUndone() {
+        updateFilteredListToShowUndone(new PredicateExpression(new UndoneQualifier()));
+    }
+    
+    private void updateFilteredListToShowUndone(Expression expression){
+        filteredTasks.setPredicate(expression::satisfies);
+    }
+    
+    @Override
+    public void updateFilteredListToShowDone() {
+        updateFilteredListToShowUndone(new PredicateExpression(new DoneQualifier()));
+    }
+    
+    private void updateFilteredListToShowDone(Expression expression){
+        filteredTasks.setPredicate(expression::satisfies);
+    }
+    
+    //========== Inner classes/interfaces used for sorting ====================================================
+    
+    private void sortList(ArrayList<String> sortByAttribute, boolean reverse){
+        addressBook.sortTasks(sortByAttribute, reverse);
+        
+    }
+    
 
     //========== Inner classes/interfaces used for filtering ==================================================
 
@@ -137,6 +189,60 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
+    
+    private class SortQualifier implements Qualifier{
+        private HashMap<String, String> dateRange;
+        private ArrayList<String> sortByAttribute;
+        private String doneStatus;
+        
+        SortQualifier(HashMap<String, String> dateRange, String doneStatus){
+            this.dateRange = dateRange;
+            this.doneStatus = doneStatus;
+        }
+        
+        /**
+         * Tests if task is within the date range if specified, is with the correct DoneFlag status if specified 
+         */
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if(!doneStatus.equalsIgnoreCase("all")){
+                if(!doneStatus.equalsIgnoreCase(task.getDoneFlag().toString())){
+                    return false;
+                }
+            }
+            
+            if(!dateRange.isEmpty()){
+                if(!task.isDated()){
+                    return false;
+                } else {
+                    ReadOnlyDatedTask datedTask = (DatedTask) task;
+                    LocalDateTime currentTaskDateTime = datedTask.getDateTime().datetime;
+                    try {
+                        LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
+                        if(currentTaskDateTime.isBefore(startDateTime)){
+                            return false;
+                        }
+                    } catch (IllegalValueException e1) {
+                        System.out.println("Start date and time given is not a valid string");
+                        e1.printStackTrace();
+                    }
+                    try {
+                        LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end")).plusDays(1);
+                        if(currentTaskDateTime.isAfter(endDateTime)){
+                            return false;
+                        }
+                    } catch (IllegalValueException e) {
+                        System.out.println("End date and time given is not a valid string");
+                        e.printStackTrace();
+                    }
+                }
+            }
+            
+            return true;
+        }
+        
+        
+    }
 
     private class NameQualifier implements Qualifier {
         private Set<String> nameKeyWords;
@@ -152,8 +258,7 @@ public class ModelManager extends ComponentManager implements Model {
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()//takes in task returns true if matches keyword. Converts to stream, check task name contains keyword
-                    //.filter(keyword -> StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
+            return nameKeyWords.stream()
                     .filter(keyword -> (this.searchScope.contains("n") && StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
                             || (this.searchScope.contains("i") && StringUtil.containsIgnoreCase(task.getInformation().fullInformation, keyword))
                             || (this.searchScope.contains("d") && task.isDated() && StringUtil.containsIgnoreCase(((DatedTask) task).getDateTime().toString(), keyword))
@@ -166,6 +271,63 @@ public class ModelManager extends ComponentManager implements Model {
         public String toString() {
             return "name=" + String.join(", ", nameKeyWords);
         }
+    }
+    
+    private class UndoneQualifier implements Qualifier {
+
+        UndoneQualifier(){
+        }
+        /**
+         * Tests if task's doneFlag is undone
+         */
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if(task.getDoneFlag().isDone()){
+                return false;
+            } else {
+                return true;
+            }
+        }
+
+    }
+    
+    private class DoneQualifier implements Qualifier {
+
+        DoneQualifier(){
+        }
+        /**
+         * Tests if task's doneFlag is done.
+         */
+        @Override
+        public boolean run(ReadOnlyTask task) {
+            if(task.getDoneFlag().isDone()){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+    }
+
+    @Override
+    public void saveState(String commandText) {
+        states.saveState(new AddressBookState(addressBook, commandText));
+    }
+
+    @Override
+    public String loadPreviousState() throws StateException {
+        return loadState(states.loadPreviousState());
+    }
+
+    @Override
+    public String loadNextState() throws StateException {
+        return loadState(states.loadNextState());
+    }
+    
+    private String loadState(AddressBookState newState) {
+        addressBook.resetData(newState.getState());
+        indicateAddressBookChanged();
+        return newState.getCommand();
     }
 
 }

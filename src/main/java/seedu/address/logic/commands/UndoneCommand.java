@@ -88,4 +88,8 @@ public class UndoneCommand extends Command {
 
     }
 
+    @Override
+    public boolean createsNewState() {
+        return true;
+    }
 }

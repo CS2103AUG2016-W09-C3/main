@@ -39,6 +39,10 @@ public class Priority {
         }
     }
     
+    public int getEnumPriority(){
+        return priority.getEnumPriority();
+    }
+    
     /**
      * Validates given priority.
      *

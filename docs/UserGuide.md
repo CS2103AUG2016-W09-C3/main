@@ -13,8 +13,11 @@
    ToDoIt is a task manager that keeps your daily activities in check. 
    It will notify you of the upcoming activities for the day or the week.<br>
    <br>
-   Unlike other task managers, ToDoIt offers a minimalistic task manager where all your tasks can be managed effortlessly in just one line. 
-   It also functions as a calendar, but with a more user-friendly, intuitive interface that allows you to accomplish everything with a minimal number of steps.<br>
+   ToDoIt has a simple command-line based interface which caters to people who are more comfortable with typing instead of navigating complex user interfaces. However that is not to say ToDoIt is not for beginners, the interface is simple and commands are intuitive; beginners can start using it immediately.<br>
+   <br>
+   ToDoIt has a simple command-line based interface which caters to people who are more comfortable with typing instead of navigating complex user interfaces. However that is not to say ToDoIt is not for beginners, the interface is simple and commands are intuitive; beginners can start using it immediately.<br>
+   <br>
+   This user guide aims to describe how you, as a user, can use ToDoIt to accomplish various tasks.<br>
    <br>
    Are you ready? Let's get started!<br>
 
@@ -41,7 +44,7 @@
 
 ## Features
 
-<img src="images/prototype.png" width="600"><br>
+<img src="images/prototype_labelled.png" width="600"><br>
 
 Ensure you've followed the quick start guide to downloading this program. Simply double click the app to run it. As you can see, the prototype User Interface will be shown above.
 
@@ -55,7 +58,7 @@ When the program is started, you will see 4 controls:
 ###Command Format
 * Each command consists of a command word (such as find, or help), followed by additional options. An option is a word or character followed by a forward slash (e.g. a/, ds/ etc.).
 * An option may require additional data, specified after the forward slash (e.g. desc/Go to Work). `UPPER_CASE` words in the format describe the data to input.
-* Options in `SQUARE_BRACKETS` are optional.
+* Options in `SQUARE_BRACKETS`"[]" are optional.
 * Options with `...` after them can be specified multiple times (e.g. `t/Work t/School t/CS2103`).
 * The order of options to specify for each command is fixed.
 
@@ -77,8 +80,8 @@ Format: `add TASK_NAME [h/TIME d/DATE l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/I
 ToDoIt compiles your tasks for the day efficiently with a simple line of text. The `add` command adds your tasks to the to do list, allowing you to view them any time you want.
 
 **Options**
-> 1. `h/` Time: Time in 24 hour HHMM format
-> 2. `d/` Date: Date in DDMMYY format
+> 1. `h/` Time: Time in 24 hour HHMM format e.g. 1400 means 2pm
+> 2. `d/` Date: Date in DDMMYYYY format e.g. 01102016 means 1st October 2016
 > 3. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
 > 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
 > 5. `p/` Priority: Specifies the priority of a task (`high`/`3`/`h`, `med`/`2`/`m`, `low`/`1`/`l`)
@@ -87,7 +90,7 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 > 8. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
 
 **Notes**
-> * A task can be dated (has time, date, length), or floating.<br> 
+> * A task can be dated (has time, date, length), or floating. A floating task is one without any specified date, time and length which can be done at a flexible timing.<br> 
 > * Both time and date must be specified (dated), or both left out (floating). Tasks with only time or date specified will give an error.<br> 
 > * Tasks can have any number of tags (including 0). Simply repeat the t/ option (e.g. `t/work t/school t/CS2103`).
 
@@ -100,23 +103,23 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 
 ### Listing tasks : `list`
 ToDoIt displays your tasks easily with a simple command. The tasks to list can be customized to your liking simply with a few keywords.<br>
-Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [d/]`
+Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 
 **Options**
 > 1. `ds/` Date start: If a start date is specified, program will only display tasks after this date. If the option is used without a specified date, it will use today's date.
 > 2. `de/` Date end: If an end date is specified, program will only display tasks before this date. If the option is used without a specified date, , it will use today's date.
 > 3. `s/` Sort by: Sorts the tasks in the order specified (`date`, `time`, `alphabetical`, `priority`).
-> 4. `d/` Done tasks: If this flag is specified, tasks that are marked done will be shown.
-
+> 4. `df/` Done tasks: If this flag is specified, tasks that are marked done will be shown.
+> 5. `rev/` Reverse: If this flag is specified, tasks will be listed in reverse order after sorting.
 **Notes**
-> * Dates are in DDMMYY format.
-> * Tasks marked done will be hidden. To view done tasks, include the d/ option.
+> * Dates are in DDMMYYYY format.
+> * Tasks marked done will be hidden. To view done tasks, include the df/all or df/done option.
 
 **Example**
 > * You want to view all upcoming tasks ordered by date, so you know what needs to be done. <br>
 >   `list ds/ s/date`
 > * You want to see all the tasks you have completed in the past year, to celebrate what you've done with your life. <br>
->   `list ds/01012016 de/ d/`
+>   `list ds/01012016 de/ df/done`
 
 ---
 
@@ -151,6 +154,7 @@ Format: `delete INDEX`
     The index refers to the index number shown in the most recent listing.<br>
     The index **must be a positive integer** `1`, `2`, `3`, ...
 > * This action is irreversible.
+> * Use find or list command to display tasks and use the order numbering as Index.
 
 **Example**
 > * Having displayed all tasks, you want to remove the one in the second position. 
@@ -179,7 +183,7 @@ Format: `edit INDEX [n/TASK_NAME] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIO
 **Options**
 > 1. `n/` Name: The new name of the task.
 > 1. `h/` Time: Time in 24 hour HHMM format
-> 2. `d/` Date: Date in DDMMYY format
+> 2. `d/` Date: Date in DDMMYYYY format
 > 3. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
 > 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
 > 5. `p/` Priority: Specifies the priority of a task (`high`/`3`/`h`, `med`/`2`/`m`, `low`/`1`/`l`)
@@ -282,7 +286,7 @@ Edit | `edit INDEX [n/TASK_NAME] [h/TIME] [d/DATE] [l/LENGTH] [r/RECUR] [p/PRIOR
 Clear | `clear`
 Delete | `delete INDEX`
 Done | `done INDEX`
-List | `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [d/]`
+List | `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [df/] [rev/]`
 Reschedule | `reschedule INDEX INTERVAL`
 Find | `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]`
 Help | `help`
