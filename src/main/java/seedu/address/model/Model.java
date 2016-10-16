@@ -6,6 +6,8 @@ import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -39,6 +41,15 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope);
+    
+    /** Sorts the filter of the filtered task list to */
+    void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse);
+    
+    /** Updates the filter of the filtered task list to show not done tasks*/
+    void updateFilteredListToShowUndone();
+    
+    /** Updates the filter of the filtered task list to show not done tasks*/
+    void updateFilteredListToShowDone();
 
     /** Loads the previous state. Returns the command attached to the state to be printed. */
     String loadPreviousState() throws StateException;

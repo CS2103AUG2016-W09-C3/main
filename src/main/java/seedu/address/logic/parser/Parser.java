@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.*;
+import seedu.address.model.task.DateParser;
 import seedu.address.model.task.DoneFlag;
 import seedu.address.model.task.Recurrance;
 import seedu.address.commons.util.StringUtil;
@@ -74,7 +75,8 @@ public class Parser {
             return prepareFind(command);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            //return new ListCommand();
+            return prepareList(command);
             
         case EditCommand.COMMAND_WORD:
         	return prepareEdit(arguments);
@@ -100,6 +102,54 @@ public class Parser {
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+    
+    /**
+     * Parses arguments in the context of the list command.
+     * 
+     * @param command
+     * @return
+     */
+    private Command prepareList(ParsedCommand command) {
+        HashMap<String, String> dateRange = new HashMap<String, String>();
+        ArrayList<String> sortByAttribute = new ArrayList<String>();
+        boolean reverse = false;
+        try{
+            /* Deprecated
+             * 
+            if(command.hasParams(ListCommand.START_AND_END_DATE_PARAM)){
+                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
+                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
+            } else if(command.hasParams(ListCommand.START_DATE_PARAM)){
+                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
+            } else if(command.hasParams(ListCommand.END_DATE_PARAM)){
+                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
+            } else {
+                
+            }*/
+            if(command.hasParams(ListCommand.START_DATE_PARAM)){
+                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
+            }
+            if(command.hasParams(ListCommand.END_DATE_PARAM)){
+                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
+            }
+            
+            if(command.hasParams(ListCommand.SORT_PARAM)){
+                //sortByAttribute = new ArrayList<String>(Arrays.asList(command.getParam("s").split(" ")));
+                sortByAttribute = command.getParamList("s");
+            }
+            if(command.hasParams(ListCommand.REVERSE_PARAM)){
+                reverse = true;
+            }
+        } catch (IllegalValueException ive){
+            return new IncorrectCommand(ive.getMessage());
+        }
+        
+        return new ListCommand(
+                dateRange,
+                sortByAttribute,
+                command.getParamOrDefault("df", "Not done"),
+                reverse);
     }
 
     /**
