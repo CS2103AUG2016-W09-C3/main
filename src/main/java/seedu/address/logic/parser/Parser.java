@@ -212,7 +212,7 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareReschedule(ParsedCommand command){
-    	if(!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS)){
+    	if(!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS) || !command.hasValueAtIndex(1)){
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE));
         }
     	try {
