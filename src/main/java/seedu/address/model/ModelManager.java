@@ -47,6 +47,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     public ModelManager(ReadOnlyAddressBook initialData, UserPrefs userPrefs) {
         addressBook = new AddressBook(initialData);
+        addressBook.updateRecurringTasks(initialData);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
     }
 

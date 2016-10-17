@@ -54,5 +54,4 @@ public class DoneFlag {
     public boolean isDone(){
         return done.equals(DONE);
     }
-
 }
