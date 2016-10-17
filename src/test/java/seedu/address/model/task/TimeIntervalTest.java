@@ -12,6 +12,8 @@ public class TimeIntervalTest {
     public void checkValidIntervals() {
         try {
             TimeInterval t;
+            t = new TimeInterval("10m");
+            assertEquals(t.getAsMinutes(), 10);
             t = new TimeInterval("4h");
             assertEquals(t.getAsHours(), 4);
             t = new TimeInterval("40h");
@@ -30,7 +32,6 @@ public class TimeIntervalTest {
         checkInvalidInterval("1hr");
         checkInvalidInterval("2weeks");
         checkInvalidInterval("1 h");
-        checkInvalidInterval("10m");
         checkInvalidInterval("0.5h");
     }
     
