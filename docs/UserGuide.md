@@ -174,7 +174,6 @@ Format: `delete INDEX`
 > * This deletes the task at the specified `INDEX`. <br>
     The index refers to the index number shown in the most recent listing.<br>
     The index **must be a positive integer** `1`, `2`, `3`, ...
-> * This action is irreversible.
 > * Use find or list command to display tasks and use the order numbering as Index.
 
 **Example**
@@ -191,9 +190,6 @@ Format: `delete INDEX`
 ### Clear all tasks : `clear`
 Sometimes you just have to start fresh. Remove everything in your task list with one command.<br>
 Format: `clear`
-
-**Notes**
-> * This action is irreversible.
 
 ---
 
@@ -216,7 +212,6 @@ Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY
     The index refers to the index number shown in the most recent listing.<br>
     The index **must be a positive integer** `1`, `2`, `3`, ... <br>
 > * Replaces the current task data with the specified task data.<br>
-> * This action is irreversible. <br>
 > * When editing a task's date and time, if only the date or the time is specified, then only the date or the time will be edited. For example, including `d/6th Oct` a task on 5th Oct 2pm will change the date to 6th Oct 2pm.<br>
 > * For more information regarding the options, refer to `add` command.
 
