@@ -8,6 +8,8 @@ import java.util.Collections;
 
 import org.junit.Test;
 
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.task.DoneFlag;
 import seedu.address.testutil.TestTask;
 
 public class ListCommandTest extends AddressBookGuiTest{
@@ -50,6 +52,13 @@ public class ListCommandTest extends AddressBookGuiTest{
             commandBox.runCommand(commands.get(i));
         }
         commandBox.runCommand("list df/done");
+        try{
+            finalList[0].setDoneFlag(new DoneFlag(DoneFlag.DONE));
+            finalList[1].setDoneFlag(new DoneFlag(DoneFlag.DONE));
+            finalList[2].setDoneFlag(new DoneFlag(DoneFlag.DONE));
+        } catch (IllegalValueException e){
+            
+        }
         assertTrue(personListPanel.isListMatching(finalList));
     }
     
@@ -115,8 +124,9 @@ public class ListCommandTest extends AddressBookGuiTest{
         commandBox.runCommand(td.meetNathan.getAddCommand());
         commandBox.runCommand(td.cuttingHair.getAddCommand());
         commandBox.runCommand("done 8");
-        String command = "list df/done ds/11-10-2016 de/11-25-2016";
+        String command = "list df/done ds/10-11-2016 de/25-11-2016";
         TestTask[] finalList = new TestTask[1];
+        commandBox.runCommand(command);
         assertTrue(personListPanel.isListMatching(finalList));
     }
 }
