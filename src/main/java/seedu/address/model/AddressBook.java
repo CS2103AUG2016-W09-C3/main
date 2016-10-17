@@ -125,6 +125,11 @@ public class AddressBook implements ReadOnlyAddressBook {
             throw new UniqueTaskList.TaskNotFoundException();
         }
     }
+    
+    // Checks if there are recurringTasks and updates it
+    public void updateRecurringTasks(ReadOnlyAddressBook initialData) {
+        tasks.updateRecurringTasks();
+    }
 
 //// tag-level operations
 

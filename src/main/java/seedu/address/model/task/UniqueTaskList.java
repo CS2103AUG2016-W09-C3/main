@@ -3,7 +3,10 @@ package seedu.address.model.task;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.commons.core.UnmodifiableObservableList;
 import seedu.address.commons.exceptions.DuplicateDataException;
+import seedu.address.commons.exceptions.IllegalValueException;
 
 import java.util.*;
 
@@ -102,6 +105,69 @@ public class UniqueTaskList implements Iterable<Task> {
                 || (other instanceof UniqueTaskList // instanceof handles nulls
                 && this.internalList.equals(
                 ((UniqueTaskList) other).internalList));
+    }
+    
+    public void updateRecurringTasks() {
+        
+        int size = internalList.size();
+        for (int i=0; i<size; i++){
+            Task recurringTask = internalList.get(i);
+            if (!recurringTask.isDated()) {
+                // Not dated, so should not have recurring task
+                // System.out.println(recurringTask + " == NOT DATED!");
+                continue;
+            } else {
+                ReadOnlyDatedTask task = (ReadOnlyDatedTask) recurringTask;
+                //System.out.println(task + " == DATED!");
+                Recurrance recurrence = task.getRecurrance();
+                if (recurrence.toString().equals(recurrence.NO_INTERVAL)) {
+                    // No recurring inputs
+                    // System.out.println("Task has no recurrence input");
+                    continue;
+                } else {
+                    // Set DoneFlag to NOT_DONE if it is DONE
+                    if (task.getDoneFlag().isDone()){
+                        // setDateAndTime and DONE_FLAG to correct task
+                        DoneFlag newFlag;
+                        try {
+                            newFlag = new DoneFlag(DoneFlag.NOT_DONE);
+                            Task toAdd = null;
+                            toAdd = new DatedTask(task.getName(), task.getDateTime(),
+                                    task.getLength(), task.getRecurrance(),
+                                    task.getPriority(), task.getInformation(), 
+                                    newFlag, task.getTags());
+                            System.out.println("Removed: " + internalList.get(i));
+                            internalList.remove(i);
+                            internalList.add(toAdd);
+                        } catch (IllegalValueException e) {
+                            // Should never happen
+                            System.out.println("This should not happen! Please notify a programmer");
+                        }
+                        
+                        //ReadOnlyDatedTask task = (ReadOnlyDatedTask) task;
+                        
+                        /*
+                        String dateTime = task.getDateTime().toString();
+                        String[] split = dateTime.split("\\s+");
+                        String date = split[0];
+                        String time = split[1];
+                        String recurr = recurrence.toString();
+                        
+                        String[] partsRecurr = recurr.split("(?<=\\d)(?=\\D)");
+                        int recurrTime = Integer.parseInt(partsRecurr[0]);
+                        String hrDayWeek = partsRecurr[1];
+                        System.out.println("Date = " + date + " Time = " + time);
+                        System.out.println("Time = " + recurrTime + " && HrDayWeek = " + hrDayWeek);
+                        */
+                        
+                        // Set increment of time&date here
+                        // TODO
+                        
+                    }
+                }
+            }
+        }
+        System.out.println("All recurring tasks successfully updated!");
     }
 
     @Override
