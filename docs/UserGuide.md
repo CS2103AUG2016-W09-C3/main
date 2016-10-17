@@ -62,7 +62,7 @@ When the program is started, you will see 4 controls:
 * Options with `...` after them can be specified multiple times (e.g. `t/Work t/School t/CS2103`).
 * The order of options to specify for each command is fixed.
 
-### Date and time parsing
+### Date Specifications
 
 ToDoIt uses Natty date parser to parse date and time options.
 
@@ -75,7 +75,7 @@ Natty accepts most common formats of dates. Some examples include:
 * 31st of December
 * Dec 31st
 * Next Thursday 2pm
-* Last wednesday 0500h
+* Last Wednesday 0500h
 * Tomorrow 5:30am
 * 3 days from now
 
@@ -100,7 +100,7 @@ Format: `add TASK_NAME [d/DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INF
 ToDoIt compiles your tasks for the day efficiently with a simple line of text. The `add` command adds your tasks to the to do list, allowing you to view them any time you want.
 
 **Options**
-> 1. `d/` Date and time: Specifies the start date and time of a task. Please refer to the Date Specifications section for what formats are accepted.
+> 1. `d/` Date and time: Specifies the start date and time of a task. Please refer to the Date Specifications section for accepted formats.
 > 2. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
 > 3. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
 > 4. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`)
@@ -132,14 +132,14 @@ Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 > 5. `rev/` Reverse: If this flag is specified, tasks will be listed in reverse order after sorting.
 
 **Notes**
-> * For start and end dates, please refer to Natty specifications for what formats are accepted.
-> * Tasks marked done will be hidden. To view done tasks, include the df/all or df/done option.
+> * For start and end dates, please refer to Date Specifications section for what formats are accepted.
+> * Tasks marked done will be hidden by default. To view done tasks, include the df/all or df/done option.
 
 **Example**
 > * You want to view all upcoming tasks ordered by date, so you know what needs to be done. <br>
 >   `list ds/ s/date`
 > * You want to see all the tasks you have completed in the past year, to celebrate what you've done with your life. <br>
->   `list ds/1st Jan 2016 df/done`
+>   `list ds/1st Jan 2016 de/ df/done`
 
 ---
 
@@ -156,7 +156,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 > * Only full words will be matched e.g. `Work` will not match `Workout`<br> 
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).<br>
     e.g. `Stuff` will match `Do stuff`<br>
-> * You can specify more than one search scope (`s/n s/d`).
+> * You can specify more than one search scope (`s/n s/d`). All areas specified will be searched.
 
 **Example**
 > * You remember naming a task `meeting`, and you want to look for it. However, you don't want to bring up unnecessary tasks so you search for task names only. <br>
@@ -178,7 +178,7 @@ Format: `delete INDEX`
 
 **Example**
 > * Having displayed all tasks, you want to remove the one in the second position. 
->   `tasks`<br>
+>   `list`<br>
     `delete 2`<br>
 > * After retrieving all work related tasks, you want to delete the first one. 
 >   `find work`<br> 
@@ -230,13 +230,13 @@ Format: `reschedule INDEX INTERVAL`
 > * This reschedules the task at the specified `INDEX`.  <br>
     The index refers to the index number shown in the most recent listing.<br>
     The index **must be a positive integer** `1`, `2`, `3`, ... <br>
-> * For interval, use a number followed by a time interval (`min`, `hr`, `day`, `week`, `mo`), e.g. `6d`, `1w`
+> * For interval, use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
 > * Negative numbers are not supported. To reschedule to an earlier time, consider using `edit` instead.
  
 **Example**
 > * You need to get some homework done, but you just got back from school and you need a break. Simply find your homework task, then run the following command: <br>
 >   `find homework`<br> 
-    `reschedule 1 1hr`
+    `reschedule 1 1h`
 
 ---
   
@@ -248,7 +248,7 @@ Format: `done INDEX`
 > * This marks task at the specified `INDEX` as done. <br>
     The index refers to the index number shown in the most recent listing.<br>
     The index **must be a positive integer** `1`, `2`, `3`, ...<br>
-> * Marking a task as done will stop it from showing up in any `list` command, unless the `\d` option is used.
+> * Marking a task as done will stop it from showing up in any `list` command, unless the `\df` option is used.
  
 **Example**
 > * You just completed your homework. Simply find your homework task, then run the following command: <br>
@@ -258,7 +258,7 @@ Format: `done INDEX`
 ---
   
 ### Mark a task as done : `undone`
-Thought you were done, but actually there was one little thing that you forgot to do? No worries we've all been there. Use this simple command to mark done tasks as undone. Don't worry, ToDoIt doesn't mock.<br>
+Thought you were done, but actually there was one little thing that you forgot to do? No worries, we've all been there. Use this simple command to mark done tasks as undone. Don't worry, ToDoIt won't mock.<br>
 Format: `undone INDEX`
 
 **Notes**
@@ -267,7 +267,7 @@ Format: `undone INDEX`
     The index **must be a positive integer** `1`, `2`, `3`, ...<br>
  
 **Example**
-> * You accidentally miscount and marked the wrong task as done. Simply revert it with the following command: <br>
+> * You accidentally miscounted and marked the wrong task as done. Simply revert it with the following command: <br>
 >   `done 3 //whoops!`<br> 
     `undone 3`
 
@@ -278,12 +278,12 @@ Made a mistake? No worries, ToDoIt is forgiving. Undo your previous commands wit
 Format: `undo`
 
 **Notes**
-> * The program can only store up to the 10 previous commands.
+> * The program can only undo up to the 10 previous commands.
 
 ---
   
 ### Redo a command : `redo`
-Made a mistake while undoing your mistake? It's a good thing ToDoIt doesn't judge. Redo your `undo` commands with this simple command.<br>
+Made a mistake while undoing your mistake? Well... it's a good thing ToDoIt doesn't judge. Redo your `undo` commands with this simple command.<br>
 Format: `redo`
 
 ---
