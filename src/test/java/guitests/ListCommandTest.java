@@ -125,7 +125,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         commandBox.runCommand(td.cuttingHair.getAddCommand());
         commandBox.runCommand("done 8");
         String command = "list df/done ds/10-11-2016 de/25-11-2016";
-        TestTask[] finalList = new TestTask[1];
+        TestTask[] finalList = new TestTask[0];
         commandBox.runCommand(command);
         assertTrue(personListPanel.isListMatching(finalList));
     }
