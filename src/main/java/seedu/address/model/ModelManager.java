@@ -219,7 +219,7 @@ public class ModelManager extends ComponentManager implements Model {
                     ReadOnlyDatedTask datedTask = (DatedTask) task;
                     LocalDateTime currentTaskDateTime = datedTask.getDateTime().datetime;
                     try {
-                        LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
+                        LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start")).minusDays(1);
                         if(currentTaskDateTime.isBefore(startDateTime)){
                             return false;
                         }
