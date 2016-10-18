@@ -1,8 +1,8 @@
 package seedu.address.commons.events.model;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ReadOnlyAddressBook;
 
+/** Indicates the filepath of the AddressBook has changed*/
 public class FilePathChangedEvent extends BaseEvent {
 
     public final String filePath;
