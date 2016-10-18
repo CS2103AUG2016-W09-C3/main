@@ -4,11 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.exceptions.DuplicateDataException;
+import seedu.address.commons.exceptions.IllegalValueException;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
- * A list of tasks that enforces uniqueness between its elements and does not allow nulls.
+ * A list of tasks that enforces uniqueness between its elements and does not
+ * allow nulls.
  *
  * Supports a minimal set of list operations.
  *
@@ -18,7 +21,8 @@ import java.util.*;
 public class UniqueTaskList implements Iterable<Task> {
 
     /**
-     * Signals that an operation would have violated the 'no duplicates' property of the list.
+     * Signals that an operation would have violated the 'no duplicates'
+     * property of the list.
      */
     public static class DuplicateTaskException extends DuplicateDataException {
         protected DuplicateTaskException() {
@@ -27,20 +31,23 @@ public class UniqueTaskList implements Iterable<Task> {
     }
 
     /**
-     * Signals that an operation targeting a specified task in the list would fail because
-     * there is no such matching task in the list.
+     * Signals that an operation targeting a specified task in the list would
+     * fail because there is no such matching task in the list.
      */
-    public static class TaskNotFoundException extends Exception {}
+    public static class TaskNotFoundException extends Exception {
+    }
 
     private final ObservableList<Task> internalList = FXCollections.observableArrayList();
 
     /**
      * Constructs empty TaskList.
      */
-    public UniqueTaskList() {}
+    public UniqueTaskList() {
+    }
 
     /**
-     * Returns true if the list contains an equivalent task as the given argument.
+     * Returns true if the list contains an equivalent task as the given
+     * argument.
      */
     public boolean contains(ReadOnlyTask toCheck) {
         assert toCheck != null;
@@ -50,7 +57,9 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Adds a task to the list.
      *
-     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
+     * @throws DuplicateTaskException
+     *             if the task to add is a duplicate of an existing task in the
+     *             list.
      */
     public void add(Task toAdd) throws DuplicateTaskException {
         assert toAdd != null;
@@ -59,11 +68,13 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.add(toAdd);
     }
-    
+
     /**
      * Adds a task to the list at the specific index
      *
-     * @throws DuplicateTaskException if the task to add is a duplicate of an existing task in the list.
+     * @throws DuplicateTaskException
+     *             if the task to add is a duplicate of an existing task in the
+     *             list.
      */
     public void addToIndex(Task toAdd, int index) throws DuplicateTaskException {
         assert toAdd != null;
@@ -76,7 +87,8 @@ public class UniqueTaskList implements Iterable<Task> {
     /**
      * Removes the equivalent task from the list.
      *
-     * @throws TaskNotFoundException if no such task could be found in the list.
+     * @throws TaskNotFoundException
+     *             if no such task could be found in the list.
      */
     public boolean remove(ReadOnlyTask toRemove) throws TaskNotFoundException {
         assert toRemove != null;
@@ -100,8 +112,61 @@ public class UniqueTaskList implements Iterable<Task> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueTaskList // instanceof handles nulls
-                && this.internalList.equals(
-                ((UniqueTaskList) other).internalList));
+                        && this.internalList.equals(((UniqueTaskList) other).internalList));
+    }
+
+    public void updateRecurringTasks() {
+
+        int size = internalList.size();
+        int count = 0;
+
+        for (int i = 0; i < size; i++) {
+            Task recurringTask = internalList.get(i);
+            if (!recurringTask.isDated()) {
+                // Not dated, so should not have recurring task
+                // System.out.println(recurringTask + " == NOT DATED!");
+                continue;
+            } else {
+                ReadOnlyDatedTask task = (ReadOnlyDatedTask) recurringTask;
+                // System.out.println(task + " == DATED!");
+                Recurrance recurrence = task.getRecurrance();
+                if (recurrence.toString().equals(recurrence.NO_INTERVAL)) {
+                    // No recurring inputs
+                    // System.out.println("Task has no recurrence input");
+                    continue;
+                } else {
+                    // Set DoneFlag to NOT_DONE if it is DONE
+                    if (task.getDoneFlag().isDone()) {
+                        // setDateAndTime and DONE_FLAG to correct task
+                        DoneFlag newFlag;
+                        try {
+                            newFlag = new DoneFlag(DoneFlag.NOT_DONE);
+
+                            DateTime dateTime = task.getDateTime();
+                            String recurr = recurrence.toString();
+                            
+                            // Set increment of time & date
+                            LocalDateTime editDateTime = DateParser.rescheduleDate(dateTime.datetime, recurr);
+                            
+                            DateTime latestDateTime = new DateTime(editDateTime);
+                            
+                            Task toAdd = null;
+                            toAdd = new DatedTask(task.getName(), latestDateTime, task.getLength(),
+                                    task.getRecurrance(), task.getPriority(), task.getInformation(), newFlag,
+                                    task.getTags());
+                            System.out.println("Removed: " + internalList.get(i));
+                            internalList.remove(i);
+                            internalList.add(i, toAdd);
+                            count++;
+                        } catch (IllegalValueException e) {
+                            // Should never happen
+                            System.out.println("This should not happen! Please notify a programmer");
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println(count + " recurring tasks successfully updated!");
     }
 
     @Override
@@ -111,9 +176,9 @@ public class UniqueTaskList implements Iterable<Task> {
 
     public void sortTasks(ArrayList<String> sortByAttribute, boolean reverse) {
         internalList.sort(new CustomTaskComparator(sortByAttribute));
-        if(reverse){
+        if (reverse) {
             Collections.reverse(internalList);
         }
-        
+
     }
 }
