@@ -184,6 +184,11 @@ public class MainApp extends Application {
         this.stop();
     }
 
+    /*
+     * Handles the change file path event.
+     * Saves the new file path to both storage and config.
+     * If either fail, revert to the old file path.
+     */
 
     @Subscribe
     public void handleAddressBookChangedEvent(FilePathChangedEvent event) {

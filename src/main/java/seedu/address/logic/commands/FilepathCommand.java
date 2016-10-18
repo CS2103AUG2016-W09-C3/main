@@ -4,7 +4,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-
+/**
+ * Changes the filepath of the address book.
+ */
 public class FilepathCommand extends Command {
 
     public static final String COMMAND_WORD = "filepath";
@@ -25,11 +27,6 @@ public class FilepathCommand extends Command {
 
     private final String filePath;
 
-    /**
-     * Convenience constructor using raw values for adding 
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
     public FilepathCommand(String filePath){
         this.filePath = filePath;
     }
