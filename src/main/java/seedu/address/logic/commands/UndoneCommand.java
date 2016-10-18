@@ -71,7 +71,7 @@ public class UndoneCommand extends Command {
                         newFlag, datedTaskToDelete.getTags());
             }
             model.deleteTask(taskToDelete);
-            model.addTask(toAdd);
+            model.addTaskToIndex(toAdd, targetIndex - 1);
         } catch (DuplicateTaskException e) {
             assert false : "Can't add a duplicate task.";
             return new CommandResult(MESSAGE_EXCEPTION);
