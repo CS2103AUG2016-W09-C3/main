@@ -10,7 +10,8 @@ import seedu.address.model.task.ReadOnlyTask;
 public class PersonCard extends UiPart{
 
     private static final String FXML = "PersonListCard.fxml";
-
+    private static final Styler styler = new StyleMappings();
+    
     @FXML
     private HBox cardPane;
     @FXML
@@ -64,8 +65,13 @@ public class PersonCard extends UiPart{
             recurrance.setText("");
         }
         tags.setText(person.tagsString());
+        style();
     }
-
+    
+    public void style(){
+        cardPane.setStyle(styler.getPriorityColour(person.getPriority().toString()));
+    }
+    
     public HBox getLayout() {
         return cardPane;
     }
