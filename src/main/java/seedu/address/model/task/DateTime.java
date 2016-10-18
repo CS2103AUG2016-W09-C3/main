@@ -2,7 +2,6 @@ package seedu.address.model.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 /**
@@ -47,6 +46,10 @@ public class DateTime {
         dateString = dateString.trim();
         datetime = DateParser.editDate(dateString, oldDatetime.datetime);
     }
+    
+    public DateTime (LocalDateTime datetime) {
+        this.datetime = datetime;
+    }
 
 
     @Override
@@ -65,5 +68,5 @@ public class DateTime {
     public int hashCode() {
         return this.datetime.hashCode();
     }
-
+    
 }

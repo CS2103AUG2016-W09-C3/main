@@ -92,13 +92,16 @@ public class Parser {
 
         case UndoneCommand.COMMAND_WORD:
             return prepareUndone(command);
-            
+
+        case RescheduleCommand.COMMAND_WORD:
+        	return prepareReschedule(command);
+
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
 
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
-            
+
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
@@ -253,6 +256,25 @@ public class Parser {
                         DoneFlag.NOT_DONE,
                         getTagsFromArgs(command.getParamList("t"))
                 );
+        } catch (IllegalValueException ive){
+            return new IncorrectCommand(ive.getMessage());
+        }
+    }
+    
+    /**
+     * Parses arguments in the context of the reschedule task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareReschedule(ParsedCommand command){
+    	if(!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS) || !command.hasValueAtIndex(1)){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE));
+        }
+    	try {
+    		return new RescheduleCommand(
+                        Integer.parseInt(command.getValue()),
+                        command.getValue(1));
         } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
         }

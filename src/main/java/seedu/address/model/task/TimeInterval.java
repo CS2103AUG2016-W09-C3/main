@@ -9,7 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 public class TimeInterval {
     public static final String MESSAGE_TIME_INTERVAL_CONSTRAINTS = "Time interval should be a positive number followed by a character e.g 5h, 1d, 2m, 1w. " +
-            "Acceptable time units are h (hour), d (day), w(week)";
+            "Acceptable time units are m (min) h (hour), d (day), w(week)";
 
     //public static final String INTERVAL_VALIDATION_REGEX = "\\d+\\c";
     private static final Pattern INTERVAL_VALIDATION_REGEX = Pattern.compile("(?<length>\\d+)(?<unit>[a-zA-Z])");
@@ -17,6 +17,7 @@ public class TimeInterval {
     static
     {
         INTERVAL_TO_HOURS = new HashMap<String, Integer>();
+        INTERVAL_TO_HOURS.put("m", 0);
         INTERVAL_TO_HOURS.put("h", 1);
         INTERVAL_TO_HOURS.put("d", 24);
         INTERVAL_TO_HOURS.put("w", 7 * 24);
@@ -62,9 +63,17 @@ public class TimeInterval {
         return length * INTERVAL_TO_HOURS.get(unit);
     }
     
+    public int getAsMinutes(){
+    	return length;
+    }
+    
     @Override
     public String toString() {
         return length + unit;
+    }
+    
+    public String getUnit(){
+    	return unit;
     }
 
     @Override

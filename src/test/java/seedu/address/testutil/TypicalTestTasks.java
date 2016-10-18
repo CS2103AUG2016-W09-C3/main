@@ -12,7 +12,7 @@ public class TypicalTestTasks {
     public static TestTask aliceMeeting, breadShopping, lorryMaintainance, danielLunch, fetchElle, 
                            researchPaper, mumLunch, nieceBirthdayMeal, surveyResults;
     
-    public static TestTask lectureToAttend, meetNathan, cuttingHair;
+    public static TestDatedTask lectureToAttend, meetNathan, cuttingHair, dinnerDate, meetingToAttend, csFinalExam;
 
     public TypicalTestTasks() {
         try {
@@ -47,14 +47,23 @@ public class TypicalTestTasks {
                     withInformation("As soon as possible").withPriority("VeryHigh").build();
             
             //Manually added (dated)
-            lectureToAttend = new TaskBuilder().withName("Attend CS2103T lecture").withDoneFlag("Not done").withDateTime("10-10-2016 1400")
+            lectureToAttend = new DatedTaskBuilder().withName("Attend CS2103T lecture").withDoneFlag("Not done").withDateTime("10-10-2016 1400")
                     .withLength("2").withRecurrance("5d").withPriority("low").withInformation("There is webcast if you do not attend").build();
             
-            meetNathan = new TaskBuilder().withName("Meet Nathan for dinner").withDoneFlag("Not done").withDateTime("11-25-2016 1800")
-                    .withLength("3").withPriority("medium").withInformation("Meeting nathan to catch up").build();
+            meetNathan = new DatedTaskBuilder().withName("Meet Nathan for dinner").withDoneFlag("Not done").withDateTime("11-25-2016 1800")
+                    .withLength("3").withRecurrance("3d").withPriority("medium").withInformation("Meeting nathan to catch up").build();
             
-            cuttingHair = new TaskBuilder().withName("Cut hair").withDoneFlag("Not done").withDateTime("11-10-2016 0900")
+            cuttingHair = new DatedTaskBuilder().withName("Cut hair").withDoneFlag("Not done").withDateTime("11-10-2016 0900")
                     .withLength("1").withRecurrance("6d").withPriority("medium").withInformation("Cut hair so your hair will not be long").build();
+            
+            dinnerDate = new DatedTaskBuilder().withName("Dinner date").withDoneFlag("Not done").withDateTime("11-17-2016 1900")
+                    .withLength("2").withRecurrance("5d").withPriority("medium").withInformation("Nice dinner at restuarant").build();
+            
+            meetingToAttend = new DatedTaskBuilder().withName("Meeting with CS2101 tutor").withDoneFlag("Not done").withDateTime("10-30-2016 1000")
+                    .withLength("2").withRecurrance("3d").withPriority("high").withInformation("At COM2").build();
+            
+            csFinalExam = new DatedTaskBuilder().withName("CS2103T Finals").withDoneFlag("Not done").withDateTime("11-28-2016 1800")
+                    .withLength("2").withRecurrance("1d").withPriority("high").withInformation("At MPSH").build();
             
         } catch (IllegalValueException e) {
             e.printStackTrace();
@@ -81,7 +90,7 @@ public class TypicalTestTasks {
         return new TestTask[] {aliceMeeting, breadShopping, lorryMaintainance, 
                                 danielLunch, fetchElle,researchPaper, mumLunch};
     }
-    
+
     public TestTask[] getTypicalDatedTask() {
         return new TestTask[] {lectureToAttend, meetNathan, cuttingHair};
     }
