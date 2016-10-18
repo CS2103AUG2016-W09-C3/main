@@ -47,6 +47,10 @@ public class DateTime {
         dateString = dateString.trim();
         datetime = DateParser.editDate(dateString, oldDatetime.datetime);
     }
+    
+    public DateTime (LocalDateTime datetime) {
+        this.datetime = datetime;
+    }
 
 
     @Override
