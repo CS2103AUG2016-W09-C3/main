@@ -141,7 +141,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ### Model component
 
-<img src="images/model_diagram.jpg" width="800"><br>
+<img src="images/model_diagram.png" width="800"><br>
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
@@ -154,7 +154,7 @@ The `Model`,
 
 ### Storage component
 
-<img src="images/storage_diagram.jpg" width="800"><br>
+<img src="images/storage_diagram.png" width="800"><br>
 
 **API** : [`Storage.java`](../src/main/java/seedu/address/storage/Storage.java)
 
@@ -335,7 +335,7 @@ Use case ends.
 **MSS**
 
 1. User requests to edit task
-2. ToDoIt shows a list of persons
+2. ToDoIt shows a list of tasks
 3. User requests to edit a specific task in the list
 4. ToDoIt edits the task <br>
 Use case ends.
@@ -351,7 +351,50 @@ Use case ends.
 > 3a1. ToDoIt shows an error message <br>
   Use case resumes at step 2
 
-{More to be added}
+#### Use case: Reschedule task**MSS**1. User requests to list tasks
+2. ToDoIt shows a list of tasks
+3. User requests to reschedule a specific task in the list to another specified list
+4. ToDoIt reschedules the task <br>
+Use case ends.
+**Extensions**2a. The list is empty>Use case ends
+3a. The given index is invalid
+>3a1. ToDoIt shows an error message <br> Use case ends
+
+#### Use case: Find task**MSS**1. User requests to find task by keywords and attribute
+2. ToDoIt shows a list of tasks  with specified keywords in specified attribute fields <br>
+Use case ends.
+**Extensions**2a. The list is empty>Use case ends
+3a. There is no matching tasks
+
+>Use case ends
+
+#### Use case: Done**MSS**1. User requests to list tasks
+2. ToDoIt shows a list of tasks
+3. User request to set task as done
+4. ToDoIt sets the specified task as done <br>
+Use case ends.
+**Extensions**2a. The list is empty>Use case ends
+3a. The given index is invalid
+>3a1. ToDoIt shows an error message <br> Use case ends
+
+#### Use case: Undone**MSS**1. User requests to list tasks
+2. ToDoIt shows a list of tasks
+3. User request to set task as undone
+4. ToDoIt sets the specified task as undone <br>
+Use case ends.
+**Extensions**2a. The list is empty>Use case ends
+3a. The given index is invalid
+>3a1. ToDoIt shows an error message <br> Use case ends
+
+#### Use case: List tasks**MSS**1. User requests to list tasks in specified order with specified time frame
+2. ToDoIt shows a list of tasks in time frame in the specified order <br>
+Use case ends.
+**Extensions**
+2a. The list is empty>Use case ends
+3a. The given time frame or specified order is invalid
+
+>ToDoIt shows an error message <br>
+ Use case ends
 
 ## Appendix C : Non Functional Requirements
 
