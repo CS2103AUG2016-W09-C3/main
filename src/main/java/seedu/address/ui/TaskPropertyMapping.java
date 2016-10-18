@@ -17,19 +17,30 @@ public class TaskPropertyMapping implements TaskStyleMapping{
     private final static String PROPERTY_BACKGROUND = "-fx-background-color";
     
     private final static PropertyMap priorityMap;
+    private final static PropertyMap doneMap;
     
     static {
         // Priority : Background color
-        priorityMap = new PropertyMap(PROPERTY_BACKGROUND, "#FFFFFF");
+        priorityMap = new PropertyMap(PROPERTY_BACKGROUND);
         priorityMap.addTo("VERYHIGH", "#FFAAAA");
         priorityMap.addTo("HIGH", "#FFD0D0");
         priorityMap.addTo("MEDIUM", "#FFFFFF");
         priorityMap.addTo("LOW", "#C5F1C5");
         priorityMap.addTo("VERYLOW", "#95E195");
+        
+        // Done : Background color
+        doneMap = new PropertyMap(PROPERTY_BACKGROUND);
+        priorityMap.addTo("Done", "#A9DEE3");
     }
     
+    @Override
     public String getPriorityColour(String priority){
         return priorityMap.get(priority);
+    }
+
+    @Override
+    public String getDoneColour(String done) {
+        return doneMap.get(done);
     }
     
     /*
@@ -39,12 +50,10 @@ public class TaskPropertyMapping implements TaskStyleMapping{
      */
     private static class PropertyMap{
         private final String property;
-        private final String defaultProperty;
         public final static HashMap<String, String> map = new HashMap<String, String>();
         
-        public PropertyMap(String property, String defaultProperty){
+        public PropertyMap(String property){
             this.property = property;
-            this.defaultProperty = defaultProperty;
         }
         
         public void addTo(String key, String value){
@@ -55,7 +64,7 @@ public class TaskPropertyMapping implements TaskStyleMapping{
             if(map.containsKey(key)){
                 return map.get(key);
             }
-            return defaultProperty;
+            return ""; // No property
         }
     }
     
@@ -65,4 +74,5 @@ public class TaskPropertyMapping implements TaskStyleMapping{
     private static String getStyleString(String property, String value){
         return property + ": " + value + ";";
     }
+
 }

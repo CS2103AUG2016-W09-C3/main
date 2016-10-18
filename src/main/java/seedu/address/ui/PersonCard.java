@@ -69,8 +69,12 @@ public class PersonCard extends UiPart{
     }
     
     public void style(){
+        StringBuilder styleString = new StringBuilder();
         // Style based on property
-        cardPane.setStyle(styler.getPriorityColour(person.getPriority().toString()));
+        styleString.append(styler.getPriorityColour(person.getPriority().toString()));
+        // Style based on done
+        styleString.append(styler.getDoneColour(person.getDoneFlag().toString()));
+        cardPane.setStyle(styleString.toString());
     }
     
     public HBox getLayout() {
