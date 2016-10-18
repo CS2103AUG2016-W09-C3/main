@@ -179,7 +179,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.sortTasks(sortByAttribute, reverse);
     }
     
-    public void updateRecurringTasks(ReadOnlyAddressBook initialData) {
+    public void updateRecurringTasks() {
         tasks.updateRecurringTasks();
     }
 }
