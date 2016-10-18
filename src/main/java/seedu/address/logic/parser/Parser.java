@@ -102,6 +102,9 @@ public class Parser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
+        case FilepathCommand.COMMAND_WORD:
+            return new FilepathCommand(arguments);
+            
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
