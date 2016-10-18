@@ -14,7 +14,7 @@ public class FilepathCommand extends Command {
     public static final String[] REQUIRED_PARAMS = {};
     public static final String[] POSSIBLE_PARAMS = {};
     
-    private static final Pattern FILEPATH_REGEX = Pattern.compile(
+    public static final Pattern FILEPATH_REGEX = Pattern.compile(
             "^([a-zA-Z]\\:\\\\)?[^\\\\:\\*\\|\\\"<>\\?\\n]+(\\\\[^\\\\:\\*\\|\\\"<>\\?\\n]+)*\\.xml$");
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the filepath. "
             + "Parameter: FILEPATH"
