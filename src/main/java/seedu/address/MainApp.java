@@ -8,6 +8,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.core.Version;
+import seedu.address.commons.events.model.FilePathChangedEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.StringUtil;
@@ -121,6 +122,7 @@ public class MainApp extends Application {
         } catch (IOException e) {
             logger.warning("Failed to save config file : " + StringUtil.getDetails(e));
         }
+        initializedConfig.setConfigFilePath(configFilePathUsed);
         return initializedConfig;
     }
 
@@ -182,6 +184,28 @@ public class MainApp extends Application {
         this.stop();
     }
 
+    /*
+     * Handles the change file path event.
+     * Saves the new file path to both storage and config.
+     * If either fail, revert to the old file path.
+     */
+
+    @Subscribe
+    public void handleAddressBookChangedEvent(FilePathChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Config data changed, saving to file"));
+        String oldFilePath = config.getAddressBookFilePath();
+        try {
+            storage.setAddressBookFilePath(event.filePath);
+            storage.saveAddressBook(model.getAddressBook());
+            config.setAddressBookFilePath(event.filePath);
+            ConfigUtil.saveConfig(config, config.getConfigFilePath());
+        } catch (IOException e) {
+            storage.setAddressBookFilePath(oldFilePath);
+            config.setAddressBookFilePath(oldFilePath);
+            logger.warning("Failed to save config file, reverting to old : " + StringUtil.getDetails(e));
+        }
+    }
+    
     public static void main(String[] args) {
         launch(args);
     }

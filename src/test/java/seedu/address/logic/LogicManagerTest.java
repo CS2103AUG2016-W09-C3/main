@@ -215,7 +215,7 @@ public class LogicManagerTest {
         // prepare address book state
         helper.addToModel(model, 2);
 
-        assertCommandBehavior("list",
+        assertCommandBehavior("list df/all",
                 ListCommand.MESSAGE_SUCCESS,
                 expectedAB,
                 expectedList);

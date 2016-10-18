@@ -170,4 +170,10 @@ public class EditCommand extends Command {
 			tagList = new UniqueTagList(tagSet);
 		}
 	}
+	
+
+    @Override
+    public boolean createsNewState() {
+        return true;
+    }
 }

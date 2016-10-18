@@ -213,7 +213,16 @@ public class CommandParser implements ParsedCommand{
     public boolean hasValue() {
         return values.size() > 0;
     }
-
+    
+    /**
+     * Check if command has value at the particular index
+     * Useful for checking if the command is valid.
+     */
+    @Override
+    public boolean hasValueAtIndex(int index){
+    	return values.size() > index;
+    }
+    
     @Override
     public boolean hasUnnecessaryParams(String[] possibleParams) {
         for(String param : params.keySet()){

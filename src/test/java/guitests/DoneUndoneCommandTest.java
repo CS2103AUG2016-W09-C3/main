@@ -28,6 +28,11 @@ public class DoneUndoneCommandTest extends AddressBookGuiTest {
         int targetIndex = 1;
         assertDoneSuccess(targetIndex, currentList);
         currentList = doTask(targetIndex, currentList, DoneFlag.DONE);
+        
+        //mark the last task in list as done
+        targetIndex = currentList.length;
+        assertDoneSuccess(targetIndex, currentList);
+        currentList = doTask(targetIndex, currentList, DoneFlag.DONE);
 
         //check already done
         targetIndex = currentList.length;
@@ -108,7 +113,8 @@ public class DoneUndoneCommandTest extends AddressBookGuiTest {
         } catch (IllegalValueException e) {
             assert(false);
         }
-        expectedRemainder = TestUtil.addPersonsToList(expectedRemainder, taskToDo);
+        //expectedRemainder = TestUtil.addPersonsToList(expectedRemainder, taskToDo);
+        expectedRemainder = TestUtil.addPersonsToListIndex(expectedRemainder, taskToDo, targetIndexOneIndexed - 1);
         return expectedRemainder;
     }
   

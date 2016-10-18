@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import seedu.address.logic.commands.*;
+import seedu.address.model.task.DateParser;
 import seedu.address.model.task.DoneFlag;
 import seedu.address.model.task.Recurrance;
 import seedu.address.commons.util.StringUtil;
@@ -67,13 +68,15 @@ public class Parser {
             return prepareDelete(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            return new ClearCommand();
+            //return new ClearCommand();
+            return prepareClear(command);
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(command);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            //return new ListCommand();
+            return prepareList(command);
             
         case EditCommand.COMMAND_WORD:
         	return prepareEdit(arguments);
@@ -89,9 +92,70 @@ public class Parser {
 
         case UndoneCommand.COMMAND_WORD:
             return prepareUndone(command);
+
+        case RescheduleCommand.COMMAND_WORD:
+        	return prepareReschedule(command);
+
+        case UndoCommand.COMMAND_WORD:
+            return new UndoCommand();
+
+        case RedoCommand.COMMAND_WORD:
+            return new RedoCommand();
+
+        case FilepathCommand.COMMAND_WORD:
+            return new FilepathCommand(arguments);
+            
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
         }
+    }
+    
+    /**
+     * Parses arguments in the context of the list command.
+     * 
+     * @param command
+     * @return
+     */
+    private Command prepareList(ParsedCommand command) {
+        HashMap<String, String> dateRange = new HashMap<String, String>();
+        ArrayList<String> sortByAttribute = new ArrayList<String>();
+        boolean reverse = false;
+        try{
+            /* Deprecated
+             * 
+            if(command.hasParams(ListCommand.START_AND_END_DATE_PARAM)){
+                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
+                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
+            } else if(command.hasParams(ListCommand.START_DATE_PARAM)){
+                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
+            } else if(command.hasParams(ListCommand.END_DATE_PARAM)){
+                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
+            } else {
+                
+            }*/
+            if(command.hasParams(ListCommand.START_DATE_PARAM)){
+                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
+            }
+            if(command.hasParams(ListCommand.END_DATE_PARAM)){
+                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
+            }
+            
+            if(command.hasParams(ListCommand.SORT_PARAM)){
+                //sortByAttribute = new ArrayList<String>(Arrays.asList(command.getParam("s").split(" ")));
+                sortByAttribute = command.getParamList("s");
+            }
+            if(command.hasParams(ListCommand.REVERSE_PARAM)){
+                reverse = true;
+            }
+        } catch (IllegalValueException ive){
+            return new IncorrectCommand(ive.getMessage());
+        }
+        
+        return new ListCommand(
+                dateRange,
+                sortByAttribute,
+                command.getParamOrDefault("df", "Not done"),
+                reverse);
     }
 
     /**
@@ -161,6 +225,19 @@ public class Parser {
     }
     
     /**
+     * Checks if clear command has any other users input behind clear command word.
+     * 
+     * @param command
+     * @return clear command
+     */
+    private Command prepareClear(ParsedCommand command){
+        if(command.getAllValues().size() > 0){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearCommand.MESSAGE_USAGE));
+        }
+        return new ClearCommand();
+    }
+    
+    /**
      * Parses arguments in the context of the edit task command.
      *
      * @param args full command args string
@@ -184,6 +261,25 @@ public class Parser {
                         DoneFlag.NOT_DONE,
                         getTagsFromArgs(command.getParamList("t"))
                 );
+        } catch (IllegalValueException ive){
+            return new IncorrectCommand(ive.getMessage());
+        }
+    }
+    
+    /**
+     * Parses arguments in the context of the reschedule task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareReschedule(ParsedCommand command){
+    	if(!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS) || !command.hasValueAtIndex(1)){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE));
+        }
+    	try {
+    		return new RescheduleCommand(
+                        Integer.parseInt(command.getValue()),
+                        command.getValue(1));
         } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
         }

@@ -70,7 +70,8 @@ public class DoneCommand extends Command {
                         newFlag, datedTaskToDelete.getTags());
             }
             model.deleteTask(taskToDelete);
-            model.addTask(toAdd);
+            model.addTaskToIndex(toAdd, targetIndex - 1);
+            //model.addTask(toAdd);
         } catch (DuplicateTaskException e) {
             assert false : "Can't add a duplicate task.";
             return new CommandResult(MESSAGE_EXCEPTION);
@@ -87,4 +88,9 @@ public class DoneCommand extends Command {
 
     }
 
+
+    @Override
+    public boolean createsNewState() {
+        return true;
+    }
 }

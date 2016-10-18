@@ -1,10 +1,13 @@
 package seedu.address.model;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.StateException;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,6 +30,9 @@ public interface Model {
     /** Adds the given task at the specific index*/
     void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException;
 
+    /** Saves the current state onto stack*/
+    void saveState(String commandText);
+    
     /** Returns the filtered task list as an {@code UnmodifiableObservableList<ReadOnlyTask>} */
     UnmodifiableObservableList<ReadOnlyTask> getFilteredTaskList();
 
@@ -35,5 +41,22 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope);
+    
+    /** Sorts the filter of the filtered task list to */
+    void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse);
+    
+    /** Updates the filter of the filtered task list to show not done tasks*/
+    void updateFilteredListToShowUndone();
+    
+    /** Updates the filter of the filtered task list to show not done tasks*/
+    void updateFilteredListToShowDone();
+
+    /** Loads the previous state. Returns the command attached to the state to be printed. */
+    String loadPreviousState() throws StateException;
+
+    /** Loads the next state. Returns the command attached to the state to be printed. */
+    String loadNextState() throws StateException;
+
+    void changeFilePath(String filePath);
 
 }

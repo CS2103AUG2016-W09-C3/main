@@ -41,21 +41,6 @@ public class TaskBuilder {
         this.task.setDoneFlag(new DoneFlag(doneFlag));
         return this;
     }
-    
-    public TaskBuilder withLength(String length) throws IllegalValueException {
-        this.task.setLength(new Length(length));
-        return this;
-    }
-    
-    public TaskBuilder withDateTime(String date, String time) throws IllegalValueException {
-        this.task.setDateTime(new DateTime(date, time));
-        return this;
-    }
-    
-    public TaskBuilder withRecurrance(String recurrance) throws IllegalValueException {
-        this.task.setRecurrance(new Recurrance(recurrance));
-        return this;
-    }
 
     public TestTask build() {
         return this.task;

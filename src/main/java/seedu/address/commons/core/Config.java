@@ -16,6 +16,7 @@ public class Config {
     private String userPrefsFilePath = "preferences.json";
     private String addressBookFilePath = "data/addressbook.xml";
     private String addressBookName = "MyAddressBook";
+    private String configFilePath = "config.json";
 
 
     public Config() {
@@ -61,6 +62,13 @@ public class Config {
         this.addressBookName = addressBookName;
     }
 
+    public String getConfigFilePath() {
+        return configFilePath;
+    }
+
+    public void setConfigFilePath(String configFilePath) {
+        this.configFilePath = configFilePath;
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -95,5 +103,6 @@ public class Config {
         sb.append("\nAddressBook name : " + addressBookName);
         return sb.toString();
     }
+
 
 }

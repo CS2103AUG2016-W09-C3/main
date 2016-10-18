@@ -174,4 +174,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
+
+    public void sortTasks(ArrayList<String> sortByAttribute, boolean reverse) {
+        tasks.sortTasks(sortByAttribute, reverse);
+    }
+    
+    public void updateRecurringTasks() {
+        tasks.updateRecurringTasks();
+    }
 }

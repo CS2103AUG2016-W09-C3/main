@@ -2,7 +2,6 @@ package seedu.address.model.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 /**
@@ -59,6 +58,10 @@ public class DateTime {
     private boolean isValidDate(String date) {
         return date.matches(DATE_VALIDATION_REGEX);
     }
+    
+    public DateTime (LocalDateTime datetime) {
+        this.datetime = datetime;
+    }
 
     /**
      * Returns true if a given string is a valid task time field.
@@ -87,5 +90,5 @@ public class DateTime {
     public int hashCode() {
         return this.datetime.hashCode();
     }
-
+    
 }

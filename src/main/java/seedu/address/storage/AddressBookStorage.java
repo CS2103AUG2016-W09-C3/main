@@ -17,6 +17,11 @@ public interface AddressBookStorage {
     String getAddressBookFilePath();
 
     /**
+     * Sets the file path of the data file.
+     */
+    void setAddressBookFilePath(String filePath);
+    
+    /**
      * Returns AddressBook data as a {@link ReadOnlyAddressBook}.
      *   Returns {@code Optional.empty()} if storage file is not found.
      * @throws DataConversionException if the data in storage is not in the expected format.
