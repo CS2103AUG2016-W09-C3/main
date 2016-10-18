@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+	package seedu.address.logic.commands;
 
 import java.time.LocalDateTime;
 
@@ -68,7 +68,7 @@ public class RescheduleCommand extends Command{
         DateTime toBeEdited = taskToReschedule.getDateTime();
         try {
 			LocalDateTime editedLocalDateTime = DateParser.rescheduleDate(toBeEdited.datetime, interval);
-			toBeEdited.setDateTime(editedLocalDateTime);
+			toBeEdited = new DateTime(editedLocalDateTime);
 		} catch (IllegalValueException e) {
 			return new CommandResult(TimeInterval.MESSAGE_TIME_INTERVAL_CONSTRAINTS);
 		}
