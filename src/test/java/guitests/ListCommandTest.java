@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.task.DoneFlag;
+import seedu.address.testutil.TestDatedTask;
 import seedu.address.testutil.TestTask;
 
 public class ListCommandTest extends AddressBookGuiTest{
@@ -26,9 +27,6 @@ public class ListCommandTest extends AddressBookGuiTest{
     public void list_allTask_reverse(){
         TestTask[] initialList = td.getTypicalPersons();
         String command = "list df/all rev/";
-/*        ArrayList<TestTask> allTaskArrayListReversed = new ArrayList<TestTask>(Arrays.asList(allTaskList));
-        Collections.reverse(allTaskArrayListReversed);
-        TestTask[] allTaskListReversed = (TestTask[]) allTaskArrayListReversed.toArray();*/
         TestTask[] finalList = new TestTask[initialList.length];
         for(int i= 0; i < initialList.length; i++){
             finalList[initialList.length - 1 - i] = initialList[i];
@@ -118,14 +116,34 @@ public class ListCommandTest extends AddressBookGuiTest{
     }
     
     @Test
-    public void list_doneTask_date(){
-        TestTask[] initialList = td.getTypicalPersons();
+    public void list_doneTask_daterange_none(){
+        //TestDatedTask[] initialList = (TestDatedTask[]) td.getTypicalPersons();
         commandBox.runCommand(td.lectureToAttend.getAddCommand());
         commandBox.runCommand(td.meetNathan.getAddCommand());
         commandBox.runCommand(td.cuttingHair.getAddCommand());
         commandBox.runCommand("done 8");
         String command = "list df/done ds/10-11-2016 de/25-11-2016";
-        TestTask[] finalList = new TestTask[0];
+        TestDatedTask[] finalList = new TestDatedTask[0];
+        commandBox.runCommand(command);
+        assertTrue(personListPanel.isListMatching(finalList));
+    }
+    
+    @Test
+    public void list_doneTask_daterange_one(){
+        //TestDatedTask[] initialList = (TestDatedTask[]) td.getTypicalPersons();
+        commandBox.runCommand(td.lectureToAttend.getAddCommand());
+        commandBox.runCommand(td.meetNathan.getAddCommand());
+        commandBox.runCommand(td.cuttingHair.getAddCommand());
+        commandBox.runCommand("done 8");
+        //boundary value test
+        String command = "list df/done ds/10-10-2016 de/25-11-2016";
+        TestDatedTask[] finalList = new TestDatedTask[1];
+        finalList[0] = td.lectureToAttend;
+        try {
+            finalList[0].setDoneFlag(new DoneFlag(DoneFlag.DONE));
+        } catch (IllegalValueException e) {
+            e.printStackTrace();
+        }
         commandBox.runCommand(command);
         assertTrue(personListPanel.isListMatching(finalList));
     }
