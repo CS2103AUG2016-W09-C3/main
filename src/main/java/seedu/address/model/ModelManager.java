@@ -14,6 +14,7 @@ import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.address.model.task.CustomTaskComparator;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.FilePathChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.exceptions.StateException;
 import seedu.address.commons.core.ComponentManager;
@@ -81,6 +82,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(addressBook));
     }
 
+
+    /** Raises an event to indicate the config has changed */
+    @Override
+    public void changeFilePath(String filePath) {
+        raise(new FilePathChangedEvent(filePath));
+    }
+    
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
         addressBook.removeTask(target);

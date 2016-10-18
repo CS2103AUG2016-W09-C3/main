@@ -57,4 +57,6 @@ public interface Model {
     /** Loads the next state. Returns the command attached to the state to be printed. */
     String loadNextState() throws StateException;
 
+    void changeFilePath(String filePath);
+
 }

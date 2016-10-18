@@ -50,6 +50,11 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ AddressBook methods ==============================
 
     @Override
+    public void setAddressBookFilePath(String filePath) {
+        addressBookStorage.setAddressBookFilePath(filePath);
+    }
+    
+    @Override
     public String getAddressBookFilePath() {
         return addressBookStorage.getAddressBookFilePath();
     }
@@ -87,5 +92,6 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
+
 
 }
