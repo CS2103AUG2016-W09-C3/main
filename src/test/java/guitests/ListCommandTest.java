@@ -117,7 +117,6 @@ public class ListCommandTest extends AddressBookGuiTest{
     
     @Test
     public void list_doneTask_daterange_none(){
-        //TestDatedTask[] initialList = (TestDatedTask[]) td.getTypicalPersons();
         commandBox.runCommand(td.lectureToAttend.getAddCommand());
         commandBox.runCommand(td.meetNathan.getAddCommand());
         commandBox.runCommand(td.cuttingHair.getAddCommand());
@@ -130,7 +129,6 @@ public class ListCommandTest extends AddressBookGuiTest{
     
     @Test
     public void list_doneTask_daterange_one(){
-        //TestDatedTask[] initialList = (TestDatedTask[]) td.getTypicalPersons();
         commandBox.runCommand(td.lectureToAttend.getAddCommand());
         commandBox.runCommand(td.meetNathan.getAddCommand());
         commandBox.runCommand(td.cuttingHair.getAddCommand());
