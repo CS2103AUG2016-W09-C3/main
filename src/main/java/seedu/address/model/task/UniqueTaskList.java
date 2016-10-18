@@ -124,15 +124,12 @@ public class UniqueTaskList implements Iterable<Task> {
             Task recurringTask = internalList.get(i);
             if (!recurringTask.isDated()) {
                 // Not dated, so should not have recurring task
-                // System.out.println(recurringTask + " == NOT DATED!");
                 continue;
             } else {
                 ReadOnlyDatedTask task = (ReadOnlyDatedTask) recurringTask;
-                // System.out.println(task + " == DATED!");
                 Recurrance recurrence = task.getRecurrance();
                 if (recurrence.toString().equals(recurrence.NO_INTERVAL)) {
                     // No recurring inputs
-                    // System.out.println("Task has no recurrence input");
                     continue;
                 } else {
                     // Set DoneFlag to NOT_DONE if it is DONE
@@ -166,7 +163,7 @@ public class UniqueTaskList implements Iterable<Task> {
                 }
             }
         }
-        System.out.println(count + " recurring tasks successfully updated!");
+        // System.out.println(count + " recurring tasks successfully updated!");
     }
 
     @Override
