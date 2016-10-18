@@ -2,11 +2,24 @@ package seedu.address.ui;
 
 import java.util.HashMap;
 
-public class StyleMappings implements Styler{
+/*
+ * Class for converting task properties to CSS style strings which
+ * are used to style UI elements.
+ * 
+ * Task properties must be a string.
+ * 
+ * Styles are usually strings in the form:
+ * style-name : value;
+ * which can be easily applied by using setStyle();
+ */
+
+public class TaskPropertyMapping implements TaskStyleMapping{
     private final static String PROPERTY_BACKGROUND = "-fx-background-color";
     
     private final static PropertyMap priorityMap;
+    
     static {
+        // Priority : Background color
         priorityMap = new PropertyMap(PROPERTY_BACKGROUND, "#FFFFFF");
         priorityMap.addTo("VERYHIGH", "#FFAAAA");
         priorityMap.addTo("HIGH", "#FFD0D0");
@@ -19,6 +32,11 @@ public class StyleMappings implements Styler{
         return priorityMap.get(priority);
     }
     
+    /*
+     * Wrapper class for a hash map which maps Task Property : CSS Style String.
+     * Makes adding property constants easier.
+     * Also, returns a default value if the requested property does not exist.
+     */
     private static class PropertyMap{
         private final String property;
         private final String defaultProperty;
@@ -40,7 +58,10 @@ public class StyleMappings implements Styler{
             return defaultProperty;
         }
     }
-
+    
+    /*
+     * Converts a CSS property and value into the CSS style string format.
+     */
     private static String getStyleString(String property, String value){
         return property + ": " + value + ";";
     }
