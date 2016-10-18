@@ -51,7 +51,7 @@ public class TypicalTestTasks {
                     .withLength("2").withRecurrance("5d").withPriority("low").withInformation("There is webcast if you do not attend").build();
             
             meetNathan = new DatedTaskBuilder().withName("Meet Nathan for dinner").withDoneFlag("Not done").withDateTime("11-25-2016 1800")
-                    .withLength("3").withPriority("medium").withInformation("Meeting nathan to catch up").build();
+                    .withLength("3").withRecurrance("3d").withPriority("medium").withInformation("Meeting nathan to catch up").build();
             
             cuttingHair = new DatedTaskBuilder().withName("Cut hair").withDoneFlag("Not done").withDateTime("11-10-2016 0900")
                     .withLength("1").withRecurrance("6d").withPriority("medium").withInformation("Cut hair so your hair will not be long").build();
