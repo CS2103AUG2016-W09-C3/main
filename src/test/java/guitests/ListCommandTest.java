@@ -121,7 +121,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         commandBox.runCommand(td.meetNathan.getAddCommand());
         commandBox.runCommand(td.cuttingHair.getAddCommand());
         commandBox.runCommand("done 8");
-        String command = "list df/done ds/10-11-2016 de/25-11-2016";
+        String command = "list df/done ds/11-10-2016 de/11-25-2016";
         TestDatedTask[] finalList = new TestDatedTask[0];
         commandBox.runCommand(command);
         assertTrue(personListPanel.isListMatching(finalList));
@@ -134,7 +134,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         commandBox.runCommand(td.cuttingHair.getAddCommand());
         commandBox.runCommand("done 8");
         //boundary value test
-        String command = "list df/done ds/10-10-2016 de/25-11-2016";
+        String command = "list df/done ds/10-10-2016 de/11-25-2016";
         TestDatedTask[] finalList = new TestDatedTask[1];
         finalList[0] = td.lectureToAttend;
         try {
