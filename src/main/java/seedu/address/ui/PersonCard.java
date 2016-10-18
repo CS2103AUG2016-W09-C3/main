@@ -10,7 +10,8 @@ import seedu.address.model.task.ReadOnlyTask;
 public class PersonCard extends UiPart{
 
     private static final String FXML = "PersonListCard.fxml";
-
+    private static final TaskStyleMapping styler = new TaskPropertyMapping();
+    
     @FXML
     private HBox cardPane;
     @FXML
@@ -64,8 +65,18 @@ public class PersonCard extends UiPart{
             recurrance.setText("");
         }
         tags.setText(person.tagsString());
+        style();
     }
-
+    
+    public void style(){
+        StringBuilder styleString = new StringBuilder();
+        // Style based on property
+        styleString.append(styler.getPriorityColour(person.getPriority().toString()));
+        // Style based on done
+        styleString.append(styler.getDoneColour(person.getDoneFlag().toString()));
+        cardPane.setStyle(styleString.toString());
+    }
+    
     public HBox getLayout() {
         return cardPane;
     }
