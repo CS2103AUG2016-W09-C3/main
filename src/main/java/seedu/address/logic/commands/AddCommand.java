@@ -24,7 +24,7 @@ public class AddCommand extends Command {
             + "Parameters: NAME [d/DATE,TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...\n"
             + "Parameters should not contain '/'s."
             + "Example: " + COMMAND_WORD
-            + " Meet John d/2pm next thurs l/2 r/1d p/medium i/Meeting for lunch";
+            + " Meet John d/2pm next thurs l/2h r/1d p/medium i/Meeting for lunch";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
