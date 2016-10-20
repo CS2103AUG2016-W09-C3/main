@@ -30,7 +30,7 @@ public class AddCommand extends Command {
             + "Parameters should not contain '/'s."
             + "Parameters should not contain both length and end date\n"
             + "Example: " + COMMAND_WORD
-            + " Meet John d/2pm next thurs l/2 r/1d p/medium i/Meeting for lunch";
+            + " Meet John d/2pm next thurs l/2h r/1d p/medium i/Meeting for lunch";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";

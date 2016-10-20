@@ -54,17 +54,9 @@ public class DateParser {
      */
     public static LocalDateTime rescheduleDate(LocalDateTime rescheduleDatetime, String rescheduleInterval) throws IllegalValueException{
     	TimeInterval timeInterval = new TimeInterval(rescheduleInterval);
-    	//Minutes 
-    	if(timeInterval.getUnit().equals("m")){
-    		int minutes = timeInterval.getAsMinutes();
-    		rescheduleDatetime = rescheduleDatetime.plusMinutes(minutes);
-    	}
-    	//Hours
-    	else{
-    		int hours = timeInterval.getAsHours();
-    		rescheduleDatetime = rescheduleDatetime.plusHours(hours);
-    	}
-    	
+        int minutes = timeInterval.getAsMinutes();
+        rescheduleDatetime = rescheduleDatetime.plusMinutes(minutes);
+
     	return rescheduleDatetime;
     }
     
