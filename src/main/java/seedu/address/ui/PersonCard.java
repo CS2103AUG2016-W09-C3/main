@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -60,9 +61,11 @@ public class PersonCard extends UiPart{
             length.setText(datedTask.getLength().toString());
             recurrance.setText(datedTask.getRecurrance().toString());
         }else{
-            datetime.setText("");
-            length.setText("");
-            recurrance.setText("");
+            VBox sub = ((VBox) (datetime.getParent()));
+            sub.getChildren().remove(datetime);
+            sub.getChildren().remove(recurrance);
+            sub.getChildren().remove(length);
+            
         }
         tags.setText(person.tagsString());
         style();
