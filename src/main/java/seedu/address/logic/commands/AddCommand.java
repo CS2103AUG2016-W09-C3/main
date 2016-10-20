@@ -23,7 +23,7 @@ public class AddCommand extends Command {
     
     public static final String[] DATED_TASK_PARAMS = {"d"};
     
-    public static final String NO_LENGTH = "0";
+    public static final String NO_LENGTH = "0h";
     
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
             + "Parameters: NAME [d/DATE,TIME l/LENGTH de/END_DATE,END_TIME] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...\n"
