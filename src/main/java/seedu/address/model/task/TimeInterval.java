@@ -13,14 +13,14 @@ public class TimeInterval {
 
     //public static final String INTERVAL_VALIDATION_REGEX = "\\d+\\c";
     private static final Pattern INTERVAL_VALIDATION_REGEX = Pattern.compile("(?<length>\\d+)(?<unit>[a-zA-Z])");
-    public static HashMap<String, Integer> INTERVAL_TO_HOURS = new HashMap<>();
+    private static HashMap<String, Integer> INTERVAL_TO_MINUTES = new HashMap<>();
     static
     {
-        INTERVAL_TO_HOURS = new HashMap<String, Integer>();
-        INTERVAL_TO_HOURS.put("m", 0);
-        INTERVAL_TO_HOURS.put("h", 1);
-        INTERVAL_TO_HOURS.put("d", 24);
-        INTERVAL_TO_HOURS.put("w", 7 * 24);
+        INTERVAL_TO_MINUTES = new HashMap<String, Integer>();
+        INTERVAL_TO_MINUTES.put("m", 1);
+        INTERVAL_TO_MINUTES.put("h", 60);
+        INTERVAL_TO_MINUTES.put("d", 24 * 60);
+        INTERVAL_TO_MINUTES.put("w", 7 * 24 * 60);
     }
     
     public final String intervalString;
@@ -50,7 +50,7 @@ public class TimeInterval {
     }
     
     private boolean isValidInterval(int length, String unit){
-        if(!INTERVAL_TO_HOURS.containsKey(unit)){
+        if(!INTERVAL_TO_MINUTES.containsKey(unit)){
             return false;
         }
         if(length == 0){
@@ -59,12 +59,8 @@ public class TimeInterval {
         return true;
     }
     
-    public int getAsHours(){
-        return length * INTERVAL_TO_HOURS.get(unit);
-    }
-    
     public int getAsMinutes(){
-    	return length;
+        return length * INTERVAL_TO_MINUTES.get(unit);
     }
     
     @Override
