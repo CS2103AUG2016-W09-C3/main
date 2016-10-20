@@ -15,13 +15,13 @@ public class TimeIntervalTest {
             t = new TimeInterval("10m");
             assertEquals(t.getAsMinutes(), 10);
             t = new TimeInterval("4h");
-            assertEquals(t.getAsHours(), 4);
+            assertEquals(t.getAsMinutes(), 4 * 60);
             t = new TimeInterval("40h");
-            assertEquals(t.getAsHours(), 40);
+            assertEquals(t.getAsMinutes(), 40 * 60);
             t = new TimeInterval("2d");
-            assertEquals(t.getAsHours(), 2 * 24);
+            assertEquals(t.getAsMinutes(), 2 * 24 * 60);
             t = new TimeInterval("3w");
-            assertEquals(t.getAsHours(), 3 * 7 * 24);
+            assertEquals(t.getAsMinutes(), 3 * 7 * 24 * 60);
         } catch (IllegalValueException e) {
             fail("Could not parse time interval");
         }
