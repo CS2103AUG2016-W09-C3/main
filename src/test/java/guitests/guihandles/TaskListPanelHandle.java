@@ -92,7 +92,7 @@ public class TaskListPanelHandle extends GuiHandle {
             final int scrollTo = i + startPosition;
             guiRobot.interact(() -> getListView().scrollTo(scrollTo));
             guiRobot.sleep(200);
-            if (!TestUtil.compareCardAndPerson(getPersonCardHandle(startPosition + i), tasks[i])) {
+            if (!TestUtil.compareCardAndTask(getPersonCardHandle(startPosition + i), tasks[i])) {
                 return false;
             }
         }
@@ -100,7 +100,7 @@ public class TaskListPanelHandle extends GuiHandle {
     }
 
 
-    public PersonCardHandle navigateToTask(String name) {
+    public TaskCardHandle navigateToTask(String name) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<ReadOnlyTask> task = getListView().getItems().stream().filter(p -> p.getName().fullName.equals(name)).findAny();
         if (!task.isPresent()) {
@@ -113,7 +113,7 @@ public class TaskListPanelHandle extends GuiHandle {
     /**
      * Navigates the listview to display and select the task.
      */
-    public PersonCardHandle navigateToTask(ReadOnlyTask task) {
+    public TaskCardHandle navigateToTask(ReadOnlyTask task) {
         int index = getTaskIndex(task);
 
         guiRobot.interact(() -> {
@@ -146,17 +146,17 @@ public class TaskListPanelHandle extends GuiHandle {
         return getListView().getItems().get(index);
     }
 
-    public PersonCardHandle getPersonCardHandle(int index) {
+    public TaskCardHandle getPersonCardHandle(int index) {
         return getPersonCardHandle(new Task(getListView().getItems().get(index)));
     }
 
-    public PersonCardHandle getPersonCardHandle(ReadOnlyTask person) {
+    public TaskCardHandle getPersonCardHandle(ReadOnlyTask person) {
         Set<Node> nodes = getAllCardNodes();
         Optional<Node> personCardNode = nodes.stream()
-                .filter(n -> new PersonCardHandle(guiRobot, primaryStage, n).isSamePerson(person))
+                .filter(n -> new TaskCardHandle(guiRobot, primaryStage, n).isSameTask(person))
                 .findFirst();
         if (personCardNode.isPresent()) {
-            return new PersonCardHandle(guiRobot, primaryStage, personCardNode.get());
+            return new TaskCardHandle(guiRobot, primaryStage, personCardNode.get());
         } else {
             return null;
         }

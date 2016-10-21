@@ -86,7 +86,7 @@ public class TypicalTestTasks {
         }
     }
 
-    public TestTask[] getTypicalPersons() {
+    public TestTask[] getTypicalTasks() {
         return new TestTask[] {aliceMeeting, breadShopping, lorryMaintainance, 
                                 danielLunch, fetchElle,researchPaper, mumLunch};
     }

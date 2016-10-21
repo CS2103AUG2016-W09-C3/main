@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.StatesManager;
@@ -16,20 +16,20 @@ public class UndoRedoCommandTest extends AddressBookGuiTest {
     @Test
     public void addUndoRedo() {
         //add one person
-        TestTask[] initialList = td.getTypicalPersons();
+        TestTask[] initialList = td.getTypicalTasks();
         TestTask personToAdd = td.nieceBirthdayMeal;
-        TestTask[] finalList = TestUtil.addPersonsToList(initialList, personToAdd);
+        TestTask[] finalList = TestUtil.addTasksToList(initialList, personToAdd);
         assertUndoRedo(initialList, finalList, new String[] {personToAdd.getAddCommand()});
     }
 
     @Test
     public void addUndoRedoMultiple() {
         //add one person
-        TestTask[] initialList = td.getTypicalPersons();
+        TestTask[] initialList = td.getTypicalTasks();
         TestTask personToAdd = td.nieceBirthdayMeal;
         TestTask personToAdd2 = td.cuttingHair;
         TestTask personToAdd3 = td.lectureToAttend;
-        TestTask[] finalList = TestUtil.addPersonsToList(initialList, personToAdd, personToAdd2, personToAdd3);
+        TestTask[] finalList = TestUtil.addTasksToList(initialList, personToAdd, personToAdd2, personToAdd3);
         assertUndoRedo(initialList, finalList, 
                 new String[] {personToAdd.getAddCommand(), personToAdd2.getAddCommand(), personToAdd3.getAddCommand()});
     }
@@ -37,7 +37,7 @@ public class UndoRedoCommandTest extends AddressBookGuiTest {
     @Test
     public void clearUndoRedo() {
         //add one person
-        TestTask[] initialList = td.getTypicalPersons();
+        TestTask[] initialList = td.getTypicalTasks();
         TestTask[] finalList = {};
         assertUndoRedo(initialList, finalList, new String[] {"clear"});
     }

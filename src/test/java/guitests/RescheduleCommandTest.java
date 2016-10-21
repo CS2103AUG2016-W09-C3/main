@@ -23,11 +23,11 @@ public class RescheduleCommandTest extends AddressBookGuiTest {
 		commandBox.runCommand(td.dinnerDate.getAddCommand());
         commandBox.runCommand(td.csFinalExam.getAddCommand());
         commandBox.runCommand(td.meetingToAttend.getAddCommand());
-		TestTask[] initialList = td.getTypicalPersons();
+		TestTask[] initialList = td.getTypicalTasks();
         TestTask datedTaskToAdd = td.dinnerDate;
         TestTask datedTaskToAdd2 = td.csFinalExam;
         TestTask datedTaskToAdd3 = td.meetingToAttend;
-        TestTask[] finalList = TestUtil.addPersonsToList(initialList, datedTaskToAdd, datedTaskToAdd2, datedTaskToAdd3);
+        TestTask[] finalList = TestUtil.addTasksToList(initialList, datedTaskToAdd, datedTaskToAdd2, datedTaskToAdd3);
         String command = "reschedule 10 30m";
         assertRescheduleSuccess(command, finalList);
 	}
@@ -37,11 +37,11 @@ public class RescheduleCommandTest extends AddressBookGuiTest {
 		commandBox.runCommand(td.dinnerDate.getAddCommand());
         commandBox.runCommand(td.csFinalExam.getAddCommand());
         commandBox.runCommand(td.meetingToAttend.getAddCommand());
-		TestTask[] initialList = td.getTypicalPersons();
+		TestTask[] initialList = td.getTypicalTasks();
         TestTask datedTaskToAdd = td.dinnerDate;
         TestTask datedTaskToAdd2 = td.csFinalExam;
         TestTask datedTaskToAdd3 = td.meetingToAttend;
-        TestTask[] finalList = TestUtil.addPersonsToList(initialList, datedTaskToAdd, datedTaskToAdd2, datedTaskToAdd3);
+        TestTask[] finalList = TestUtil.addTasksToList(initialList, datedTaskToAdd, datedTaskToAdd2, datedTaskToAdd3);
         String command = "reschedule 9 2d";
         assertRescheduleSuccess(command, finalList);
 	}
@@ -51,11 +51,11 @@ public class RescheduleCommandTest extends AddressBookGuiTest {
 		commandBox.runCommand(td.dinnerDate.getAddCommand());
         commandBox.runCommand(td.csFinalExam.getAddCommand());
         commandBox.runCommand(td.meetingToAttend.getAddCommand());
-		TestTask[] initialList = td.getTypicalPersons();
+		TestTask[] initialList = td.getTypicalTasks();
         TestTask datedTaskToAdd = td.dinnerDate;
         TestTask datedTaskToAdd2 = td.csFinalExam;
         TestTask datedTaskToAdd3 = td.meetingToAttend;
-        TestTask[] finalList = TestUtil.addPersonsToList(initialList, datedTaskToAdd, datedTaskToAdd2, datedTaskToAdd3);
+        TestTask[] finalList = TestUtil.addTasksToList(initialList, datedTaskToAdd, datedTaskToAdd2, datedTaskToAdd3);
         String command = "reschedule 8 2w";
         assertRescheduleSuccess(command, finalList);
 	}
@@ -108,7 +108,7 @@ public class RescheduleCommandTest extends AddressBookGuiTest {
 		try {
 			System.out.println(interval);
 			TestTask target = finalList[targetIndex - 1];
-			TestTask[] remainderList = TestUtil.removePersonFromList(finalList, targetIndex);
+			TestTask[] remainderList = TestUtil.removeTaskFromList(finalList, targetIndex);
 			
 			LocalDateTime rescheduleDatetime = ((TestDatedTask) target).getDateTime().datetime;
 			System.out.println(rescheduleDatetime.toString());
@@ -116,7 +116,7 @@ public class RescheduleCommandTest extends AddressBookGuiTest {
 			System.out.println(newDateTime.toString());
 			((TestDatedTask) target).setDateTimeString(newDateTime.toString());
 			
-			remainderList = TestUtil.addPersonsToListIndex(remainderList, target, targetIndex - 1);
+			remainderList = TestUtil.addTaskToListIndex(remainderList, target, targetIndex - 1);
 		} catch (IllegalValueException e) {
 			assert(false);
 		}
