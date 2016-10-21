@@ -265,7 +265,7 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
-## Commands
+## Model
 
 In this section, the usage and design of certain features of model will be discussed.
 
@@ -302,11 +302,14 @@ object with the following methods:
 
 ToDoIt allows the user to undo and redo commands with `undo` and `redo`.
 
+#### AddressBookState
 
 This is accomplished by storing different states of the addressbook, using `AddressBookState`. `AddressBookState` is a class that is used solely to wrap two variables:
 
 * `state`: An `AddressBook` object that stores the state of the to do list.
 * `command`: A string that stores the command that is used to get to this state. This is solely used for displaying purposes.
+
+#### StatesManager
 
 States are stored and managed using the StatesManager class, which offers the following API:
 
@@ -318,7 +321,10 @@ The `ModelManager` has a `StatesManager` object, which handles the state of the 
 
 #### State handling
 
-The states of the to do list are stored in an ArrayList `states`. To keep track of the current state, the `StatesManager` has an integer, `currentState`, which always points to the current state of the to do list as displayed to the user. It stores the index of the current state in `states`.
+The StateManager has two variables to keep track of states:
+
+* `states`: An arraylist of `AddressBook` state which stores the state.
+* `currentState`: An integer to keep track of the current state (the one displayed to the user). It stores the index of the current state in `states`.
 
 The `states` array and the `currentState` always function such that `states[currentState - 1]`, `states[currentState]`, `states[currentState + 1]` always store the previous, current and next state respectively, assuming the states exist.
 
@@ -326,12 +332,14 @@ When the program is started, the ModelManager saves the init state using `saveSt
 
 #### Adding a state
 
-When commands are run, the `Parser` checks that the command changes the data of the to do list using `createsNewState()`. If data has the potential to change, a new `AddressBookState` is created and saved onto the stack using `saveState`. The `AddressBookState` stores the new state of the `AddressBook` object, and the command string that was used, and the `currentState` is incremented, so it now points to the new `AddressBookState`.
+When commands are run, a new `AddressBookState` is created and saved onto the stack using `saveState`. The `AddressBookState` stores the new state of the `AddressBook` object, and the command string that was used.
+
+The `currentState` is incremented, so it now points to the new `AddressBookState`.
 
 This is how the `StateManager` might look like after 3 commands, and the contents of the `states` list:
 
-> `add Meeting`
-> `done 5`
+> `add Meeting` <br>
+> `done 5` <br>
 > `edit 1 i/Due today`
 
 <img src="images/state1.png" width="400"><br>
@@ -359,7 +367,9 @@ Index|AddressBookState|Command
 
 #### Undoing
 
-When the `undo` command is called, the to do list has to reset the to do list to the state directly before the `currentState`. The `ModelManager` calls `loadPreviousState()`, and the StatesManager handles this by decrementing the `currentState`, and returning the state corresponding to the `currentState`.
+When the `undo` command is called, the state before the `currentState` is loaded.
+
+The `ModelManager` calls `loadPreviousState()`, and the StatesManager handles this by decrementing the `currentState`, and returning the state corresponding to the `currentState`.
 
 > `undo`
 
