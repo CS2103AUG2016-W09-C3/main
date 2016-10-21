@@ -174,6 +174,7 @@ public class Parser {
                         command.getValuesAsString(),
                         command.getParamOrDefault("d", "-1"),
                         command.getParamOrDefault("l", "-1"),
+                        command.getParamOrDefault("de", "-1"),
                         command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
                         command.getParamOrDefault("p", "medium"),
                         command.getParamOrDefault("i", ""),

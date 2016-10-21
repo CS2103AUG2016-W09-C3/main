@@ -53,9 +53,11 @@ public class TimeInterval {
         if(!INTERVAL_TO_MINUTES.containsKey(unit)){
             return false;
         }
+        /*
         if(length == 0){
             return false;
         }
+        */
         return true;
     }
     
