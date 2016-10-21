@@ -17,6 +17,7 @@ public class DeleteCommandTest extends AddressBookGuiTest {
         int targetIndex = 1;
         assertDeleteSuccess(targetIndex, currentList);
 
+
         //delete the last in the list
         currentList = TestUtil.removePersonFromList(currentList, targetIndex);
         targetIndex = currentList.length;
