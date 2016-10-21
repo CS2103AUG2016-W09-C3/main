@@ -270,7 +270,6 @@ b. Require developers to download those libraries manually (this creates extra w
 In this section, the usage and design of certain features of model will be discussed.
 
 ### The Command Parser
-----------------------
 
 <img src="images/commandparser.png" width="800"><br>
 
@@ -300,7 +299,6 @@ object with the following methods:
 * `hasUnnecessaryParams(String[] params)`: Takes in an array of regex strings and returns true if every param in the command matches a regex in the provided array. Used mainly to check if the user has provided any unnecessary parameters.
 
 ### Undo/Redo command
----------------------
 
 ToDoIt allows the user to undo and redo commands with `undo` and `redo`.
 
@@ -336,7 +334,7 @@ This is how the `StateManager` might look like after 3 commands, and the content
 > `done 5`
 > `edit 1 i/Due today`
 
-<img src="images/state1.png" width="800"><br>
+<img src="images/state1.png" width="400"><br>
 
 Index|AddressBookState|Command
 -----|----------------|-------
@@ -349,7 +347,7 @@ If a 4th command is run, this is what it would look like:
 
 > `clear`
 
-<img src="images/state2.png" width="800"><br>
+<img src="images/state2.png" width="400"><br>
 
 Index|AddressBookState|Command
 -----|----------------|-------
@@ -365,7 +363,7 @@ When the `undo` command is called, the to do list has to reset the to do list to
 
 > `undo`
 
-<img src="images/state3.png" width="800"><br>
+<img src="images/state3.png" width="400"><br>
 
 Index|AddressBookState|Command
 -----|----------------|-------
@@ -385,7 +383,7 @@ The `redo` command is similar to `undo`, except `loadNextState()` is called inst
 
 > `redo`
 
-<img src="images/state2.png" width="800"><br>
+<img src="images/state2.png" width="400"><br>
 
 Index|AddressBookState|Command
 -----|----------------|-------
@@ -403,7 +401,7 @@ It's important to note that `loadPreviousState()` returns the previous state's (
 
 When a new command is run, and a state is saved, but the `currentState` points to a state in the middle of the list, all future states have to be overwritten. 
 
-<img src="images/state3.png" width="800"><br>
+<img src="images/state3.png" width="400"><br>
 
 Index|AddressBookState|Command
 -----|----------------|-------
@@ -415,7 +413,7 @@ Index|AddressBookState|Command
 
 > `done 7`
 
-<img src="images/state4.png" width="800"><br>
+<img src="images/state4.png" width="400"><br>
 
 Index|AddressBookState|Command
 -----|----------------|-------
