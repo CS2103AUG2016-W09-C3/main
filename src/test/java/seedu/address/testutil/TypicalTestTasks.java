@@ -88,11 +88,11 @@ public class TypicalTestTasks {
 
     public TestTask[] getTypicalPersons() {
         return new TestTask[] {aliceMeeting, breadShopping, lorryMaintainance, 
-                                danielLunch, fetchElle,researchPaper, mumLunch};
+                                danielLunch, fetchElle, researchPaper, mumLunch};
     }
 
     public TestTask[] getTypicalDatedTask() {
-        return new TestTask[] {lectureToAttend, meetNathan, cuttingHair};
+        return new TestTask[] {lectureToAttend, meetNathan, cuttingHair, dinnerDate, meetingToAttend, csFinalExam};
     }
 
     public AddressBook getTypicalAddressBook(){

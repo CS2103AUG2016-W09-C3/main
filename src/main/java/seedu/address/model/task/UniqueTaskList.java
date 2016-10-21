@@ -118,7 +118,6 @@ public class UniqueTaskList implements Iterable<Task> {
     public void updateRecurringTasks() {
 
         int size = internalList.size();
-        int count = 0;
 
         for (int i = 0; i < size; i++) {
             Task recurringTask = internalList.get(i);
@@ -151,10 +150,9 @@ public class UniqueTaskList implements Iterable<Task> {
                             toAdd = new DatedTask(task.getName(), latestDateTime, task.getLength(),
                                     task.getRecurrance(), task.getPriority(), task.getInformation(), newFlag,
                                     task.getTags());
-                            System.out.println("Removed: " + internalList.get(i));
+                            // System.out.println("Removed: " + internalList.get(i));
                             internalList.remove(i);
                             internalList.add(i, toAdd);
-                            count++;
                         } catch (IllegalValueException e) {
                             // Should never happen
                             System.out.println("This should not happen! Please notify a programmer");
