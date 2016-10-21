@@ -265,6 +265,39 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
+## Commands
+
+In this section, the usage and design of certain features of model will be discussed.
+
+### The Command Parser
+
+<img src="images/commandparser.png" width="800"><br>
+
+The command parser is a custom utility used for parsing command syntax easily. It can be used to easily 
+customize command behaviour for any new commands to be added.
+
+Each command in ToDoIt consists of a command word, followed by a number of values (represented by any string),
+followed by a number of params (represented by two strings separated by a slash i.e. `paramName/param value`).
+
+The CommandParser class parses a command string (Note: **without** the command word) and returns a ParsedCommand
+object with the following methods:
+
+#### Value related:
+* `getValue()`: Gets the first value in the list of values
+* `getValueAtIndex(int index)`: Gets the value in the list of values corresponding to the index
+* `getAllValues()`: Gets all values as an arraylist of strings
+* `getValuesAsString()`: Gets all values as a string (space concatented)
+* `hasValue()`: Returns true if the parsed command has at least one value
+* `hasValueAtIndex(int index)`: Returns true if the parsed command has a value at the specified index
+
+#### Param related:
+* `getParam(String paramName)`: Retrieves the first param (Note: A param can appear multiple times) from the list corresponding to the param name
+* `getParamOrDefault(String paramName, String defaultParam)`: Tries to retrieve the first param from the list corresponding to the param name. Returns defaultParam if the param does not exist
+* `getAllParams()`: Gets all param names as an arraylist of strings
+* `getParamList(String paramName)`: Retrieves all params from the list corresponding to the param name as an arraylist. Returns an empty list if there are no params corrsponding to the param name
+* `hasParams(String[] params)`: Returns true if the parsed command contains every param in the array
+* `hasUnnecessaryParams(String[] params)`: Takes in an array of regex strings and returns true if every param in the command matches a regex in the provided array. Used mainly to check if the user has provided any unnecessary parameters.
+
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
