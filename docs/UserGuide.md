@@ -337,8 +337,3 @@ Undo | `undo`
 Redo | `redo`
 Help | `help`
 Exit | `exit`
-
-## Acknowledgements
-
-This program uses Natty Date Parser under the MIT license.
-http://natty.joestelmach.com/

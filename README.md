@@ -30,5 +30,8 @@ Are you ready? Let's start now!<br>
 * Some parts of this sample application were inspired by the excellent 
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*. 
 
+* This program uses [Natty Date Parser](http://natty.joestelmach.com/) under the MIT license.
+
+* This application is based off [AddressBook Level 4](https://github.com/se-edu/addressbook-level4)'s sample code.
 
 #### Licence : [MIT](LICENSE)
