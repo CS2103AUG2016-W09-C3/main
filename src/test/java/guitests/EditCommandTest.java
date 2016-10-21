@@ -57,15 +57,20 @@ public class EditCommandTest extends AddressBookGuiTest {
         String command = "edit 3 i/This is also an information p/high";
         assertEditSuccess(command, listToEdit);
     }
-/*   
+   
     @Test
-    public void edit_allNonDatedTask(){
+    public void edit_datedTask(){
         // Check if program is able to edit all tasks in sequence
         TestTask[] listToEdit = td.getTypicalPersons();
-        String command = "edit 1 n/Meet Isabel p/High r/6d d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
-        assertEditSuccess(command, listToEdit);
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        commandBox.runCommand(td.csFinalExam.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        TestTask datedTaskToAdd2 = td.csFinalExam;
+        String command = "edit 8 n/Meet Isabel p/High r/6d d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
+        TestTask[] finalList = TestUtil.addPersonsToList(listToEdit, datedTaskToAdd, datedTaskToAdd2);
+        assertEditSuccess(command, finalList);
     }
-*/  
+  
     /**
      * Runs the edit command to edit the task at specified index and confirms the task is successfully edited
      * @param editCommand: To edit the first person in the list, 1 should be given as the target index. (i.e. Edit 1 ... )
