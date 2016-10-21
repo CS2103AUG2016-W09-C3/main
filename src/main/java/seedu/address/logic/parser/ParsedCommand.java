@@ -72,7 +72,11 @@ public interface ParsedCommand {
      * Useful for checking if the command is valid.
      */
     boolean hasValueAtIndex(int index);
-
+    
+    /**
+     * Check if command has value at the particular index
+     * Useful for checking if the command is valid.
+     */
     boolean hasUnnecessaryParams(String[] possibleParams);
     
 }
