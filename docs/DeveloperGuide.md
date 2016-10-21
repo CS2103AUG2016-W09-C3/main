@@ -270,6 +270,7 @@ b. Require developers to download those libraries manually (this creates extra w
 In this section, the usage and design of certain features of model will be discussed.
 
 ### The Command Parser
+----------------------
 
 <img src="images/commandparser.png" width="800"><br>
 
@@ -297,6 +298,138 @@ object with the following methods:
 * `getParamList(String paramName)`: Retrieves all params from the list corresponding to the param name as an arraylist. Returns an empty list if there are no params corrsponding to the param name
 * `hasParams(String[] params)`: Returns true if the parsed command contains every param in the array
 * `hasUnnecessaryParams(String[] params)`: Takes in an array of regex strings and returns true if every param in the command matches a regex in the provided array. Used mainly to check if the user has provided any unnecessary parameters.
+
+### Undo/Redo command
+---------------------
+
+ToDoIt allows the user to undo and redo commands with `undo` and `redo`.
+
+
+This is accomplished by storing different states of the addressbook, using `AddressBookState`. `AddressBookState` is a class that is used solely to wrap two variables:
+
+* `state`: An `AddressBook` object that stores the state of the to do list.
+* `command`: A string that stores the command that is used to get to this state. This is solely used for displaying purposes.
+
+States are stored and managed using the StatesManager class, which offers the following API:
+
+* `saveState(AddressBookState newState)`: Saves the provided `AdressBookState`
+* `loadPreviousState()`: Loads and returns the previous `AdressBookState`. Throws an error if there isn't one
+* `loadNextState()`: Loads and returns the next `AdressBookState`. Throws an error if there isn't one
+
+The `ModelManager` has a `StatesManager` object, which handles the state of the to do list as it changes. It calls either `loadPreviousState()` or `loadNextState()` and refreshes the to do list with the state's data.
+
+#### State handling
+
+The states of the to do list are stored in an ArrayList `states`. To keep track of the current state, the `StatesManager` has an integer, `currentState`, which always points to the current state of the to do list as displayed to the user. It stores the index of the current state in `states`.
+
+The `states` array and the `currentState` always function such that `states[currentState - 1]`, `states[currentState]`, `states[currentState + 1]` always store the previous, current and next state respectively, assuming the states exist.
+
+When the program is started, the ModelManager saves the init state using `saveState` into the array list and the `currentState` is set to 0.
+
+#### Adding a state
+
+When commands are run, the `Parser` checks that the command changes the data of the to do list using `createsNewState()`. If data has the potential to change, a new `AddressBookState` is created and saved onto the stack using `saveState`. The `AddressBookState` stores the new state of the `AddressBook` object, and the command string that was used, and the `currentState` is incremented, so it now points to the new `AddressBookState`.
+
+This is how the `StateManager` might look like after 3 commands, and the contents of the `states` list:
+
+> `add Meeting`
+> `done 5`
+> `edit 1 i/Due today`
+
+<img src="images/state1.png" width="800"><br>
+
+Index|AddressBookState|Command
+-----|----------------|-------
+0|[AddressBook 0]|`Initial State`
+1|[AddressBook 1]|`add Meeting`
+2|[AddressBook 2]|`done 5`
+**3**|**[AddressBook 3]**|**`edit 1 i/Due today`**
+
+If a 4th command is run, this is what it would look like:
+
+> `clear`
+
+<img src="images/state2.png" width="800"><br>
+
+Index|AddressBookState|Command
+-----|----------------|-------
+0|[AddressBook 0]|`Initial State`
+1|[AddressBook 1]|`add Meeting`
+2|[AddressBook 2]|`done 5`
+3|[AddressBook 3]|`edit 1 i/Due today`
+**4**|**[AddressBook 4]**|**`clear`**
+
+#### Undoing
+
+When the `undo` command is called, the to do list has to reset the to do list to the state directly before the `currentState`. The `ModelManager` calls `loadPreviousState()`, and the StatesManager handles this by decrementing the `currentState`, and returning the state corresponding to the `currentState`.
+
+> `undo`
+
+<img src="images/state3.png" width="800"><br>
+
+Index|AddressBookState|Command
+-----|----------------|-------
+0|[AddressBook 0]|`Initial State`
+1|[AddressBook 1]|`add Meeting`
+2|[AddressBook 2]|`done 5`
+**3**|**[AddressBook 3]**|**`edit 1 i/Due today`**
+4|[AddressBook 4]|`clear`
+
+`return AddressBookState([AddressBook 3], "clear")`
+
+Note that only the `currentState` is updated.
+
+#### Redoing
+
+The `redo` command is similar to `undo`, except `loadNextState()` is called instead. The StatesManager increments the `currentState`, and returns the state corresponding to the `currentState`.
+
+> `redo`
+
+<img src="images/state2.png" width="800"><br>
+
+Index|AddressBookState|Command
+-----|----------------|-------
+0|[AddressBook 0]|`Initial State`
+1|[AddressBook 1]|`add Meeting`
+2|[AddressBook 2]|`done 5`
+3|[AddressBook 3]|`edit 1 i/Due today`
+**4**|**[AddressBook 4]**|**`clear`**
+
+`return AddressBookState([AddressBook 4], "clear")`
+
+It's important to note that `loadPreviousState()` returns the previous state's (3) state, but the current state's (4) command, while `loadNextState()` returns the current state's (4) command and data. This is needed for displaying the command result message.
+
+#### Overwriting
+
+When a new command is run, and a state is saved, but the `currentState` points to a state in the middle of the list, all future states have to be overwritten. 
+
+<img src="images/state3.png" width="800"><br>
+
+Index|AddressBookState|Command
+-----|----------------|-------
+0|[AddressBook 0]|`Initial State`
+1|[AddressBook 1]|`add Meeting`
+2|[AddressBook 2]|`done 5`
+**3**|**[AddressBook 3]**|**`edit 1 i/Due today`**
+4|[AddressBook 4]|`clear`
+
+> `done 7`
+
+<img src="images/state4.png" width="800"><br>
+
+Index|AddressBookState|Command
+-----|----------------|-------
+0|[AddressBook 0]|`Initial State`
+1|[AddressBook 1]|`add Meeting`
+2|[AddressBook 2]|`done 5`
+3|[AddressBook 3]|`edit 1 i/Due today`
+**4**|**[AddressBook 5]**|**`done 7`**
+
+#### Other concerns
+
+Since a copy of the to do list is saved to a state after each command, the amount of memory stored can be quite big. As such, a hard cap of 10 states (`MAX_STATES`) is imposed.
+
+A better solution might be to have custom undos for each command storing only the minimal amount of data needed to undo it, or to use a shallow copied list + copy-on-write system, but due to limited time constraints, we have decided to go with our current solution.
 
 ## Appendix A : User Stories
 
