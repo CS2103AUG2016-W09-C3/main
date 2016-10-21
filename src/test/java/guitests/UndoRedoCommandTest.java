@@ -64,19 +64,19 @@ public class UndoRedoCommandTest extends AddressBookGuiTest {
     }
     
     private void assertUndoRedo(TestTask[] initialList, TestTask[] finalList, String... commands) {
-        assertTrue(personListPanel.isListMatching(initialList));
+        assertTrue(taskListPanel.isListMatching(initialList));
         for(int i = 0; i < commands.length; i++){
             commandBox.runCommand(commands[i]);
         }
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
         for(int i = 0; i < commands.length; i++){
             commandBox.runCommand("undo");
         }
-        assertTrue(personListPanel.isListMatching(initialList));
+        assertTrue(taskListPanel.isListMatching(initialList));
         for(int i = 0; i < commands.length; i++){
             commandBox.runCommand("redo");
         }
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
 
 }

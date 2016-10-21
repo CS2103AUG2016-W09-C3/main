@@ -100,7 +100,7 @@ public class RescheduleCommandTest extends AddressBookGuiTest {
         String interval = split[2];
 		TestTask[] expected = rescheduleTask(targetIndex, interval, finalList);
 		commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(expected));
+        assertTrue(taskListPanel.isListMatching(expected));
         assertResultMessage(String.format(RescheduleCommand.MESSAGE_RESCHEDULE_TASK_SUCCESS, expected[targetIndex -1]));
 	}
 	

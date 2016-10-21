@@ -20,7 +20,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         TestTask[] allTaskList = td.getTypicalPersons();
         String command = "list df/all";
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(allTaskList));
+        assertTrue(taskListPanel.isListMatching(allTaskList));
     }
     
     @Test
@@ -32,7 +32,7 @@ public class ListCommandTest extends AddressBookGuiTest{
             finalList[initialList.length - 1 - i] = initialList[i];
         }
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
@@ -57,7 +57,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         } catch (IllegalValueException e){
             
         }
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
@@ -76,7 +76,7 @@ public class ListCommandTest extends AddressBookGuiTest{
             commandBox.runCommand(assistingCommands.get(i));
         }
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
@@ -92,7 +92,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         finalList[6] = initialList[6];
         String command = "list df/all s/name";
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
@@ -112,7 +112,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         finalList[2] = initialList[3];
         finalList[3] = initialList[4];
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
@@ -124,7 +124,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         String command = "list df/done ds/11-10-2016 de/11-25-2016";
         TestDatedTask[] finalList = new TestDatedTask[0];
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
@@ -143,6 +143,6 @@ public class ListCommandTest extends AddressBookGuiTest{
             e.printStackTrace();
         }
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
 }

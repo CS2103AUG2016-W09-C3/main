@@ -150,7 +150,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(command);
         
         // Confirm the list now contains all previous tasks except the deleted task
-        assertTrue(personListPanel.isListMatching(expected));
+        assertTrue(taskListPanel.isListMatching(expected));
         
         // Confirm the result message is correctly edited
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, target));

@@ -72,7 +72,7 @@ public class DoneUndoneCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("done " + targetIndexOneIndexed);
 
         //confirm the list now contains all previous persons except the deleted person
-        assertTrue(personListPanel.isListMatching(expectedRemainder));
+        assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_SUCCESS, DoneFlag.DONE, taskToDo.getName()));
@@ -94,7 +94,7 @@ public class DoneUndoneCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("undone " + targetIndexOneIndexed);
 
         //confirm the list now contains all previous persons except the deleted person
-        assertTrue(personListPanel.isListMatching(expectedRemainder));
+        assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_SUCCESS, DoneFlag.NOT_DONE, taskToDo.getName()));
