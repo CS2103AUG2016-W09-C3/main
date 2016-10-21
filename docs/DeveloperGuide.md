@@ -462,8 +462,6 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | input my tasks in different languages | 
 `*` | user | customise the command words for the program | use the program in the way I want to use it
 
-{More to be added}
-
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `ToDoIt` and the **Actor** is the `user`, unless specified otherwise)
@@ -579,15 +577,11 @@ Use case ends.
 5. Should come with automated unit tests
 6. Should favor DOS style commands over Unix-style commands
 
-{More to be added}
-
 ## Appendix D : Glossary
 
 ##### Mainstream OS
 
 > Windows, Linux, Unix, OS-X
-
-{More to be added}
 
 ## Appendix E : Product Survey
 
