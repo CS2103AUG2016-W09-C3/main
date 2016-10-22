@@ -17,27 +17,27 @@ public class ListCommandTest extends AddressBookGuiTest{
     
     @Test
     public void list_allTask(){
-        TestTask[] allTaskList = td.getTypicalPersons();
+        TestTask[] allTaskList = td.getTypicalTasks();
         String command = "list df/all";
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(allTaskList));
+        assertTrue(taskListPanel.isListMatching(allTaskList));
     }
     
     @Test
     public void list_allTask_reverse(){
-        TestTask[] initialList = td.getTypicalPersons();
+        TestTask[] initialList = td.getTypicalTasks();
         String command = "list df/all rev/";
         TestTask[] finalList = new TestTask[initialList.length];
         for(int i= 0; i < initialList.length; i++){
             finalList[initialList.length - 1 - i] = initialList[i];
         }
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
     public void list_doneTask(){
-        TestTask[] initialList = td.getTypicalPersons();
+        TestTask[] initialList = td.getTypicalTasks();
         ArrayList<String> commands = new ArrayList<String>();
         commands.add("done 3");
         commands.add("done 2");
@@ -57,12 +57,12 @@ public class ListCommandTest extends AddressBookGuiTest{
         } catch (IllegalValueException e){
             
         }
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
     public void list_undoneTask(){
-        TestTask[] initialList = td.getTypicalPersons();
+        TestTask[] initialList = td.getTypicalTasks();
         ArrayList<String> assistingCommands = new ArrayList<String>();
         assistingCommands.add("done 3");
         assistingCommands.add("done 2");
@@ -76,12 +76,12 @@ public class ListCommandTest extends AddressBookGuiTest{
             commandBox.runCommand(assistingCommands.get(i));
         }
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
     public void list_allTask_alphabetical(){
-        TestTask[] initialList = td.getTypicalPersons();
+        TestTask[] initialList = td.getTypicalTasks();
         TestTask[] finalList = new TestTask[initialList.length];
         finalList[0] = initialList[1];
         finalList[1] = initialList[4];
@@ -92,12 +92,12 @@ public class ListCommandTest extends AddressBookGuiTest{
         finalList[6] = initialList[6];
         String command = "list df/all s/name";
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
     public void list_undoneTask_priority(){
-        TestTask[] initialList = td.getTypicalPersons();
+        TestTask[] initialList = td.getTypicalTasks();
         ArrayList<String> assistingCommands = new ArrayList<String>();
         String command = "list df/not done s/priority";
         assistingCommands.add("done 3");
@@ -112,7 +112,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         finalList[2] = initialList[3];
         finalList[3] = initialList[4];
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
@@ -124,7 +124,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         String command = "list df/done ds/11-10-2016 de/11-25-2016";
         TestDatedTask[] finalList = new TestDatedTask[0];
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
     
     @Test
@@ -143,6 +143,6 @@ public class ListCommandTest extends AddressBookGuiTest{
             e.printStackTrace();
         }
         commandBox.runCommand(command);
-        assertTrue(personListPanel.isListMatching(finalList));
+        assertTrue(taskListPanel.isListMatching(finalList));
     }
 }
