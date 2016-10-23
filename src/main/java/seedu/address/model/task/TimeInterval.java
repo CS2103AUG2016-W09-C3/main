@@ -1,6 +1,5 @@
 package seedu.address.model.task;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 import java.util.regex.Matcher;
