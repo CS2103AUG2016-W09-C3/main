@@ -64,9 +64,7 @@ When the program is started, you will see 4 controls:
 
 ### Date Specifications
 
-ToDoIt uses Natty date parser to parse date and time options.
-
-Natty accepts most common formats of dates. Some examples include:
+ToDoIt accepts most common formats of dates. Some examples include:
 
 * 2015-12-31
 * 2015/12/31
@@ -337,8 +335,3 @@ Undo | `undo`
 Redo | `redo`
 Help | `help`
 Exit | `exit`
-
-## Acknowledgements
-
-This program uses Natty Date Parser under the MIT license.
-http://natty.joestelmach.com/

@@ -142,7 +142,7 @@ public class Parser {
             
             if(command.hasParams(ListCommand.SORT_PARAM)){
                 //sortByAttribute = new ArrayList<String>(Arrays.asList(command.getParam("s").split(" ")));
-                sortByAttribute = command.getParamList("s");
+                sortByAttribute = command.getAllParams("s");
             }
             if(command.hasParams(ListCommand.REVERSE_PARAM)){
                 reverse = true;
@@ -179,7 +179,7 @@ public class Parser {
                         command.getParamOrDefault("p", "medium"),
                         command.getParamOrDefault("i", ""),
                         DoneFlag.NOT_DONE,
-                        getTagsFromArgs(command.getParamList("t"))
+                        getTagsFromArgs(command.getAllParams("t"))
                 );
             } else {
                 return new AddCommand(
@@ -187,7 +187,7 @@ public class Parser {
                         command.getParamOrDefault("p", "medium"),
                         command.getParamOrDefault("i", ""),
                         DoneFlag.NOT_DONE,
-                        getTagsFromArgs(command.getParamList("t"))
+                        getTagsFromArgs(command.getAllParams("t"))
                 );
             }
         } catch (IllegalValueException ive){
@@ -258,7 +258,7 @@ public class Parser {
                         command.getParamOrDefault("p", ""),
                         command.getParamOrDefault("i", ""),
                         DoneFlag.NOT_DONE,
-                        getTagsFromArgs(command.getParamList("t"))
+                        getTagsFromArgs(command.getAllParams("t"))
                 );
         } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
@@ -371,7 +371,7 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         try{
-            return new FindCommand(new HashSet<String>(command.getAllValues()), new HashSet<String>(command.getParamList("s")));
+            return new FindCommand(new HashSet<String>(command.getAllValues()), new HashSet<String>(command.getAllParams("s")));
         } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
         }
