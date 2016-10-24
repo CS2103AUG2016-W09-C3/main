@@ -1,3 +1,4 @@
+//@@author A0139121R
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -88,6 +89,7 @@ public class ListCommandTest extends AddressBookGuiTest{
     public void list_allTask_alphabetical(){
         TestTask[] initialList = td.getTypicalTasks();
         TestTask[] finalList = new TestTask[initialList.length];
+        //manual sorting
         finalList[0] = initialList[1];
         finalList[1] = initialList[4];
         finalList[2] = initialList[5];

@@ -38,7 +38,7 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
-
+    //@@author A0139121R  
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope);
     
@@ -50,7 +50,7 @@ public interface Model {
     
     /** Updates the filter of the filtered task list to show not done tasks*/
     void updateFilteredListToShowDone();
-
+    //@@author
     /** Loads the previous state. Returns the command attached to the state to be printed. */
     String loadPreviousState() throws StateException;
 

@@ -10,7 +10,7 @@ import seedu.address.testutil.TestUtil;
 import static org.junit.Assert.assertTrue;
 
 public class AddCommandTest extends AddressBookGuiTest {
-
+    //@@author A0139121R
     @Test
     public void add() {
         //add one person
@@ -37,7 +37,7 @@ public class AddCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("adds Johnny");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
-
+    //@@author
     private void assertAddSuccess(TestTask personToAdd, TestTask... currentList) {
         commandBox.runCommand(personToAdd.getAddCommand());
 

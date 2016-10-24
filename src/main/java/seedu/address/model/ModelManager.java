@@ -105,7 +105,6 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTask(task);
         updateFilteredListToShowAll();
-        //updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
     
@@ -113,7 +112,6 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTaskToIndex(task, index);
         updateFilteredListToShowAll();
-        //updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
 
@@ -137,11 +135,10 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    
+    //@@author A0139121R
     @Override
     public void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse){
         sortList(sortByAttribute, reverse);
-        //filteredTasks.sorted(new CustomTaskComparator(sortByAttribute));
         updateSortTaskList(new PredicateExpression(new SortQualifier(dateRange, doneStatus)));
     }
     
@@ -172,7 +169,7 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.sortTasks(sortByAttribute, reverse);
         
     }
-    
+    //@@author
 
     //========== Inner classes/interfaces used for filtering ==================================================
 
@@ -204,7 +201,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-    
+    //@@author A0139121R
     private class SortQualifier implements Qualifier{
         private HashMap<String, String> dateRange;
         private ArrayList<String> sortByAttribute;
@@ -323,6 +320,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
+    //@@author
     // @@author A0140155U
     @Override
     public void saveState(String commandText) {

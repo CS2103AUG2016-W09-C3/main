@@ -168,7 +168,7 @@ public class UniqueTaskList implements Iterable<Task> {
     public int hashCode() {
         return internalList.hashCode();
     }
-
+    //@@author A0139121R
     public void sortTasks(ArrayList<String> sortByAttribute, boolean reverse) {
         internalList.sort(new CustomTaskComparator(sortByAttribute));
         if (reverse) {
@@ -176,4 +176,5 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
     }
+    //@@author
 }
