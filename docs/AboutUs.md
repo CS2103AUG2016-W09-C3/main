@@ -20,8 +20,19 @@ Responsibilities: Model
 #### [Jamos Tay](https://github.com/jamos-tay) 
 <img src="images/JamosTay.png" width="150"><br>
 Role: Developer <br>
-Responsibilities: Logic
-
+* Components in charge of: [Logic](https://github.com/CS2103AUG2016-W09-C3/main/tree/master/src/main/java/seedu/address/logic)
+* Aspects/tools in charge of: Testing, Git
+* Features implemented:
+   * [Undo/Redo command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#undo-a-command--undo)
+   * [Done/Undone command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#mark-a-task-as-done--done)
+   * [Filepath command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#changing-filepath--filepath)
+* Code written: [[functional code]()][[test code]()][[docs]()] // TODO
+* Other major contributions:
+  * Did refactoring from AddressBook to ToDoList with Su Wei and got tests to pass (only for the main folder) [[#7](https://github.com/CS2103AUG2016-W09-C3/main/pull/7)], [[#38](https://github.com/CS2103AUG2016-W09-C3/main/pull/38)]
+  * Implemented Natty Date Parser [[#59](https://github.com/CS2103AUG2016-W09-C3/main/pull/59)]
+  * Created custom command parser [[#13](https://github.com/CS2103AUG2016-W09-C3/main/pull/13)]
+  * Did UI revamp [[#88](https://github.com/CS2103AUG2016-W09-C3/main/pull/88)]
+  
 -----
 
 #### [Goh Qi Wei](https://github.com/qiwei24)
