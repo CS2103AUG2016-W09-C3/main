@@ -15,6 +15,7 @@ import seedu.address.testutil.TestTask;
 
 public class ListCommandTest extends AddressBookGuiTest{
     
+    //Test to list all tasks.
     @Test
     public void list_allTask(){
         TestTask[] allTaskList = td.getTypicalTasks();
@@ -23,6 +24,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         assertTrue(taskListPanel.isListMatching(allTaskList));
     }
     
+    //Test to list all tasks in reverse order.
     @Test
     public void list_allTask_reverse(){
         TestTask[] initialList = td.getTypicalTasks();
@@ -35,6 +37,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         assertTrue(taskListPanel.isListMatching(finalList));
     }
     
+    //Test to list only done tasks.
     @Test
     public void list_doneTask(){
         TestTask[] initialList = td.getTypicalTasks();
@@ -60,6 +63,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         assertTrue(taskListPanel.isListMatching(finalList));
     }
     
+    //Test to list only tasks that are not done.
     @Test
     public void list_undoneTask(){
         TestTask[] initialList = td.getTypicalTasks();
@@ -79,6 +83,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         assertTrue(taskListPanel.isListMatching(finalList));
     }
     
+    //Test to list all tasks sorted in alphabetical order.
     @Test
     public void list_allTask_alphabetical(){
         TestTask[] initialList = td.getTypicalTasks();
@@ -95,6 +100,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         assertTrue(taskListPanel.isListMatching(finalList));
     }
     
+    //Test to list all undone tasks, sorted from highest to lowest priority.
     @Test
     public void list_undoneTask_priority(){
         TestTask[] initialList = td.getTypicalTasks();
@@ -115,6 +121,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         assertTrue(taskListPanel.isListMatching(finalList));
     }
     
+    //Test to list all done tasks within specific period, should have no done tasks in this period.
     @Test
     public void list_doneTask_daterange_none(){
         commandBox.runCommand(td.lectureToAttend.getAddCommand());
@@ -127,6 +134,7 @@ public class ListCommandTest extends AddressBookGuiTest{
         assertTrue(taskListPanel.isListMatching(finalList));
     }
     
+    //Test to list all done tasks within a specific period, should have one done task within this period.
     @Test
     public void list_doneTask_daterange_one(){
         commandBox.runCommand(td.lectureToAttend.getAddCommand());
