@@ -9,11 +9,14 @@ import seedu.address.commons.exceptions.IllegalValueException;
 
 public class TimeInterval {
     public static final String MESSAGE_TIME_INTERVAL_CONSTRAINTS = "Time interval should be a positive number followed by a character e.g 5h, 1d, 2m, 1w. " +
-            "Acceptable time units are m (min) h (hour), d (day), w(week)";
+            "Acceptable time units are m/min/mins (minutes) h/hr/hrs (hours), d/day/days (days), w/week/weeks (weeks)";
 
     //public static final String INTERVAL_VALIDATION_REGEX = "\\d+\\c";
-    private static final Pattern INTERVAL_VALIDATION_REGEX = Pattern.compile("(?<length>\\d+)(?<unit>[a-zA-Z])");
+    private static final Pattern INTERVAL_VALIDATION_REGEX = Pattern.compile("(?<length>\\d+)(?<unit>[a-zA-Z]+)");
     private static HashMap<String, Integer> INTERVAL_TO_MINUTES = new HashMap<>();
+
+    private static HashMap<String, String> listOfMinutes = new HashMap<>();
+    
     static
     {
         INTERVAL_TO_MINUTES = new HashMap<String, Integer>();
@@ -25,7 +28,7 @@ public class TimeInterval {
     
     public final String intervalString;
     public final int length;
-    public final String unit;
+    public String unit;
     
     /**
      * Validates given information.
@@ -35,6 +38,9 @@ public class TimeInterval {
     public TimeInterval(String intervalString) throws IllegalValueException {
         assert intervalString != null;
         intervalString = intervalString.toLowerCase().trim();
+        
+        listOfMinutes = new HashMap<String, String>();
+        getListOfDifferentAliases();
 
         this.intervalString = intervalString;
         
@@ -44,9 +50,26 @@ public class TimeInterval {
         }
         length = Integer.parseInt(matcher.group("length"));
         unit = matcher.group("unit");
+        
+        if (listOfMinutes.containsKey(unit)){
+            this.unit = listOfMinutes.get(unit);
+        }
+        
         if(!isValidInterval(length, unit)){
             throw new IllegalValueException(MESSAGE_TIME_INTERVAL_CONSTRAINTS);
         }
+    }
+
+    // User is able to put different aliases for time
+    private void getListOfDifferentAliases() {
+        listOfMinutes.put("min", "m");
+        listOfMinutes.put("mins", "m");
+        listOfMinutes.put("hr", "h");
+        listOfMinutes.put("hrs", "h");
+        listOfMinutes.put("day", "d");
+        listOfMinutes.put("days", "d");
+        listOfMinutes.put("week", "w");
+        listOfMinutes.put("weeks", "w");
     }
     
     private boolean isValidInterval(int length, String unit){

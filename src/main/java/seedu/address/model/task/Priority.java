@@ -1,5 +1,7 @@
 package seedu.address.model.task;
 
+import java.util.HashMap;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
@@ -13,9 +15,9 @@ public class Priority {
     public final acceptedPriority priority;
     
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should either veryhigh, high, medium, low or verylow.\n"
-                                                            + "It is case insensitive";
+                                                            + "It is case insensitive.\n" + "You may also type in vh/h/m/l/vl in that respective order.";
     
-    
+    private static HashMap<String, String> listOfPriorities = new HashMap<>();
     
     private enum acceptedPriority{
         VERYHIGH(5), HIGH(4), MEDIUM(3), LOW(2), VERYLOW(1);
@@ -39,6 +41,15 @@ public class Priority {
         }
     }
     
+    // User is able to put different aliases for time
+    private void getListOfDifferentAliases() {
+        listOfPriorities.put("VH", "VERYHIGH");
+        listOfPriorities.put("H", "HIGH");
+        listOfPriorities.put("M", "MEDIUM");
+        listOfPriorities.put("L", "LOW");
+        listOfPriorities.put("VL", "VERYLOW");
+    }
+    
     public int getEnumPriority(){
         return priority.getEnumPriority();
     }
@@ -51,14 +62,23 @@ public class Priority {
     public Priority(String priority) throws IllegalValueException{
         assert priority != null;
         priority = priority.trim();
+        
         String upperPriority = priority.toUpperCase();
+        
+        listOfPriorities = new HashMap<String, String>();
+        getListOfDifferentAliases();
+        
+        if (listOfPriorities.containsKey(upperPriority)){
+            upperPriority = listOfPriorities.get(upperPriority);
+       }
+        
         if(acceptedPriority.Contains(upperPriority)){
             this.priority = acceptedPriority.valueOf(upperPriority);
         } else {
             throw new IllegalValueException(MESSAGE_PRIORITY_CONSTRAINTS);
         }
     }
-    
+
     @Override
     public String toString() {
         return this.priority.name();
