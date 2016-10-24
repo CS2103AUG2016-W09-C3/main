@@ -5,21 +5,19 @@ import static seedu.address.logic.commands.DoneCommand.MESSAGE_SUCCESS;
 
 import org.junit.Test;
 
-import guitests.guihandles.TaskCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.CommandParser;
 import seedu.address.logic.parser.ParsedCommand;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DateTime;
-import seedu.address.model.task.DoneFlag;
 import seedu.address.model.task.Information;
 import seedu.address.model.task.Length;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Recurrance;
+import seedu.address.model.task.TimeInterval;
 import seedu.address.testutil.TestDatedTask;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
@@ -35,6 +33,54 @@ public class EditCommandTest extends AddressBookGuiTest {
     }
     
     @Test
+    public void edit_priorityHigh(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestTask[] listToEdit = td.getTypicalTasks();
+        String command = "edit 1 p/h";
+        assertEditSuccess(command, listToEdit);
+    }
+    
+    @Test
+    public void edit_invalidPriorityVeryHigh(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestTask[] listToEdit = td.getTypicalTasks();
+        String command = "edit 2 p/superhigh";
+        unknownCommandFormatPriority(command);
+    }
+    
+    @Test
+    public void edit_priorityVeryLow(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestTask[] listToEdit = td.getTypicalTasks();
+        String command = "edit 1 p/vl";
+        assertEditSuccess(command, listToEdit);
+    }
+/*    
+    @Test
+    public void edit_timeIntervalRecurrenceDays(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestDatedTask[] listToEdit = td.getTypicalDatedTask();
+        String command = "edit 1 r/7day";
+        assertEditSuccess(command, listToEdit);
+    }
+    
+    @Test
+    public void edit_timeIntervalRecurrenceWeeks(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestDatedTask[] listToEdit = td.getTypicalDatedTask();
+        String command = "edit 1 r/16weeks";
+        assertEditSuccess(command, listToEdit);
+    }
+    
+    @Test
+    public void edit_invalidTimeIntervalRecurrence(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestDatedTask[] listToEdit = td.getTypicalDatedTask();
+        String command = "edit 1 r/3dayzz";
+        unknownCommandFormatTimeInterval(command);
+    }
+*/    
+    @Test
     public void edit_invalidIndex(){
         // Check if program handles invalid index properly with a thrown message
         commandBox.runCommand("clear");
@@ -49,6 +95,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         String command = "edit";
         assertInvalidEditCommandFormat(command);
     }
+    
     
     @Test
     public void edit_nonDatedTaskNotInSequence(){
@@ -166,5 +213,17 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(command);
         // Throws error message if format is invalid
         assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+    }
+    
+    private void unknownCommandFormatPriority(String command) {
+        commandBox.runCommand(command);
+        // Throws error message if format is invalid
+        assertResultMessage(String.format(Priority.MESSAGE_PRIORITY_CONSTRAINTS, EditCommand.MESSAGE_USAGE));
+    }
+    
+    private void unknownCommandFormatTimeInterval(String command) {
+        commandBox.runCommand(command);
+        // Throws error message if format is invalid
+        assertResultMessage(String.format(TimeInterval.MESSAGE_TIME_INTERVAL_CONSTRAINTS, EditCommand.MESSAGE_USAGE));
     }
 }
