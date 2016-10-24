@@ -5,16 +5,13 @@ import static seedu.address.logic.commands.DoneCommand.MESSAGE_SUCCESS;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.CommandParser;
 import seedu.address.logic.parser.ParsedCommand;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DateTime;
-import seedu.address.model.task.DoneFlag;
 import seedu.address.model.task.Information;
 import seedu.address.model.task.Length;
 import seedu.address.model.task.Name;
@@ -38,7 +35,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_priorityHigh(){
         // Check if edit function edits successfully (not necessary in sequence)
-        TestTask[] listToEdit = td.getTypicalPersons();
+        TestTask[] listToEdit = td.getTypicalTasks();
         String command = "edit 1 p/h";
         assertEditSuccess(command, listToEdit);
     }
@@ -46,7 +43,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_invalidPriorityVeryHigh(){
         // Check if edit function edits successfully (not necessary in sequence)
-        TestTask[] listToEdit = td.getTypicalPersons();
+        TestTask[] listToEdit = td.getTypicalTasks();
         String command = "edit 2 p/superhigh";
         unknownCommandFormatPriority(command);
     }
@@ -54,7 +51,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_priorityVeryLow(){
         // Check if edit function edits successfully (not necessary in sequence)
-        TestTask[] listToEdit = td.getTypicalPersons();
+        TestTask[] listToEdit = td.getTypicalTasks();
         String command = "edit 1 p/vl";
         assertEditSuccess(command, listToEdit);
     }
