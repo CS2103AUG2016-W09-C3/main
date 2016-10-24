@@ -1,5 +1,5 @@
 package seedu.address.model;
-//@@author Jamos
+//@@author A0140155U
 /**
  * Represents a state of the address book.
  * 
