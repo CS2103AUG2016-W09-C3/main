@@ -26,7 +26,7 @@ public interface ParsedCommand {
      * Retrieves a list of params corresponding to the param name.
      * If the param name has no values, returns an empty list.
      */
-    ArrayList<String> getAllParams();
+    ArrayList<String> getParamList();
     
     /**
      * Retrieves the very first value in the list.
@@ -47,7 +47,7 @@ public interface ParsedCommand {
     /**
      * Get all params.
      */
-    ArrayList<String> getParamList(String paramName);
+    ArrayList<String> getAllParams(String paramName);
 
     /**
      * Retrieves list of values joined with spaces.
@@ -72,7 +72,11 @@ public interface ParsedCommand {
      * Useful for checking if the command is valid.
      */
     boolean hasValueAtIndex(int index);
-
+    
+    /**
+     * Check if command has value at the particular index
+     * Useful for checking if the command is valid.
+     */
     boolean hasUnnecessaryParams(String[] possibleParams);
     
 }

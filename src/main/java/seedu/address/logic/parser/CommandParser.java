@@ -136,7 +136,7 @@ public class CommandParser implements ParsedCommand{
      * If the param name has no values, returns an empty list.
      */
     @Override
-    public ArrayList<String> getParamList(String paramName) {
+    public ArrayList<String> getAllParams(String paramName) {
         if(!params.containsKey(paramName) || params.get(paramName).size() == 0){
             return new ArrayList<String>();
         }
@@ -178,7 +178,7 @@ public class CommandParser implements ParsedCommand{
      * Get all params.
      */
     @Override
-    public ArrayList<String> getAllParams(){
+    public ArrayList<String> getParamList(){
         ArrayList<String> readOnlyParams = new ArrayList<> (params.keySet());
         return readOnlyParams;
     }

@@ -27,7 +27,7 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_nonDatedTask(){
         // Check if edit function edits successfully (not necessary in sequence)
-        TestTask[] listToEdit = td.getTypicalPersons();
+        TestTask[] listToEdit = td.getTypicalTasks();
         String command = "edit 1 n/King Arthur p/high i/This is just another kind of information you would see in a task";
         assertEditSuccess(command, listToEdit);
     }
@@ -100,19 +100,24 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_nonDatedTaskNotInSequence(){
         // Check if program is able to edit a task in the middle of list
-        TestTask[] listToEdit = td.getTypicalPersons();
+        TestTask[] listToEdit = td.getTypicalTasks();
         String command = "edit 3 i/This is also an information p/high";
         assertEditSuccess(command, listToEdit);
     }
-/*   
+   
     @Test
-    public void edit_allNonDatedTask(){
+    public void edit_datedTask(){
         // Check if program is able to edit all tasks in sequence
-        TestTask[] listToEdit = td.getTypicalPersons();
-        String command = "edit 1 n/Meet Isabel p/High r/6d d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
-        assertEditSuccess(command, listToEdit);
+        TestTask[] listToEdit = td.getTypicalTasks();
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        commandBox.runCommand(td.csFinalExam.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        TestTask datedTaskToAdd2 = td.csFinalExam;
+        String command = "edit 8 n/Meet Isabel p/High r/6d d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
+        TestTask[] finalList = TestUtil.addTasksToList(listToEdit, datedTaskToAdd, datedTaskToAdd2);
+        assertEditSuccess(command, finalList);
     }
-*/  
+  
     /**
      * Runs the edit command to edit the task at specified index and confirms the task is successfully edited
      * @param editCommand: To edit the first person in the list, 1 should be given as the target index. (i.e. Edit 1 ... )
@@ -136,7 +141,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         priority = command.getParamOrDefault("p", "");
         information = command.getParamOrDefault("i", "");
         
-        TestTask[] expected = TestUtil.removePersonFromList(list, index);
+        TestTask[] expected = TestUtil.removeTaskFromList(list, index);
         
         try {
             expected = testEdit(target, name, datetime, length, recurrance, priority, information, expected, index);
@@ -178,7 +183,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         if (isChanged) {
             ((TestDatedTask) target).setDateTime(new DateTime(datetime));
         }
-        expected = TestUtil.addPersonsToListIndex(expected, target, index - 1);
+        expected = TestUtil.addTaskToListIndex(expected, target, index - 1);
         return expected;
     }
     
@@ -192,7 +197,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(command);
         
         // Confirm the list now contains all previous tasks except the deleted task
-        assertTrue(personListPanel.isListMatching(expected));
+        assertTrue(taskListPanel.isListMatching(expected));
         
         // Confirm the result message is correctly edited
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, target));

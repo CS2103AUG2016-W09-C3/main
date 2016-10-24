@@ -76,15 +76,15 @@ public class EditCommand extends Command {
 			return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 		}	
 		taskToEdit = lastShownList.get(targetIndex - 1);
-		boolean isDated = taskToEdit.isDated();
-		
+		boolean isDated = taskToEdit.isDated();		
 		if(isDated){
 			copyDatedTask(lastShownList);
 		}
 		copyTask();
-		editTag();		
+		editTag();
+		boolean typeChange = checkChangeTaskType();
 		try{
-			if(isDated){
+			if(isDated) {
 				this.toAdd = new DatedTask(
 						new Name(name),
 				        new DateTime(datetime, oldDatetime),
@@ -95,7 +95,19 @@ public class EditCommand extends Command {
 				        new DoneFlag(doneFlag),
 				        new UniqueTagList(tagList)
 				);
-			} 
+			}
+			else if(typeChange) {
+				this.toAdd = new DatedTask(
+								new Name(name),
+								new DateTime(datetime),
+								new Length(length),
+								new Recurrance(recurring),
+								new Priority(priority),
+								new Information(information),
+								new DoneFlag(doneFlag),
+								new UniqueTagList(tagList)
+					);
+			}
 			else {
 				this.toAdd = new Task(
 	                new Name(name),
@@ -122,11 +134,21 @@ public class EditCommand extends Command {
 	}
 	
 	/**
+	 * Check if task change from task to datedtask 
+	 */
+	private boolean checkChangeTaskType(){
+		if(!(this.datetime.equals("-1")) && !(this.length.equals("-1"))){
+			return true;
+		}
+		return false;
+	}
+	
+	/**
 	 * Copy dated task information of time, date, length, recurring if it is not edited
 	 */
 	private void copyDatedTask(UnmodifiableObservableList<ReadOnlyTask> lastShownList){
 		ReadOnlyDatedTask datedTaskToEdit = (ReadOnlyDatedTask) lastShownList.get(targetIndex - 1);
-        this.oldDatetime = datedTaskToEdit.getDateTime();
+		this.oldDatetime = datedTaskToEdit.getDateTime();
 		if(this.datetime.equals("-1")){
 	        this.datetime = datedTaskToEdit.getDateTime().toString();
 		}
@@ -136,26 +158,6 @@ public class EditCommand extends Command {
         if(this.recurring.equals(Recurrance.NO_INTERVAL)){
             this.recurring = datedTaskToEdit.getRecurrance().toString();
         }
-		/*
-		String dateTime = datedTaskToEdit.getDateTime().toString();
-		String[] split = dateTime.split("\\s+");
-		String date = split[0];
-		String time = split[1];
-		if(this.time.equals("-1")){
-			String[] timeSplit = time.split(":");
-			this.time = timeSplit[0] + timeSplit[1];
-		}
-		if(this.date.equals("-1")){
-			String[] dateSplit = date.split("-");
-			this.date = dateSplit[0] + dateSplit[1] + dateSplit[2];
-		}
-		if(this.length.equals("-1")){
-			this.length = datedTaskToEdit.getLength().toString();
-		}
-		if(this.recurring.equals(Recurrance.NO_INTERVAL))
-			this.recurring = datedTaskToEdit.getRecurrance().toString();
-		*/
-//		System.out.println(targetIndex + " " + 	name + " " +  priority + " " + information + " " + doneFlag + " " + time + " "  + date + " " +  length + " " + recurring);
 	}
 	
 	/**
@@ -182,7 +184,6 @@ public class EditCommand extends Command {
 		}
 	}
 	
-
     @Override
     public boolean createsNewState() {
         return true;
