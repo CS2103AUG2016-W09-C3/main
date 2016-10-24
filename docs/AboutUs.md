@@ -21,7 +21,7 @@ Responsibilities: Model
 <img src="images/JamosTay.png" width="150"><br>
 Role: Developer <br>
 * Components in charge of: [Logic](https://github.com/CS2103AUG2016-W09-C3/main/tree/master/src/main/java/seedu/address/logic)
-* Aspects/tools in charge of: Testing, Git
+* Aspects/tools in charge of: Logic, Natty, CommandParser
 * Features implemented:
    * [Undo/Redo command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#undo-a-command--undo)
    * [Done/Undone command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#mark-a-task-as-done--done)
