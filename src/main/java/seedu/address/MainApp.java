@@ -190,8 +190,9 @@ public class MainApp extends Application {
      * If either fail, revert to the old file path.
      */
 
+    // @@author A0140155U
     @Subscribe
-    public void handleAddressBookChangedEvent(FilePathChangedEvent event) {
+    public void handleFilePathChangedEvent(FilePathChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Config data changed, saving to file"));
         String oldFilePath = config.getAddressBookFilePath();
         try {
@@ -205,6 +206,7 @@ public class MainApp extends Application {
             logger.warning("Failed to save config file, reverting to old : " + StringUtil.getDetails(e));
         }
     }
+    // @@author A0140155U    
     
     public static void main(String[] args) {
         launch(args);

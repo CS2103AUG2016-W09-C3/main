@@ -37,8 +37,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<Task> filteredTasks;
+    // @@author A0140155U
     private final States states;
-
+    // @@author
     /**
      * Initializes a ModelManager with the given AddressBook
      * AddressBook and its variables should not be null
@@ -52,7 +53,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook = new AddressBook(src);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        // @@author A0140155U
         states = new StatesManager(new AddressBookState(addressBook));
+        // @@author
     }
 
     public ModelManager() {
@@ -63,7 +66,9 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook = new AddressBook(initialData);
         addressBook.updateRecurringTasks();
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        // @@author A0140155U
         states = new StatesManager(new AddressBookState(addressBook));
+        // @@author
     }
 
     @Override
@@ -82,12 +87,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(addressBook));
     }
 
-
+    // @@author A0140155U
     /** Raises an event to indicate the config has changed */
     @Override
     public void changeFilePath(String filePath) {
         raise(new FilePathChangedEvent(filePath));
     }
+    // @@author
     
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
@@ -317,7 +323,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
-
+    // @@author A0140155U
     @Override
     public void saveState(String commandText) {
         states.saveState(new AddressBookState(addressBook, commandText));
@@ -338,5 +344,5 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
         return newState.getCommand();
     }
-
+    // @@author
 }

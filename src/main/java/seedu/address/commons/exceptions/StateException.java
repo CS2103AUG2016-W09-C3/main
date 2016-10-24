@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.commons.exceptions;
 
 /**
@@ -11,3 +12,4 @@ public class StateException extends Exception {
         super(message);
     }
 }
+//@@author

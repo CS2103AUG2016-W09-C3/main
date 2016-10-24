@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.logic.parser;
 
 import java.util.ArrayList;
@@ -80,3 +81,4 @@ public interface ParsedCommand {
     boolean hasUnnecessaryParams(String[] possibleParams);
     
 }
+//@@author

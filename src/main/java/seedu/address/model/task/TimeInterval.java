@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.model.task;
 
 import java.util.HashMap;
@@ -102,3 +103,4 @@ public class TimeInterval {
         return Objects.hash(length, unit);
     }
 }
+//@@author

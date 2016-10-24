@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.ui;
 
 import java.util.HashMap;
@@ -88,3 +89,4 @@ public class TaskPropertyMapping implements TaskStyleMapping{
     }
 
 }
+//@@author

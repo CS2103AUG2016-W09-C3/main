@@ -266,6 +266,10 @@
     -fx-padding: 8 1 8 1;
 }
 
+/* @@author A0140155U 
+ * Many of the above properties were changed too
+ * */
+
 #cardPane {
     -fx-background-color: transparent;
     -fx-border-color: #A0A0A0;

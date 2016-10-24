@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.model;
 
 import seedu.address.commons.exceptions.StateException;
@@ -16,3 +17,4 @@ public interface States {
     public AddressBookState loadNextState() throws StateException;
     
 }
+//@@author

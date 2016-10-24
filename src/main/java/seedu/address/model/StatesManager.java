@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.model;
 
 import java.util.ArrayList;
@@ -68,3 +69,4 @@ public class StatesManager implements States{
     }
     
 }
+//@@author
