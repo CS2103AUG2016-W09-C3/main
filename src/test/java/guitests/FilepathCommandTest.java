@@ -12,22 +12,30 @@ public class FilepathCommandTest extends AddressBookGuiTest {
 
     @Test
     public void wrongFilePaths() {
-        assertFilepathFail("");
-        assertFilepathFail("noxml");
-        assertFilepathFail("<>*.xml");
-        assertFilepathFail("3:\\data.xml");
-        assertFilepathFail(":\\data.xml");
-        assertFilepathFail("DRIVE:\\data.xml");
-        assertFilepathFail("\\data.xml");
-        assertFilepathFail("file\\\\data.xml");
-        assertFilepathFail("\\\\file\\\\data.xml");
+        assertFilepath("", false);
+        assertFilepath(".xml", false);
+        assertFilepath("noxml", false);
+        assertFilepath("<>*.xml", false);
+        assertFilepath("3:\\data.xml", false);
+        assertFilepath(":\\data.xml", false);
+        assertFilepath("DRIVE:\\data.xml", false);
+        assertFilepath("\\data.xml", false);
+        assertFilepath("file\\\\data.xml", false);
+        assertFilepath("\\\\file\\\\data.xml", false);
     }
-
-    private void assertFilepathFail(String wrongFilePath) {
-        final Matcher matcher = FilepathCommand.FILEPATH_REGEX.matcher(wrongFilePath);
-        if (matcher.matches()) {
-            fail("Wrong file path matched: " + wrongFilePath);
-        }
+    
+    @Test
+    public void rightFilePaths() {
+        assertFilepath("a.xml", true);
+        assertFilepath("hello-world.xml", true);
+        assertFilepath("D:\\file.xml", true);
+        assertFilepath("folder\\folder\\folder\\file.xml", true);
+        assertFilepath("C:\\folder\\folder\\folder\\file.xml", true);
+    }
+    
+    private void assertFilepath(String filePath, boolean result) {
+        final Matcher matcher = FilepathCommand.FILEPATH_REGEX.matcher(filePath);
+        assert(matcher.matches() == result);
     }
 
 }
