@@ -15,15 +15,22 @@ public class TimeInterval {
     private static final Pattern INTERVAL_VALIDATION_REGEX = Pattern.compile("(?<length>\\d+)(?<unit>[a-zA-Z]+)");
     private static HashMap<String, Integer> INTERVAL_TO_MINUTES = new HashMap<>();
 
-    private static HashMap<String, String> listOfMinutes = new HashMap<>();
+    private static HashMap<String, String> MINUTE_ALIASES = new HashMap<>();
     
     static
     {
-        INTERVAL_TO_MINUTES = new HashMap<String, Integer>();
         INTERVAL_TO_MINUTES.put("m", 1);
         INTERVAL_TO_MINUTES.put("h", 60);
         INTERVAL_TO_MINUTES.put("d", 24 * 60);
         INTERVAL_TO_MINUTES.put("w", 7 * 24 * 60);
+        MINUTE_ALIASES.put("min", "m");
+        MINUTE_ALIASES.put("mins", "m");
+        MINUTE_ALIASES.put("hr", "h");
+        MINUTE_ALIASES.put("hrs", "h");
+        MINUTE_ALIASES.put("day", "d");
+        MINUTE_ALIASES.put("days", "d");
+        MINUTE_ALIASES.put("week", "w");
+        MINUTE_ALIASES.put("weeks", "w");
     }
     
     public final String intervalString;
@@ -38,9 +45,6 @@ public class TimeInterval {
     public TimeInterval(String intervalString) throws IllegalValueException {
         assert intervalString != null;
         intervalString = intervalString.toLowerCase().trim();
-        
-        listOfMinutes = new HashMap<String, String>();
-        getListOfDifferentAliases();
 
         this.intervalString = intervalString;
         
@@ -51,25 +55,13 @@ public class TimeInterval {
         length = Integer.parseInt(matcher.group("length"));
         unit = matcher.group("unit");
         
-        if (listOfMinutes.containsKey(unit)){
-            this.unit = listOfMinutes.get(unit);
+        if (MINUTE_ALIASES.containsKey(unit)){
+            this.unit = MINUTE_ALIASES.get(unit);
         }
         
         if(!isValidInterval(length, unit)){
             throw new IllegalValueException(MESSAGE_TIME_INTERVAL_CONSTRAINTS);
         }
-    }
-
-    // User is able to put different aliases for time
-    private void getListOfDifferentAliases() {
-        listOfMinutes.put("min", "m");
-        listOfMinutes.put("mins", "m");
-        listOfMinutes.put("hr", "h");
-        listOfMinutes.put("hrs", "h");
-        listOfMinutes.put("day", "d");
-        listOfMinutes.put("days", "d");
-        listOfMinutes.put("week", "w");
-        listOfMinutes.put("weeks", "w");
     }
     
     private boolean isValidInterval(int length, String unit){
