@@ -19,6 +19,8 @@ public class TaskPropertyMapping implements TaskStyleMapping{
     private final static PropertyMap priorityMap;
     private final static PropertyMap doneMap;
     
+    private static TaskPropertyMapping instance = null;
+    
     static {
         // Priority : Background color
         priorityMap = new PropertyMap(PROPERTY_BACKGROUND);
@@ -31,6 +33,16 @@ public class TaskPropertyMapping implements TaskStyleMapping{
         // Done : Background color
         doneMap = new PropertyMap(PROPERTY_BACKGROUND);
         priorityMap.addTo("Done", "radial-gradient(radius 100%, #BAEFF4, #A9DEE3)");
+    }
+    
+    // Singleton
+    private TaskPropertyMapping(){}
+    
+    public static TaskPropertyMapping getInstance(){
+        if(instance == null){
+            instance = new TaskPropertyMapping();
+        }
+        return instance;
     }
     
     @Override
