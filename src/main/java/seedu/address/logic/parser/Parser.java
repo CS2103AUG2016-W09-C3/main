@@ -110,6 +110,7 @@ public class Parser {
         }
     }
     
+    //@@author A0139121R
     /**
      * Parses arguments in the context of the list command.
      * 
@@ -121,18 +122,6 @@ public class Parser {
         ArrayList<String> sortByAttribute = new ArrayList<String>();
         boolean reverse = false;
         try{
-            /* Deprecated
-             * 
-            if(command.hasParams(ListCommand.START_AND_END_DATE_PARAM)){
-                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
-                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
-            } else if(command.hasParams(ListCommand.START_DATE_PARAM)){
-                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
-            } else if(command.hasParams(ListCommand.END_DATE_PARAM)){
-                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
-            } else {
-                
-            }*/
             if(command.hasParams(ListCommand.START_DATE_PARAM)){
                 dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
             }
@@ -157,7 +146,8 @@ public class Parser {
                 command.getParamOrDefault("df", "Not done"),
                 reverse);
     }
-
+    
+    //@@author A0139121R
     /**
      * Parses arguments in the context of the add task command.
      *
@@ -194,6 +184,7 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
+    //@@author
 
     /**
      * Extracts the new task's tags from the add command's tag arguments string.
@@ -224,6 +215,8 @@ public class Parser {
         return new DeleteCommand(index.get());
     }
     
+    
+    //@@author A0139121R
     /**
      * Checks if clear command has any other users input behind clear command word.
      * 
@@ -264,7 +257,7 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
-    
+    //@@author
     /**
      * Parses arguments in the context of the reschedule task command.
      *
@@ -361,6 +354,7 @@ public class Parser {
 
     }
 
+    //@@author A0139121R
     /**
      * Parses arguments in the context of the find task command.
      *
@@ -376,18 +370,6 @@ public class Parser {
         } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
         }
-        /* Deprecated
-        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindCommand.MESSAGE_USAGE));
-        }
-
-        // keywords delimited by whitespace
-        final String[] keywords = matcher.group("keywords").split("\\s+");
-        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-        return new FindCommand(keywordSet);
-        */
     }
-
+    //@@author
 }
