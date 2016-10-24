@@ -265,6 +265,7 @@ is better than these alternatives.<br>
 a. Include those libraries in the repo (this bloats the repo size)<br>
 b. Require developers to download those libraries manually (this creates extra work for developers)<br>
 
+<!-- @@author A0140155U -->
 ## Model
 
 In this section, the usage and design of certain features of model will be discussed.
@@ -438,6 +439,8 @@ Index|AddressBookState|Command
 Since a copy of the to do list is saved to a state after each command, the amount of memory stored can be quite big. As such, a hard cap of 10 states (`MAX_STATES`) is imposed.
 
 A better solution might be to have custom undos for each command storing only the minimal amount of data needed to undo it, or to use a shallow copied list + copy-on-write system, but due to limited time constraints, we have decided to go with our current solution.
+
+<!-- @@author -->
 
 ## Appendix A : User Stories
 

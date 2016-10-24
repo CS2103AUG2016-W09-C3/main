@@ -11,7 +11,7 @@ import seedu.address.model.task.ReadOnlyTask;
 public class PersonCard extends UiPart{
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final TaskStyleMapping styler = new TaskPropertyMapping();
+    private static final TaskStyleMapping styler = TaskPropertyMapping.getInstance();
     
     @FXML
     private HBox cardPane;
@@ -48,6 +48,7 @@ public class PersonCard extends UiPart{
         return UiPartLoader.loadUiPart(card);
     }
 
+    // @@author A0140155U
     @FXML
     public void initialize() {
         name.setText(person.getName().fullName);
@@ -80,6 +81,7 @@ public class PersonCard extends UiPart{
         cardPane.setStyle(styleString.toString());
     }
     
+    // @@author
     public HBox getLayout() {
         return cardPane;
     }

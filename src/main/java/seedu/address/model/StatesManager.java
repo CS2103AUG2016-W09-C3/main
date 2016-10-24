@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.model;
 
 import java.util.ArrayList;
@@ -26,8 +27,10 @@ public class StatesManager implements States{
         while(states.size() - 1 > currentState){
             states.remove(states.size() - 1);
         }
+        
         states.add(newState);
         if(currentState == MAX_STATES){
+            // Exceeded cap, delete the first state
             states.remove(0);
         }else{
             currentState++;
@@ -37,22 +40,33 @@ public class StatesManager implements States{
 
     public AddressBookState loadPreviousState() throws StateException{
         if(currentState == 0){
+            assert !states.isEmpty();
             if(states.get(0).getCommand().equals(AddressBookState.INITIAL_STATE)){
                 throw new StateException(MESSAGE_NO_PREV_STATE);
             }else{
+                // First state is not the initial state.
+                // This means it was deleted by saveState() due to hitting max capacity
                 throw new StateException(MESSAGE_MAX_STATES_EXCEEDED);
             }
         }
-        String commandString = states.get(currentState).getCommand();
+        // Note: Unlike loadNextState(), return current state command, but previous state data.
+        String commandString = getCurrentState().getCommand();
         currentState--;
-        return new AddressBookState(states.get(currentState).getState(), commandString);
+        return new AddressBookState(getCurrentState().getState(), commandString);
     }
-    
+
     public AddressBookState loadNextState() throws StateException{
         if(currentState == states.size() - 1){
             throw new StateException(MESSAGE_NO_NEXT_STATE);
         }
+        // Note: Unlike loadNextState(), return current state command and data.
         currentState++;
+        return getCurrentState();
+    }
+
+    private AddressBookState getCurrentState() {
         return states.get(currentState);
     }
+    
 }
+//@@author

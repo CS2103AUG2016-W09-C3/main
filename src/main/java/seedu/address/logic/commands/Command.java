@@ -10,7 +10,8 @@ import seedu.address.model.Model;
  */
 public abstract class Command {
     protected Model model;
-
+    
+    // @@author A0140155U
     public static final String[] REQUIRED_PARAMS = {};
     public static final String[] POSSIBLE_PARAMS = {".*"};
     
@@ -22,7 +23,10 @@ public abstract class Command {
      * 
      * @return whether or not the command creates a new state
      */
+
     public abstract boolean createsNewState();
+    // @@author
+    
     /**
      * Constructs a feedback message to summarise an operation that displayed a listing of tasks.
      *

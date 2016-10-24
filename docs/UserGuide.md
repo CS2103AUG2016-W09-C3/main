@@ -62,6 +62,8 @@ When the program is started, you will see 4 controls:
 * Options with `...` after them can be specified multiple times (e.g. `t/Work t/School t/CS2103`).
 * The order of options to specify for each command is fixed.
 
+<!-- @@author A0140155U -->
+
 ### Date Specifications
 
 ToDoIt accepts most common formats of dates. Some examples include:
@@ -80,6 +82,7 @@ ToDoIt accepts most common formats of dates. Some examples include:
 For a full list of accepted formats, please refer to:
 http://natty.joestelmach.com/doc.jsp
 
+<!-- @@author -->
 ---
 
 ### Viewing help : `help`
