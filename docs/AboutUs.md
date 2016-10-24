@@ -26,7 +26,7 @@ Role: Developer <br>
    * [Undo/Redo command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#undo-a-command--undo)
    * [Done/Undone command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#mark-a-task-as-done--done)
    * [Filepath command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#changing-filepath--filepath)
-* Code written: [[functional code]()][[test code]()][[docs]()] // TODO
+* Code written: [[functional code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/maind/A0140155U.md)][[test code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/test/A0140155U.md)][[docs](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/docs/A0140155U.md)]
 * Other major contributions:
   * Did refactoring from AddressBook to ToDoList with Su Wei and got tests to pass (only for the main folder) [[#7](https://github.com/CS2103AUG2016-W09-C3/main/pull/7)], [[#38](https://github.com/CS2103AUG2016-W09-C3/main/pull/38)]
   * Implemented Natty Date Parser [[#59](https://github.com/CS2103AUG2016-W09-C3/main/pull/59)]
