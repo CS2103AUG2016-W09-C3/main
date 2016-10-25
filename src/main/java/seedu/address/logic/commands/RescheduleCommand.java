@@ -1,4 +1,3 @@
-//@@author A0139046E
 package seedu.address.logic.commands;
 
 import java.time.LocalDateTime;

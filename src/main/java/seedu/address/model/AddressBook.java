@@ -181,7 +181,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.sortTasks(sortByAttribute, reverse);
     }
     //@@author
+    
+    //@@author A0139947L
     public void updateRecurringTasks() {
         tasks.updateRecurringTasks();
     }
-}
+    //@@author
+}   
+

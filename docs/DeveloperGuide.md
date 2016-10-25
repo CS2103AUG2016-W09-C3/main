@@ -132,7 +132,7 @@ The `UI` component,
 
 1. `Logic` uses the `Parser` class to parse the user command.
 2. This results in a `Command` object which is executed by the `LogicManager`.
-3. The command execution can affect the `Model` (e.g. adding a person) and/or raise events.
+3. The command execution can affect the `Model` (e.g. adding a task) and/or raise events.
 4. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 
 Given below is the Sequence Diagram for interactions within the `Logic` component for the `execute("delete 1")`
@@ -441,11 +441,11 @@ Since a copy of the to do list is saved to a state after each command, the amoun
 A better solution might be to have custom undos for each command storing only the minimal amount of data needed to undo it, or to use a shallow copied list + copy-on-write system, but due to limited time constraints, we have decided to go with our current solution.
 
 <!-- @@author -->
+<!-- @@author A0139947L -->
 
 ## Appendix A : User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (unlikely to have) - `*`
-
 
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
@@ -464,8 +464,10 @@ Priority | As a ... | I want to ... | So that I can...
 `* *` | user | sort my tasks in order based on date or priority | see what needs to be done based on priority
 `*` | user | input my tasks in different languages | 
 `*` | user | customise the command words for the program | use the program in the way I want to use it
+<!-- @@author -->
 
 <!-- @@author A0139046E -->
+
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `ToDoIt` and the **Actor** is the `user`, unless specified otherwise)
@@ -564,6 +566,14 @@ Use case ends.
 
 >Use case ends
 
+=======
+
+>Use case ends
+
+3a. There is no matching tasks
+
+>Use case ends
+
 #### Use case: Done
 
 **MSS**
@@ -622,8 +632,10 @@ Use case ends.
 
 >ToDoIt shows an error message <br>
  Use case ends
-
+ 
 <!-- @@author -->
+
+<!-- @@author A0139947L -->
 
 ## Appendix C : Non Functional Requirements
 
@@ -650,4 +662,4 @@ Google Calendar | 1. Integration with all of google's existing products includin
 Todo.txt | 1. Simple and fast<br><br>2. Able to set different priorities for task<br><br>3. Able to group task into a particular project so that we can see all tasks related to the project<br><br>4. Todo.txt supports dropbox, so the user can sync easily sync task between mobile on both Android and Apple phones with the computers | 1. No support for recurring task<br><br>2. Only for users that prefer command line input | Todo.txt will cater to users like Jim to a large extend. Todo.txt is perfect for Jim as it uses command line inputs, and ToDo.txt meets a lot of our requirements for our program so we can use this application as a gauge.
 Wunderlist | 1. Aesthetically pleasing with a responsive interface<br><br>2. Self-explanatory UI<br><br>3. Able to add/delete in one click<br><br>4. Able to sync with other devices<br><br>5. Able to categorise tasks into different categories<br><br>6. Able to "star" tasks to priotise them<br><br>7. Able to view completed tasks and mark them as undone | 1. Date detection is dodgy (Detects only specific combinations of dates)<br><br>2. Task description and date has to be entered separately<br><br>3. No built in calendar | Wunderlist is an easy to use application, serving more as a to-do list than a calendar. It is geared towards users who wants a simple reminder of things they have to do rather than a full task scheduler application.
 Fantastical | 1. Simple interface with little to no distractions<br><br>2. Built in search and alarm functions for various tasks<br><br>3. Able to sync with other online calendars<br><br>4. Able to carry out most features without opening the actual calendar application | 1. Fantastical is only free for the first 21-days<br><br>2. Fantastical is an iPhone/MacBook friendly application (Only suits to Apple products) | Overall, Fantastical is a great calendar management application. Fantastical caters to Jim's needs and more, such as having alarm and search functions. Since this is a paid application, it is also well maintained with little to no distractions (no advertisements).
-
+<!-- @@author -->
