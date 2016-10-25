@@ -38,7 +38,14 @@ Role: Developer <br>
 #### [Goh Qi Wei](https://github.com/qiwei24)
 <img src="images/GohQiWei.jpg" width="150"><br>
 Role: Developer <br>
-Responsibilities: Storage
+* Components in charge of: [Storage](https://github.com/CS2103AUG2016-W09-C3/main/tree/master/src/main/java/seedu/address/storage)
+* Aspects/tools in charge of: Tester
+* Features implemented:
+   * [Edit command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#editing-a-task-edit)
+   * [Reschedule command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#rescheduling-a-task-reschedule)
+* Code written: [[functional code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/main/A0139046E.md)][[test code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/test/A0139046E.md)][[docs](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/docs/A0139046E.md)]
+* Other major contributions:
+  * Did refactoring from AddressBook to ToDoIt for test code and got tests to pass [[#93](https://github.com/CS2103AUG2016-W09-C3/main/pull/93)]
 
 -----
 

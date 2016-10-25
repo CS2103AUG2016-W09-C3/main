@@ -1,3 +1,4 @@
+//@@author A0139046E
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -9,34 +10,14 @@ import seedu.address.model.task.*;
  */
 public class TestDatedTask extends TestTask implements ReadOnlyDatedTask {
 
-    private Name name;
-    protected Priority priority;
-    protected Information information;
-    protected DoneFlag doneFlag;
-    private UniqueTagList tags;
     private Length length;
     private DateTime dateTime;
     private Recurrance recurrance;
     private String dateTimeString;
+    private UniqueTagList tags;
 
     public TestDatedTask() {
         tags = new UniqueTagList();
-    }
-
-    public void setName(Name name) {
-        this.name = name;
-    }
-
-    public void setPriority(Priority priority) {
-        this.priority = priority;
-    }
-
-    public void setInformation(Information information) {
-        this.information = information;
-    }
-
-    public void setDoneFlag(DoneFlag doneFlag) {
-        this.doneFlag = doneFlag;
     }
     
     public void setLength(Length length) {
@@ -53,26 +34,6 @@ public class TestDatedTask extends TestTask implements ReadOnlyDatedTask {
     
     public void setDateTimeString(String dateTimeString){
     	this.dateTimeString = dateTimeString;
-    }
-
-    @Override
-    public Name getName() {
-        return this.name;
-    }
-
-    @Override
-    public Priority getPriority() {
-        return this.priority;
-    }
-
-    @Override
-    public Information getInformation() {
-        return this.information;
-    }
-
-    @Override
-    public DoneFlag getDoneFlag() {
-        return this.doneFlag;
     }
 
     @Override
@@ -120,3 +81,4 @@ public class TestDatedTask extends TestTask implements ReadOnlyDatedTask {
         return sb.toString();
     }
 }
+//@@author

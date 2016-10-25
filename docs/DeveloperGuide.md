@@ -466,6 +466,8 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | customise the command words for the program | use the program in the way I want to use it
 <!-- @@author -->
 
+<!-- @@author A0139046E -->
+
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `ToDoIt` and the **Actor** is the `user`, unless specified otherwise)
@@ -564,6 +566,14 @@ Use case ends.
 
 >Use case ends
 
+=======
+
+>Use case ends
+
+3a. There is no matching tasks
+
+>Use case ends
+
 #### Use case: Done
 
 **MSS**
@@ -622,6 +632,8 @@ Use case ends.
 
 >ToDoIt shows an error message <br>
  Use case ends
+ 
+<!-- @@author -->
 
 <!-- @@author A0139947L -->
 

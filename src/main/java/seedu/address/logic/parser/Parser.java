@@ -233,7 +233,9 @@ public class Parser {
         }
         return new ClearCommand();
     }
+    //@@author
     
+    //@@author A0139046E
     /**
      * Parses arguments in the context of the edit task command.
      *
@@ -262,6 +264,8 @@ public class Parser {
         }
     }
     //@@author
+    
+    //@@author A0139046E
     /**
      * Parses arguments in the context of the reschedule task command.
      *
@@ -280,6 +284,7 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
+    //@author
 
     /**
      * Parses arguments in the context of the select task command.
@@ -296,6 +301,7 @@ public class Parser {
 
         return new SelectCommand(index.get());
     }
+    
     // @@author A0140155U
     /**
      * Parses arguments in the context of the done task command.

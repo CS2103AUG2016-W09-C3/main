@@ -83,6 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.add(p);
     }
     
+    //@@author A0139046E
     /**
      * Adds a task to the address book at the specific index
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
@@ -94,6 +95,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         syncTagsWithMasterList(p);
         tasks.addToIndex(p, index);
     }
+    //@@author
 
     /**
      * Ensures that every tag in this task:
