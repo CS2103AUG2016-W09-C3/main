@@ -41,6 +41,7 @@ public class EditCommand extends Command {
 
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DATED_PARAMS = "A non-dated task cannot have length or recurring data.";
 
 	public final int targetIndex;
 	
@@ -110,6 +111,9 @@ public class EditCommand extends Command {
 					);
 			}
 			else {
+			    if(checkHasDatedParams()){
+			        throw new IllegalValueException(MESSAGE_DATED_PARAMS);
+			    }
 				this.toAdd = new Task(
 	                new Name(name),
 	                new Priority(priority),
@@ -138,12 +142,22 @@ public class EditCommand extends Command {
 	 * Check if task change from task to datedtask
 	 */
 	private boolean checkChangeTaskType(){
-		if(!(this.datetime.equals("-1")) && !(this.length.equals("-1"))){
+		if(!(this.datetime.equals("-1"))){
 			return true;
 		}
 		return false;
 	}
 	
+	 /**
+     * Check has dated params 
+     */
+    private boolean checkHasDatedParams(){
+        if(!(this.length.equals(Length.NO_INTERVAL)) && !(this.recurring.equals(Recurrance.NO_INTERVAL))){
+            return true;
+        }
+        return false;
+    }
+    
 	/**
 	 * Copy dated task information of time, date, length, recurring if it is not edited
 	 */
@@ -153,7 +167,7 @@ public class EditCommand extends Command {
 		if(this.datetime.equals("-1")){
 	        this.datetime = datedTaskToEdit.getDateTime().toString();
 		}
-        if(this.length.equals("-1")){
+        if(this.length.equals(Length.NO_INTERVAL)){
             this.length = datedTaskToEdit.getLength().toString();
         }
         if(this.recurring.equals(Recurrance.NO_INTERVAL)){

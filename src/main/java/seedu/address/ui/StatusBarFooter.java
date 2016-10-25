@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import org.controlsfx.control.StatusBar;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.FilePathChangedEvent;
 import seedu.address.commons.util.FxViewUtil;
 
 import java.util.Date;
@@ -45,7 +46,7 @@ public class StatusBarFooter extends UiPart {
         addSyncStatus();
         setSyncStatus("Not updated yet in this session");
         addSaveLocation();
-        setSaveLocation("./" + saveLocation);
+        setSaveLocation(getFormattedPath(saveLocation));
         registerAsAnEventHandler(this);
     }
 
@@ -95,4 +96,19 @@ public class StatusBarFooter extends UiPart {
         logger.info(LogsCenter.getEventHandlingLogMessage(abce, "Setting last updated status to " + lastUpdated));
         setSyncStatus("Last Updated: " + lastUpdated);
     }
+    // @@author A0140155U
+    @Subscribe
+    public void handleFilePathChangedEvent(FilePathChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Setting last updated status to " + event.filePath));
+        setSaveLocation(getFormattedPath(event.filePath));
+    }
+    
+    private String getFormattedPath(String filepath){
+        if(filepath.matches("^.:.*")){
+            // Drive path e.g. C:\...
+            return filepath;
+        }
+        return "./" + filepath;
+    }
+    // @@author
 }
