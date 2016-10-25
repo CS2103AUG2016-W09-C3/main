@@ -9,7 +9,7 @@ import java.util.HashSet;
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Lists all tasks in the address book to the user.
+ * Lists all tasks in the task list to the user.
  */
 public class ListCommand extends Command {
 
