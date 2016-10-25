@@ -24,8 +24,7 @@ public interface ParsedCommand {
     String getParamOrDefault(String paramName, String defaultParam);
 
     /**
-     * Retrieves a list of params corresponding to the param name.
-     * If the param name has no values, returns an empty list.
+     * Get all params.
      */
     ArrayList<String> getParamList();
     
@@ -46,7 +45,8 @@ public interface ParsedCommand {
     ArrayList<String> getAllValues();
 
     /**
-     * Get all params.
+     * Retrieves a list of params corresponding to the param name.
+     * If the param name has no values, returns an empty list.
      */
     ArrayList<String> getAllParams(String paramName);
 
