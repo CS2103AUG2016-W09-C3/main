@@ -64,7 +64,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     public ModelManager(ReadOnlyAddressBook initialData, UserPrefs userPrefs) {
         addressBook = new AddressBook(initialData);
+        //@@author A0139947L
         addressBook.updateRecurringTasks();
+        //@@author
         filteredTasks = new FilteredList<>(addressBook.getTasks());
         // @@author A0140155U
         states = new StatesManager(new AddressBookState(addressBook));
@@ -108,12 +110,14 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
     
+    //@@author A0139046E
     @Override
     public synchronized void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTaskToIndex(task, index);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
     }
+    //@@author
 
     //=========== Filtered Task List Accessors ===============================================================
 

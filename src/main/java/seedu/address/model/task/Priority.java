@@ -42,7 +42,8 @@ public class Priority {
         }
     }
     
-    // User is able to put different aliases for time
+    //@@author A0139947L
+    // User is able to put different aliases for priority
     private void getListOfDifferentAliases() {
         listOfPriorities.put("VH", "VERYHIGH");
         listOfPriorities.put("H", "HIGH");
@@ -50,6 +51,7 @@ public class Priority {
         listOfPriorities.put("L", "LOW");
         listOfPriorities.put("VL", "VERYLOW");
     }
+    //@@author
     
     public int getEnumPriority(){
         return priority.getEnumPriority();
@@ -66,12 +68,14 @@ public class Priority {
         
         String upperPriority = priority.toUpperCase();
         
+        //@@author A0139947L
         listOfPriorities = new HashMap<String, String>();
         getListOfDifferentAliases();
         
         if (listOfPriorities.containsKey(upperPriority)){
             upperPriority = listOfPriorities.get(upperPriority);
        }
+       //@@author
         
         if(acceptedPriority.Contains(upperPriority)){
             this.priority = acceptedPriority.valueOf(upperPriority);

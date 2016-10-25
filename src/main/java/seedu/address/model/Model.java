@@ -27,9 +27,11 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
     
+    //@@author A0139046E
     /** Adds the given task at the specific index*/
     void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException;
-
+    //@@author
+    
     /** Saves the current state onto stack*/
     void saveState(String commandText);
     

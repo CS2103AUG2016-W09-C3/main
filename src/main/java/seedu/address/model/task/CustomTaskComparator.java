@@ -38,7 +38,7 @@ public class CustomTaskComparator implements Comparator<Task>{
     
     private class AlphabetComparer implements Comparer{
         public int compare(Task t1, Task t2){
-            return t1.getName().toString().compareTo(t2.getName().toString());
+            return t1.getName().toString().compareToIgnoreCase(t2.getName().toString());
         }
     }
     

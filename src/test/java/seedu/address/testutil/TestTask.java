@@ -9,11 +9,11 @@ import seedu.address.model.task.*;
  */
 public class TestTask implements ReadOnlyTask {
 
-    private Name name;
+    protected Name name;
     protected Priority priority;
     protected Information information;
     protected DoneFlag doneFlag;
-    private UniqueTagList tags;
+    protected UniqueTagList tags;
 
     public TestTask() {
         tags = new UniqueTagList();

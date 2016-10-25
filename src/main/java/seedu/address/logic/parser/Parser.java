@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import seedu.address.logic.commands.*;
 import seedu.address.model.task.DateParser;
 import seedu.address.model.task.DoneFlag;
+import seedu.address.model.task.Length;
 import seedu.address.model.task.Recurrance;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -140,11 +141,15 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
         
-        return new ListCommand(
-                dateRange,
-                sortByAttribute,
-                command.getParamOrDefault("df", "Not done"),
-                reverse);
+        try {
+            return new ListCommand(
+                    dateRange,
+                    sortByAttribute,
+                    command.getParamOrDefault("df", "Not done"),
+                    reverse);
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
     }
     
     //@@author A0139121R
@@ -229,7 +234,9 @@ public class Parser {
         }
         return new ClearCommand();
     }
+    //@@author
     
+    //@@author A0139046E
     /**
      * Parses arguments in the context of the edit task command.
      *
@@ -246,7 +253,7 @@ public class Parser {
                         Integer.parseInt(command.getValuesAsString()),
                         command.getParamOrDefault("n", ""),
                         command.getParamOrDefault("d", "-1"),
-                        command.getParamOrDefault("l", "-1"),
+                        command.getParamOrDefault("l", Length.NO_INTERVAL),
                         command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
                         command.getParamOrDefault("p", ""),
                         command.getParamOrDefault("i", ""),
@@ -258,6 +265,8 @@ public class Parser {
         }
     }
     //@@author
+    
+    //@@author A0139046E
     /**
      * Parses arguments in the context of the reschedule task command.
      *
@@ -276,6 +285,7 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
+    //@author
 
     /**
      * Parses arguments in the context of the select task command.
@@ -292,6 +302,7 @@ public class Parser {
 
         return new SelectCommand(index.get());
     }
+    
     // @@author A0140155U
     /**
      * Parses arguments in the context of the done task command.
