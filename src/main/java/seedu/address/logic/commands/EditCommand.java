@@ -151,7 +151,7 @@ public class EditCommand extends Command {
      * Check has dated params 
      */
     private boolean checkHasDatedParams(){
-        if(!(this.length.equals("-1")) && !(this.recurring.equals("-1"))){
+        if(!(this.length.equals(Length.NO_INTERVAL)) && !(this.recurring.equals(Recurrance.NO_INTERVAL))){
             return true;
         }
         return false;
@@ -166,7 +166,7 @@ public class EditCommand extends Command {
 		if(this.datetime.equals("-1")){
 	        this.datetime = datedTaskToEdit.getDateTime().toString();
 		}
-        if(this.length.equals("-1")){
+        if(this.length.equals(Length.NO_INTERVAL)){
             this.length = datedTaskToEdit.getLength().toString();
         }
         if(this.recurring.equals(Recurrance.NO_INTERVAL)){
