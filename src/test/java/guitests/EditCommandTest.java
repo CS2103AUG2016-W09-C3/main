@@ -52,34 +52,23 @@ public class EditCommandTest extends AddressBookGuiTest {
     public void edit_priorityVeryLow(){
         // Check if edit function edits successfully (not necessary in sequence)
         TestTask[] listToEdit = td.getTypicalTasks();
+        
         String command = "edit 1 p/vl";
-        assertEditSuccess(command, listToEdit);
-    }
-/*    
-    @Test
-    public void edit_timeIntervalRecurrenceDays(){
-        // Check if edit function edits successfully (not necessary in sequence)
-        TestDatedTask[] listToEdit = td.getTypicalDatedTask();
-        String command = "edit 1 r/7day";
-        assertEditSuccess(command, listToEdit);
-    }
-    
-    @Test
-    public void edit_timeIntervalRecurrenceWeeks(){
-        // Check if edit function edits successfully (not necessary in sequence)
-        TestDatedTask[] listToEdit = td.getTypicalDatedTask();
-        String command = "edit 1 r/16weeks";
         assertEditSuccess(command, listToEdit);
     }
     
     @Test
     public void edit_invalidTimeIntervalRecurrence(){
         // Check if edit function edits successfully (not necessary in sequence)
-        TestDatedTask[] listToEdit = td.getTypicalDatedTask();
-        String command = "edit 1 r/3dayzz";
+        TestTask[] listToEdit = td.getTypicalTasks();
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        commandBox.runCommand(td.csFinalExam.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        TestTask datedTaskToAdd2 = td.csFinalExam;
+        String command = "edit 9 r/3dayzz";
         unknownCommandFormatTimeInterval(command);
     }
-*/    
+    
     @Test
     public void edit_invalidIndex(){
         // Check if program handles invalid index properly with a thrown message
