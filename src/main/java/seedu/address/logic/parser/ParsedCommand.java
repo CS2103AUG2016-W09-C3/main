@@ -68,11 +68,13 @@ public interface ParsedCommand {
      */
     boolean hasValue();
     
+    //@@author A0139046E
     /**
      * Check if command has value at the particular index
      * Useful for checking if the command is valid.
      */
     boolean hasValueAtIndex(int index);
+    //@@author
     
     /**
      * Check if command has value at the particular index

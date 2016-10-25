@@ -1,4 +1,5 @@
-	package seedu.address.logic.commands;
+//@@author A0139046E
+package seedu.address.logic.commands;
 
 import java.time.LocalDateTime;
 
@@ -100,3 +101,4 @@ public class RescheduleCommand extends Command{
 		return true;
 	}
 }
+//@@author

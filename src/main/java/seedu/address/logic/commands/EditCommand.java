@@ -1,3 +1,4 @@
+//@@author A0139046E
 package seedu.address.logic.commands;
 
 import java.util.HashSet;
@@ -134,7 +135,7 @@ public class EditCommand extends Command {
 	}
 	
 	/**
-	 * Check if task change from task to datedtask 
+	 * Check if task change from task to datedtask
 	 */
 	private boolean checkChangeTaskType(){
 		if(!(this.datetime.equals("-1")) && !(this.length.equals("-1"))){
@@ -189,3 +190,4 @@ public class EditCommand extends Command {
         return true;
     }
 }
+//@@author
