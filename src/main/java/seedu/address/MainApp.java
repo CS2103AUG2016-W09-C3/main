@@ -206,7 +206,7 @@ public class MainApp extends Application {
             logger.warning("Failed to save config file, reverting to old : " + StringUtil.getDetails(e));
         }
     }
-    // @@author A0140155U    
+    // @@author  
     
     public static void main(String[] args) {
         launch(args);
