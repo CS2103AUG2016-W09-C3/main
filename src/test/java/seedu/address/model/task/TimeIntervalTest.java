@@ -24,6 +24,8 @@ public class TimeIntervalTest {
             t = new TimeInterval("3w");
             assertEquals(t.getAsMinutes(), 3 * 7 * 24 * 60);
             // @@author
+            
+            // @@author A0139947L
             // Check if TimeInterval is able to get different aliases
             t = new TimeInterval("6min");
             assertEquals(t.getAsMinutes(), 6);
@@ -41,6 +43,8 @@ public class TimeIntervalTest {
             assertEquals(t.getAsMinutes(), 2 * 7 * 24 * 60);
             t = new TimeInterval("9weeks");
             assertEquals(t.getAsMinutes(), 9 * 7 * 24 * 60);
+            // @@author
+            
             // @@author A0140155U
         } catch (IllegalValueException e) {
             fail("Could not parse time interval");

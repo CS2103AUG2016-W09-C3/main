@@ -1,3 +1,4 @@
+// @@author A0139947L
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -58,6 +59,15 @@ public class EditCommandTest extends AddressBookGuiTest {
     }
     
     @Test
+    public void edit_priorityCaseSensitive(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestTask[] listToEdit = td.getTypicalTasks();
+        
+        String command = "edit 3 p/vH";
+        assertEditSuccess(command, listToEdit);
+    }
+    
+    @Test
     public void edit_invalidTimeIntervalRecurrence(){
         // Check if edit function edits successfully (not necessary in sequence)
         TestTask[] listToEdit = td.getTypicalTasks();
@@ -67,6 +77,45 @@ public class EditCommandTest extends AddressBookGuiTest {
         TestTask datedTaskToAdd2 = td.csFinalExam;
         String command = "edit 9 r/3dayzz";
         unknownCommandFormatTimeInterval(command);
+    }
+    
+    @Test
+    public void edit_datedTaskTimeIntervalRecurrenceDays(){
+        // Check if program is able to edit all tasks in sequence
+        TestTask[] listToEdit = td.getTypicalTasks();
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        commandBox.runCommand(td.csFinalExam.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        TestTask datedTaskToAdd2 = td.csFinalExam;
+        String command = "edit 8 n/Meet Isabel p/High r/3days d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
+        TestTask[] finalList = TestUtil.addTasksToList(listToEdit, datedTaskToAdd, datedTaskToAdd2);
+        assertEditSuccess(command, finalList);
+    }
+    
+    @Test
+    public void edit_datedTaskTimeIntervalRecurrenceWeeks(){
+        // Check if program is able to edit all tasks in sequence
+        TestTask[] listToEdit = td.getTypicalTasks();
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        commandBox.runCommand(td.csFinalExam.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        TestTask datedTaskToAdd2 = td.csFinalExam;
+        String command = "edit 8 n/Meet Isabel p/High r/6weeks d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
+        TestTask[] finalList = TestUtil.addTasksToList(listToEdit, datedTaskToAdd, datedTaskToAdd2);
+        assertEditSuccess(command, finalList);
+    }
+    
+    @Test
+    public void edit_recurrenceAndPriorityAlias(){
+        // Check if program is able to edit all tasks in sequence
+        TestTask[] listToEdit = td.getTypicalTasks();
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        commandBox.runCommand(td.csFinalExam.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        TestTask datedTaskToAdd2 = td.csFinalExam;
+        String command = "edit 8 n/Meet KappaRoss p/vH r/6weeks d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
+        TestTask[] finalList = TestUtil.addTasksToList(listToEdit, datedTaskToAdd, datedTaskToAdd2);
+        assertEditSuccess(command, finalList);
     }
     
     @Test
@@ -216,3 +265,4 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(String.format(TimeInterval.MESSAGE_TIME_INTERVAL_CONSTRAINTS, EditCommand.MESSAGE_USAGE));
     }
 }
+// @@author

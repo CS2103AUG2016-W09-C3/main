@@ -18,12 +18,15 @@ public class TimeInterval {
 
     private static HashMap<String, String> MINUTE_ALIASES = new HashMap<>();
     
+    
     static
     {
         INTERVAL_TO_MINUTES.put("m", 1);
         INTERVAL_TO_MINUTES.put("h", 60);
         INTERVAL_TO_MINUTES.put("d", 24 * 60);
         INTERVAL_TO_MINUTES.put("w", 7 * 24 * 60);
+        
+        // @@author A0139947L
         MINUTE_ALIASES.put("min", "m");
         MINUTE_ALIASES.put("mins", "m");
         MINUTE_ALIASES.put("hr", "h");
@@ -32,6 +35,7 @@ public class TimeInterval {
         MINUTE_ALIASES.put("days", "d");
         MINUTE_ALIASES.put("week", "w");
         MINUTE_ALIASES.put("weeks", "w");
+        // @@author
     }
     
     public final String intervalString;
@@ -56,9 +60,11 @@ public class TimeInterval {
         length = Integer.parseInt(matcher.group("length"));
         unit = matcher.group("unit");
         
+        // @@author A0139947L
         if (MINUTE_ALIASES.containsKey(unit)){
             this.unit = MINUTE_ALIASES.get(unit);
         }
+        // @@author
         
         if(!isValidInterval(length, unit)){
             throw new IllegalValueException(MESSAGE_TIME_INTERVAL_CONSTRAINTS);
