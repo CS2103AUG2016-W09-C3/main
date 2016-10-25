@@ -64,12 +64,12 @@ public class Task implements ReadOnlyTask {
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
     }
-    //@@ author
+
     @Override
     public DoneFlag getDoneFlag() {
         return this.doneFlag;
     }
-    //@@author A0139121R
+    
     /**
      * Replaces this task's tags with the tags in the argument tag list.
      */
