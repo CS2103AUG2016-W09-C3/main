@@ -27,9 +27,11 @@ public interface Model {
     /** Adds the given task */
     void addTask(Task task) throws UniqueTaskList.DuplicateTaskException;
     
+    //@@author A0139046E
     /** Adds the given task at the specific index*/
     void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException;
-
+    //@@author
+    
     /** Saves the current state onto stack*/
     void saveState(String commandText);
     
@@ -38,7 +40,7 @@ public interface Model {
 
     /** Updates the filter of the filtered task list to show all tasks */
     void updateFilteredListToShowAll();
-
+    //@@author A0139121R  
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope);
     
@@ -50,7 +52,7 @@ public interface Model {
     
     /** Updates the filter of the filtered task list to show not done tasks*/
     void updateFilteredListToShowDone();
-
+    //@@author
     /** Loads the previous state. Returns the command attached to the state to be printed. */
     String loadPreviousState() throws StateException;
 

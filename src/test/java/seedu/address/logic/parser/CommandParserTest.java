@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.*;
@@ -196,7 +197,7 @@ public class CommandParserTest {
     public void getAllParams() {
         ParsedCommand command = new CommandParser("param1/paramValue1 param2/paramValue1 param1/paramValue2 param2/paramValue1");
         String[] result = {"param1", "param2"};
-        ArrayList<String> paramList = command.getAllParams();
+        ArrayList<String> paramList = command.getParamList();
         assertEqualValues(paramList, result);
     }
 
@@ -234,7 +235,7 @@ public class CommandParserTest {
     }
     
     private void assertParamList(ParsedCommand command, String param, String... paramValues){
-        ArrayList<String> paramList = command.getParamList(param);
+        ArrayList<String> paramList = command.getAllParams(param);
         assertEqualValues(paramList, paramValues);
     }
 
@@ -245,6 +246,7 @@ public class CommandParserTest {
     }
 
     private void assertNoParams(ParsedCommand command){
-        assert(command.getAllParams().size() == 0);
+        assert(command.getParamList().size() == 0);
     }
 }
+//@@author

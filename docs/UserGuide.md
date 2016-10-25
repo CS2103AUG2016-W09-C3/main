@@ -62,11 +62,11 @@ When the program is started, you will see 4 controls:
 * Options with `...` after them can be specified multiple times (e.g. `t/Work t/School t/CS2103`).
 * The order of options to specify for each command is fixed.
 
+<!-- @@author A0140155U -->
+
 ### Date Specifications
 
-ToDoIt uses Natty date parser to parse date and time options.
-
-Natty accepts most common formats of dates. Some examples include:
+ToDoIt accepts most common formats of dates. Some examples include:
 
 * 2015-12-31
 * 2015/12/31
@@ -82,6 +82,7 @@ Natty accepts most common formats of dates. Some examples include:
 For a full list of accepted formats, please refer to:
 http://natty.joestelmach.com/doc.jsp
 
+<!-- @@author -->
 ---
 
 ### Viewing help : `help`
@@ -102,8 +103,8 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 **Options**
 > 1. `d/` Date and time: Specifies the start date and time of a task. Please refer to the Date Specifications section for accepted formats.
 > 2. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
-> 3. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
-> 4. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`)
+> 3. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval. 
+> 4. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
 > 5. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
 > 6. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
 > 7. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
@@ -201,8 +202,8 @@ Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY
 > 1. `n/` Name: The new name of the task.
 > 1. `d/` Date and time: Specifies the start date and time of a task. Please refer to the Date Specifications section for what formats are accepted.
 > 2. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
-> 3. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
-> 4. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`)
+> 3. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
+> 4. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
 > 5. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
 > 6. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
 > 7. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
@@ -293,7 +294,7 @@ ToDoIt is sad to see you go.<br>
 Format: `exit`  
 
 ---
-
+<!-- @@author A0139121R -->
 ## FAQ
 
 **Q**: How do I access help?<br>
@@ -319,7 +320,9 @@ Format: `exit`
 **A**: No, there is no prior command line knowledge required to use ToDoIt.
 	   Instead, just follow the instructions given in the help. See access help faq.<br>
        <br>
-       
+
+<!-- @@author -->
+
 ## Command Summary
 
 Command | Format  
@@ -337,8 +340,3 @@ Undo | `undo`
 Redo | `redo`
 Help | `help`
 Exit | `exit`
-
-## Acknowledgements
-
-This program uses Natty Date Parser under the MIT license.
-http://natty.joestelmach.com/

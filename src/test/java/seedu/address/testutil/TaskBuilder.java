@@ -5,7 +5,9 @@ import seedu.address.model.tag.Tag;
 import seedu.address.model.task.*;
 
 /**
- *
+ * A utility class to help with building Task objects. Example usage: <br>
+ * {@code TestTask testTask = new TaskBuilder().withName("Meeting with John").withPriority("medium")
+ *                   .withInformation("To pitch business idea").withDoneFlag("Not done").build();}
  */
 public class TaskBuilder {
 

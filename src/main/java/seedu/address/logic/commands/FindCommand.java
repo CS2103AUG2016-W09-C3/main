@@ -1,3 +1,4 @@
+//@@author A0139121R
 package seedu.address.logic.commands;
 
 import java.util.Arrays;
@@ -16,10 +17,11 @@ public class FindCommand extends Command {
     
     public static final String[] REQUIRED_PARAMS = {};
     public static final String[] POSSIBLE_PARAMS = {"s"};
-    public static final HashSet<String> defaultSearchScope = new HashSet<String>(Arrays.asList("n", "i", "d"));;
+    public static final HashSet<String> defaultSearchScope = new HashSet<String>(Arrays.asList("n", "i", "d"));
+    public static final HashSet<String> ALL_POSSIBLE_PARAMS = new HashSet<String>(Arrays.asList("n", "i", "d"));
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
-            + "the specified keywords (case-sensitive) from the specified attributes and displays them as a list with index numbers.\n"
+            + "the specified keywords (case-insensitive) from the specified attributes and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS] [s/i s/n s/d]...\n"
             + "Example: " + COMMAND_WORD + " Meeting 01-01-2016 14:30 s/n s/d \n"
             + "Take note s/d here means to search within time and date in the format dd-MM-yyyy HH:mm";
@@ -30,6 +32,11 @@ public class FindCommand extends Command {
     public FindCommand(Set<String> keywords, HashSet<String> searchScope) throws IllegalValueException{
         if (keywords.isEmpty()){
             throw new IllegalValueException(MESSAGE_USAGE);
+        }
+        for(String scope : searchScope){
+            if(!ALL_POSSIBLE_PARAMS.contains(scope)){
+                throw new IllegalValueException("Invalid search scope, use only n, i and d " + MESSAGE_USAGE);
+            }
         }
         this.keywords = keywords;
         this.searchScope = searchScope;

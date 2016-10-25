@@ -3,7 +3,7 @@
 
 # ToDoIt Task Manager
 
-<img src="docs/images/prototype.png" width="600"><br>
+<img src="docs/images/ui.png" width="800"><br>
 
 Always forgetting what to do? If you would like to plan your day efficiently, then we have got just the app just for you, ToDoIt!<br>
 <br>
@@ -30,5 +30,8 @@ Are you ready? Let's start now!<br>
 * Some parts of this sample application were inspired by the excellent 
   [Java FX tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by *Marco Jakob*. 
 
+* This program uses [Natty Date Parser](http://natty.joestelmach.com/) under the MIT license.
+
+* This application is based off [AddressBook Level 4](https://github.com/se-edu/addressbook-level4)'s sample code.
 
 #### Licence : [MIT](LICENSE)

@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import seedu.address.logic.commands.*;
 import seedu.address.model.task.DateParser;
 import seedu.address.model.task.DoneFlag;
+import seedu.address.model.task.Length;
 import seedu.address.model.task.Recurrance;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -110,6 +111,7 @@ public class Parser {
         }
     }
     
+    //@@author A0139121R
     /**
      * Parses arguments in the context of the list command.
      * 
@@ -121,18 +123,6 @@ public class Parser {
         ArrayList<String> sortByAttribute = new ArrayList<String>();
         boolean reverse = false;
         try{
-            /* Deprecated
-             * 
-            if(command.hasParams(ListCommand.START_AND_END_DATE_PARAM)){
-                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
-                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
-            } else if(command.hasParams(ListCommand.START_DATE_PARAM)){
-                dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
-            } else if(command.hasParams(ListCommand.END_DATE_PARAM)){
-                dateRange.put("end", command.getParam(ListCommand.END_DATE_PARAM[0]));
-            } else {
-                
-            }*/
             if(command.hasParams(ListCommand.START_DATE_PARAM)){
                 dateRange.put("start", command.getParam(ListCommand.START_DATE_PARAM[0]));
             }
@@ -142,7 +132,7 @@ public class Parser {
             
             if(command.hasParams(ListCommand.SORT_PARAM)){
                 //sortByAttribute = new ArrayList<String>(Arrays.asList(command.getParam("s").split(" ")));
-                sortByAttribute = command.getParamList("s");
+                sortByAttribute = command.getAllParams("s");
             }
             if(command.hasParams(ListCommand.REVERSE_PARAM)){
                 reverse = true;
@@ -151,13 +141,18 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
         
-        return new ListCommand(
-                dateRange,
-                sortByAttribute,
-                command.getParamOrDefault("df", "Not done"),
-                reverse);
+        try {
+            return new ListCommand(
+                    dateRange,
+                    sortByAttribute,
+                    command.getParamOrDefault("df", "Not done"),
+                    reverse);
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
     }
-
+    
+    //@@author A0139121R
     /**
      * Parses arguments in the context of the add task command.
      *
@@ -174,11 +169,12 @@ public class Parser {
                         command.getValuesAsString(),
                         command.getParamOrDefault("d", "-1"),
                         command.getParamOrDefault("l", "-1"),
+                        command.getParamOrDefault("de", "-1"),
                         command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
                         command.getParamOrDefault("p", "medium"),
                         command.getParamOrDefault("i", ""),
                         DoneFlag.NOT_DONE,
-                        getTagsFromArgs(command.getParamList("t"))
+                        getTagsFromArgs(command.getAllParams("t"))
                 );
             } else {
                 return new AddCommand(
@@ -186,13 +182,14 @@ public class Parser {
                         command.getParamOrDefault("p", "medium"),
                         command.getParamOrDefault("i", ""),
                         DoneFlag.NOT_DONE,
-                        getTagsFromArgs(command.getParamList("t"))
+                        getTagsFromArgs(command.getAllParams("t"))
                 );
             }
         } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
         }
     }
+    //@@author
 
     /**
      * Extracts the new task's tags from the add command's tag arguments string.
@@ -223,6 +220,8 @@ public class Parser {
         return new DeleteCommand(index.get());
     }
     
+    
+    //@@author A0139121R
     /**
      * Checks if clear command has any other users input behind clear command word.
      * 
@@ -235,7 +234,9 @@ public class Parser {
         }
         return new ClearCommand();
     }
+    //@@author
     
+    //@@author A0139046E
     /**
      * Parses arguments in the context of the edit task command.
      *
@@ -252,18 +253,20 @@ public class Parser {
                         Integer.parseInt(command.getValuesAsString()),
                         command.getParamOrDefault("n", ""),
                         command.getParamOrDefault("d", "-1"),
-                        command.getParamOrDefault("l", "-1"),
+                        command.getParamOrDefault("l", Length.NO_INTERVAL),
                         command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
                         command.getParamOrDefault("p", ""),
                         command.getParamOrDefault("i", ""),
                         DoneFlag.NOT_DONE,
-                        getTagsFromArgs(command.getParamList("t"))
+                        getTagsFromArgs(command.getAllParams("t"))
                 );
         } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
         }
     }
+    //@@author
     
+    //@@author A0139046E
     /**
      * Parses arguments in the context of the reschedule task command.
      *
@@ -282,6 +285,7 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
     }
+    //@author
 
     /**
      * Parses arguments in the context of the select task command.
@@ -298,7 +302,8 @@ public class Parser {
 
         return new SelectCommand(index.get());
     }
-
+    
+    // @@author A0140155U
     /**
      * Parses arguments in the context of the done task command.
      *
@@ -340,6 +345,7 @@ public class Parser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
         }
     }
+    // @@author
     
     /**
      * Returns the specified index in the {@code command} IF a positive unsigned integer is given as the index.
@@ -359,6 +365,7 @@ public class Parser {
 
     }
 
+    //@@author A0139121R
     /**
      * Parses arguments in the context of the find task command.
      *
@@ -370,22 +377,10 @@ public class Parser {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
         try{
-            return new FindCommand(new HashSet<String>(command.getAllValues()), new HashSet<String>(command.getParamList("s")));
+            return new FindCommand(new HashSet<String>(command.getAllValues()), new HashSet<String>(command.getAllParams("s")));
         } catch (IllegalValueException ive){
             return new IncorrectCommand(ive.getMessage());
         }
-        /* Deprecated
-        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
-        if (!matcher.matches()) {
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    FindCommand.MESSAGE_USAGE));
-        }
-
-        // keywords delimited by whitespace
-        final String[] keywords = matcher.group("keywords").split("\\s+");
-        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
-        return new FindCommand(keywordSet);
-        */
     }
-
+    //@@author
 }

@@ -83,6 +83,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         tasks.add(p);
     }
     
+    //@@author A0139046E
     /**
      * Adds a task to the address book at the specific index
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
@@ -94,6 +95,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         syncTagsWithMasterList(p);
         tasks.addToIndex(p, index);
     }
+    //@@author
 
     /**
      * Ensures that every tag in this task:
@@ -174,12 +176,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(tasks, tags);
     }
-
+    //@@author A0139121R
     public void sortTasks(ArrayList<String> sortByAttribute, boolean reverse) {
         tasks.sortTasks(sortByAttribute, reverse);
     }
+    //@@author
     
+    //@@author A0139947L
     public void updateRecurringTasks() {
         tasks.updateRecurringTasks();
     }
-}
+    //@@author
+}   
+

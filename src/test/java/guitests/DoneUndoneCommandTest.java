@@ -1,6 +1,7 @@
+// @@author A0140155U
 package guitests;
 
-import guitests.guihandles.PersonCardHandle;
+import guitests.guihandles.TaskCardHandle;
 import org.junit.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.DoneCommand;
@@ -24,7 +25,7 @@ public class DoneUndoneCommandTest extends AddressBookGuiTest {
     public void doneUndone() {
 
         //done the first task in the list
-        TestTask[] currentList = td.getTypicalPersons();
+        TestTask[] currentList = td.getTypicalTasks();
         int targetIndex = 1;
         assertDoneSuccess(targetIndex, currentList);
         currentList = doTask(targetIndex, currentList, DoneFlag.DONE);
@@ -72,7 +73,7 @@ public class DoneUndoneCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("done " + targetIndexOneIndexed);
 
         //confirm the list now contains all previous persons except the deleted person
-        assertTrue(personListPanel.isListMatching(expectedRemainder));
+        assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_SUCCESS, DoneFlag.DONE, taskToDo.getName()));
@@ -94,7 +95,7 @@ public class DoneUndoneCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("undone " + targetIndexOneIndexed);
 
         //confirm the list now contains all previous persons except the deleted person
-        assertTrue(personListPanel.isListMatching(expectedRemainder));
+        assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
         assertResultMessage(String.format(MESSAGE_SUCCESS, DoneFlag.NOT_DONE, taskToDo.getName()));
@@ -107,15 +108,16 @@ public class DoneUndoneCommandTest extends AddressBookGuiTest {
     
     private TestTask[] doTask(int targetIndexOneIndexed, final TestTask[] currentList, String flag) {
         TestTask taskToDo = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
-        TestTask[] expectedRemainder = TestUtil.removePersonFromList(currentList, targetIndexOneIndexed);
+        TestTask[] expectedRemainder = TestUtil.removeTaskFromList(currentList, targetIndexOneIndexed);
         try {
             taskToDo.setDoneFlag(new DoneFlag(flag));
         } catch (IllegalValueException e) {
             assert(false);
         }
         //expectedRemainder = TestUtil.addPersonsToList(expectedRemainder, taskToDo);
-        expectedRemainder = TestUtil.addPersonsToListIndex(expectedRemainder, taskToDo, targetIndexOneIndexed - 1);
+        expectedRemainder = TestUtil.addTaskToListIndex(expectedRemainder, taskToDo, targetIndexOneIndexed - 1);
         return expectedRemainder;
     }
   
 }
+//@@author

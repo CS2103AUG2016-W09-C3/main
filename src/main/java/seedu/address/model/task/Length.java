@@ -1,57 +1,54 @@
+// @@author A0140155U
 package seedu.address.model.task;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 
 /**
- * Represents a Task's length in the task book.
- * Guarantees: immutable; is valid as declared in {@link #isValidLength(String)}
+ * Represents a Task's length.
+ * Functions as a wrapper for TimeInterval
  */
 public class Length {
-    
-    public static final String MESSAGE_LENGTH_CONSTRAINTS = "Task length should be alphanumeric characters, "
-                                                            + "used to denote number of hours.";
-    
-    public static final String LENGTH_VALIDATION_REGEX = "\\d+";
-    
-    public final int length;
-    
+
+    public final TimeInterval timeInterval;
+    public final static String NO_INTERVAL = "";
+    public final static String DEFAULT_INTERVAL = "1h";
+    public boolean hasInterval = true;
     /**
-     * Validates given length.
+     * Stores given interval. Validation of interval is done by TimeInterval class.
      *
-     * @throws IllegalValueException if given length string is invalid.
+     * @throws IllegalValueException if given information string is invalid.
      */
-
-    public Length(String givenLength) throws IllegalValueException {
-        assert givenLength != null;
-        givenLength = givenLength.trim();
+    public Length(String interval) throws IllegalValueException {
+        assert interval != null;
+        interval = interval.trim();
         
-        if (!isValidLength(givenLength)) {
-            throw new IllegalValueException(MESSAGE_LENGTH_CONSTRAINTS);
+        if(interval.equals(NO_INTERVAL)){
+            hasInterval = false;
+            interval = DEFAULT_INTERVAL;
+            
         }
-        int numLength = Integer.parseInt(givenLength);
-        this.length = numLength;
+        this.timeInterval = new TimeInterval(interval);
     }
 
-    private boolean isValidLength(String test) {
-        return test.matches(LENGTH_VALIDATION_REGEX);
-    }
     
     @Override
     public String toString() {
-        return this.length + "";
+        if(!hasInterval){
+            return NO_INTERVAL;
+        }else{
+            return this.timeInterval.toString();
+        }
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Length // instanceof handles nulls
-                && this.length == (((Length) other).length)); // state check
+                || (other instanceof Recurrance // instanceof handles nulls
+                && this.timeInterval.equals(((Length) other).timeInterval)); // state check
     }
 
     @Override
     public int hashCode() {
-        Integer tempLength = (Integer) this.length;
-        return tempLength.hashCode();
+        return this.timeInterval.hashCode();
     }
-
 }

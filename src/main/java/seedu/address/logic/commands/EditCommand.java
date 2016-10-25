@@ -1,3 +1,4 @@
+//@@author A0139046E
 package seedu.address.logic.commands;
 
 import java.util.HashSet;
@@ -40,6 +41,7 @@ public class EditCommand extends Command {
 
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DATED_PARAMS = "A non-dated task cannot have length or recurring data.";
 
 	public final int targetIndex;
 	
@@ -76,15 +78,15 @@ public class EditCommand extends Command {
 			return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 		}	
 		taskToEdit = lastShownList.get(targetIndex - 1);
-		boolean isDated = taskToEdit.isDated();
-		
+		boolean isDated = taskToEdit.isDated();		
 		if(isDated){
 			copyDatedTask(lastShownList);
 		}
 		copyTask();
-		editTag();		
+		editTag();
+		boolean typeChange = checkChangeTaskType();
 		try{
-			if(isDated){
+			if(isDated) {
 				this.toAdd = new DatedTask(
 						new Name(name),
 				        new DateTime(datetime, oldDatetime),
@@ -95,8 +97,23 @@ public class EditCommand extends Command {
 				        new DoneFlag(doneFlag),
 				        new UniqueTagList(tagList)
 				);
-			} 
+			}
+			else if(typeChange) {
+				this.toAdd = new DatedTask(
+								new Name(name),
+								new DateTime(datetime),
+								new Length(length),
+								new Recurrance(recurring),
+								new Priority(priority),
+								new Information(information),
+								new DoneFlag(doneFlag),
+								new UniqueTagList(tagList)
+					);
+			}
 			else {
+			    if(checkHasDatedParams()){
+			        throw new IllegalValueException(MESSAGE_DATED_PARAMS);
+			    }
 				this.toAdd = new Task(
 	                new Name(name),
 	                new Priority(priority),
@@ -122,40 +139,40 @@ public class EditCommand extends Command {
 	}
 	
 	/**
+	 * Check if task change from task to datedtask
+	 */
+	private boolean checkChangeTaskType(){
+		if(!(this.datetime.equals("-1"))){
+			return true;
+		}
+		return false;
+	}
+	
+	 /**
+     * Check has dated params 
+     */
+    private boolean checkHasDatedParams(){
+        if(!(this.length.equals(Length.NO_INTERVAL)) && !(this.recurring.equals(Recurrance.NO_INTERVAL))){
+            return true;
+        }
+        return false;
+    }
+    
+	/**
 	 * Copy dated task information of time, date, length, recurring if it is not edited
 	 */
 	private void copyDatedTask(UnmodifiableObservableList<ReadOnlyTask> lastShownList){
 		ReadOnlyDatedTask datedTaskToEdit = (ReadOnlyDatedTask) lastShownList.get(targetIndex - 1);
-        this.oldDatetime = datedTaskToEdit.getDateTime();
+		this.oldDatetime = datedTaskToEdit.getDateTime();
 		if(this.datetime.equals("-1")){
 	        this.datetime = datedTaskToEdit.getDateTime().toString();
 		}
-        if(this.length.equals("-1")){
+        if(this.length.equals(Length.NO_INTERVAL)){
             this.length = datedTaskToEdit.getLength().toString();
         }
         if(this.recurring.equals(Recurrance.NO_INTERVAL)){
             this.recurring = datedTaskToEdit.getRecurrance().toString();
         }
-		/*
-		String dateTime = datedTaskToEdit.getDateTime().toString();
-		String[] split = dateTime.split("\\s+");
-		String date = split[0];
-		String time = split[1];
-		if(this.time.equals("-1")){
-			String[] timeSplit = time.split(":");
-			this.time = timeSplit[0] + timeSplit[1];
-		}
-		if(this.date.equals("-1")){
-			String[] dateSplit = date.split("-");
-			this.date = dateSplit[0] + dateSplit[1] + dateSplit[2];
-		}
-		if(this.length.equals("-1")){
-			this.length = datedTaskToEdit.getLength().toString();
-		}
-		if(this.recurring.equals(Recurrance.NO_INTERVAL))
-			this.recurring = datedTaskToEdit.getRecurrance().toString();
-		*/
-//		System.out.println(targetIndex + " " + 	name + " " +  priority + " " + information + " " + doneFlag + " " + time + " "  + date + " " +  length + " " + recurring);
 	}
 	
 	/**
@@ -182,9 +199,9 @@ public class EditCommand extends Command {
 		}
 	}
 	
-
     @Override
     public boolean createsNewState() {
         return true;
     }
 }
+//@@author

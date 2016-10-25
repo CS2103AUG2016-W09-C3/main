@@ -1,3 +1,4 @@
+//@@author A0139947L
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -5,21 +6,19 @@ import static seedu.address.logic.commands.DoneCommand.MESSAGE_SUCCESS;
 
 import org.junit.Test;
 
-import guitests.guihandles.PersonCardHandle;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.CommandParser;
 import seedu.address.logic.parser.ParsedCommand;
-import seedu.address.model.tag.Tag;
 import seedu.address.model.task.DateTime;
-import seedu.address.model.task.DoneFlag;
 import seedu.address.model.task.Information;
 import seedu.address.model.task.Length;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.Recurrance;
+import seedu.address.model.task.TimeInterval;
 import seedu.address.testutil.TestDatedTask;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
@@ -29,9 +28,94 @@ public class EditCommandTest extends AddressBookGuiTest {
     @Test
     public void edit_nonDatedTask(){
         // Check if edit function edits successfully (not necessary in sequence)
-        TestTask[] listToEdit = td.getTypicalPersons();
+        TestTask[] listToEdit = td.getTypicalTasks();
         String command = "edit 1 n/King Arthur p/high i/This is just another kind of information you would see in a task";
         assertEditSuccess(command, listToEdit);
+    }
+    
+    @Test
+    public void edit_priorityHigh(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestTask[] listToEdit = td.getTypicalTasks();
+        String command = "edit 1 p/h";
+        assertEditSuccess(command, listToEdit);
+    }
+    
+    @Test
+    public void edit_invalidPriorityVeryHigh(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestTask[] listToEdit = td.getTypicalTasks();
+        String command = "edit 2 p/superhigh";
+        unknownCommandFormatPriority(command);
+    }
+    
+    @Test
+    public void edit_priorityVeryLow(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestTask[] listToEdit = td.getTypicalTasks();
+        
+        String command = "edit 1 p/vl";
+        assertEditSuccess(command, listToEdit);
+    }
+    
+    @Test
+    public void edit_priorityCaseSensitive(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestTask[] listToEdit = td.getTypicalTasks();
+        
+        String command = "edit 3 p/vH";
+        assertEditSuccess(command, listToEdit);
+    }
+    
+    @Test
+    public void edit_invalidTimeIntervalRecurrence(){
+        // Check if edit function edits successfully (not necessary in sequence)
+        TestTask[] listToEdit = td.getTypicalTasks();
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        commandBox.runCommand(td.csFinalExam.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        TestTask datedTaskToAdd2 = td.csFinalExam;
+        String command = "edit 9 r/3dayzz";
+        unknownCommandFormatTimeInterval(command);
+    }
+    
+    @Test
+    public void edit_datedTaskTimeIntervalRecurrenceDays(){
+        // Check if program is able to edit all tasks in sequence
+        TestTask[] listToEdit = td.getTypicalTasks();
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        commandBox.runCommand(td.csFinalExam.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        TestTask datedTaskToAdd2 = td.csFinalExam;
+        String command = "edit 8 n/Meet Isabel p/High r/3days d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
+        TestTask[] finalList = TestUtil.addTasksToList(listToEdit, datedTaskToAdd, datedTaskToAdd2);
+        assertEditSuccess(command, finalList);
+    }
+    
+    @Test
+    public void edit_datedTaskTimeIntervalRecurrenceWeeks(){
+        // Check if program is able to edit all tasks in sequence
+        TestTask[] listToEdit = td.getTypicalTasks();
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        commandBox.runCommand(td.csFinalExam.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        TestTask datedTaskToAdd2 = td.csFinalExam;
+        String command = "edit 8 n/Meet Isabel p/High r/6weeks d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
+        TestTask[] finalList = TestUtil.addTasksToList(listToEdit, datedTaskToAdd, datedTaskToAdd2);
+        assertEditSuccess(command, finalList);
+    }
+    
+    @Test
+    public void edit_recurrenceAndPriorityAlias(){
+        // Check if program is able to edit all tasks in sequence
+        TestTask[] listToEdit = td.getTypicalTasks();
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        commandBox.runCommand(td.csFinalExam.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        TestTask datedTaskToAdd2 = td.csFinalExam;
+        String command = "edit 8 n/Meet KappaRoss p/vH r/6weeks d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
+        TestTask[] finalList = TestUtil.addTasksToList(listToEdit, datedTaskToAdd, datedTaskToAdd2);
+        assertEditSuccess(command, finalList);
     }
     
     @Test
@@ -50,29 +134,27 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertInvalidEditCommandFormat(command);
     }
     
+    
     @Test
     public void edit_nonDatedTaskNotInSequence(){
         // Check if program is able to edit a task in the middle of list
-        TestTask[] listToEdit = td.getTypicalPersons();
+        TestTask[] listToEdit = td.getTypicalTasks();
         String command = "edit 3 i/This is also an information p/high";
         assertEditSuccess(command, listToEdit);
     }
-/*   
+   
     @Test
-    public void edit_allNonDatedTask(){
+    public void edit_datedTask(){
         // Check if program is able to edit all tasks in sequence
-        TestTask[] listToEdit = td.getTypicalPersons();
-        String command = "edit 1 n/Meet Isabel p/High r/6d d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
-        assertEditSuccess(command, listToEdit);
+        TestTask[] listToEdit = td.getTypicalTasks();
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        commandBox.runCommand(td.csFinalExam.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        TestTask datedTaskToAdd2 = td.csFinalExam;
+        String command = "edit 8 n/Meet Isabel p/High r/6d d/01-01-2017 18:00 i/Meet up for CS2101 briefing";
+        TestTask[] finalList = TestUtil.addTasksToList(listToEdit, datedTaskToAdd, datedTaskToAdd2);
+        assertEditSuccess(command, finalList);
     }
-*/  
-    /**
-     * Runs the edit command to edit the task at specified index and confirms the task is successfully edited
-     * @param editCommand: To edit the first person in the list, 1 should be given as the target index. (i.e. Edit 1 ... )
-     * @param listToEdit: A list of the current tasks
-     * @return 
-     */
-    
     
     private TestTask[] doEdit(String args, TestTask[] list) {
         // To get different commands from the command input
@@ -89,7 +171,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         priority = command.getParamOrDefault("p", "");
         information = command.getParamOrDefault("i", "");
         
-        TestTask[] expected = TestUtil.removePersonFromList(list, index);
+        TestTask[] expected = TestUtil.removeTaskFromList(list, index);
         
         try {
             expected = testEdit(target, name, datetime, length, recurrance, priority, information, expected, index);
@@ -131,7 +213,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         if (isChanged) {
             ((TestDatedTask) target).setDateTime(new DateTime(datetime));
         }
-        expected = TestUtil.addPersonsToListIndex(expected, target, index - 1);
+        expected = TestUtil.addTaskToListIndex(expected, target, index - 1);
         return expected;
     }
     
@@ -145,7 +227,7 @@ public class EditCommandTest extends AddressBookGuiTest {
         commandBox.runCommand(command);
         
         // Confirm the list now contains all previous tasks except the deleted task
-        assertTrue(personListPanel.isListMatching(expected));
+        assertTrue(taskListPanel.isListMatching(expected));
         
         // Confirm the result message is correctly edited
         assertResultMessage(String.format(EditCommand.MESSAGE_EDIT_TASK_SUCCESS, target));
@@ -162,4 +244,17 @@ public class EditCommandTest extends AddressBookGuiTest {
         // Throws error message if format is invalid
         assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
     }
+    
+    private void unknownCommandFormatPriority(String command) {
+        commandBox.runCommand(command);
+        // Throws error message if format is invalid
+        assertResultMessage(String.format(Priority.MESSAGE_PRIORITY_CONSTRAINTS, EditCommand.MESSAGE_USAGE));
+    }
+    
+    private void unknownCommandFormatTimeInterval(String command) {
+        commandBox.runCommand(command);
+        // Throws error message if format is invalid
+        assertResultMessage(String.format(TimeInterval.MESSAGE_TIME_INTERVAL_CONSTRAINTS, EditCommand.MESSAGE_USAGE));
+    }
 }
+//@@author

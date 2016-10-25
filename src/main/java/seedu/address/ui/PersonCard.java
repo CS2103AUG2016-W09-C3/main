@@ -4,13 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 
 public class PersonCard extends UiPart{
 
     private static final String FXML = "PersonListCard.fxml";
-    private static final TaskStyleMapping styler = new TaskPropertyMapping();
+    private static final TaskStyleMapping styler = TaskPropertyMapping.getInstance();
     
     @FXML
     private HBox cardPane;
@@ -47,6 +48,7 @@ public class PersonCard extends UiPart{
         return UiPartLoader.loadUiPart(card);
     }
 
+    // @@author A0140155U
     @FXML
     public void initialize() {
         name.setText(person.getName().fullName);
@@ -60,9 +62,11 @@ public class PersonCard extends UiPart{
             length.setText(datedTask.getLength().toString());
             recurrance.setText(datedTask.getRecurrance().toString());
         }else{
-            datetime.setText("");
-            length.setText("");
-            recurrance.setText("");
+            VBox sub = ((VBox) (datetime.getParent()));
+            sub.getChildren().remove(datetime);
+            sub.getChildren().remove(recurrance);
+            sub.getChildren().remove(length);
+            
         }
         tags.setText(person.tagsString());
         style();
@@ -77,6 +81,7 @@ public class PersonCard extends UiPart{
         cardPane.setStyle(styleString.toString());
     }
     
+    // @@author
     public HBox getLayout() {
         return cardPane;
     }

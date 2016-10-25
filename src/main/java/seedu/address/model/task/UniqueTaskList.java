@@ -68,7 +68,8 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.add(toAdd);
     }
-
+    
+    //@@author A0139046E
     /**
      * Adds a task to the list at the specific index
      *
@@ -83,6 +84,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
         internalList.add(index, toAdd);
     }
+    //@@author
 
     /**
      * Removes the equivalent task from the list.
@@ -114,11 +116,11 @@ public class UniqueTaskList implements Iterable<Task> {
                 || (other instanceof UniqueTaskList // instanceof handles nulls
                         && this.internalList.equals(((UniqueTaskList) other).internalList));
     }
-
+    
+    //@@author A0139947L
     public void updateRecurringTasks() {
 
         int size = internalList.size();
-        int count = 0;
 
         for (int i = 0; i < size; i++) {
             Task recurringTask = internalList.get(i);
@@ -135,26 +137,8 @@ public class UniqueTaskList implements Iterable<Task> {
                     // Set DoneFlag to NOT_DONE if it is DONE
                     if (task.getDoneFlag().isDone()) {
                         // setDateAndTime and DONE_FLAG to correct task
-                        DoneFlag newFlag;
                         try {
-                            newFlag = new DoneFlag(DoneFlag.NOT_DONE);
-
-                            DateTime dateTime = task.getDateTime();
-                            String recurr = recurrence.toString();
-                            
-                            // Set increment of time & date
-                            LocalDateTime editDateTime = DateParser.rescheduleDate(dateTime.datetime, recurr);
-                            
-                            DateTime latestDateTime = new DateTime(editDateTime);
-                            
-                            Task toAdd = null;
-                            toAdd = new DatedTask(task.getName(), latestDateTime, task.getLength(),
-                                    task.getRecurrance(), task.getPriority(), task.getInformation(), newFlag,
-                                    task.getTags());
-                            System.out.println("Removed: " + internalList.get(i));
-                            internalList.remove(i);
-                            internalList.add(i, toAdd);
-                            count++;
+                            updateTask(i, task, recurrence);
                         } catch (IllegalValueException e) {
                             // Should never happen
                             System.out.println("This should not happen! Please notify a programmer");
@@ -163,14 +147,35 @@ public class UniqueTaskList implements Iterable<Task> {
                 }
             }
         }
-        // System.out.println(count + " recurring tasks successfully updated!");
     }
+
+    private void updateTask(int i, ReadOnlyDatedTask task, Recurrance recurrence) throws IllegalValueException {
+        DoneFlag newFlag;
+        newFlag = new DoneFlag(DoneFlag.NOT_DONE);
+
+        DateTime dateTime = task.getDateTime();
+        String recurr = recurrence.toString();
+        
+        // Set increment of time & date
+        LocalDateTime editDateTime = DateParser.rescheduleDate(dateTime.datetime, recurr);
+        
+        DateTime latestDateTime = new DateTime(editDateTime);
+        
+        Task toAdd = null;
+        toAdd = new DatedTask(task.getName(), latestDateTime, task.getLength(),
+                task.getRecurrance(), task.getPriority(), task.getInformation(), newFlag,
+                task.getTags());
+        
+        internalList.remove(i);
+        internalList.add(i, toAdd);
+    }
+    //@@author
 
     @Override
     public int hashCode() {
         return internalList.hashCode();
     }
-
+    //@@author A0139121R
     public void sortTasks(ArrayList<String> sortByAttribute, boolean reverse) {
         internalList.sort(new CustomTaskComparator(sortByAttribute));
         if (reverse) {
@@ -178,4 +183,5 @@ public class UniqueTaskList implements Iterable<Task> {
         }
 
     }
+    //@@author
 }

@@ -39,7 +39,8 @@ public class XmlAdaptedPerson {
      * No-arg constructor for JAXB use.
      */
     public XmlAdaptedPerson() {}
-
+    
+    // @@author A0140155U
 
     /**
      * Converts a given Task into this class for JAXB use.
@@ -89,4 +90,6 @@ public class XmlAdaptedPerson {
             return new Task(name, priority, information, done, tags);
         }
     }
+    
+    // @@author
 }

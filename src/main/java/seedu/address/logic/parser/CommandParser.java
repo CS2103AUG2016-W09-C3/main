@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.logic.parser;
 
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class CommandParser implements ParsedCommand{
      * Returns the index of the first param in the command.
      */
     private int loadValues(String[] splitted, int index) {
+        // Load string tokens until we encounter a param token
         while(index < splitted.length && !isParamToken(splitted[index])){
             values.add(splitted[index]);
             index++;
@@ -67,11 +69,14 @@ public class CommandParser implements ParsedCommand{
      * Loads params from command.
      */
     private void loadParams(String[] splitted, int index) {
+        // This stores the param name
         String currentParam = null;
+        // This stores the param value
         StringBuilder currentParamValue = new StringBuilder();
         for(int i = index; i < splitted.length; i++){
             String token = splitted[i];
             if(isParamToken(token)){
+                // New param, flush the param value, add the old param and start over
                 addParam(currentParam, currentParamValue.toString());
                 
                 int paramDelimIndex = token.indexOf(PARAM_DELIMITER);
@@ -79,6 +84,7 @@ public class CommandParser implements ParsedCommand{
                 currentParamValue = new StringBuilder();
                 currentParamValue.append(token.substring(paramDelimIndex + 1, token.length()));
             }else{
+                // Not a param, add the token on to the value
                 currentParamValue.append(COMMAND_DELIMITER);
                 currentParamValue.append(token);
             }
@@ -136,7 +142,7 @@ public class CommandParser implements ParsedCommand{
      * If the param name has no values, returns an empty list.
      */
     @Override
-    public ArrayList<String> getParamList(String paramName) {
+    public ArrayList<String> getAllParams(String paramName) {
         if(!params.containsKey(paramName) || params.get(paramName).size() == 0){
             return new ArrayList<String>();
         }
@@ -178,7 +184,7 @@ public class CommandParser implements ParsedCommand{
      * Get all params.
      */
     @Override
-    public ArrayList<String> getAllParams(){
+    public ArrayList<String> getParamList(){
         ArrayList<String> readOnlyParams = new ArrayList<> (params.keySet());
         return readOnlyParams;
     }
@@ -214,6 +220,7 @@ public class CommandParser implements ParsedCommand{
         return values.size() > 0;
     }
     
+    //@@author A0139046E
     /**
      * Check if command has value at the particular index
      * Useful for checking if the command is valid.
@@ -222,7 +229,8 @@ public class CommandParser implements ParsedCommand{
     public boolean hasValueAtIndex(int index){
     	return values.size() > index;
     }
-    
+    //@@author
+    // @@author A0140155U
     @Override
     public boolean hasUnnecessaryParams(String[] possibleParams) {
         for(String param : params.keySet()){
@@ -242,3 +250,4 @@ public class CommandParser implements ParsedCommand{
         return false;
     }
 }
+//@@author

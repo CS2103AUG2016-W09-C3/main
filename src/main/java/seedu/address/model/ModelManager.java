@@ -37,8 +37,9 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final AddressBook addressBook;
     private final FilteredList<Task> filteredTasks;
+    // @@author A0140155U
     private final States states;
-
+    // @@author
     /**
      * Initializes a ModelManager with the given AddressBook
      * AddressBook and its variables should not be null
@@ -52,7 +53,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         addressBook = new AddressBook(src);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        // @@author A0140155U
         states = new StatesManager(new AddressBookState(addressBook));
+        // @@author
     }
 
     public ModelManager() {
@@ -61,9 +64,13 @@ public class ModelManager extends ComponentManager implements Model {
 
     public ModelManager(ReadOnlyAddressBook initialData, UserPrefs userPrefs) {
         addressBook = new AddressBook(initialData);
+        //@@author A0139947L
         addressBook.updateRecurringTasks();
+        //@@author
         filteredTasks = new FilteredList<>(addressBook.getTasks());
+        // @@author A0140155U
         states = new StatesManager(new AddressBookState(addressBook));
+        // @@author
     }
 
     @Override
@@ -82,12 +89,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new AddressBookChangedEvent(addressBook));
     }
 
-
+    // @@author A0140155U
     /** Raises an event to indicate the config has changed */
     @Override
     public void changeFilePath(String filePath) {
         raise(new FilePathChangedEvent(filePath));
     }
+    // @@author
     
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
@@ -99,17 +107,17 @@ public class ModelManager extends ComponentManager implements Model {
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTask(task);
         updateFilteredListToShowAll();
-        //updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
     
+    //@@author A0139046E
     @Override
     public synchronized void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException {
         addressBook.addTaskToIndex(task, index);
         updateFilteredListToShowAll();
-        //updateFilteredListToShowUndone();
         indicateAddressBookChanged();
     }
+    //@@author
 
     //=========== Filtered Task List Accessors ===============================================================
 
@@ -131,11 +139,10 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    
+    //@@author A0139121R
     @Override
     public void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse){
         sortList(sortByAttribute, reverse);
-        //filteredTasks.sorted(new CustomTaskComparator(sortByAttribute));
         updateSortTaskList(new PredicateExpression(new SortQualifier(dateRange, doneStatus)));
     }
     
@@ -166,7 +173,7 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.sortTasks(sortByAttribute, reverse);
         
     }
-    
+    //@@author
 
     //========== Inner classes/interfaces used for filtering ==================================================
 
@@ -198,7 +205,7 @@ public class ModelManager extends ComponentManager implements Model {
         boolean run(ReadOnlyTask task);
         String toString();
     }
-    
+    //@@author A0139121R
     private class SortQualifier implements Qualifier{
         private HashMap<String, String> dateRange;
         private ArrayList<String> sortByAttribute;
@@ -317,7 +324,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
     }
-
+    //@@author
+    // @@author A0140155U
     @Override
     public void saveState(String commandText) {
         states.saveState(new AddressBookState(addressBook, commandText));
@@ -338,5 +346,5 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
         return newState.getCommand();
     }
-
+    // @@author
 }
