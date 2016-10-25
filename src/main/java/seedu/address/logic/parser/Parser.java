@@ -140,11 +140,15 @@ public class Parser {
             return new IncorrectCommand(ive.getMessage());
         }
         
-        return new ListCommand(
-                dateRange,
-                sortByAttribute,
-                command.getParamOrDefault("df", "Not done"),
-                reverse);
+        try {
+            return new ListCommand(
+                    dateRange,
+                    sortByAttribute,
+                    command.getParamOrDefault("df", "Not done"),
+                    reverse);
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
     }
     
     //@@author A0139121R
