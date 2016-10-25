@@ -465,6 +465,7 @@ Priority | As a ... | I want to ... | So that I can...
 `*` | user | input my tasks in different languages | 
 `*` | user | customise the command words for the program | use the program in the way I want to use it
 
+<!-- @@author A0139046E -->
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `ToDoIt` and the **Actor** is the `user`, unless specified otherwise)
@@ -526,50 +527,103 @@ Use case ends.
 > 3a1. ToDoIt shows an error message <br>
   Use case resumes at step 2
 
-#### Use case: Reschedule task**MSS**1. User requests to list tasks
+#### Use case: Reschedule task
+
+**MSS**
+
+1. User requests to list tasks
 2. ToDoIt shows a list of tasks
 3. User requests to reschedule a specific task in the list to another specified list
 4. ToDoIt reschedules the task <br>
 Use case ends.
-**Extensions**2a. The list is empty>Use case ends
-3a. The given index is invalid
->3a1. ToDoIt shows an error message <br> Use case ends
 
-#### Use case: Find task**MSS**1. User requests to find task by keywords and attribute
-2. ToDoIt shows a list of tasks  with specified keywords in specified attribute fields <br>
-Use case ends.
-**Extensions**2a. The list is empty>Use case ends
-3a. There is no matching tasks
+**Extensions**
+2a. The list is empty
 
 >Use case ends
 
-#### Use case: Done**MSS**1. User requests to list tasks
+3a. The given index is invalid
+
+>3a1. ToDoIt shows an error message <br>
+ Use case ends
+
+#### Use case: Find task
+
+**MSS**
+
+1. User requests to find task by keywords and attribute
+2. ToDoIt shows a list of tasks  with specified keywords in specified attribute fields <br>
+Use case ends.
+
+**Extensions**
+2a. The list is empty
+
+>Use case ends
+
+3a. There is no matching tasks
+
+>Use case ends
+
+#### Use case: Done
+
+**MSS**
+
+1. User requests to list tasks
 2. ToDoIt shows a list of tasks
 3. User request to set task as done
 4. ToDoIt sets the specified task as done <br>
 Use case ends.
-**Extensions**2a. The list is empty>Use case ends
-3a. The given index is invalid
->3a1. ToDoIt shows an error message <br> Use case ends
 
-#### Use case: Undone**MSS**1. User requests to list tasks
+**Extensions**
+2a. The list is empty
+
+>Use case ends
+
+3a. The given index is invalid
+
+>3a1. ToDoIt shows an error message <br>
+ Use case ends
+
+#### Use case: Undone
+
+**MSS**
+
+1. User requests to list tasks
 2. ToDoIt shows a list of tasks
 3. User request to set task as undone
 4. ToDoIt sets the specified task as undone <br>
 Use case ends.
-**Extensions**2a. The list is empty>Use case ends
-3a. The given index is invalid
->3a1. ToDoIt shows an error message <br> Use case ends
 
-#### Use case: List tasks**MSS**1. User requests to list tasks in specified order with specified time frame
+**Extensions**
+2a. The list is empty
+
+>Use case ends
+
+3a. The given index is invalid
+
+>3a1. ToDoIt shows an error message <br>
+ Use case ends
+
+#### Use case: List tasks
+
+**MSS**
+
+1. User requests to list tasks in specified order with specified time frame
 2. ToDoIt shows a list of tasks in time frame in the specified order <br>
 Use case ends.
-**Extensions**
-2a. The list is empty>Use case ends
-3a. The given time frame or specified order is invalid
+
+**Extensions**
+
+2a. The list is empty
+
+>Use case ends
+
+3a. The given time frame or specified order is invalid
 
 >ToDoIt shows an error message <br>
  Use case ends
+
+<!-- @@author -->
 
 ## Appendix C : Non Functional Requirements
 
