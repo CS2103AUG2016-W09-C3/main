@@ -1,3 +1,4 @@
+//@@author A0139046E
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -123,5 +124,5 @@ public class RescheduleCommandTest extends AddressBookGuiTest {
 		
 		return finalList;
 	}
-	
 }
+//@@author
