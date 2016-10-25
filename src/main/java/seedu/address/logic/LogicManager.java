@@ -26,19 +26,19 @@ public class LogicManager extends ComponentManager implements Logic {
         this.parser = new Parser();
     }
 
+    // @@author A0140155U
     @Override
     public CommandResult execute(String commandText) {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
         Command command = parser.parseCommand(commandText);
         command.setData(model);
-        // @@author A0140155U
         CommandResult cr = command.execute();
         if(command.createsNewState()){
             model.saveState(commandText);
         }
         return cr;
-        // @@author
     }
+    // @@author
 
     @Override
     public ObservableList<ReadOnlyTask> getFilteredTaskList() {

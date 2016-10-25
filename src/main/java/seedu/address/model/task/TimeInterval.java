@@ -19,7 +19,7 @@ public class TimeInterval {
     //@@author A0139947L
     private static HashMap<String, String> MINUTE_ALIASES = new HashMap<>();
     //@@author
-    
+    // @@author A0140155U
     
     static
     {
@@ -38,6 +38,7 @@ public class TimeInterval {
         MINUTE_ALIASES.put("week", "w");
         MINUTE_ALIASES.put("weeks", "w");
         //@@author
+        // @@author A0140155U
     }
     
     public final String intervalString;
@@ -49,6 +50,7 @@ public class TimeInterval {
      *
      * @throws IllegalValueException if given information string is invalid.
      */
+    //@@author A0139947L
     public TimeInterval(String intervalString) throws IllegalValueException {
         assert intervalString != null;
         intervalString = intervalString.toLowerCase().trim();
@@ -62,16 +64,16 @@ public class TimeInterval {
         length = Integer.parseInt(matcher.group("length"));
         unit = matcher.group("unit");
         
-        //@@author A0139947L
         if (MINUTE_ALIASES.containsKey(unit)){
             this.unit = MINUTE_ALIASES.get(unit);
         }
-        //@@author
         
         if(!isValidInterval(length, unit)){
             throw new IllegalValueException(MESSAGE_TIME_INTERVAL_CONSTRAINTS);
         }
     }
+    //@@author
+    // @@author A0140155U
     
     private boolean isValidInterval(int length, String unit){
         if(!INTERVAL_TO_MINUTES.containsKey(unit)){
