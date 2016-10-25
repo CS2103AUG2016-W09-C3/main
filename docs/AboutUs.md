@@ -49,7 +49,7 @@ Responsibilities: Storage
 * Aspects/tools in charge of: Documentation
 * Features implemented:
    * [Recurrence Feature] (https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#adding-a-task-add)
-* Code written: [[Recurring tasks](Insert link here)] [[Edit command testing](Insert link here)] [[Different aliases](Insert link here)]
+* Code written: [[Functional code](Insert link here)] [[Test code](Insert link here)] [[Docs](Insert link here)]
 * Other major contributions:
   * Added support for different aliases for priority and recurrence when Adding and Editing tasks
 
