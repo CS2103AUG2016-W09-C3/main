@@ -40,6 +40,7 @@ public class EditCommand extends Command {
 
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
 	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DATED_PARAMS = "A non-dated task cannot have length or recurring data.";
 
 	public final int targetIndex;
 	
@@ -109,6 +110,9 @@ public class EditCommand extends Command {
 					);
 			}
 			else {
+			    if(checkHasDatedParams()){
+			        throw new IllegalValueException(MESSAGE_DATED_PARAMS);
+			    }
 				this.toAdd = new Task(
 	                new Name(name),
 	                new Priority(priority),
@@ -143,6 +147,16 @@ public class EditCommand extends Command {
 		return false;
 	}
 	
+	 /**
+     * Check has dated params 
+     */
+    private boolean checkHasDatedParams(){
+        if(!(this.length.equals("-1")) && !(this.recurring.equals("-1"))){
+            return true;
+        }
+        return false;
+    }
+    
 	/**
 	 * Copy dated task information of time, date, length, recurring if it is not edited
 	 */
