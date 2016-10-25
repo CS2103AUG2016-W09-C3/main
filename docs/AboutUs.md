@@ -45,8 +45,13 @@ Responsibilities: Storage
 #### [Shaun Chee](https://github.com/ShaunChee) 
 <img src="images/ShaunChee.JPG" width="150"><br>
  Role: Developer <br>
- Responsibilities: UI
-
+* Components in charge of: [UI](https://github.com/CS2103AUG2016-W09-C3/main/tree/master/src/main/java/seedu/address/logic)
+* Aspects/tools in charge of: Documentation
+* Features implemented:
+   * [Recurrence Feature] (https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md)
+* Code written: [[Recurring tasks](Insert link here)] [[Edit command testing](Insert link here)] [[Different aliases](Insert link here)]
+* Other major contributions:
+  * Added support for different aliases for priority and recurrence when Adding and Editing tasks
 
 # Contributors
 
