@@ -114,7 +114,8 @@ public class UniqueTaskList implements Iterable<Task> {
                 || (other instanceof UniqueTaskList // instanceof handles nulls
                         && this.internalList.equals(((UniqueTaskList) other).internalList));
     }
-
+    
+    //@@author A0139947L
     public void updateRecurringTasks() {
 
         int size = internalList.size();
@@ -134,25 +135,8 @@ public class UniqueTaskList implements Iterable<Task> {
                     // Set DoneFlag to NOT_DONE if it is DONE
                     if (task.getDoneFlag().isDone()) {
                         // setDateAndTime and DONE_FLAG to correct task
-                        DoneFlag newFlag;
                         try {
-                            newFlag = new DoneFlag(DoneFlag.NOT_DONE);
-
-                            DateTime dateTime = task.getDateTime();
-                            String recurr = recurrence.toString();
-                            
-                            // Set increment of time & date
-                            LocalDateTime editDateTime = DateParser.rescheduleDate(dateTime.datetime, recurr);
-                            
-                            DateTime latestDateTime = new DateTime(editDateTime);
-                            
-                            Task toAdd = null;
-                            toAdd = new DatedTask(task.getName(), latestDateTime, task.getLength(),
-                                    task.getRecurrance(), task.getPriority(), task.getInformation(), newFlag,
-                                    task.getTags());
-                            // System.out.println("Removed: " + internalList.get(i));
-                            internalList.remove(i);
-                            internalList.add(i, toAdd);
+                            updateTask(i, task, recurrence);
                         } catch (IllegalValueException e) {
                             // Should never happen
                             System.out.println("This should not happen! Please notify a programmer");
@@ -161,8 +145,29 @@ public class UniqueTaskList implements Iterable<Task> {
                 }
             }
         }
-        // System.out.println(count + " recurring tasks successfully updated!");
     }
+
+    private void updateTask(int i, ReadOnlyDatedTask task, Recurrance recurrence) throws IllegalValueException {
+        DoneFlag newFlag;
+        newFlag = new DoneFlag(DoneFlag.NOT_DONE);
+
+        DateTime dateTime = task.getDateTime();
+        String recurr = recurrence.toString();
+        
+        // Set increment of time & date
+        LocalDateTime editDateTime = DateParser.rescheduleDate(dateTime.datetime, recurr);
+        
+        DateTime latestDateTime = new DateTime(editDateTime);
+        
+        Task toAdd = null;
+        toAdd = new DatedTask(task.getName(), latestDateTime, task.getLength(),
+                task.getRecurrance(), task.getPriority(), task.getInformation(), newFlag,
+                task.getTags());
+        
+        internalList.remove(i);
+        internalList.add(i, toAdd);
+    }
+    //@@author
 
     @Override
     public int hashCode() {
