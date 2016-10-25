@@ -45,7 +45,7 @@ Responsibilities: Storage
 #### [Shaun Chee](https://github.com/ShaunChee) 
 <img src="images/ShaunChee.JPG" width="150"><br>
  Role: Developer <br>
-* Components in charge of: [UI](https://github.com/CS2103AUG2016-W09-C3/main/tree/master/src/main/java/seedu/address/logic)
+* Components in charge of: [UI](Insert link here)
 * Aspects/tools in charge of: Documentation
 * Features implemented:
    * [Recurrence Feature] (https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md)
