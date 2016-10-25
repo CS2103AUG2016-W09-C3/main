@@ -68,12 +68,14 @@ public class Priority {
         
         String upperPriority = priority.toUpperCase();
         
+        // @@author A0139947L
         listOfPriorities = new HashMap<String, String>();
         getListOfDifferentAliases();
         
         if (listOfPriorities.containsKey(upperPriority)){
             upperPriority = listOfPriorities.get(upperPriority);
        }
+       // @@author
         
         if(acceptedPriority.Contains(upperPriority)){
             this.priority = acceptedPriority.valueOf(upperPriority);
