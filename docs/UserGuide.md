@@ -294,7 +294,7 @@ ToDoIt is sad to see you go.<br>
 Format: `exit`  
 
 ---
-
+<!-- @@author A0139121R -->
 ## FAQ
 
 **Q**: How do I access help?<br>
@@ -320,7 +320,9 @@ Format: `exit`
 **A**: No, there is no prior command line knowledge required to use ToDoIt.
 	   Instead, just follow the instructions given in the help. See access help faq.<br>
        <br>
-       
+
+<!-- @@author -->
+
 ## Command Summary
 
 Command | Format  
