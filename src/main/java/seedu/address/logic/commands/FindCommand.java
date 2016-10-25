@@ -35,7 +35,7 @@ public class FindCommand extends Command {
         }
         for(String scope : searchScope){
             if(!ALL_POSSIBLE_PARAMS.contains(scope)){
-                throw new IllegalValueException(MESSAGE_USAGE);
+                throw new IllegalValueException("Invalid search scope, use only n, i and d " + MESSAGE_USAGE);
             }
         }
         this.keywords = keywords;

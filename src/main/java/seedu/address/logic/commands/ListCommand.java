@@ -44,7 +44,7 @@ public class ListCommand extends Command {
         assert sortByAttribute != null : "sortByAttribute given is a null object";
         for(String sortAttribute : sortByAttribute){
             if(!ALL_SORT_ATTRIBUTES.contains(sortAttribute)){
-                throw new IllegalValueException(MESSAGE_USAGE);
+                throw new IllegalValueException("Invalid sort attribute, use only name, priority, date " + MESSAGE_USAGE);
             }
         }
         this.dateRange = dateRange;
