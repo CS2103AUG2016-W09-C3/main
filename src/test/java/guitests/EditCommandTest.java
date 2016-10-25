@@ -155,14 +155,6 @@ public class EditCommandTest extends AddressBookGuiTest {
         TestTask[] finalList = TestUtil.addTasksToList(listToEdit, datedTaskToAdd, datedTaskToAdd2);
         assertEditSuccess(command, finalList);
     }
-  
-    /**
-     * Runs the edit command to edit the task at specified index and confirms the task is successfully edited
-     * @param editCommand: To edit the first person in the list, 1 should be given as the target index. (i.e. Edit 1 ... )
-     * @param listToEdit: A list of the current tasks
-     * @return 
-     */
-    
     
     private TestTask[] doEdit(String args, TestTask[] list) {
         // To get different commands from the command input
