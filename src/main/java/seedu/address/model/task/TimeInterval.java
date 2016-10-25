@@ -16,7 +16,9 @@ public class TimeInterval {
     private static final Pattern INTERVAL_VALIDATION_REGEX = Pattern.compile("(?<length>\\d+)(?<unit>[a-zA-Z]+)");
     private static HashMap<String, Integer> INTERVAL_TO_MINUTES = new HashMap<>();
 
+    //@@author A0139947L
     private static HashMap<String, String> MINUTE_ALIASES = new HashMap<>();
+    //@@author
     
     
     static
@@ -26,7 +28,7 @@ public class TimeInterval {
         INTERVAL_TO_MINUTES.put("d", 24 * 60);
         INTERVAL_TO_MINUTES.put("w", 7 * 24 * 60);
         
-        // @@author A0139947L
+        //@@author A0139947L
         MINUTE_ALIASES.put("min", "m");
         MINUTE_ALIASES.put("mins", "m");
         MINUTE_ALIASES.put("hr", "h");
@@ -35,7 +37,7 @@ public class TimeInterval {
         MINUTE_ALIASES.put("days", "d");
         MINUTE_ALIASES.put("week", "w");
         MINUTE_ALIASES.put("weeks", "w");
-        // @@author
+        //@@author
     }
     
     public final String intervalString;
@@ -60,11 +62,11 @@ public class TimeInterval {
         length = Integer.parseInt(matcher.group("length"));
         unit = matcher.group("unit");
         
-        // @@author A0139947L
+        //@@author A0139947L
         if (MINUTE_ALIASES.containsKey(unit)){
             this.unit = MINUTE_ALIASES.get(unit);
         }
-        // @@author
+        //@@author
         
         if(!isValidInterval(length, unit)){
             throw new IllegalValueException(MESSAGE_TIME_INTERVAL_CONSTRAINTS);

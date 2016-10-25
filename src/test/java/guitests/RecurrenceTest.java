@@ -1,4 +1,4 @@
-// @@author A0139947L
+//@@author A0139947L
 package guitests;
 
 import static org.junit.Assert.*;
@@ -59,4 +59,4 @@ public class RecurrenceTest extends AddressBookGuiTest {
         assert(true);
     }
 }
-// @@author
+//@@author

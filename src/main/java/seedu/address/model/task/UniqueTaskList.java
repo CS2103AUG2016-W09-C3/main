@@ -115,7 +115,7 @@ public class UniqueTaskList implements Iterable<Task> {
                         && this.internalList.equals(((UniqueTaskList) other).internalList));
     }
     
-    // @@author A0139947L
+    //@@author A0139947L
     public void updateRecurringTasks() {
 
         int size = internalList.size();
@@ -167,7 +167,7 @@ public class UniqueTaskList implements Iterable<Task> {
         internalList.remove(i);
         internalList.add(i, toAdd);
     }
-    // @@author
+    //@@author
 
     @Override
     public int hashCode() {

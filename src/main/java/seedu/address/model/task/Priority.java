@@ -42,7 +42,7 @@ public class Priority {
         }
     }
     
-    // @@author A0139947L
+    //@@author A0139947L
     // User is able to put different aliases for priority
     private void getListOfDifferentAliases() {
         listOfPriorities.put("VH", "VERYHIGH");
@@ -51,7 +51,7 @@ public class Priority {
         listOfPriorities.put("L", "LOW");
         listOfPriorities.put("VL", "VERYLOW");
     }
-    // @@author
+    //@@author
     
     public int getEnumPriority(){
         return priority.getEnumPriority();
@@ -68,14 +68,14 @@ public class Priority {
         
         String upperPriority = priority.toUpperCase();
         
-        // @@author A0139947L
+        //@@author A0139947L
         listOfPriorities = new HashMap<String, String>();
         getListOfDifferentAliases();
         
         if (listOfPriorities.containsKey(upperPriority)){
             upperPriority = listOfPriorities.get(upperPriority);
        }
-       // @@author
+       //@@author
         
         if(acceptedPriority.Contains(upperPriority)){
             this.priority = acceptedPriority.valueOf(upperPriority);

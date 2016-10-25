@@ -1,4 +1,4 @@
-// @@author A0139947L
+//@@author A0139947L
 package guitests;
 
 import static org.junit.Assert.assertTrue;
@@ -257,4 +257,4 @@ public class EditCommandTest extends AddressBookGuiTest {
         assertResultMessage(String.format(TimeInterval.MESSAGE_TIME_INTERVAL_CONSTRAINTS, EditCommand.MESSAGE_USAGE));
     }
 }
-// @@author
+//@@author
