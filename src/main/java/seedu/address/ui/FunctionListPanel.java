@@ -10,6 +10,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import seedu.address.commons.events.ui.CommandPresetSelectedEvent;
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
 import seedu.address.logic.commands.CommandPreset;
 import seedu.address.model.task.ReadOnlyTask;
@@ -76,7 +77,7 @@ public class FunctionListPanel extends UiPart {
         functionListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 logger.fine("Selection in function list panel changed to : '" + newValue + "'");
-                //raise(new TaskPanelSelectionChangedEvent(newValue));
+                raise(new CommandPresetSelectedEvent(newValue));
             }
         });
     }
