@@ -15,8 +15,9 @@ import javafx.collections.ObservableList;
 public class UserPrefs {
 
     public GuiSettings guiSettings;
+    // @@author A0140155U
     public ArrayList<CommandPreset> commandPresets;
-
+    // @@author
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
     }
@@ -33,9 +34,11 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
+    // @@author A0140155U
     public ObservableList<CommandPreset> getCommandPresets(){
         return FXCollections.observableArrayList(commandPresets);
     }
+    // @@author
     @Override
     public boolean equals(Object other) {
         if (other == this){
