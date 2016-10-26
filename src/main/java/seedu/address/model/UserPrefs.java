@@ -16,7 +16,7 @@ public class UserPrefs {
 
     public GuiSettings guiSettings;
     // @@author A0140155U
-    public ArrayList<CommandPreset> commandPresets;
+    public ArrayList<CommandPreset> commandPresets = new ArrayList<>();
     // @@author
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
