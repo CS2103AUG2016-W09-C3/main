@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
+import seedu.address.logic.commands.CommandPreset;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.commons.core.LogsCenter;
 
@@ -26,7 +27,7 @@ public class FunctionListPanel extends UiPart {
     private AnchorPane placeHolderPane;
 
     @FXML
-    private ListView<ReadOnlyTask> functionListView;
+    private ListView<CommandPreset> functionListView;
 
     public FunctionListPanel() {
         super();
@@ -48,19 +49,19 @@ public class FunctionListPanel extends UiPart {
     }
 
     public static FunctionListPanel load(Stage primaryStage, AnchorPane functionListPlaceholder,
-                                       ObservableList<ReadOnlyTask> functionList) {
+                                       ObservableList<CommandPreset> functionList) {
         FunctionListPanel functionListPanel =
                 UiPartLoader.loadUiPart(primaryStage, functionListPlaceholder, new FunctionListPanel());
         functionListPanel.configure(functionList);
         return functionListPanel;
     }
 
-    private void configure(ObservableList<ReadOnlyTask> functionList) {
+    private void configure(ObservableList<CommandPreset> functionList) {
         setConnections(functionList);
         addToPlaceholder();
     }
 
-    private void setConnections(ObservableList<ReadOnlyTask> functionList) {
+    private void setConnections(ObservableList<CommandPreset> functionList) {
         functionListView.setItems(functionList);
         functionListView.setCellFactory(listView -> new FunctionListViewCell());
         setEventHandlerForSelectionChangeEvent();
@@ -75,7 +76,7 @@ public class FunctionListPanel extends UiPart {
         functionListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 logger.fine("Selection in function list panel changed to : '" + newValue + "'");
-                raise(new TaskPanelSelectionChangedEvent(newValue));
+                //raise(new TaskPanelSelectionChangedEvent(newValue));
             }
         });
     }
@@ -87,20 +88,20 @@ public class FunctionListPanel extends UiPart {
         });
     }
 
-    class FunctionListViewCell extends ListCell<ReadOnlyTask> {
+    class FunctionListViewCell extends ListCell<CommandPreset> {
 
         public FunctionListViewCell() {
         }
 
         @Override
-        protected void updateItem(ReadOnlyTask function, boolean empty) {
-            super.updateItem(function, empty);
+        protected void updateItem(CommandPreset commandPreset, boolean empty) {
+            super.updateItem(commandPreset, empty);
 
-            if (empty || function == null) {
+            if (empty || commandPreset == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(FunctionCard.load(function, getIndex() + 1).getLayout());
+                setGraphic(FunctionCard.load(commandPreset).getLayout());
             }
         }
     }

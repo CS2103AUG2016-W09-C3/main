@@ -5,6 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import seedu.address.logic.commands.CommandPreset;
 import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -16,69 +17,27 @@ public class FunctionCard extends UiPart{
     @FXML
     private HBox cardPane;
     @FXML
-    private Label name;
+    private Label description;
     @FXML
-    private Label done;
-    @FXML
-    private Label id;
-    @FXML
-    private Label priority;
-    @FXML
-    private Label information;
-    @FXML
-    private Label datetime;
-    @FXML
-    private Label length;
-    @FXML
-    private Label recurrance;
-    @FXML
-    private Label tags;
+    private Label command;
 
-    private ReadOnlyTask person;
-    private int displayedIndex;
+    private CommandPreset commandPreset;
 
     public FunctionCard(){
 
     }
 
-    public static FunctionCard load(ReadOnlyTask person, int displayedIndex){
+    public static FunctionCard load(CommandPreset commandPreset){
         FunctionCard card = new FunctionCard();
-        card.person = person;
-        card.displayedIndex = displayedIndex;
+        card.commandPreset = commandPreset;
         return UiPartLoader.loadUiPart(card);
     }
 
     // @@author A0140155U
     @FXML
     public void initialize() {
-        name.setText(person.getName().fullName);
-        id.setText(displayedIndex + ". ");
-        priority.setText(person.getPriority().toString());
-        information.setText(person.getInformation().fullInformation);
-        done.setText(person.getDoneFlag().toString());
-        if(person.isDated()){
-            ReadOnlyDatedTask datedTask = (ReadOnlyDatedTask) person;
-            datetime.setText(datedTask.getDateTime().toString());
-            length.setText(datedTask.getLength().toString());
-            recurrance.setText(datedTask.getRecurrance().toString());
-        }else{
-            VBox sub = ((VBox) (datetime.getParent()));
-            sub.getChildren().remove(datetime);
-            sub.getChildren().remove(recurrance);
-            sub.getChildren().remove(length);
-            
-        }
-        tags.setText(person.tagsString());
-        style();
-    }
-    
-    public void style(){
-        StringBuilder styleString = new StringBuilder();
-        // Style based on property
-        styleString.append(styler.getPriorityColour(person.getPriority().toString()));
-        // Style based on done
-        styleString.append(styler.getDoneColour(person.getDoneFlag().toString()));
-        cardPane.setStyle(styleString.toString());
+        command.setText(commandPreset.getCommand());
+        description.setText(commandPreset.getDescription());
     }
     
     // @@author

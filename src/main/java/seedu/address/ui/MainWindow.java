@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CommandPreset;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -113,7 +115,7 @@ public class MainWindow extends UiPart {
 
     void fillInnerParts() {
         //browserPanel = BrowserPanel.load(browserPlaceholder);
-        functionListPanel = FunctionListPanel.load(primaryStage, getFunctionListPlaceholder(), logic.getFilteredTaskList());
+        functionListPanel = FunctionListPanel.load(primaryStage, getFunctionListPlaceholder(), userPrefs.getCommandPresets());
         personListPanel = PersonListPanel.load(primaryStage, getPersonListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getAddressBookFilePath());
