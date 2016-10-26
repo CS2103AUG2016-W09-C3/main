@@ -17,6 +17,10 @@ public class MainGuiHandle extends GuiHandle {
         return new TaskListPanelHandle(guiRobot, primaryStage);
     }
 
+    public PresetListPanelHandle getPresetListPanel() {
+        return new PresetListPanelHandle(guiRobot, primaryStage);
+    }
+
     public ResultDisplayHandle getResultDisplay() {
         return new ResultDisplayHandle(guiRobot, primaryStage);
     }

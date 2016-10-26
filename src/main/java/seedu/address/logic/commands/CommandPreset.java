@@ -21,6 +21,11 @@ public class CommandPreset implements Serializable{
         this.description = description;
     }
     
+    public CommandPreset(CommandPreset commandPreset) {
+        this.command = commandPreset.getCommand();
+        this.description = commandPreset.getDescription();
+    }
+
     public String getCommand() {
         return command;
     }
