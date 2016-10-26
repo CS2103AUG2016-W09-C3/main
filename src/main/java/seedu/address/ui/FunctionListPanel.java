@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.ui;
 
 import javafx.application.Platform;
@@ -19,7 +20,7 @@ import seedu.address.commons.core.LogsCenter;
 import java.util.logging.Logger;
 
 /**
- * Panel containing the list of functions.
+ * Panel containing the list of presets.
  */
 public class FunctionListPanel extends UiPart {
     private final Logger logger = LogsCenter.getLogger(FunctionListPanel.class);

@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.ui;
 
 import javafx.fxml.FXML;
@@ -33,14 +34,12 @@ public class FunctionCard extends UiPart{
         return UiPartLoader.loadUiPart(card);
     }
 
-    // @@author A0140155U
     @FXML
     public void initialize() {
         command.setText(commandPreset.getCommand());
         description.setText(commandPreset.getDescription());
     }
     
-    // @@author
     public HBox getLayout() {
         return cardPane;
     }
