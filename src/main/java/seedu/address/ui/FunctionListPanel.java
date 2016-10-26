@@ -62,7 +62,7 @@ public class FunctionListPanel extends UiPart {
 
     private void setConnections(ObservableList<ReadOnlyTask> functionList) {
         functionListView.setItems(functionList);
-        functionListView.setCellFactory(listView -> new PersonListViewCell());
+        functionListView.setCellFactory(listView -> new FunctionListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -87,9 +87,9 @@ public class FunctionListPanel extends UiPart {
         });
     }
 
-    class PersonListViewCell extends ListCell<ReadOnlyTask> {
+    class FunctionListViewCell extends ListCell<ReadOnlyTask> {
 
-        public PersonListViewCell() {
+        public FunctionListViewCell() {
         }
 
         @Override
@@ -100,7 +100,7 @@ public class FunctionListPanel extends UiPart {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(PersonCard.load(function, getIndex() + 1).getLayout());
+                setGraphic(FunctionCard.load(function, getIndex() + 1).getLayout());
             }
         }
     }
