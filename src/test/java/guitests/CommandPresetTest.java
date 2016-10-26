@@ -6,9 +6,11 @@ import org.junit.Test;
 
 public class CommandPresetTest extends AddressBookGuiTest  {
 
+    /*
     @Test
     public void test() {
         presetListPanel.navigateToPreset("list");
     }
-
+    */
+    
 }
