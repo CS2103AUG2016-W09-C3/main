@@ -8,7 +8,7 @@ public class CommandPresetTest extends AddressBookGuiTest  {
 
     @Test
     public void test() {
-        presetListPanel.clickOnPreset("list");
+        presetListPanel.navigateToPreset("list");
     }
 
 }
