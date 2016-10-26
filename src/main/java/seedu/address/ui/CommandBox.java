@@ -82,13 +82,14 @@ public class CommandBox extends UiPart {
         logger.info("Result: " + mostRecentResult.feedbackToUser);
     }
 
+    // @@author A0140155U
     @Subscribe
     private void handleCommandPresetSelected(CommandPresetSelectedEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event,"Selected command preset: " + event.getCommand()));
         commandTextField.setText(event.getCommand());
         handleCommandInputChanged();
     }
-    
+    // @@author
     /**
      * Sets the command box style to indicate a correct command.
      */
