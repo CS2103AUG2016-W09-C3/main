@@ -29,7 +29,8 @@ public class MainWindow extends UiPart {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    //private BrowserPanel browserPanel;
+    private FunctionListPanel functionListPanel;
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
@@ -55,6 +56,9 @@ public class MainWindow extends UiPart {
     @FXML
     private AnchorPane personListPanelPlaceholder;
 
+    @FXML
+    private AnchorPane functionListPanelPlaceholder;
+    
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
@@ -108,7 +112,8 @@ public class MainWindow extends UiPart {
     }
 
     void fillInnerParts() {
-        browserPanel = BrowserPanel.load(browserPlaceholder);
+        //browserPanel = BrowserPanel.load(browserPlaceholder);
+        functionListPanel = FunctionListPanel.load(primaryStage, getFunctionListPlaceholder(), logic.getFilteredTaskList());
         personListPanel = PersonListPanel.load(primaryStage, getPersonListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getAddressBookFilePath());
@@ -131,6 +136,10 @@ public class MainWindow extends UiPart {
         return personListPanelPlaceholder;
     }
 
+    public AnchorPane getFunctionListPlaceholder() {
+        return functionListPanelPlaceholder;
+    }
+    
     public void hide() {
         primaryStage.hide();
     }
@@ -186,11 +195,15 @@ public class MainWindow extends UiPart {
         return this.personListPanel;
     }
 
-    public void loadPersonPage(ReadOnlyTask person) {
+    public FunctionListPanel getFunctionListPanel() {
+        return this.functionListPanel;
+    }
+    
+    /*public void loadPersonPage(ReadOnlyTask person) {
         browserPanel.loadTaskPage(person);
     }
 
     public void releaseResources() {
         browserPanel.freeResources();
-    }
+    }*/
 }

@@ -39,11 +39,14 @@
                   <AnchorPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
-            <AnchorPane fx:id="browserPlaceholder" prefWidth="340">
+            <VBox fx:id="presetList" prefWidth="340">
                 <padding>
                     <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
-            </AnchorPane>
+               <children>
+                  <AnchorPane fx:id="functionListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
          </items>
       </SplitPane>
        <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
