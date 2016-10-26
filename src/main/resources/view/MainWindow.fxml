@@ -29,38 +29,36 @@
             </Menu>
          </menus>
       </MenuBar>
-      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
+      <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.5" VBox.vgrow="ALWAYS">
          <items>
+            <AnchorPane fx:id="presetListPanelPlaceholder" prefWidth="320.0" />
             <VBox fx:id="personList" minWidth="340" prefWidth="340">
                 <padding>
                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                 </padding>
                <children>
                   <AnchorPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-               </children>
-            </VBox>
-            <!-- @@author A0140155U -->
-            <VBox fx:id="presetList" prefWidth="340">
-                <padding>
-                    <Insets bottom="10" left="10" right="10" top="10" />
-                </padding>
-               <children>
-                  <AnchorPane fx:id="presetListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                   <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+                       <padding>
+                           <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                       </padding>
+                   </AnchorPane>
+                  <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
+                     <padding>
+                        <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+                     </padding>
+                  </AnchorPane>
                </children>
             </VBox>
             <!-- @@author -->
          </items>
       </SplitPane>
-       <AnchorPane fx:id="resultDisplayPlaceholder" maxHeight="100" minHeight="100" prefHeight="100" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
-           <padding>
-               <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-           </padding>
-       </AnchorPane>
-      <AnchorPane fx:id="commandBoxPlaceholder" styleClass="anchor-pane-with-border" VBox.vgrow="NEVER">
-         <padding>
-            <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-         </padding>
-      </AnchorPane>
       <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
+      <!-- @@author A0140155U -->
+      <VBox fx:id="presetList" prefWidth="340">
+          <padding>
+              <Insets bottom="10" left="10" right="10" top="10" />
+          </padding>
+      </VBox>
    </children>
 </VBox>
