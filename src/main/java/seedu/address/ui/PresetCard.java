@@ -10,9 +10,9 @@ import seedu.address.logic.commands.CommandPreset;
 import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 
-public class FunctionCard extends UiPart{
+public class PresetCard extends UiPart{
 
-    private static final String FXML = "FunctionListCard.fxml";
+    private static final String FXML = "PresetListCard.fxml";
     private static final TaskStyleMapping styler = TaskPropertyMapping.getInstance();
     
     @FXML
@@ -24,12 +24,12 @@ public class FunctionCard extends UiPart{
 
     private CommandPreset commandPreset;
 
-    public FunctionCard(){
+    public PresetCard(){
 
     }
 
-    public static FunctionCard load(CommandPreset commandPreset){
-        FunctionCard card = new FunctionCard();
+    public static PresetCard load(CommandPreset commandPreset){
+        PresetCard card = new PresetCard();
         card.commandPreset = commandPreset;
         return UiPartLoader.loadUiPart(card);
     }

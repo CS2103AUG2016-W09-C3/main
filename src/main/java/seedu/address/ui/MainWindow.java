@@ -31,8 +31,9 @@ public class MainWindow extends UiPart {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    //private BrowserPanel browserPanel;
-    private FunctionListPanel functionListPanel;
+    // @@author A0140155U
+    private PresetListPanel presetListPanel;
+    // @@author
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
@@ -57,10 +58,10 @@ public class MainWindow extends UiPart {
 
     @FXML
     private AnchorPane personListPanelPlaceholder;
-
+    // @@author A0140155U
     @FXML
-    private AnchorPane functionListPanelPlaceholder;
-    
+    private AnchorPane presetListPanelPlaceholder;
+    // @@author
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
@@ -114,8 +115,9 @@ public class MainWindow extends UiPart {
     }
 
     void fillInnerParts() {
-        //browserPanel = BrowserPanel.load(browserPlaceholder);
-        functionListPanel = FunctionListPanel.load(primaryStage, getFunctionListPlaceholder(), userPrefs.getCommandPresets());
+        // @@author A0140155U
+        presetListPanel = PresetListPanel.load(primaryStage, getPresetListPlaceholder(), userPrefs.getCommandPresets());
+        // @@author
         personListPanel = PersonListPanel.load(primaryStage, getPersonListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getAddressBookFilePath());
@@ -137,11 +139,11 @@ public class MainWindow extends UiPart {
     public AnchorPane getPersonListPlaceholder() {
         return personListPanelPlaceholder;
     }
-
-    public AnchorPane getFunctionListPlaceholder() {
-        return functionListPanelPlaceholder;
+    // @@author A0140155U
+    public AnchorPane getPresetListPlaceholder() {
+        return presetListPanelPlaceholder;
     }
-    
+    // @@author
     public void hide() {
         primaryStage.hide();
     }
@@ -197,15 +199,10 @@ public class MainWindow extends UiPart {
         return this.personListPanel;
     }
 
-    public FunctionListPanel getFunctionListPanel() {
-        return this.functionListPanel;
+    // @@author A0140155U
+    public PresetListPanel getPresetListPanel() {
+        return this.presetListPanel;
     }
+    // @@author
     
-    /*public void loadPersonPage(ReadOnlyTask person) {
-        browserPanel.loadTaskPage(person);
-    }
-
-    public void releaseResources() {
-        browserPanel.freeResources();
-    }*/
 }

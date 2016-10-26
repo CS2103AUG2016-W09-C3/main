@@ -44,7 +44,7 @@
                     <Insets bottom="10" left="10" right="10" top="10" />
                 </padding>
                <children>
-                  <AnchorPane fx:id="functionListPanelPlaceholder" VBox.vgrow="ALWAYS" />
+                  <AnchorPane fx:id="presetListPanelPlaceholder" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </items>

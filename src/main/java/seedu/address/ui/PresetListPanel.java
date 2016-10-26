@@ -22,16 +22,16 @@ import java.util.logging.Logger;
 /**
  * Panel containing the list of presets.
  */
-public class FunctionListPanel extends UiPart {
-    private final Logger logger = LogsCenter.getLogger(FunctionListPanel.class);
-    private static final String FXML = "FunctionListPanel.fxml";
+public class PresetListPanel extends UiPart {
+    private final Logger logger = LogsCenter.getLogger(PresetListPanel.class);
+    private static final String FXML = "PresetListPanel.fxml";
     private VBox panel;
     private AnchorPane placeHolderPane;
 
     @FXML
-    private ListView<CommandPreset> functionListView;
+    private ListView<CommandPreset> presetListView;
 
-    public FunctionListPanel() {
+    public PresetListPanel() {
         super();
     }
 
@@ -50,22 +50,22 @@ public class FunctionListPanel extends UiPart {
         this.placeHolderPane = pane;
     }
 
-    public static FunctionListPanel load(Stage primaryStage, AnchorPane functionListPlaceholder,
-                                       ObservableList<CommandPreset> functionList) {
-        FunctionListPanel functionListPanel =
-                UiPartLoader.loadUiPart(primaryStage, functionListPlaceholder, new FunctionListPanel());
-        functionListPanel.configure(functionList);
-        return functionListPanel;
+    public static PresetListPanel load(Stage primaryStage, AnchorPane presetListPlaceholder,
+                                       ObservableList<CommandPreset> presetList) {
+        PresetListPanel presetListPanel =
+                UiPartLoader.loadUiPart(primaryStage, presetListPlaceholder, new PresetListPanel());
+        presetListPanel.configure(presetList);
+        return presetListPanel;
     }
 
-    private void configure(ObservableList<CommandPreset> functionList) {
-        setConnections(functionList);
+    private void configure(ObservableList<CommandPreset> presetList) {
+        setConnections(presetList);
         addToPlaceholder();
     }
 
-    private void setConnections(ObservableList<CommandPreset> functionList) {
-        functionListView.setItems(functionList);
-        functionListView.setCellFactory(listView -> new FunctionListViewCell());
+    private void setConnections(ObservableList<CommandPreset> presetList) {
+        presetListView.setItems(presetList);
+        presetListView.setCellFactory(listView -> new PresetListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -75,9 +75,9 @@ public class FunctionListPanel extends UiPart {
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        functionListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        presetListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                logger.fine("Selection in function list panel changed to : '" + newValue + "'");
+                logger.fine("Selection in preset list panel changed to : '" + newValue + "'");
                 raise(new CommandPresetSelectedEvent(newValue));
             }
         });
@@ -85,14 +85,14 @@ public class FunctionListPanel extends UiPart {
 
     public void scrollTo(int index) {
         Platform.runLater(() -> {
-            functionListView.scrollTo(index);
-            functionListView.getSelectionModel().clearAndSelect(index);
+            presetListView.scrollTo(index);
+            presetListView.getSelectionModel().clearAndSelect(index);
         });
     }
 
-    class FunctionListViewCell extends ListCell<CommandPreset> {
+    class PresetListViewCell extends ListCell<CommandPreset> {
 
-        public FunctionListViewCell() {
+        public PresetListViewCell() {
         }
 
         @Override
@@ -103,7 +103,7 @@ public class FunctionListPanel extends UiPart {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(FunctionCard.load(commandPreset).getLayout());
+                setGraphic(PresetCard.load(commandPreset).getLayout());
             }
         }
     }
