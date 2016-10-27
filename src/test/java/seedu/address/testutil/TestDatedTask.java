@@ -80,5 +80,18 @@ public class TestDatedTask extends TestTask implements ReadOnlyDatedTask {
         this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));
         return sb.toString();
     }
+
+    @Override
+    public DateTime getDateTimeEnd() {
+        if(!hasValidLength()){
+            return dateTime;
+        }
+        return new DateTime(dateTime.getDateTime().plusMinutes(length.getAsMinutes()));
+    }
+
+    @Override
+    public boolean hasValidLength() {
+        return length.isValid();
+    }
 }
 //@@author

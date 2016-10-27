@@ -111,7 +111,7 @@ public class RescheduleCommandTest extends AddressBookGuiTest {
 			TestTask target = finalList[targetIndex - 1];
 			TestTask[] remainderList = TestUtil.removeTaskFromList(finalList, targetIndex);
 			
-			LocalDateTime rescheduleDatetime = ((TestDatedTask) target).getDateTime().datetime;
+			LocalDateTime rescheduleDatetime = ((TestDatedTask) target).getDateTime().getDateTime();
 			System.out.println(rescheduleDatetime.toString());
 			LocalDateTime newDateTime = DateParser.rescheduleDate(rescheduleDatetime, interval);
 			System.out.println(newDateTime.toString());

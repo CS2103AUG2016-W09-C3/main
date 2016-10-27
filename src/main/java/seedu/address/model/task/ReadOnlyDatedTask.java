@@ -7,6 +7,7 @@ package seedu.address.model.task;
 public interface ReadOnlyDatedTask extends ReadOnlyTask {
     
     DateTime getDateTime();
+    DateTime getDateTimeEnd();
     Length getLength();
     Recurrance getRecurrance();
     
@@ -55,4 +56,5 @@ public interface ReadOnlyDatedTask extends ReadOnlyTask {
     default boolean isDated(){
         return true;
     }
+    boolean hasValidLength();
 }

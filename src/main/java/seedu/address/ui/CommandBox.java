@@ -88,6 +88,7 @@ public class CommandBox extends UiPart {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,"Selected command preset: " + event.getCommand()));
         commandTextField.setText(event.getCommand());
         handleCommandInputChanged();
+        commandTextField.setText(event.getCommand());
     }
     // @@author
     /**

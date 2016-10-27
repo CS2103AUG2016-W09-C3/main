@@ -157,7 +157,7 @@ public class UniqueTaskList implements Iterable<Task> {
         String recurr = recurrence.toString();
         
         // Set increment of time & date
-        LocalDateTime editDateTime = DateParser.rescheduleDate(dateTime.datetime, recurr);
+        LocalDateTime editDateTime = DateParser.rescheduleDate(dateTime.getDateTime(), recurr);
         
         DateTime latestDateTime = new DateTime(editDateTime);
         

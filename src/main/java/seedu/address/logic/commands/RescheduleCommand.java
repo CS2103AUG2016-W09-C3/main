@@ -68,7 +68,7 @@ public class RescheduleCommand extends Command{
         ReadOnlyDatedTask taskToReschedule = (ReadOnlyDatedTask) lastShownList.get(targetIndex - 1);
         DateTime toBeEdited = taskToReschedule.getDateTime();
         try {
-			LocalDateTime editedLocalDateTime = DateParser.rescheduleDate(toBeEdited.datetime, interval);
+			LocalDateTime editedLocalDateTime = DateParser.rescheduleDate(toBeEdited.getDateTime(), interval);
 			toBeEdited = new DateTime(editedLocalDateTime);
 		} catch (IllegalValueException e) {
 			return new CommandResult(TimeInterval.MESSAGE_TIME_INTERVAL_CONSTRAINTS);

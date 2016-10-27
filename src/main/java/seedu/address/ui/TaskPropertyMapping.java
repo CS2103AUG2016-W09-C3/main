@@ -17,23 +17,29 @@ import java.util.HashMap;
 public class TaskPropertyMapping implements TaskStyleMapping{
     private final static String PROPERTY_BACKGROUND = "-fx-background-color";
     
-    private final static PropertyMap priorityMap;
-    private final static PropertyMap doneMap;
+    private final static PropertyMap lightPriorityMap;
+    private final static PropertyMap lightDoneMap;
+    private final static PropertyMap cardDoneMap;
     
     private static TaskPropertyMapping instance = null;
     
     static {
-        // Priority : Background color
-        priorityMap = new PropertyMap(PROPERTY_BACKGROUND);
-        priorityMap.addTo("VERYHIGH", "radial-gradient(radius 100%, #FFAAAA, #FF9999)");
-        priorityMap.addTo("HIGH", "radial-gradient(radius 100%, #FFDDDD, #FFCCCC)");
-        priorityMap.addTo("MEDIUM", "radial-gradient(radius 100%, #DDDDDD, #CCCCCC)");
-        priorityMap.addTo("LOW", "radial-gradient(radius 100%, #D5FFD5, #C4EEC4)");
-        priorityMap.addTo("VERYLOW", "radial-gradient(radius 100%, #95E195, #84D084)");
+        // Light - Priority : Background color
+        lightPriorityMap = new PropertyMap(PROPERTY_BACKGROUND);
+        lightPriorityMap.addTo("VERYHIGH", "radial-gradient(center 50% 50%, radius 50%, #C20E00, #A70E00)");
+        lightPriorityMap.addTo("HIGH", "radial-gradient(center 50% 50%, radius 50%, #D19900, #C08800)");
+        lightPriorityMap.addTo("MEDIUM", "radial-gradient(center 50% 50%, radius 50%, #555555, #444444)");
+        lightPriorityMap.addTo("LOW", "radial-gradient(center 50% 50%, radius 50%, #007614, #005B14)");
+        lightPriorityMap.addTo("VERYLOW", "radial-gradient(center 50% 50%, radius 50%, #00A625, #009519)");
         
-        // Done : Background color
-        doneMap = new PropertyMap(PROPERTY_BACKGROUND);
-        priorityMap.addTo("Done", "radial-gradient(radius 100%, #BAEFF4, #A9DEE3)");
+        // Light - Done : Background color
+        lightDoneMap = new PropertyMap(PROPERTY_BACKGROUND);
+        lightDoneMap.addTo("Done", "radial-gradient(radius 100%, #3408B1, #2C08A1)");
+        
+        // Card - Done : Background color
+        cardDoneMap = new PropertyMap(PROPERTY_BACKGROUND);
+        cardDoneMap.addTo("Done", "#606060");
+        cardDoneMap.addTo("Not done", "radial-gradient(radius 100%, #202020, #101010)");
     }
     
     // Singleton
@@ -47,13 +53,18 @@ public class TaskPropertyMapping implements TaskStyleMapping{
     }
     
     @Override
-    public String getPriorityColour(String priority){
-        return priorityMap.get(priority);
+    public String getLightPriorityColour(String priority){
+        return lightPriorityMap.get(priority);
     }
 
     @Override
-    public String getDoneColour(String done) {
-        return doneMap.get(done);
+    public String getLightDoneColour(String done) {
+        return lightDoneMap.get(done);
+    }
+    
+    @Override
+    public String getCardDoneColour(String done) {
+        return cardDoneMap.get(done);
     }
     
     /*
@@ -63,7 +74,7 @@ public class TaskPropertyMapping implements TaskStyleMapping{
      */
     private static class PropertyMap{
         private final String property;
-        public final static HashMap<String, String> map = new HashMap<String, String>();
+        public final HashMap<String, String> map = new HashMap<String, String>();
         
         public PropertyMap(String property){
             this.property = property;

@@ -14,7 +14,11 @@ public class PersonCard extends UiPart{
     private static final TaskStyleMapping styler = TaskPropertyMapping.getInstance();
     
     @FXML
-    private HBox cardPane;
+    private HBox taskPane;
+
+    @FXML
+    private VBox light;
+    
     @FXML
     private Label name;
     @FXML
@@ -52,43 +56,64 @@ public class PersonCard extends UiPart{
     @FXML
     public void initialize() {
         name.setText(person.getName().fullName);
-        id.setText(displayedIndex + ". ");
-        priority.setText(person.getPriority().toString());
-        information.setText(person.getInformation().fullInformation);
-        done.setText(person.getDoneFlag().toString());
+        id.setText(Integer.toString(displayedIndex));
+        setOrNullText(priority, "Priority: ", person.getPriority().toString());
+        setOrNullText(information, "Info: ", person.getInformation().toString());
+        setOrNullText(done, person.getDoneFlag().toString());
         if(person.isDated()){
             ReadOnlyDatedTask datedTask = (ReadOnlyDatedTask) person;
-            datetime.setText(datedTask.getDateTime().toString());
-            length.setText(datedTask.getLength().toString());
-            recurrance.setText(datedTask.getRecurrance().toString());
+            setOrNullText(datetime, "Date: ",
+                    datedTask.getDateTime().toString() + (datedTask.hasValidLength() ? " - " + datedTask.getDateTimeEnd().toString() : ""));
+            setOrNullText(length, "");
+            setOrNullText(recurrance, "Repeat every ", datedTask.getRecurrance().toString());
         }else{
-            VBox sub = ((VBox) (datetime.getParent()));
-            sub.getChildren().remove(datetime);
-            sub.getChildren().remove(recurrance);
-            sub.getChildren().remove(length);
-            
+            setOrNullText(datetime, "");
+            setOrNullText(length, "");
+            setOrNullText(recurrance, "");
         }
         tags.setText(person.tagsString());
+        removeUnnecessaryLabels();
         style();
+    }
+
+    public void setOrNullText(Label label, String value){
+        setOrNullText(label, "", value);
+    }
+    
+    public void setOrNullText(Label label, String prefix, String value){
+        if(value.equals("")){
+            label.setText("");
+        }else{
+            label.setText(prefix + value);
+        }
+    }
+    
+    public void removeUnnecessaryLabels(){
+        VBox sub = ((VBox) (datetime.getParent()));
+        sub.getChildren().removeIf(lbl -> lbl instanceof Label && ((Label) lbl).getText().equals(""));
     }
     
     public void style(){
         StringBuilder styleString = new StringBuilder();
         // Style based on property
-        styleString.append(styler.getPriorityColour(person.getPriority().toString()));
+        styleString.append(styler.getLightPriorityColour(person.getPriority().toString()));
         // Style based on done
-        styleString.append(styler.getDoneColour(person.getDoneFlag().toString()));
-        cardPane.setStyle(styleString.toString());
+        styleString.append(styler.getLightDoneColour(person.getDoneFlag().toString()));
+        light.setStyle(styleString.toString());
+        //styleString = new StringBuilder();
+        //styleString.append(styler.getCardDoneColour(person.getDoneFlag().toString()));
+        //cardPane.setStyle(styleString.toString());
+        
     }
     
     // @@author
     public HBox getLayout() {
-        return cardPane;
+        return taskPane;
     }
 
     @Override
     public void setNode(Node node) {
-        cardPane = (HBox)node;
+        taskPane = (HBox)node;
     }
 
     @Override
