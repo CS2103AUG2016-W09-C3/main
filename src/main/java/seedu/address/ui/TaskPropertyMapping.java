@@ -26,11 +26,11 @@ public class TaskPropertyMapping implements TaskStyleMapping{
     static {
         // Light - Priority : Background color
         lightPriorityMap = new PropertyMap(PROPERTY_BACKGROUND);
-        lightPriorityMap.addTo("VERYHIGH", "radial-gradient(radius 100%, #BC0E00, #AC0E00)");
-        lightPriorityMap.addTo("HIGH", "radial-gradient(radius 100%, #940B00, #840B00)");
-        lightPriorityMap.addTo("MEDIUM", "radial-gradient(radius 100%, #555555, #444444)");
-        lightPriorityMap.addTo("LOW", "radial-gradient(radius 100%, #007114, #006114)");
-        lightPriorityMap.addTo("VERYLOW", "radial-gradient(radius 100%, #009019, #008019)");
+        lightPriorityMap.addTo("VERYHIGH", "radial-gradient(center 50% 50%, radius 50%, #C20E00, #A70E00)");
+        lightPriorityMap.addTo("HIGH", "radial-gradient(center 50% 50%, radius 50%, #D19900, #C08800)");
+        lightPriorityMap.addTo("MEDIUM", "radial-gradient(center 50% 50%, radius 50%, #555555, #444444)");
+        lightPriorityMap.addTo("LOW", "radial-gradient(center 50% 50%, radius 50%, #007614, #005B14)");
+        lightPriorityMap.addTo("VERYLOW", "radial-gradient(center 50% 50%, radius 50%, #00A625, #009519)");
         
         // Light - Done : Background color
         lightDoneMap = new PropertyMap(PROPERTY_BACKGROUND);

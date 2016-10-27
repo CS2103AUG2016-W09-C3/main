@@ -156,13 +156,13 @@
 }
 
 .menu-bar {
-    -fx-background-color: #6F98E2;
+    -fx-background-color: #292929;
 }
 
 .menu-bar .label {
     -fx-font-size: 14pt;
     -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: black;
+    -fx-text-fill: white;
     -fx-opacity: 0.9;
 }
 
@@ -272,20 +272,14 @@
 
 #personCard {
 	-fx-text-fill: #888888;
-    -fx-background-color: transparent;
-    -fx-border-color: #A0A0A0;
     -fx-padding: 10;
-    -fx-border-width: 2 2 2 2;
-    -fx-border-radius: 30 0 30 0;
     -fx-border-insets: 5 10 5 10;
     -fx-background-insets: 5 10 5 10;
-    -fx-background-radius: 30 0 30 0;
 }
 
 #presetCard {
 	-fx-text-fill: #888888;
     -fx-background-color: transparent;
-    -fx-border-color: #A0A0A0;
 }
 
 #commandTypeLabel {
@@ -303,24 +297,26 @@
 }
 
 .list-cell:odd{
-	-fx-background-color: linear-gradient(#303030, #202020);
+	-fx-background-color: #303030;
 }
 
 .list-cell:even{
-	-fx-background-color: linear-gradient(#353535, #252525);
+	-fx-background-color: #292929;
 }
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
-    -fx-background-color: #270481;
+    -fx-background-color: #555555;
 }
 
+.list-view{
+	-fx-background-color: #000000;
+}
+.list-view:focused{
+	-fx-background-color: #000000;
+}
 #indexLblContainer {
 	-fx-background-color: linear-gradient(#575757, #454545);
 	-fx-padding: 5;
-    -fx-background-radius: 20;
-    -fx-border-radius: 20;
-    -fx-border-color: #A0A0A0;
-    -fx-border-width: 2;
 }
 
 .text-area .content{
