@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="presetCard" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane HBox.hgrow="ALWAYS" >
             <columnConstraints>
@@ -31,7 +31,7 @@
                                 <Label fx:id="tags" styleClass="cell_small_label" text="\$tags" />
                             </children>
                         </HBox> -->
-                        <Label fx:id="description" styleClass="cell_small_label" text="\$description" />
+                        <Label fx:id="description" styleClass="cell_big_label" text="\$description" />
                         <Label fx:id="command" styleClass="cell_small_label" text="\$command" />
                     </children>
                 </VBox>
