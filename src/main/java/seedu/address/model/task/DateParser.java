@@ -84,6 +84,9 @@ public class DateParser {
      * Parses a date using natty.
      */
     private static DateGroup parseNatty(String dateString) throws IllegalValueException{
+        if(dateString == null){
+            throw new IllegalValueException("Missing date parameter.");
+        }
         List<DateGroup> dates = nattyParser.parse(dateString);
         if(dates.isEmpty() || dates.get(0).getDates().isEmpty()){
             throw new IllegalValueException("Date not parsable.");

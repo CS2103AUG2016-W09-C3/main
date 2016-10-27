@@ -1,8 +1,13 @@
 package seedu.address.model;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.CommandPreset;
 
+import java.util.ArrayList;
 import java.util.Objects;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  * Represents User's preferences.
@@ -10,7 +15,9 @@ import java.util.Objects;
 public class UserPrefs {
 
     public GuiSettings guiSettings;
-
+    // @@author A0140155U
+    public ArrayList<CommandPreset> commandPresets = new ArrayList<>();
+    // @@author
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
     }
@@ -27,6 +34,11 @@ public class UserPrefs {
         guiSettings = new GuiSettings(width, height, x, y);
     }
 
+    // @@author A0140155U
+    public ObservableList<CommandPreset> getCommandPresets(){
+        return FXCollections.observableArrayList(commandPresets);
+    }
+    // @@author
     @Override
     public boolean equals(Object other) {
         if (other == this){

@@ -1,5 +1,6 @@
 package seedu.address.ui;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -12,6 +13,7 @@ import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.CommandPreset;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.task.ReadOnlyTask;
 
@@ -29,7 +31,9 @@ public class MainWindow extends UiPart {
     private Logic logic;
 
     // Independent Ui parts residing in this Ui container
-    private BrowserPanel browserPanel;
+    // @@author A0140155U
+    private PresetListPanel presetListPanel;
+    // @@author
     private PersonListPanel personListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
@@ -54,7 +58,10 @@ public class MainWindow extends UiPart {
 
     @FXML
     private AnchorPane personListPanelPlaceholder;
-
+    // @@author A0140155U
+    @FXML
+    private AnchorPane presetListPanelPlaceholder;
+    // @@author
     @FXML
     private AnchorPane resultDisplayPlaceholder;
 
@@ -108,7 +115,9 @@ public class MainWindow extends UiPart {
     }
 
     void fillInnerParts() {
-        browserPanel = BrowserPanel.load(browserPlaceholder);
+        // @@author A0140155U
+        presetListPanel = PresetListPanel.load(primaryStage, getPresetListPlaceholder(), userPrefs.getCommandPresets());
+        // @@author
         personListPanel = PersonListPanel.load(primaryStage, getPersonListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getAddressBookFilePath());
@@ -130,7 +139,11 @@ public class MainWindow extends UiPart {
     public AnchorPane getPersonListPlaceholder() {
         return personListPanelPlaceholder;
     }
-
+    // @@author A0140155U
+    public AnchorPane getPresetListPlaceholder() {
+        return presetListPanelPlaceholder;
+    }
+    // @@author
     public void hide() {
         primaryStage.hide();
     }
@@ -186,11 +199,10 @@ public class MainWindow extends UiPart {
         return this.personListPanel;
     }
 
-    public void loadPersonPage(ReadOnlyTask person) {
-        browserPanel.loadTaskPage(person);
+    // @@author A0140155U
+    public PresetListPanel getPresetListPanel() {
+        return this.presetListPanel;
     }
-
-    public void releaseResources() {
-        browserPanel.freeResources();
-    }
+    // @@author
+    
 }
