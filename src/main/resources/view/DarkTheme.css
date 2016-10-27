@@ -270,7 +270,7 @@
  * Many of the above properties were changed too
  * */
 
-#personCard {
+#taskPane {
 	-fx-text-fill: #888888;
     -fx-padding: 10;
     -fx-border-insets: 5 10 5 10;

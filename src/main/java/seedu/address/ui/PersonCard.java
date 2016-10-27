@@ -14,7 +14,7 @@ public class PersonCard extends UiPart{
     private static final TaskStyleMapping styler = TaskPropertyMapping.getInstance();
     
     @FXML
-    private HBox cardPane;
+    private HBox taskPane;
 
     @FXML
     private VBox light;
@@ -108,12 +108,12 @@ public class PersonCard extends UiPart{
     
     // @@author
     public HBox getLayout() {
-        return cardPane;
+        return taskPane;
     }
 
     @Override
     public void setNode(Node node) {
-        cardPane = (HBox)node;
+        taskPane = (HBox)node;
     }
 
     @Override

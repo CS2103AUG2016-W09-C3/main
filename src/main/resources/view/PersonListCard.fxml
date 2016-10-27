@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
-<HBox id="personCard" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<HBox id="taskPane" fx:id="taskPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <VBox id="indexLblContainer" fx:id="light" alignment="CENTER" minWidth="30.0">
 				<Label fx:id="id" styleClass="cell_big_label"></Label>
