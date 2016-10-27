@@ -32,7 +32,7 @@
                             </children>
                         </HBox> -->
                         <Label fx:id="description" styleClass="cell_big_label" text="\$description" />
-                        <Label fx:id="command" styleClass="cell_small_label" text="\$command" />
+                        
                     </children>
                 </VBox>
             </children>

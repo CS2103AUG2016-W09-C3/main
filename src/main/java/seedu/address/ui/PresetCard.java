@@ -19,8 +19,6 @@ public class PresetCard extends UiPart{
     private HBox cardPane;
     @FXML
     private Label description;
-    @FXML
-    private Label command;
 
     private CommandPreset commandPreset;
 
@@ -36,7 +34,6 @@ public class PresetCard extends UiPart{
 
     @FXML
     public void initialize() {
-        command.setText(commandPreset.getCommand());
         description.setText(commandPreset.getDescription());
     }
     
