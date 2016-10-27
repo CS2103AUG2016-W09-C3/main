@@ -55,8 +55,8 @@ public class CustomTaskComparator implements Comparator<Task>{
             if(t1.isDated() && t2.isDated()){
                 DatedTask datedT1 = (DatedTask) t1;
                 DatedTask datedT2 = (DatedTask) t2;
-                LocalDateTime time1 = datedT1.getDateTime().datetime;
-                LocalDateTime time2 = datedT2.getDateTime().datetime;
+                LocalDateTime time1 = datedT1.getDateTime().getDateTime();
+                LocalDateTime time2 = datedT2.getDateTime().getDateTime();
                 
                 return time1.compareTo(time2);
             } else if(t1.isDated() && !t2.isDated()){

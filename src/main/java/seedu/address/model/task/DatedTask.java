@@ -48,6 +48,14 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
     public DateTime getDateTime(){
         return this.dateTime;
     }
+
+    @Override
+    public DateTime getDateTimeEnd() {
+        if(!this.length.isValid()){
+            return dateTime;
+        }
+        return new DateTime(dateTime.getDateTime().plusMinutes(length.getAsMinutes()));
+    }
     
     public Length getLength(){
         return this.length;
@@ -70,5 +78,5 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
         return Objects.hash(this.name, this.dateTime, this.length, 
                             this.recurrance, this.priority, this.information, tags);
     }
-    
+
 }

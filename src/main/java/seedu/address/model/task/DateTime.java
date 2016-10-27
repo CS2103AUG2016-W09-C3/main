@@ -18,7 +18,7 @@ public class DateTime {
     public static final DateTimeFormatter DATE_DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     public static final String PARAM_NOT_SPECIFIED = "-1";
 
-    public final LocalDateTime datetime;
+    private final LocalDateTime datetime;
     
     /**
      * Validates given date and time.
@@ -70,4 +70,7 @@ public class DateTime {
         return this.datetime.hashCode();
     }
     
+    public LocalDateTime getDateTime(){
+        return datetime;
+    }
 }

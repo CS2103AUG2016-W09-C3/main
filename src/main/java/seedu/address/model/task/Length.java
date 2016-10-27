@@ -9,10 +9,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
  */
 public class Length {
 
-    public final TimeInterval timeInterval;
+    private final TimeInterval timeInterval;
     public final static String NO_INTERVAL = "";
     public final static String DEFAULT_INTERVAL = "1h";
-    public boolean hasInterval = true;
+    private boolean hasInterval = true;
     /**
      * Stores given interval. Validation of interval is done by TimeInterval class.
      *
@@ -30,6 +30,9 @@ public class Length {
         this.timeInterval = new TimeInterval(interval);
     }
 
+    public boolean isValid(){
+        return hasInterval;
+    }
     
     @Override
     public String toString() {
@@ -50,5 +53,9 @@ public class Length {
     @Override
     public int hashCode() {
         return this.timeInterval.hashCode();
+    }
+    
+    public int getAsMinutes(){
+        return timeInterval.getAsMinutes();
     }
 }
