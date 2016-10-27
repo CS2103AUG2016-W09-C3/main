@@ -58,18 +58,22 @@ public class PersonCard extends UiPart{
         done.setText(person.getDoneFlag().toString());
         if(person.isDated()){
             ReadOnlyDatedTask datedTask = (ReadOnlyDatedTask) person;
-            datetime.setText(datedTask.getDateTime().toString());
+            datetime.setText(datedTask.getDateTime().toString() + (datedTask.hasValidLength() ? " - " + datedTask.getDateTimeEnd().toString() : ""));
             length.setText(datedTask.getLength().toString());
             recurrance.setText(datedTask.getRecurrance().toString());
         }else{
-            VBox sub = ((VBox) (datetime.getParent()));
-            sub.getChildren().remove(datetime);
-            sub.getChildren().remove(recurrance);
-            sub.getChildren().remove(length);
-            
+            datetime.setText("");
+            length.setText("");
+            recurrance.setText("");
         }
         tags.setText(person.tagsString());
+        removeUnnecessaryLabels();
         style();
+    }
+    
+    public void removeUnnecessaryLabels(){
+        VBox sub = ((VBox) (datetime.getParent()));
+        sub.getChildren().removeIf(lbl -> lbl instanceof Label && ((Label) lbl).getText().equals(""));
     }
     
     public void style(){
