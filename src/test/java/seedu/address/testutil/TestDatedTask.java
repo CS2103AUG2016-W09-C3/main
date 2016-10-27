@@ -83,10 +83,15 @@ public class TestDatedTask extends TestTask implements ReadOnlyDatedTask {
 
     @Override
     public DateTime getDateTimeEnd() {
-        if(!this.length.isValid()){
+        if(!hasValidLength()){
             return dateTime;
         }
         return new DateTime(dateTime.getDateTime().plusMinutes(length.getAsMinutes()));
+    }
+
+    @Override
+    public boolean hasValidLength() {
+        return length.isValid();
     }
 }
 //@@author

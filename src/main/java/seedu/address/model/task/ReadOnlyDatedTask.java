@@ -56,4 +56,5 @@ public interface ReadOnlyDatedTask extends ReadOnlyTask {
     default boolean isDated(){
         return true;
     }
+    boolean hasValidLength();
 }
