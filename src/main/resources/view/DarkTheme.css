@@ -96,20 +96,20 @@
 
 .cell_big_label {
     -fx-font-size: 16px;
-    -fx-text-fill: #CCCCCC !important;
+    -fx-text-fill: #EEEEEE !important;
 }
 
 .cell_small_label {
     -fx-font-size: 13px;
-    -fx-text-fill: #CCCCCC !important;
+    -fx-text-fill: #EEEEEE !important;
 }
 
 .anchor-pane {
-     -fx-background-color: #9EBAEF;
+     -fx-background-color: linear-gradient(#353535, #202020);
 }
 
 .anchor-pane-with-border {
-     -fx-background-color: #9EBAEF;
+     -fx-background-color: linear-gradient(#353535, #202020);
 }
 
 .status-bar {
@@ -122,11 +122,11 @@
 }
 
 .result-display .label {
-    -fx-text-fill: #888888 !important;
+    -fx-text-fill: #CCCCCC !important;
 }
 
 .status-bar .label {
-    -fx-text-fill: #888888;
+    -fx-text-fill: #CCCCCC;
 }
 
 .status-bar-with-border {
@@ -311,5 +311,5 @@
 }
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
-    -fx-background-color: #6F98E2;
+    -fx-background-color: #270481;
 }
