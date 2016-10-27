@@ -293,8 +293,8 @@
     -fx-text-fill: #F70D1A;
 }
 
-#filterField, #personListPanel, #personWebpage {
-	-fx-background-color: black;
+#filterField, #personListView, #personListPanel, #personWebpage {
+	-fx-background-color: linear-gradient(#303030, #202020);
     -fx-effect: innershadow(gaussian, black, 10, 0, 0, 0);
 }
 
@@ -312,4 +312,18 @@
 
 .list-cell:filled:selected:focused, .list-cell:filled:selected {
     -fx-background-color: #270481;
+}
+
+#indexLblContainer {
+	-fx-background-color: linear-gradient(#575757, #454545);
+	-fx-padding: 5;
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+    -fx-border-color: #A0A0A0;
+    -fx-border-width: 2;
+}
+
+#indexLbl{
+    -fx-font-family: "Segoe UI Light";
+    -fx-text-fill: #888888;
 }

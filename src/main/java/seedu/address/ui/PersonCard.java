@@ -15,6 +15,10 @@ public class PersonCard extends UiPart{
     
     @FXML
     private HBox cardPane;
+
+    @FXML
+    private VBox light;
+    
     @FXML
     private Label name;
     @FXML
@@ -52,23 +56,36 @@ public class PersonCard extends UiPart{
     @FXML
     public void initialize() {
         name.setText(person.getName().fullName);
-        id.setText(displayedIndex + ". ");
-        priority.setText(person.getPriority().toString());
-        information.setText(person.getInformation().fullInformation);
-        done.setText(person.getDoneFlag().toString());
+        id.setText(Integer.toString(displayedIndex));
+        setOrNullText(priority, "Priority: ", person.getPriority().toString());
+        setOrNullText(information, "Info: ", person.getInformation().toString());
+        setOrNullText(done, person.getDoneFlag().toString());
         if(person.isDated()){
             ReadOnlyDatedTask datedTask = (ReadOnlyDatedTask) person;
-            datetime.setText(datedTask.getDateTime().toString() + (datedTask.hasValidLength() ? " - " + datedTask.getDateTimeEnd().toString() : ""));
-            length.setText(datedTask.getLength().toString());
-            recurrance.setText(datedTask.getRecurrance().toString());
+            setOrNullText(datetime, "Date: ",
+                    datedTask.getDateTime().toString() + (datedTask.hasValidLength() ? " - " + datedTask.getDateTimeEnd().toString() : ""));
+            setOrNullText(length, "");
+            setOrNullText(recurrance, "Repeat every ", datedTask.getRecurrance().toString());
         }else{
-            datetime.setText("");
-            length.setText("");
-            recurrance.setText("");
+            setOrNullText(datetime, "");
+            setOrNullText(length, "");
+            setOrNullText(recurrance, "");
         }
         tags.setText(person.tagsString());
         removeUnnecessaryLabels();
         style();
+    }
+
+    public void setOrNullText(Label label, String value){
+        setOrNullText(label, "", value);
+    }
+    
+    public void setOrNullText(Label label, String prefix, String value){
+        if(value.equals("")){
+            label.setText("");
+        }else{
+            label.setText(prefix + value);
+        }
     }
     
     public void removeUnnecessaryLabels(){
@@ -82,7 +99,7 @@ public class PersonCard extends UiPart{
         styleString.append(styler.getPriorityColour(person.getPriority().toString()));
         // Style based on done
         styleString.append(styler.getDoneColour(person.getDoneFlag().toString()));
-        cardPane.setStyle(styleString.toString());
+        light.setStyle(styleString.toString());
     }
     
     // @@author

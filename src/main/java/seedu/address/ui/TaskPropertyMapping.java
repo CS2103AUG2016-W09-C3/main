@@ -27,13 +27,13 @@ public class TaskPropertyMapping implements TaskStyleMapping{
         priorityMap = new PropertyMap(PROPERTY_BACKGROUND);
         priorityMap.addTo("VERYHIGH", "radial-gradient(radius 100%, #BC0E00, #AC0E00)");
         priorityMap.addTo("HIGH", "radial-gradient(radius 100%, #940B00, #840B00)");
-        priorityMap.addTo("MEDIUM", "radial-gradient(radius 100%, #333333, #222222)");
+        priorityMap.addTo("MEDIUM", "radial-gradient(radius 100%, #555555, #444444)");
         priorityMap.addTo("LOW", "radial-gradient(radius 100%, #007114, #006114)");
         priorityMap.addTo("VERYLOW", "radial-gradient(radius 100%, #009019, #008019)");
         
         // Done : Background color
         doneMap = new PropertyMap(PROPERTY_BACKGROUND);
-        priorityMap.addTo("Done", "radial-gradient(radius 100%, #BAEFF4, #A9DEE3)");
+        doneMap.addTo("Done", "radial-gradient(radius 100%, #230575, #180564)");
     }
     
     // Singleton
