@@ -118,7 +118,7 @@
 }
 
 .result-display {
-    -fx-background-color: #000000;
+    -fx-background-color: #CCCCCC;
 }
 
 .result-display .label {
@@ -323,7 +323,11 @@
     -fx-border-width: 2;
 }
 
-#indexLbl{
-    -fx-font-family: "Segoe UI Light";
-    -fx-text-fill: #888888;
+.text-area .content{
+	-fx-background-color: #CCCCCC;
+}
+
+#commandTextField{
+	-fx-background-color: #CCCCCC;
+	-fx-prompt-text-fill: #555555;
 }

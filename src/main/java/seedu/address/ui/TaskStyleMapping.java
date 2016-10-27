@@ -7,8 +7,10 @@ package seedu.address.ui;
  */
 public interface TaskStyleMapping {
     /* Returns a colour style based on the Task's priority property.*/
-    public String getPriorityColour(String priority);
+    public String getLightPriorityColour(String priority);
     /* Returns a colour style based on the Task's done property.*/
-    public String getDoneColour(String done);
+    public String getLightDoneColour(String done);
+    /* Returns a colour style based on the Task's done property.*/
+    public String getCardDoneColour(String done);
 }
 //@@author

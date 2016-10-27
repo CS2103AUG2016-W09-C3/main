@@ -96,10 +96,14 @@ public class PersonCard extends UiPart{
     public void style(){
         StringBuilder styleString = new StringBuilder();
         // Style based on property
-        styleString.append(styler.getPriorityColour(person.getPriority().toString()));
+        styleString.append(styler.getLightPriorityColour(person.getPriority().toString()));
         // Style based on done
-        styleString.append(styler.getDoneColour(person.getDoneFlag().toString()));
+        styleString.append(styler.getLightDoneColour(person.getDoneFlag().toString()));
         light.setStyle(styleString.toString());
+        styleString = new StringBuilder();
+        styleString.append(styler.getCardDoneColour(person.getDoneFlag().toString()));
+        cardPane.setStyle(styleString.toString());
+        
     }
     
     // @@author
