@@ -58,7 +58,11 @@ public interface Model {
 
     /** Loads the next state. Returns the command attached to the state to be printed. */
     String loadNextState() throws StateException;
-
+    
+    /** Raises event to change file path of data */
     void changeFilePath(String filePath);
+
+    /** Adds a command preset to the current list */
+    void addPreset(CommandPreset commandPreset);
 
 }
