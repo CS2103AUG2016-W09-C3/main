@@ -4,6 +4,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.PresetChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -93,5 +94,14 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
-
+    @Override
+    @Subscribe
+    public void handlePresetChangedEvent(PresetChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local preset data changed, saving to file"));
+        try {
+            saveUserPrefs(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
 }
