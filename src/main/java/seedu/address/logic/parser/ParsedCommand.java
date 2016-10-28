@@ -82,5 +82,7 @@ public interface ParsedCommand {
      */
     boolean hasUnnecessaryParams(String[] possibleParams);
     
+    /** Returns entire command. */
+    String getCommand();
 }
 //@@author
