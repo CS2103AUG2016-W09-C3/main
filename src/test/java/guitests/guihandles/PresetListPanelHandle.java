@@ -47,11 +47,11 @@ public class PresetListPanelHandle extends GuiHandle {
         guiRobot.clickOn(point.getX(), point.getY());
     }
     
-    public PresetCardHandle navigateToPreset(String command) {
+    public PresetCardHandle navigateToPreset(String description) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
-        final Optional<CommandPreset> preset = getListView().getItems().stream().filter(p -> p.getCommand().equals(command)).findAny();
+        final Optional<CommandPreset> preset = getListView().getItems().stream().filter(p -> p.getDescription().equals(description)).findAny();
         if (!preset.isPresent()) {
-            throw new IllegalStateException("Name not found: " + command);
+            throw new IllegalStateException("Name not found: " + description);
         }
 
         return navigateToPreset(preset.get());
@@ -78,7 +78,7 @@ public class PresetListPanelHandle extends GuiHandle {
     public int getPresetIndex(CommandPreset targetPreset) {
         List<CommandPreset> prsetsInList = getListView().getItems();
         for (int i = 0; i < prsetsInList.size(); i++) {
-            if(prsetsInList.get(i).getCommand().equals(targetPreset.getCommand())){
+            if(prsetsInList.get(i).getDescription().equals(targetPreset.getDescription())){
                 return i;
             }
         }
