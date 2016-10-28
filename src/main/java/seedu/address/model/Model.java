@@ -62,7 +62,8 @@ public interface Model {
     /** Raises event to change file path of data */
     void changeFilePath(String filePath);
 
+    // @@author A0140155U
     /** Adds a command preset to the current list */
     void addPreset(CommandPreset commandPreset);
-
+    // @@author
 }

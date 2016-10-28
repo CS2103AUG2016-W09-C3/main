@@ -93,7 +93,7 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
-
+    // @@author A0140155U
     @Override
     @Subscribe
     public void handlePresetChangedEvent(PresetChangedEvent event) {
@@ -104,4 +104,5 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new DataSavingExceptionEvent(e));
         }
     }
+    // @@author
 }
