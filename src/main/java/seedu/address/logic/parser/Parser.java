@@ -105,6 +105,9 @@ public class Parser {
 
         case FilepathCommand.COMMAND_WORD:
             return new FilepathCommand(arguments);
+
+        case FavoriteCommand.COMMAND_WORD:
+            return prepareFavorite(command);
             
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
@@ -345,6 +348,26 @@ public class Parser {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
         }
     }
+    
+    /**
+     * Parses arguments in the context of the favorite task command.
+     */
+    private Command prepareFavorite(ParsedCommand command) {
+        try{
+            if(!command.hasValue() || !command.hasParams(FavoriteCommand.REQUIRED_PARAMS)){
+                return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
+            }
+            
+            // Work around because the command might have tokens which can be recognized by ParsedCommand as params.
+            int paramIndex = command.getCommand().indexOf(" c/");
+            String favCommand = command.getCommand().substring(paramIndex + 3, command.getCommand().length());
+            return new FavoriteCommand(favCommand, command.getValuesAsString());
+        }catch(IllegalValueException ex){
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        }
+    }
+   
     // @@author
     
     /**

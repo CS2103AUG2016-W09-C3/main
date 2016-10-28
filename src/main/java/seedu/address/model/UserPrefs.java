@@ -1,10 +1,11 @@
 package seedu.address.model;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.CommandPreset;
 
 import java.util.ArrayList;
 import java.util.Objects;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +17,25 @@ public class UserPrefs {
 
     public GuiSettings guiSettings;
     // @@author A0140155U
+    
+    // This list stores the list of command presets, which are serialized to preferences.json
     public ArrayList<CommandPreset> commandPresets = new ArrayList<>();
+    
+    // This list stores an observable list of command presets, which the cards in the PresetListPanel are binded to.
+    @JsonIgnore 
+    private ObservableList<CommandPreset> internalList = FXCollections.observableArrayList();
+    
+    /*
+     * Both lists store the exact same data.
+     * 
+     * One is used to display on the panel and the other is used to save to a JSON file.
+     * 
+     * Ideally I'd use just one list, but PresetListPanel can only bind to ObservableList, and
+     * ObservableList cannot be serialized to JSON.
+     * 
+     * So, I used separate lists. A bit hacky, but I didn't really have a choice...
+     */
+    
     // @@author
     public GuiSettings getGuiSettings() {
         return guiSettings == null ? new GuiSettings() : guiSettings;
@@ -36,7 +55,9 @@ public class UserPrefs {
 
     // @@author A0140155U
     public ObservableList<CommandPreset> getCommandPresets(){
-        return FXCollections.observableArrayList(commandPresets);
+        // Initialize internalList after JSON has been loaded
+        internalList = FXCollections.observableArrayList(commandPresets);
+        return internalList;
     }
     // @@author
     @Override
@@ -62,5 +83,12 @@ public class UserPrefs {
     public String toString(){
         return guiSettings.toString();
     }
+
+    // @@author A0140155U
+    public void addPreset(CommandPreset commandPreset) {
+        commandPresets.add(commandPreset);
+        internalList.add(commandPreset);
+    }
+    // @@author
 
 }

@@ -15,6 +15,7 @@ import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.address.model.task.CustomTaskComparator;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.FilePathChangedEvent;
+import seedu.address.commons.events.model.PresetChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.exceptions.StateException;
 import seedu.address.commons.core.ComponentManager;
@@ -39,6 +40,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Task> filteredTasks;
     // @@author A0140155U
     private final States states;
+    private final UserPrefs userPrefs;
     // @@author
     /**
      * Initializes a ModelManager with the given AddressBook
@@ -55,6 +57,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(addressBook.getTasks());
         // @@author A0140155U
         states = new StatesManager(new AddressBookState(addressBook));
+        this.userPrefs = userPrefs;
         // @@author
     }
 
@@ -70,6 +73,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredTasks = new FilteredList<>(addressBook.getTasks());
         // @@author A0140155U
         states = new StatesManager(new AddressBookState(addressBook));
+        this.userPrefs = userPrefs;
         // @@author
     }
 
@@ -108,6 +112,13 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook.addTask(task);
         updateFilteredListToShowAll();
         indicateAddressBookChanged();
+    }
+
+
+    @Override
+    public void addPreset(CommandPreset commandPreset) {
+        userPrefs.addPreset(commandPreset);
+        raise(new PresetChangedEvent(userPrefs));
     }
     
     //@@author A0139046E
@@ -234,7 +245,7 @@ public class ModelManager extends ComponentManager implements Model {
                     ReadOnlyDatedTask datedTask = (DatedTask) task;
                     LocalDateTime currentTaskDateTime = datedTask.getDateTime().getDateTime();
                     try {
-                        LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start")).minusDays(1);
+                        LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
                         if(currentTaskDateTime.isBefore(startDateTime)){
                             return false;
                         }
@@ -243,7 +254,7 @@ public class ModelManager extends ComponentManager implements Model {
                         e1.printStackTrace();
                     }
                     try {
-                        LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end")).plusDays(1);
+                        LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end"));
                         if(currentTaskDateTime.isAfter(endDateTime)){
                             return false;
                         }
@@ -347,4 +358,5 @@ public class ModelManager extends ComponentManager implements Model {
         return newState.getCommand();
     }
     // @@author
+
 }

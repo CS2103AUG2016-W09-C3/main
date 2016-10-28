@@ -30,8 +30,10 @@ public class CommandParser implements ParsedCommand{
     private ArrayList<String> values = new ArrayList<>();
     // Param name -> list of param values
     private HashMap<String, ArrayList<String>> params = new HashMap<>();
+    private final String command;
     
     public CommandParser(String command){
+        this.command = command;
         loadFromString(command);
     }
     
@@ -248,6 +250,10 @@ public class CommandParser implements ParsedCommand{
             }
         }
         return false;
+    }
+    
+    public String getCommand(){
+        return command;
     }
 }
 //@@author

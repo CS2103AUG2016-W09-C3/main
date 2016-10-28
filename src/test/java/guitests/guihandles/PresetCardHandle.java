@@ -3,7 +3,7 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import seedu.address.logic.commands.CommandPreset;
+import seedu.address.model.CommandPreset;
 import seedu.address.model.task.ReadOnlyTask;
 
 /**

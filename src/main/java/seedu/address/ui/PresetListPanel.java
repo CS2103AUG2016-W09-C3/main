@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import seedu.address.commons.events.ui.CommandPresetSelectedEvent;
 import seedu.address.commons.events.ui.TaskPanelSelectionChangedEvent;
-import seedu.address.logic.commands.CommandPreset;
+import seedu.address.model.CommandPreset;
 import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.commons.core.LogsCenter;
 

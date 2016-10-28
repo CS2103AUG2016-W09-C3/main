@@ -100,9 +100,9 @@ public class PersonCard extends UiPart{
         // Style based on done
         styleString.append(styler.getLightDoneColour(person.getDoneFlag().toString()));
         light.setStyle(styleString.toString());
-        //styleString = new StringBuilder();
-        //styleString.append(styler.getCardDoneColour(person.getDoneFlag().toString()));
-        //cardPane.setStyle(styleString.toString());
+        styleString = new StringBuilder();
+        styleString.append(styler.getCardDoneColour(person.getDoneFlag().toString()));
+        taskPane.setStyle(styleString.toString());
         
     }
     
