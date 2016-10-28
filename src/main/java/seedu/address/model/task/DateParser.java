@@ -24,7 +24,12 @@ public class DateParser {
      * Parses a date time from a string using natty.
      */
     public static LocalDateTime parseDate(String dateString) throws IllegalValueException{
-        return getDateTime(parseNatty(dateString));
+        DateGroup dateGroup = parseNatty(dateString);
+        LocalDateTime parsedDate = getDateTime(dateGroup);
+        if(!searchDateTree(dateGroup, TIME_STRING)){
+            parsedDate = parsedDate.withHour(0).withMinute(0).withSecond(0).withNano(0);
+        }
+        return parsedDate;
     }
     
     /*

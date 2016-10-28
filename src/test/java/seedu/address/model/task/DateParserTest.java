@@ -65,6 +65,17 @@ public class DateParserTest {
             fail("Cannot parse date");
         }
     }
+
+    @Test
+    public void timeNotSpecified() {
+        LocalDateTime datetime = parseDate("01-01-2015 00:00");
+        try {
+            assertEquals(datetime, DateParser.parseDate("01-01-2015"));
+            assertEquals(datetime, DateParser.parseDate("1st Jan 2015"));
+        } catch (IllegalValueException e) {
+            fail("Cannot parse date");
+        }
+    }
     
     private LocalDateTime parseDate(String date){
         return LocalDateTime.parse(date, DATE_DISPLAY_FORMATTER);
