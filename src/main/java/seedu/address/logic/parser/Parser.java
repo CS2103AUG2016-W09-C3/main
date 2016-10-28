@@ -358,8 +358,10 @@ public class Parser {
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
             }
             
-            String[] splitted = command.getCommand().split("c/");
-            return new FavoriteCommand(splitted[1], splitted[0]);
+            // Work around because the command might have tokens which can be recognized by ParsedCommand as params.
+            int paramIndex = command.getCommand().indexOf(" c/");
+            String favCommand = command.getCommand().substring(paramIndex + 3, command.getCommand().length());
+            return new FavoriteCommand(favCommand, command.getValuesAsString());
         }catch(IllegalValueException ex){
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
