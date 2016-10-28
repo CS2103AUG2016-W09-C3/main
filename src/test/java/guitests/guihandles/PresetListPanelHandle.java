@@ -7,7 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
-import seedu.address.logic.commands.CommandPreset;
+import seedu.address.model.CommandPreset;
 import seedu.address.testutil.TestUtil;
 
 import java.util.List;

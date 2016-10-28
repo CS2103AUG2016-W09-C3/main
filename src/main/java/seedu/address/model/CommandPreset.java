@@ -1,5 +1,5 @@
 //@@author A0140155U
-package seedu.address.logic.commands;
+package seedu.address.model;
 
 import java.io.Serializable;
 /**

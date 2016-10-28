@@ -2,7 +2,7 @@
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.logic.commands.CommandPreset;
+import seedu.address.model.CommandPreset;
 
 /**
  * Indicates a command preset card clicked

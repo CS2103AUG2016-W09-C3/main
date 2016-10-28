@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import seedu.address.commons.core.GuiSettings;
-import seedu.address.logic.commands.CommandPreset;
 
 import java.util.ArrayList;
 import java.util.Objects;
