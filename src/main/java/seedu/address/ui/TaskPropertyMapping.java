@@ -26,20 +26,20 @@ public class TaskPropertyMapping implements TaskStyleMapping{
     static {
         // Light - Priority : Background color
         lightPriorityMap = new PropertyMap(PROPERTY_BACKGROUND);
-        lightPriorityMap.addTo("VERYHIGH", "radial-gradient(center 50% 50%, radius 50%, #C20E00, #A70E00)");
-        lightPriorityMap.addTo("HIGH", "radial-gradient(center 50% 50%, radius 50%, #D19900, #C08800)");
-        lightPriorityMap.addTo("MEDIUM", "radial-gradient(center 50% 50%, radius 50%, #555555, #444444)");
-        lightPriorityMap.addTo("LOW", "radial-gradient(center 50% 50%, radius 50%, #007614, #005B14)");
-        lightPriorityMap.addTo("VERYLOW", "radial-gradient(center 50% 50%, radius 50%, #00A625, #009519)");
+        lightPriorityMap.addTo("VERYHIGH", "radial-gradient(center 50% 50%, radius 50%, #E43122, #C92C17)");
+        lightPriorityMap.addTo("HIGH", "radial-gradient(center 50% 50%, radius 50%, #F3BB22, #E2AA11)");
+        lightPriorityMap.addTo("MEDIUM", "radial-gradient(center 50% 50%, radius 50%, #22C847, #22A73B)");
+        lightPriorityMap.addTo("LOW", "radial-gradient(radius 100%, #029DAC, #028C9B)");
+        lightPriorityMap.addTo("VERYLOW", "radial-gradient(radius 100%, #3408B1, #2C08A1)");
         
         // Light - Done : Background color
         lightDoneMap = new PropertyMap(PROPERTY_BACKGROUND);
-        lightDoneMap.addTo("Done", "radial-gradient(radius 100%, #3408B1, #2C08A1)");
+        lightDoneMap.addTo("Done", "radial-gradient(center 50% 50%, radius 50%, #999999, #777777)");
         
         // Card - Done : Background color
         cardDoneMap = new PropertyMap(PROPERTY_BACKGROUND);
-        cardDoneMap.addTo("Done", "#606060");
-        cardDoneMap.addTo("Not done", "radial-gradient(radius 100%, #202020, #101010)");
+        cardDoneMap.addTo("Done", "");
+        cardDoneMap.addTo("Not done", "");
     }
     
     // Singleton
