@@ -78,8 +78,8 @@ public abstract class TaskBookGuiTest {
      * Return null to use the data in the file specified in {@link #getDataFileLocation()}
      */
     protected TaskBook getInitialData() {
-        TaskBook ab = TestUtil.generateEmptyAddressBook();
-        TypicalTestTasks.loadAddressBookWithSampleData(ab);
+        TaskBook ab = TestUtil.generateEmptyTaskBook();
+        TypicalTestTasks.loadTaskBookWithSampleData(ab);
         return ab;
     }
 
