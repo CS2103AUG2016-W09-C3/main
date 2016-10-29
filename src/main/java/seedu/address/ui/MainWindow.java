@@ -34,7 +34,7 @@ public class MainWindow extends UiPart {
     // @@author A0140155U
     private PresetListPanel presetListPanel;
     // @@author
-    private PersonListPanel taskListPanel;
+    private TaskListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;
@@ -118,7 +118,7 @@ public class MainWindow extends UiPart {
         // @@author A0140155U
         presetListPanel = PresetListPanel.load(primaryStage, getPresetListPlaceholder(), userPrefs.getCommandPresets());
         // @@author
-        taskListPanel = PersonListPanel.load(primaryStage, getTaskListPlaceholder(), logic.getFilteredTaskList());
+        taskListPanel = TaskListPanel.load(primaryStage, getTaskListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskBookFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
@@ -195,7 +195,7 @@ public class MainWindow extends UiPart {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getTaskListPanel() {
+    public TaskListPanel getTaskListPanel() {
         return this.taskListPanel;
     }
 
