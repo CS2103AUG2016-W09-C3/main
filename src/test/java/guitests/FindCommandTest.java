@@ -26,18 +26,18 @@ public class FindCommandTest extends TaskBookGuiTest {
 
     @Test
     public void find_byName(){
-        assertFindResult("find Meier s/n", td.danielLunch);
+        assertFindResult("find Meier s/name", td.danielLunch);
     }
     
     @Test
     public void find_byDate(){
         commandBox.runCommand(td.dinnerDate.getAddCommand());
-        assertFindResult("find 17-11-2016 s/d", td.dinnerDate);
+        assertFindResult("find 17-11-2016 s/date", td.dinnerDate);
     }
     
     @Test
     public void find_byInformation(){
-        assertFindResult("find loan s/i", td.lorryMaintainance);
+        assertFindResult("find loan s/information", td.lorryMaintainance);
     }
     //@@author
     @Test

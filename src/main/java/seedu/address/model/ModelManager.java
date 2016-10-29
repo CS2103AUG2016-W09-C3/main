@@ -287,15 +287,15 @@ public class ModelManager extends ComponentManager implements Model {
             this.searchScope = searchScope;
         }
         /**
-         * Tests if task contains any of the keywords in nameKeyWords in the possible specified searchScope of "n"(name) "i"(information) 
-         * and "d"(date and time).
+         * Tests if task contains any of the keywords in nameKeyWords in the possible specified searchScope of "name" "information" 
+         * and "date"(date and time).
          */
         @Override
         public boolean run(ReadOnlyTask task) {
             return nameKeyWords.stream()
-                    .filter(keyword -> (this.searchScope.contains("n") && StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
-                            || (this.searchScope.contains("i") && StringUtil.containsIgnoreCase(task.getInformation().fullInformation, keyword))
-                            || (this.searchScope.contains("d") && task.isDated() && StringUtil.containsIgnoreCase(((DatedTask) task).getDateTime().toString(), keyword))
+                    .filter(keyword -> (this.searchScope.contains("name") && StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
+                            || (this.searchScope.contains("information") && StringUtil.containsIgnoreCase(task.getInformation().fullInformation, keyword))
+                            || (this.searchScope.contains("date") && task.isDated() && StringUtil.containsIgnoreCase(((DatedTask) task).getDateTime().toString(), keyword))
                             )
                     .findAny()//finds first one
                     .isPresent();//check if null
