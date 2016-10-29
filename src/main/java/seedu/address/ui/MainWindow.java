@@ -34,7 +34,7 @@ public class MainWindow extends UiPart {
     // @@author A0140155U
     private PresetListPanel presetListPanel;
     // @@author
-    private PersonListPanel personListPanel;
+    private PersonListPanel taskListPanel;
     private ResultDisplay resultDisplay;
     private StatusBarFooter statusBarFooter;
     private CommandBox commandBox;
@@ -57,7 +57,7 @@ public class MainWindow extends UiPart {
     private MenuItem helpMenuItem;
 
     @FXML
-    private AnchorPane personListPanelPlaceholder;
+    private AnchorPane taskListPanelPlaceholder;
     // @@author A0140155U
     @FXML
     private AnchorPane presetListPanelPlaceholder;
@@ -118,7 +118,7 @@ public class MainWindow extends UiPart {
         // @@author A0140155U
         presetListPanel = PresetListPanel.load(primaryStage, getPresetListPlaceholder(), userPrefs.getCommandPresets());
         // @@author
-        personListPanel = PersonListPanel.load(primaryStage, getPersonListPlaceholder(), logic.getFilteredTaskList());
+        taskListPanel = PersonListPanel.load(primaryStage, getTaskListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());
         statusBarFooter = StatusBarFooter.load(primaryStage, getStatusbarPlaceholder(), config.getTaskBookFilePath());
         commandBox = CommandBox.load(primaryStage, getCommandBoxPlaceholder(), resultDisplay, logic);
@@ -136,8 +136,8 @@ public class MainWindow extends UiPart {
         return resultDisplayPlaceholder;
     }
 
-    public AnchorPane getPersonListPlaceholder() {
-        return personListPanelPlaceholder;
+    public AnchorPane getTaskListPlaceholder() {
+        return taskListPanelPlaceholder;
     }
     // @@author A0140155U
     public AnchorPane getPresetListPlaceholder() {
@@ -195,8 +195,8 @@ public class MainWindow extends UiPart {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return this.personListPanel;
+    public PersonListPanel getTaskListPanel() {
+        return this.taskListPanel;
     }
 
     // @@author A0140155U
