@@ -287,7 +287,7 @@
     -fx-text-fill: #F70D1A;
 }
 
-#filterField, #personListView, #personListPanel, #personWebpage {
+#filterField, #taskListView, #taskListPanel {
 	-fx-background-color: #FAFAFA;
     -fx-effect: innershadow(gaussian, white, 10, 0, 0, 0);
 }
