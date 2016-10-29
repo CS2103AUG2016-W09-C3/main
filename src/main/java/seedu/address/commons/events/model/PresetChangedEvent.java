@@ -5,7 +5,7 @@ import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.ReadOnlyTaskBook;
 import seedu.address.model.UserPrefs;
 
-/** Indicates the AddressBook in the model has changed*/
+/** Indicates the TaskBook in the model has changed*/
 public class PresetChangedEvent extends BaseEvent {
 
     public final UserPrefs data;

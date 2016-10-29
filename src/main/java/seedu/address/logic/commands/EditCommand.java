@@ -25,7 +25,7 @@ import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 
 /**
- * Edit a tasks in the address book.
+ * Edit a tasks in the Task book.
  */
 
 public class EditCommand extends Command {
@@ -40,7 +40,7 @@ public class EditCommand extends Command {
 			+ "Example: " + COMMAND_WORD + " 1 d/next thurs 2pm";
 
 	public static final String MESSAGE_EDIT_TASK_SUCCESS = "Edited Task: %1$s";
-	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
     public static final String MESSAGE_DATED_PARAMS = "A non-dated task cannot have length or recurring data.";
 
 	public final int targetIndex;
