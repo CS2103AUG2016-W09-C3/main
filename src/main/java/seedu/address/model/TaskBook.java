@@ -42,7 +42,7 @@ public class TaskBook implements ReadOnlyTaskBook {
         resetData(tasks.getInternalList(), tags.getInternalList());
     }
 
-    public static ReadOnlyTaskBook getEmptyAddressBook() {
+    public static ReadOnlyTaskBook getEmptyTaskBook() {
         return new TaskBook();
     }
 
