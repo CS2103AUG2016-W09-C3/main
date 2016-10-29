@@ -23,7 +23,7 @@ import seedu.address.model.task.ReadOnlyTask;
  */
 public class MainWindow extends UiPart {
 
-    private static final String ICON = "/images/address_book_32.png";
+    private static final String ICON = "/images/ToDoIt_32.png";
     private static final String FXML = "MainWindow.fxml";
     public static final int MIN_HEIGHT = 600;
     public static final int MIN_WIDTH = 450;
@@ -45,7 +45,7 @@ public class MainWindow extends UiPart {
     private VBox rootLayout;
     private Scene scene;
 
-    private String addressBookName;
+    private String taskBookName;
 
     @FXML
     private AnchorPane browserPlaceholder;
@@ -90,12 +90,12 @@ public class MainWindow extends UiPart {
         return mainWindow;
     }
 
-    private void configure(String appTitle, String addressBookName, Config config, UserPrefs prefs,
+    private void configure(String appTitle, String taskBookName, Config config, UserPrefs prefs,
                            Logic logic) {
 
         //Set dependencies
         this.logic = logic;
-        this.addressBookName = addressBookName;
+        this.taskBookName = taskBookName;
         this.config = config;
         this.userPrefs = prefs;
 
