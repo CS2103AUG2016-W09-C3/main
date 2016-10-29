@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
+/**
+ * 
+ * CustomTaskComparator can compare 2 tasks based on name, priority and date or any combination of the 3 attributes.
+ * Used by list command to sort the list to be displayed.
+ *
+ */
 public class CustomTaskComparator implements Comparator<Task>{
     
     private ArrayList<String> attributes;
