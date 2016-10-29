@@ -39,7 +39,7 @@ public class RescheduleCommand extends Command{
 	
 	public static final String MESSAGE_TASK_NOT_DATED = "This is not a dated task.";
 	
-	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+	public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
 	
 	public final int targetIndex;
 	public String interval; 
