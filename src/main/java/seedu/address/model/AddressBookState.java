@@ -10,20 +10,20 @@ package seedu.address.model;
  * Used simply as a wrapper for two variables.
  */
 public class AddressBookState {
-    private final AddressBook state;
+    private final TaskBook state;
     private final String command;
     public static final String INITIAL_STATE = "Initial state";
     
-    public AddressBookState(AddressBook state){
+    public AddressBookState(TaskBook state){
         this(state, INITIAL_STATE);
     }
     
-    public AddressBookState(AddressBook state, String command){
-        this.state = new AddressBook(state);
+    public AddressBookState(TaskBook state, String command){
+        this.state = new TaskBook(state);
         this.command = command;
     }
     
-    public AddressBook getState(){
+    public TaskBook getState(){
         return state;
     }
     

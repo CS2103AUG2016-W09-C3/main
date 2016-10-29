@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TaskBook;
 import seedu.address.model.task.DateTime;
 import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.UniqueTaskList;
@@ -19,7 +19,7 @@ public class RecurrenceTest extends AddressBookGuiTest {
     @Test
     // Updating recurrence
     public void checkRecurrenceDone() {
-        AddressBook tasks = getInitialData();
+        TaskBook tasks = getInitialData();
         
         commandBox.runCommand(td.dinnerDate.getAddCommand());
         commandBox.runCommand(td.meetingToAttend.getAddCommand());
@@ -35,7 +35,7 @@ public class RecurrenceTest extends AddressBookGuiTest {
     @Test
     // Without updating recurrence
     public void checkRecurrenceFalse() {
-        AddressBook tasks = getInitialData();
+        TaskBook tasks = getInitialData();
         
         commandBox.runCommand(td.dinnerDate.getAddCommand());
         commandBox.runCommand(td.csFinalExam.getAddCommand());
@@ -49,7 +49,7 @@ public class RecurrenceTest extends AddressBookGuiTest {
         assertRecurringSuccess(tasks);
     }
 
-    private void assertRecurringSuccess(AddressBook tasks) {
+    private void assertRecurringSuccess(TaskBook tasks) {
         // Test and make sure every task that is recurring is undone
         for (int i=0; i<tasks.getUniqueTaskList().getInternalList().size(); i++) {
             if (tasks.getUniqueTaskList().getInternalList().get(i).getDoneFlag().isDone()) {

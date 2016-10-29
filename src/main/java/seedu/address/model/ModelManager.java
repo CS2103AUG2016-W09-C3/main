@@ -36,24 +36,24 @@ import edu.emory.mathcs.backport.java.util.Collections;
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final TaskBook addressBook;
     private final FilteredList<Task> filteredTasks;
     // @@author A0140155U
     private final States states;
     private final UserPrefs userPrefs;
     // @@author
     /**
-     * Initializes a ModelManager with the given AddressBook
-     * AddressBook and its variables should not be null
+     * Initializes a ModelManager with the given TaskBook
+     * TaskBook and its variables should not be null
      */
-    public ModelManager(AddressBook src, UserPrefs userPrefs) {
+    public ModelManager(TaskBook src, UserPrefs userPrefs) {
         super();
         assert src != null;
         assert userPrefs != null;
 
         logger.fine("Initializing with address book: " + src + " and user prefs " + userPrefs);
 
-        addressBook = new AddressBook(src);
+        addressBook = new TaskBook(src);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
         // @@author A0140155U
         states = new StatesManager(new AddressBookState(addressBook));
@@ -62,11 +62,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TaskBook(), new UserPrefs());
     }
 
     public ModelManager(ReadOnlyTaskBook initialData, UserPrefs userPrefs) {
-        addressBook = new AddressBook(initialData);
+        addressBook = new TaskBook(initialData);
         //@@author A0139947L
         addressBook.updateRecurringTasks();
         //@@author

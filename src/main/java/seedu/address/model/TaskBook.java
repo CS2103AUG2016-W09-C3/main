@@ -13,10 +13,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Wraps all data at the address-book level
+ * Wraps all data at the task-book level
  * Duplicates are not allowed (by .equals comparison)
  */
-public class AddressBook implements ReadOnlyTaskBook {
+public class TaskBook implements ReadOnlyTaskBook {
 
     private final UniqueTaskList tasks;
     private final UniqueTagList tags;
@@ -26,24 +26,24 @@ public class AddressBook implements ReadOnlyTaskBook {
         tags = new UniqueTagList();
     }
 
-    public AddressBook() {}
+    public TaskBook() {}
 
     /**
-     * Tasks and Tags are copied into this addressbook
+     * Tasks and Tags are copied into this taskbook
      */
-    public AddressBook(ReadOnlyTaskBook toBeCopied) {
+    public TaskBook(ReadOnlyTaskBook toBeCopied) {
         this(toBeCopied.getUniqueTaskList(), toBeCopied.getUniqueTagList());
     }
 
     /**
-     * Tasks and Tags are copied into this addressbook
+     * Tasks and Tags are copied into this taskbook
      */
-    public AddressBook(UniqueTaskList tasks, UniqueTagList tags) {
+    public TaskBook(UniqueTaskList tasks, UniqueTagList tags) {
         resetData(tasks.getInternalList(), tags.getInternalList());
     }
 
     public static ReadOnlyTaskBook getEmptyAddressBook() {
-        return new AddressBook();
+        return new TaskBook();
     }
 
 //// list overwrite operations
@@ -72,7 +72,7 @@ public class AddressBook implements ReadOnlyTaskBook {
 //// task-level operations
 
     /**
-     * Adds a task to the address book.
+     * Adds a task to the task book.
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
@@ -85,7 +85,7 @@ public class AddressBook implements ReadOnlyTaskBook {
     
     //@@author A0139046E
     /**
-     * Adds a task to the address book at the specific index
+     * Adds a task to the task book at the specific index
      * Also checks the new task's tags and updates {@link #tags} with any new tags found,
      * and updates the Tag objects in the task to point to those in {@link #tags}.
      *
@@ -166,9 +166,9 @@ public class AddressBook implements ReadOnlyTaskBook {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && this.tasks.equals(((AddressBook) other).tasks)
-                && this.tags.equals(((AddressBook) other).tags));
+                || (other instanceof TaskBook // instanceof handles nulls
+                && this.tasks.equals(((TaskBook) other).tasks)
+                && this.tags.equals(((TaskBook) other).tags));
     }
 
     @Override

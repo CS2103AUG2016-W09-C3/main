@@ -48,7 +48,7 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
 
-    // ================ AddressBook methods ==============================
+    // ================ TaskBook methods ==============================
 
     @Override
     public void setTaskBookFilePath(String filePath) {
