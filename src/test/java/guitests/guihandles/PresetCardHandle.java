@@ -34,7 +34,7 @@ public class PresetCardHandle extends GuiHandle {
     }
 
     public boolean isSamePreset(CommandPreset preset){
-        return getCommand().equals(preset.getCommand()) && getDescription().equals(preset.getDescription());
+        return getDescription().equals(preset.getDescription());
     }
 
     @Override
