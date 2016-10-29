@@ -50,7 +50,7 @@ public class MainApp extends Application {
         super.init();
 
         config = initConfig(getApplicationParameter("config"));
-        storage = new StorageManager(config.getAddressBookFilePath(), config.getUserPrefsFilePath());
+        storage = new StorageManager(config.getTaskBookFilePath(), config.getUserPrefsFilePath());
 
         userPrefs = initPrefs(config);
 
@@ -71,20 +71,20 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyAddressBook> addressBookOptional;
-        ReadOnlyAddressBook initialData;
+        Optional<ReadOnlyTaskBook> taskBookOptional;
+        ReadOnlyTaskBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if(!addressBookOptional.isPresent()){
+            taskBookOptional = storage.readTaskBook();
+            if(!taskBookOptional.isPresent()){
                 logger.info("Data file not found. Will be starting with an empty task list");
             }
-            initialData = addressBookOptional.orElse(new AddressBook());
+            initialData = taskBookOptional.orElse(new TaskBook());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty task list");
-            initialData = new AddressBook();
+            initialData = new TaskBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. . Will be starting with an empty task list");
-            initialData = new AddressBook();
+            initialData = new TaskBook();
         }
 
         return new ModelManager(initialData, userPrefs);
@@ -161,7 +161,7 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        logger.info("Starting AddressBook " + MainApp.VERSION);
+        logger.info("Starting TaskBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
 
@@ -194,15 +194,15 @@ public class MainApp extends Application {
     @Subscribe
     public void handleFilePathChangedEvent(FilePathChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Config data changed, saving to file"));
-        String oldFilePath = config.getAddressBookFilePath();
+        String oldFilePath = config.getTaskBookFilePath();
         try {
-            storage.setAddressBookFilePath(event.filePath);
-            storage.saveAddressBook(model.getAddressBook());
-            config.setAddressBookFilePath(event.filePath);
+            storage.setTaskBookFilePath(event.filePath);
+            storage.saveTaskBook(model.getTaskBook());
+            config.setTaskBookFilePath(event.filePath);
             ConfigUtil.saveConfig(config, config.getConfigFilePath());
         } catch (IOException e) {
-            storage.setAddressBookFilePath(oldFilePath);
-            config.setAddressBookFilePath(oldFilePath);
+            storage.setTaskBookFilePath(oldFilePath);
+            config.setTaskBookFilePath(oldFilePath);
             logger.warning("Failed to save config file, reverting to old : " + StringUtil.getDetails(e));
         }
     }

@@ -16,11 +16,11 @@ import seedu.address.TestApp;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TaskBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
 import seedu.address.model.task.*;
-import seedu.address.storage.XmlSerializableAddressBook;
+import seedu.address.storage.XmlSerializableTaskBook;
 
 import java.io.File;
 import java.io.IOException;
@@ -151,7 +151,7 @@ public class TestUtil {
 	}
 
 	public static void createDataFileWithSampleData(String filePath) {
-		createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+		createDataFileWithData(generateSampleStorageTaskBook(), filePath);
 	}
 
 	public static <T> void createDataFileWithData(T data, String filePath) {
@@ -168,12 +168,12 @@ public class TestUtil {
 		createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
 	}
 
-	public static AddressBook generateEmptyAddressBook() {
-		return new AddressBook(new UniqueTaskList(), new UniqueTagList());
+	public static TaskBook generateEmptyTaskBook() {
+		return new TaskBook(new UniqueTaskList(), new UniqueTagList());
 	}
 
-	public static XmlSerializableAddressBook generateSampleStorageAddressBook() {
-		return new XmlSerializableAddressBook(generateEmptyAddressBook());
+	public static XmlSerializableTaskBook generateSampleStorageTaskBook() {
+		return new XmlSerializableTaskBook(generateEmptyTaskBook());
 	}
 
 	/**
@@ -339,7 +339,7 @@ public class TestUtil {
 	}
 
 	/**
-	 * Replaces persons[i] with a task.
+	 * Replaces tasks[i] with a task.
 	 * 
 	 * @param tasks
 	 *            The array of tasks.
@@ -383,9 +383,9 @@ public class TestUtil {
 	 * @return The modified array of tasks.
 	 */
 	public static TestTask[] addTaskToListIndex(final TestTask[] tasks, TestTask taskToAdd, int index) {
-		List<TestTask> listOfPersons = asList(tasks);
-		listOfPersons.add(index, taskToAdd);
-		return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+		List<TestTask> listOfTasks = asList(tasks);
+		listOfTasks.add(index, taskToAdd);
+		return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
 	}
 
 	private static <T> List<T> asList(T[] objs) {

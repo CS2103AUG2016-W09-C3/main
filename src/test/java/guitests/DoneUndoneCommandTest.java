@@ -18,7 +18,7 @@ import seedu.address.testutil.TestUtil;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.DoneCommand.MESSAGE_SUCCESS;
 
-public class DoneUndoneCommandTest extends AddressBookGuiTest {
+public class DoneUndoneCommandTest extends TaskBookGuiTest {
 
 
     @Test
@@ -63,16 +63,16 @@ public class DoneUndoneCommandTest extends AddressBookGuiTest {
 
 
     /**
-     * Runs the done command to delete the person at specified index and confirms the result is correct.
-     * @param targetIndexOneIndexed e.g. to delete the first person in the list, 1 should be given as the target index.
-     * @param currentList A copy of the current list of persons (before deletion).
+     * Runs the done command to mark doneFlag of the task at specified index as done and confirms the result is correct.
+     * @param targetIndexOneIndexed e.g. to mark the first task in the list as done, 1 should be given as the target index.
+     * @param currentList A copy of the current list of tasks (before command).
      */
     private void assertDoneSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
         TestTask taskToDo = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
         TestTask[] expectedRemainder = doTask(targetIndexOneIndexed, currentList, DoneFlag.DONE);
         commandBox.runCommand("done " + targetIndexOneIndexed);
 
-        //confirm the list now contains all previous persons except the deleted person
+        //confirm the list now contains all previous tasks except the deleted task
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
@@ -85,16 +85,16 @@ public class DoneUndoneCommandTest extends AddressBookGuiTest {
     }
 
     /**
-     * Runs the undone command to delete the person at specified index and confirms the result is correct.
-     * @param targetIndexOneIndexed e.g. to delete the first person in the list, 1 should be given as the target index.
-     * @param currentList A copy of the current list of persons (before deletion).
+     * Runs the undone command to mark doneFlag of the task at specified index as undone and confirms the result is correct.
+     * @param targetIndexOneIndexed e.g. to mark the first task in the list as undone, 1 should be given as the target index.
+     * @param currentList A copy of the current list of tasks (before command).
      */
     private void assertUndoneSuccess(int targetIndexOneIndexed, final TestTask[] currentList) {
         TestTask taskToDo = currentList[targetIndexOneIndexed-1]; //-1 because array uses zero indexing
         TestTask[] expectedRemainder = doTask(targetIndexOneIndexed, currentList, DoneFlag.NOT_DONE);
         commandBox.runCommand("undone " + targetIndexOneIndexed);
 
-        //confirm the list now contains all previous persons except the deleted person
+        //confirm the list now contains all previous tasks except the deleted task
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
@@ -114,7 +114,7 @@ public class DoneUndoneCommandTest extends AddressBookGuiTest {
         } catch (IllegalValueException e) {
             assert(false);
         }
-        //expectedRemainder = TestUtil.addPersonsToList(expectedRemainder, taskToDo);
+        //expectedRemainder = TestUtil.addTasksToList(expectedRemainder, taskToDo);
         expectedRemainder = TestUtil.addTaskToListIndex(expectedRemainder, taskToDo, targetIndexOneIndexed - 1);
         return expectedRemainder;
     }

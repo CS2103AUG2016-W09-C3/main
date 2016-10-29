@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Marks a task in the task list as done.
+ * Marks a task in the task book as done.
  */
 public class DoneCommand extends Command {
 
@@ -30,7 +30,7 @@ public class DoneCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Task marked as %1$s: %2$s";
     public static final String MESSAGE_EXCEPTION = "Error executing command.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
     public static final String MESSAGE_ALREADY_DONE_TASK = "Task is already done.";
 
     private final int targetIndex;

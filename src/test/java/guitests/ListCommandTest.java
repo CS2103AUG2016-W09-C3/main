@@ -14,7 +14,7 @@ import seedu.address.model.task.DoneFlag;
 import seedu.address.testutil.TestDatedTask;
 import seedu.address.testutil.TestTask;
 
-public class ListCommandTest extends AddressBookGuiTest{
+public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list all tasks.
     @Test

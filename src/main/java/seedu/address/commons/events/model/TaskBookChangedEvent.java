@@ -1,14 +1,14 @@
 package seedu.address.commons.events.model;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyTaskBook;
 
-/** Indicates the AddressBook in the model has changed*/
-public class AddressBookChangedEvent extends BaseEvent {
+/** Indicates the TaskBook in the model has changed*/
+public class TaskBookChangedEvent extends BaseEvent {
 
-    public final ReadOnlyAddressBook data;
+    public final ReadOnlyTaskBook data;
 
-    public AddressBookChangedEvent(ReadOnlyAddressBook data){
+    public TaskBookChangedEvent(ReadOnlyTaskBook data){
         this.data = data;
     }
 

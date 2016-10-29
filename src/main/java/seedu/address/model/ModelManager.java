@@ -13,7 +13,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.address.model.task.CustomTaskComparator;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.commons.events.model.FilePathChangedEvent;
 import seedu.address.commons.events.model.PresetChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -30,67 +30,67 @@ import java.util.logging.Logger;
 import edu.emory.mathcs.backport.java.util.Collections;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task book data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final TaskBook taskBook;
     private final FilteredList<Task> filteredTasks;
     // @@author A0140155U
     private final States states;
     private final UserPrefs userPrefs;
     // @@author
     /**
-     * Initializes a ModelManager with the given AddressBook
-     * AddressBook and its variables should not be null
+     * Initializes a ModelManager with the given TaskBook
+     * TaskBook and its variables should not be null
      */
-    public ModelManager(AddressBook src, UserPrefs userPrefs) {
+    public ModelManager(TaskBook src, UserPrefs userPrefs) {
         super();
         assert src != null;
         assert userPrefs != null;
 
-        logger.fine("Initializing with address book: " + src + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task book: " + src + " and user prefs " + userPrefs);
 
-        addressBook = new AddressBook(src);
-        filteredTasks = new FilteredList<>(addressBook.getTasks());
+        taskBook = new TaskBook(src);
+        filteredTasks = new FilteredList<>(taskBook.getTasks());
         // @@author A0140155U
-        states = new StatesManager(new AddressBookState(addressBook));
+        states = new StatesManager(new TaskBookState(taskBook));
         this.userPrefs = userPrefs;
         // @@author
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TaskBook(), new UserPrefs());
     }
 
-    public ModelManager(ReadOnlyAddressBook initialData, UserPrefs userPrefs) {
-        addressBook = new AddressBook(initialData);
+    public ModelManager(ReadOnlyTaskBook initialData, UserPrefs userPrefs) {
+        taskBook = new TaskBook(initialData);
         //@@author A0139947L
-        addressBook.updateRecurringTasks();
+        taskBook.updateRecurringTasks();
         //@@author
-        filteredTasks = new FilteredList<>(addressBook.getTasks());
+        filteredTasks = new FilteredList<>(taskBook.getTasks());
         // @@author A0140155U
-        states = new StatesManager(new AddressBookState(addressBook));
+        states = new StatesManager(new TaskBookState(taskBook));
         this.userPrefs = userPrefs;
         // @@author
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyTaskBook newData) {
+        taskBook.resetData(newData);
+        indicateTaskBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyTaskBook getTaskBook() {
+        return taskBook;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+    private void indicateTaskBookChanged() {
+        raise(new TaskBookChangedEvent(taskBook));
     }
 
     // @@author A0140155U
@@ -103,15 +103,15 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        addressBook.removeTask(target);
-        indicateAddressBookChanged();
+        taskBook.removeTask(target);
+        indicateTaskBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(task);
+        taskBook.addTask(task);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTaskBookChanged();
     }
 
     // @@author A0140155U
@@ -124,9 +124,9 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0139046E
     @Override
     public synchronized void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTaskToIndex(task, index);
+        taskBook.addTaskToIndex(task, index);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTaskBookChanged();
     }
     //@@author
 
@@ -181,7 +181,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for sorting ====================================================
     
     private void sortList(ArrayList<String> sortByAttribute, boolean reverse){
-        addressBook.sortTasks(sortByAttribute, reverse);
+        taskBook.sortTasks(sortByAttribute, reverse);
         
     }
     //@@author
@@ -339,7 +339,7 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0140155U
     @Override
     public void saveState(String commandText) {
-        states.saveState(new AddressBookState(addressBook, commandText));
+        states.saveState(new TaskBookState(taskBook, commandText));
     }
 
     @Override
@@ -352,9 +352,9 @@ public class ModelManager extends ComponentManager implements Model {
         return loadState(states.loadNextState());
     }
     
-    private String loadState(AddressBookState newState) {
-        addressBook.resetData(newState.getState());
-        indicateAddressBookChanged();
+    private String loadState(TaskBookState newState) {
+        taskBook.resetData(newState.getState());
+        indicateTaskBookChanged();
         return newState.getCommand();
     }
     // @@author

@@ -1,7 +1,7 @@
 package seedu.address.model.task;
 
 /**
- * A read-only immutable interface for a DatedTask in the addressbook(change to taskBook once refactor).
+ * A read-only immutable interface for a DatedTask in the taskbook.
  * Implementations should guarantee: details are present and not null, field values are validated.
  */
 public interface ReadOnlyDatedTask extends ReadOnlyTask {

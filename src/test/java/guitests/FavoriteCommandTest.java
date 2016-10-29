@@ -9,7 +9,7 @@ import seedu.address.logic.commands.FavoriteCommand;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
-public class FavoriteCommandTest extends AddressBookGuiTest  {
+public class FavoriteCommandTest extends TaskBookGuiTest  {
 
 
     private final String INVALID_MESSAGE = "Invalid command format! \n" + FavoriteCommand.MESSAGE_USAGE;
@@ -32,10 +32,10 @@ public class FavoriteCommandTest extends AddressBookGuiTest  {
     
     @Test
     public void add() {
-        TestTask personToAdd = td.nieceBirthdayMeal;
-        commandBox.runCommand("favorite Add c/" + personToAdd.getAddCommand());
+        TestTask taskToAdd = td.nieceBirthdayMeal;
+        commandBox.runCommand("favorite Add c/" + taskToAdd.getAddCommand());
         presetListPanel.navigateToPreset("Add");
-        TestTask[] expectedList = TestUtil.addTasksToList(td.getTypicalTasks(), personToAdd);
+        TestTask[] expectedList = TestUtil.addTasksToList(td.getTypicalTasks(), taskToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
     

@@ -9,9 +9,9 @@ import seedu.address.model.task.UniqueTaskList;
 import java.util.List;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an task book
  */
-public interface ReadOnlyAddressBook {
+public interface ReadOnlyTaskBook {
 
     UniqueTagList getUniqueTagList();
 

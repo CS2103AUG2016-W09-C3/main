@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import seedu.address.logic.commands.FilepathCommand;
 
-public class FilepathCommandTest extends AddressBookGuiTest {
+public class FilepathCommandTest extends TaskBookGuiTest {
 
     @Test
     public void wrongFilePaths() {

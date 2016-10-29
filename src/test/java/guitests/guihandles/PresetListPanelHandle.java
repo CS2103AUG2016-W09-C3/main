@@ -92,13 +92,13 @@ public class PresetListPanelHandle extends GuiHandle {
         return getPresetCardHandle(new CommandPreset(getListView().getItems().get(index)));
     }
 
-    public PresetCardHandle getPresetCardHandle(CommandPreset person) {
+    public PresetCardHandle getPresetCardHandle(CommandPreset preset) {
         Set<Node> nodes = getAllCardNodes();
-        Optional<Node> personCardNode = nodes.stream()
-                .filter(n -> new PresetCardHandle(guiRobot, primaryStage, n).isSamePreset(person))
+        Optional<Node> presetCardNode = nodes.stream()
+                .filter(n -> new PresetCardHandle(guiRobot, primaryStage, n).isSamePreset(preset))
                 .findFirst();
-        if (personCardNode.isPresent()) {
-            return new PresetCardHandle(guiRobot, primaryStage, personCardNode.get());
+        if (presetCardNode.isPresent()) {
+            return new PresetCardHandle(guiRobot, primaryStage, presetCardNode.get());
         } else {
             return null;
         }

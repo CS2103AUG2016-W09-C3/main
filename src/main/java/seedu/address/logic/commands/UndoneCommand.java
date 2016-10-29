@@ -30,7 +30,7 @@ public class UndoneCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Task marked as %1$s: %2$s";
     public static final String MESSAGE_EXCEPTION = "Error executing command.";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
     public static final String MESSAGE_ALREADY_UNDONE_TASK = "Task is already undone.";
 
     private final int targetIndex;
