@@ -13,7 +13,7 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.address.model.task.CustomTaskComparator;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.commons.events.model.FilePathChangedEvent;
 import seedu.address.commons.events.model.PresetChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -90,7 +90,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+        raise(new TaskBookChangedEvent(addressBook));
     }
 
     // @@author A0140155U

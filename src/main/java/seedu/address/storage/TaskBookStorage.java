@@ -9,17 +9,17 @@ import java.util.Optional;
 /**
  * Represents a storage for {@link seedu.address.model.AddressBook}.
  */
-public interface AddressBookStorage {
+public interface TaskBookStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    String getAddressBookFilePath();
+    String getTaskBookFilePath();
 
     /**
      * Sets the file path of the data file.
      */
-    void setAddressBookFilePath(String filePath);
+    void setTaskBookFilePath(String filePath);
     
     /**
      * Returns AddressBook data as a {@link ReadOnlyTaskBook}.
@@ -27,23 +27,23 @@ public interface AddressBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyTaskBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskBook> readTaskBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getTaskBookFilePath()
      */
-    Optional<ReadOnlyTaskBook> readAddressBook(String filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyTaskBook> readTaskBook(String filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyTaskBook} to the storage.
-     * @param addressBook cannot be null.
+     * @param taskBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyTaskBook addressBook) throws IOException;
+    void saveTaskBook(ReadOnlyTaskBook taskBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyTaskBook)
+     * @see #saveTaskBook(ReadOnlyTaskBook)
      */
-    void saveAddressBook(ReadOnlyTaskBook addressBook, String filePath) throws IOException;
+    void saveTaskBook(ReadOnlyTaskBook taskBook, String filePath) throws IOException;
 
 }

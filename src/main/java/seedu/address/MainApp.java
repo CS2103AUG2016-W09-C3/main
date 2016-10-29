@@ -71,14 +71,14 @@ public class MainApp extends Application {
     }
 
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyTaskBook> addressBookOptional;
+        Optional<ReadOnlyTaskBook> taskBookOptional;
         ReadOnlyTaskBook initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if(!addressBookOptional.isPresent()){
+            taskBookOptional = storage.readTaskBook();
+            if(!taskBookOptional.isPresent()){
                 logger.info("Data file not found. Will be starting with an empty task list");
             }
-            initialData = addressBookOptional.orElse(new AddressBook());
+            initialData = taskBookOptional.orElse(new AddressBook());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty task list");
             initialData = new AddressBook();
@@ -196,12 +196,12 @@ public class MainApp extends Application {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Config data changed, saving to file"));
         String oldFilePath = config.getTaskBookFilePath();
         try {
-            storage.setAddressBookFilePath(event.filePath);
-            storage.saveAddressBook(model.getAddressBook());
+            storage.setTaskBookFilePath(event.filePath);
+            storage.saveTaskBook(model.getAddressBook());
             config.setTaskBookFilePath(event.filePath);
             ConfigUtil.saveConfig(config, config.getConfigFilePath());
         } catch (IOException e) {
-            storage.setAddressBookFilePath(oldFilePath);
+            storage.setTaskBookFilePath(oldFilePath);
             config.setTaskBookFilePath(oldFilePath);
             logger.warning("Failed to save config file, reverting to old : " + StringUtil.getDetails(e));
         }
