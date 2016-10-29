@@ -288,7 +288,7 @@
 }
 
 #filterField, #personListView, #personListPanel, #personWebpage {
-	-fx-background-color: linear-gradient(#303030, #202020);
+	-fx-background-color: #FAFAFA;
     -fx-effect: innershadow(gaussian, white, 10, 0, 0, 0);
 }
 
