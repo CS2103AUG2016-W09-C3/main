@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.commons.exceptions.IllegalValueException;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -86,8 +87,19 @@ public class UserPrefs {
 
     // @@author A0140155U
     public void addPreset(CommandPreset commandPreset) {
+        assert commandPreset != null;
         commandPresets.add(commandPreset);
         internalList.add(commandPreset);
+    }
+
+    public String removePreset(int index) throws IllegalValueException{
+        if(index < 0 || index >= commandPresets.size()){
+            throw new IllegalValueException("Index out of range.");
+        }
+        String removedCommandDesc = commandPresets.get(index).getDescription();
+        commandPresets.remove(index);
+        internalList.remove(index);
+        return removedCommandDesc;
     }
     // @@author
 

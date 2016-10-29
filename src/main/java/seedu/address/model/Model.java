@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.exceptions.StateException;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
@@ -53,6 +54,7 @@ public interface Model {
     /** Updates the filter of the filtered task list to show not done tasks*/
     void updateFilteredListToShowDone();
     //@@author
+    // @@author A0140155U
     /** Loads the previous state. Returns the command attached to the state to be printed. */
     String loadPreviousState() throws StateException;
 
@@ -62,8 +64,10 @@ public interface Model {
     /** Raises event to change file path of data */
     void changeFilePath(String filePath);
 
-    // @@author A0140155U
     /** Adds a command preset to the current list */
     void addPreset(CommandPreset commandPreset);
+
+    /** Removes a command preset to the current list. Returns the description of the removed preset to be printed. */
+    String removePreset(int index) throws IllegalValueException;
     // @@author
 }

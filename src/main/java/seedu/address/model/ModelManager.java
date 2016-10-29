@@ -120,6 +120,13 @@ public class ModelManager extends ComponentManager implements Model {
         userPrefs.addPreset(commandPreset);
         raise(new PresetChangedEvent(userPrefs));
     }
+    
+    @Override
+    public String removePreset(int index) throws IllegalValueException {
+        String removedCommandDesc = userPrefs.removePreset(index);
+        raise(new PresetChangedEvent(userPrefs));
+        return removedCommandDesc;
+    }
     // @@author
     //@@author A0139046E
     @Override
@@ -358,5 +365,6 @@ public class ModelManager extends ComponentManager implements Model {
         return newState.getCommand();
     }
     // @@author
+
 
 }
