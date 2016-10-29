@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * JAXB-friendly version of the Task.
  */
-public class XmlAdaptedPerson {
+public class XmlAdaptedTask {
 
     @XmlElement(required = true)
     private String name;
@@ -38,16 +38,16 @@ public class XmlAdaptedPerson {
     /**
      * No-arg constructor for JAXB use.
      */
-    public XmlAdaptedPerson() {}
+    public XmlAdaptedTask() {}
     
     // @@author A0140155U
 
     /**
      * Converts a given Task into this class for JAXB use.
      *
-     * @param source future changes to this will not affect the created XmlAdaptedPerson
+     * @param source future changes to this will not affect the created XmlAdaptedTask
      */
-    public XmlAdaptedPerson(ReadOnlyTask source) {
+    public XmlAdaptedTask(ReadOnlyTask source) {
         name = source.getName().fullName;
         priority = source.getPriority().toString();
         information = source.getInformation().fullInformation;
@@ -67,9 +67,9 @@ public class XmlAdaptedPerson {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Task object.
+     * Converts this jaxb-friendly adapted task object into the model's Task object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted task
      */
     public Task toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
