@@ -9,6 +9,7 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import seedu.address.TestApp;
 import seedu.address.model.CommandPreset;
+import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.testutil.TestUtil;
 
 import java.util.List;
@@ -23,7 +24,7 @@ import static org.junit.Assert.assertTrue;
 public class PresetListPanelHandle extends GuiHandle {
 
     public static final int NOT_FOUND = -1;
-    public static final String CARD_PANE_ID = "#cardPane";
+    public static final String CARD_PANE_ID = "#presetCard";
 
     private static final String PRESET_LIST_VIEW_ID = "#presetListView";
 
@@ -48,6 +49,28 @@ public class PresetListPanelHandle extends GuiHandle {
         guiRobot.clickOn(point.getX(), point.getY());
     }
     
+    /**
+     * Returns true if the {@code presets} appear as the sub list (in that order) at position {@code startPosition}.
+     */
+    public boolean containsInOrder(int startPosition, CommandPreset... presets) {
+        List<CommandPreset> presetsInList = getListView().getItems();
+
+        // Return false if the list in panel is too short to contain the given list
+        if (startPosition + presets.length > presetsInList.size()){
+            return false;
+        }
+
+        // Return false if any of the persons doesn't match
+        for (int i = 0; i < presets.length; i++) {
+            if (!presetsInList.get(startPosition + i).getCommand().equals(presets[i].getCommand()) ||
+                    !presetsInList.get(startPosition + i).getDescription().equals(presets[i].getDescription())){
+                return false;
+            }
+        }
+
+        return true;
+    }
+    
     public PresetCardHandle navigateToPreset(String description) {
         guiRobot.sleep(500); //Allow a bit of time for the list to be updated
         final Optional<CommandPreset> preset = getListView().getItems().stream().filter(p -> p.getDescription().equals(description)).findAny();
@@ -58,6 +81,36 @@ public class PresetListPanelHandle extends GuiHandle {
         return navigateToPreset(preset.get());
     }
 
+    /**
+     * Returns true if the list is showing the oreset details correctly and in correct order.
+     * @param presets A list of person in the correct order.
+     */
+    public boolean isListMatching(CommandPreset... presets) {
+        return this.isListMatching(0, presets);
+    }
+    
+    /**
+     * Returns true if the list is showing the presets details correctly and in correct order.
+     * @param startPosition The starting position of the sub list.
+     * @param presets A list of presets in the correct order.
+     */
+    public boolean isListMatching(int startPosition, CommandPreset... presets) throws IllegalArgumentException {
+        if (presets.length + startPosition != getListView().getItems().size()) {
+            throw new IllegalArgumentException("List size mismatched\n" +
+                    "Expected " + (getListView().getItems().size() - 1) + " presets");
+        }
+        assertTrue(this.containsInOrder(startPosition, presets));
+        for (int i = 0; i < presets.length; i++) {
+            final int scrollTo = i + startPosition;
+            guiRobot.interact(() -> getListView().scrollTo(scrollTo));
+            guiRobot.sleep(200);
+            if (!TestUtil.compareCardAndPreset(getPresetCardHandle(startPosition + i), presets[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     /**
      * Navigates the listview to display and select the preset.
      */

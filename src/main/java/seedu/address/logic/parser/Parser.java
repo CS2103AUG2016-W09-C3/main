@@ -108,6 +108,9 @@ public class Parser {
 
         case FavoriteCommand.COMMAND_WORD:
             return prepareFavorite(command);
+
+        case UnfavoriteCommand.COMMAND_WORD:
+            return prepareUnfavorite(command);
             
         default:
             return new IncorrectCommand(MESSAGE_UNKNOWN_COMMAND);
@@ -364,10 +367,24 @@ public class Parser {
             return new FavoriteCommand(favCommand, command.getValuesAsString());
         }catch(IllegalValueException ex){
             return new IncorrectCommand(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
         }
     }
    
+    private Command prepareUnfavorite(ParsedCommand command) {
+        try{
+            Optional<Integer> index = parseIndex(command.getValue());
+            if(!index.isPresent()){
+                return new IncorrectCommand(
+                        String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnfavoriteCommand.MESSAGE_USAGE));
+            }
+
+            return new UnfavoriteCommand(index.get());
+        }catch(IllegalValueException ex){
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnfavoriteCommand.MESSAGE_USAGE));
+        }
+    }
     // @@author
     
     /**

@@ -1,6 +1,8 @@
 package seedu.address.testutil;
 
 import com.google.common.io.Files;
+
+import guitests.guihandles.PresetCardHandle;
 import guitests.guihandles.TaskCardHandle;
 import javafx.geometry.Bounds;
 import javafx.geometry.Point2D;
@@ -16,6 +18,7 @@ import seedu.address.TestApp;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
+import seedu.address.model.CommandPreset;
 import seedu.address.model.TaskBook;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.UniqueTagList;
@@ -399,6 +402,10 @@ public class TestUtil {
 	public static boolean compareCardAndTask(TaskCardHandle card, ReadOnlyTask task) {
 		return card.isSameTask(task);
 	}
+	
+    public static boolean compareCardAndPreset(PresetCardHandle card, CommandPreset preset) {
+        return card.isSamePreset(preset);
+    }
 
 	public static Tag[] getTagList(String tags) {
 

@@ -22,17 +22,10 @@
                     </padding>
 
                     <children>
-                        <!-- HBox spacing="5" alignment="CENTER_LEFT">
-                            <children>
-                                <HBox>
-                                    <Label fx:id="id" styleClass="cell_big_label"></Label>
-                                    <Label fx:id="name" text="\$first" styleClass="cell_big_label"/>
-                                </HBox>
-                                <Label fx:id="tags" styleClass="cell_small_label" text="\$tags" />
-                            </children>
-                        </HBox> -->
-                        <Label fx:id="description" styleClass="cell_big_label" text="\$description" />
-                        
+                        <HBox>
+                        	<Label fx:id="presetIndex" styleClass="cell_big_label" text="\$index" />
+                        	<Label fx:id="description" styleClass="cell_big_label" text="\$description" />
+                        </HBox>
                     </children>
                 </VBox>
             </children>

@@ -103,7 +103,7 @@ public class PresetListPanel extends UiPart {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(PresetCard.load(commandPreset).getLayout());
+                setGraphic(PresetCard.load(commandPreset, getIndex() + 1).getLayout());
             }
         }
     }
