@@ -40,9 +40,10 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage {
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
-    
+    // @@author A0140155U
     /**
      * Saves the current user preferences to the hard disk.
      */
     void handlePresetChangedEvent(PresetChangedEvent event);
+    // @@author
 }

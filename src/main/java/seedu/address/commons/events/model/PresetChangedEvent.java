@@ -1,3 +1,4 @@
+// @@author A0140155U
 package seedu.address.commons.events.model;
 
 import seedu.address.commons.events.BaseEvent;
@@ -18,3 +19,4 @@ public class PresetChangedEvent extends BaseEvent {
         return "number of presets: " + data.commandPresets.size();
     }
 }
+//@@author

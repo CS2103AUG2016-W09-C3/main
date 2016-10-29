@@ -1,3 +1,4 @@
+// @@author A0140155U
 package guitests;
 
 import static org.junit.Assert.*;
@@ -63,3 +64,4 @@ public class FavoriteCommandTest extends AddressBookGuiTest  {
     
     
 }
+//@@author
