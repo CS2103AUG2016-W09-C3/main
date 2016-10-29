@@ -56,7 +56,7 @@ public class ModelManager extends ComponentManager implements Model {
         addressBook = new TaskBook(src);
         filteredTasks = new FilteredList<>(addressBook.getTasks());
         // @@author A0140155U
-        states = new StatesManager(new AddressBookState(addressBook));
+        states = new StatesManager(new TaskBookState(addressBook));
         this.userPrefs = userPrefs;
         // @@author
     }
@@ -72,7 +72,7 @@ public class ModelManager extends ComponentManager implements Model {
         //@@author
         filteredTasks = new FilteredList<>(addressBook.getTasks());
         // @@author A0140155U
-        states = new StatesManager(new AddressBookState(addressBook));
+        states = new StatesManager(new TaskBookState(addressBook));
         this.userPrefs = userPrefs;
         // @@author
     }
@@ -339,7 +339,7 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0140155U
     @Override
     public void saveState(String commandText) {
-        states.saveState(new AddressBookState(addressBook, commandText));
+        states.saveState(new TaskBookState(addressBook, commandText));
     }
 
     @Override
@@ -352,7 +352,7 @@ public class ModelManager extends ComponentManager implements Model {
         return loadState(states.loadNextState());
     }
     
-    private String loadState(AddressBookState newState) {
+    private String loadState(TaskBookState newState) {
         addressBook.resetData(newState.getState());
         indicateAddressBookChanged();
         return newState.getCommand();

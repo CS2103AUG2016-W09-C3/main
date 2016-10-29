@@ -9,7 +9,7 @@ public class StatesManager implements States{
     /**
      * States are stored as a list, with currentState pointing to the current state of the address book in the model.
      */
-    private ArrayList<AddressBookState> states = new ArrayList<>();
+    private ArrayList<TaskBookState> states = new ArrayList<>();
     private int currentState = 0;
     
     private final int MAX_STATES = 10; // Does not include initial state
@@ -17,12 +17,12 @@ public class StatesManager implements States{
     public final static String MESSAGE_MAX_STATES_EXCEEDED = "Maximum undos exceeded.";
     public final static String MESSAGE_NO_NEXT_STATE = "No next state to load.";
     
-    public StatesManager(AddressBookState initialState){
+    public StatesManager(TaskBookState initialState){
         states.add(initialState);
     }
 
 
-    public void saveState(AddressBookState newState){
+    public void saveState(TaskBookState newState){
         // When a state is saved, all "future states" i.e. states that have been undone are overwritten.
         while(states.size() - 1 > currentState){
             states.remove(states.size() - 1);
@@ -38,10 +38,10 @@ public class StatesManager implements States{
     }
 
 
-    public AddressBookState loadPreviousState() throws StateException{
+    public TaskBookState loadPreviousState() throws StateException{
         if(currentState == 0){
             assert !states.isEmpty();
-            if(states.get(0).getCommand().equals(AddressBookState.INITIAL_STATE)){
+            if(states.get(0).getCommand().equals(TaskBookState.INITIAL_STATE)){
                 throw new StateException(MESSAGE_NO_PREV_STATE);
             }else{
                 // First state is not the initial state.
@@ -52,10 +52,10 @@ public class StatesManager implements States{
         // Note: Unlike loadNextState(), return current state command, but previous state data.
         String commandString = getCurrentState().getCommand();
         currentState--;
-        return new AddressBookState(getCurrentState().getState(), commandString);
+        return new TaskBookState(getCurrentState().getState(), commandString);
     }
 
-    public AddressBookState loadNextState() throws StateException{
+    public TaskBookState loadNextState() throws StateException{
         if(currentState == states.size() - 1){
             throw new StateException(MESSAGE_NO_NEXT_STATE);
         }
@@ -64,7 +64,7 @@ public class StatesManager implements States{
         return getCurrentState();
     }
 
-    private AddressBookState getCurrentState() {
+    private TaskBookState getCurrentState() {
         return states.get(currentState);
     }
     
