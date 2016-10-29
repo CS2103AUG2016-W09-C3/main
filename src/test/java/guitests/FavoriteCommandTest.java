@@ -32,10 +32,10 @@ public class FavoriteCommandTest extends TaskBookGuiTest  {
     
     @Test
     public void add() {
-        TestTask personToAdd = td.nieceBirthdayMeal;
-        commandBox.runCommand("favorite Add c/" + personToAdd.getAddCommand());
+        TestTask taskToAdd = td.nieceBirthdayMeal;
+        commandBox.runCommand("favorite Add c/" + taskToAdd.getAddCommand());
         presetListPanel.navigateToPreset("Add");
-        TestTask[] expectedList = TestUtil.addTasksToList(td.getTypicalTasks(), personToAdd);
+        TestTask[] expectedList = TestUtil.addTasksToList(td.getTypicalTasks(), taskToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
     

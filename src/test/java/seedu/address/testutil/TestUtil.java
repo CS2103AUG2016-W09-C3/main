@@ -339,7 +339,7 @@ public class TestUtil {
 	}
 
 	/**
-	 * Replaces persons[i] with a task.
+	 * Replaces tasks[i] with a task.
 	 * 
 	 * @param tasks
 	 *            The array of tasks.
@@ -383,9 +383,9 @@ public class TestUtil {
 	 * @return The modified array of tasks.
 	 */
 	public static TestTask[] addTaskToListIndex(final TestTask[] tasks, TestTask taskToAdd, int index) {
-		List<TestTask> listOfPersons = asList(tasks);
-		listOfPersons.add(index, taskToAdd);
-		return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+		List<TestTask> listOfTasks = asList(tasks);
+		listOfTasks.add(index, taskToAdd);
+		return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
 	}
 
 	private static <T> List<T> asList(T[] objs) {

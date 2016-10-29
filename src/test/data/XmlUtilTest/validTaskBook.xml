@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskbook>
+    <tasks>
+        <name>1</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>2</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>3</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+</taskbook>

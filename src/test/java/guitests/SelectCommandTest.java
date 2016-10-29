@@ -13,7 +13,7 @@ public class SelectCommandTest extends TaskBookGuiTest {
     public void selectTask_nonEmptyList() {
 
         assertSelectionInvalid(10); //invalid index
-        assertNoPersonSelected();
+        assertNoTaskSelected();
 
         assertSelectionSuccess(1); //first task in the list
         int taskCount = td.getTypicalTasks().length;
@@ -51,7 +51,7 @@ public class SelectCommandTest extends TaskBookGuiTest {
         assertEquals(taskListPanel.getTask(index-1), selectedTask);
     }
 
-    private void assertNoPersonSelected() {
+    private void assertNoTaskSelected() {
         assertEquals(taskListPanel.getSelectedTasks().size(), 0);
     }
 
