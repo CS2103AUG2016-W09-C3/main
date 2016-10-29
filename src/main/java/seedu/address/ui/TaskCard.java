@@ -8,9 +8,9 @@ import javafx.scene.layout.VBox;
 import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
 
-public class PersonCard extends UiPart{
+public class TaskCard extends UiPart{
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "TaskListCard.fxml";
     private static final TaskStyleMapping styler = TaskPropertyMapping.getInstance();
     
     @FXML
@@ -38,16 +38,16 @@ public class PersonCard extends UiPart{
     @FXML
     private Label tags;
 
-    private ReadOnlyTask person;
+    private ReadOnlyTask task;
     private int displayedIndex;
 
-    public PersonCard(){
+    public TaskCard(){
 
     }
 
-    public static PersonCard load(ReadOnlyTask person, int displayedIndex){
-        PersonCard card = new PersonCard();
-        card.person = person;
+    public static TaskCard load(ReadOnlyTask task, int displayedIndex){
+        TaskCard card = new TaskCard();
+        card.task = task;
         card.displayedIndex = displayedIndex;
         return UiPartLoader.loadUiPart(card);
     }
@@ -55,13 +55,13 @@ public class PersonCard extends UiPart{
     // @@author A0140155U
     @FXML
     public void initialize() {
-        name.setText(person.getName().fullName);
+        name.setText(task.getName().fullName);
         id.setText(Integer.toString(displayedIndex));
-        setOrNullText(priority, "Priority: ", person.getPriority().toString());
-        setOrNullText(information, "Info: ", person.getInformation().toString());
-        setOrNullText(done, person.getDoneFlag().toString());
-        if(person.isDated()){
-            ReadOnlyDatedTask datedTask = (ReadOnlyDatedTask) person;
+        setOrNullText(priority, "Priority: ", task.getPriority().toString());
+        setOrNullText(information, "Info: ", task.getInformation().toString());
+        setOrNullText(done, task.getDoneFlag().toString());
+        if(task.isDated()){
+            ReadOnlyDatedTask datedTask = (ReadOnlyDatedTask) task;
             setOrNullText(datetime, "Date: ",
                     datedTask.getDateTime().toString() + (datedTask.hasValidLength() ? " - " + datedTask.getDateTimeEnd().toString() : ""));
             setOrNullText(length, "");
@@ -71,7 +71,7 @@ public class PersonCard extends UiPart{
             setOrNullText(length, "");
             setOrNullText(recurrance, "");
         }
-        tags.setText(person.tagsString());
+        tags.setText(task.tagsString());
         removeUnnecessaryLabels();
         style();
     }
@@ -96,12 +96,12 @@ public class PersonCard extends UiPart{
     public void style(){
         StringBuilder styleString = new StringBuilder();
         // Style based on property
-        styleString.append(styler.getLightPriorityColour(person.getPriority().toString()));
+        styleString.append(styler.getLightPriorityColour(task.getPriority().toString()));
         // Style based on done
-        styleString.append(styler.getLightDoneColour(person.getDoneFlag().toString()));
+        styleString.append(styler.getLightDoneColour(task.getDoneFlag().toString()));
         light.setStyle(styleString.toString());
         //styleString = new StringBuilder();
-        //styleString.append(styler.getCardDoneColour(person.getDoneFlag().toString()));
+        //styleString.append(styler.getCardDoneColour(task.getDoneFlag().toString()));
         //taskPane.setStyle(styleString.toString());
         
     }
