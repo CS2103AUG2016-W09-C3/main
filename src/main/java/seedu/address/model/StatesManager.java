@@ -7,7 +7,7 @@ import seedu.address.commons.exceptions.StateException;
 
 public class StatesManager implements States{
     /**
-     * States are stored as a list, with currentState pointing to the current state of the address book in the model.
+     * States are stored as a list, with currentState pointing to the current state of the task book in the model.
      */
     private ArrayList<TaskBookState> states = new ArrayList<>();
     private int currentState = 0;
