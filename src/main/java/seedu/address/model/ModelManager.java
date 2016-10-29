@@ -148,7 +148,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
     }
-
+    //@@author A0139121R
     @Override
     public void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope){
         updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, searchScope)));
@@ -157,7 +157,7 @@ public class ModelManager extends ComponentManager implements Model {
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    //@@author A0139121R
+    
     @Override
     public void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse){
         sortList(sortByAttribute, reverse);
