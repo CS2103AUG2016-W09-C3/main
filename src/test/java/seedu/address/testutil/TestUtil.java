@@ -154,7 +154,7 @@ public class TestUtil {
 	}
 
 	public static void createDataFileWithSampleData(String filePath) {
-		createDataFileWithData(generateSampleStorageAddressBook(), filePath);
+		createDataFileWithData(generateSampleStorageTaskBook(), filePath);
 	}
 
 	public static <T> void createDataFileWithData(T data, String filePath) {
@@ -171,12 +171,12 @@ public class TestUtil {
 		createDataFileWithSampleData(TestApp.SAVE_LOCATION_FOR_TESTING);
 	}
 
-	public static TaskBook generateEmptyAddressBook() {
+	public static TaskBook generateEmptyTaskBook() {
 		return new TaskBook(new UniqueTaskList(), new UniqueTagList());
 	}
 
-	public static XmlSerializableTaskBook generateSampleStorageAddressBook() {
-		return new XmlSerializableTaskBook(generateEmptyAddressBook());
+	public static XmlSerializableTaskBook generateSampleStorageTaskBook() {
+		return new XmlSerializableTaskBook(generateEmptyTaskBook());
 	}
 
 	/**
@@ -342,7 +342,7 @@ public class TestUtil {
 	}
 
 	/**
-	 * Replaces persons[i] with a task.
+	 * Replaces tasks[i] with a task.
 	 * 
 	 * @param tasks
 	 *            The array of tasks.
@@ -386,9 +386,9 @@ public class TestUtil {
 	 * @return The modified array of tasks.
 	 */
 	public static TestTask[] addTaskToListIndex(final TestTask[] tasks, TestTask taskToAdd, int index) {
-		List<TestTask> listOfPersons = asList(tasks);
-		listOfPersons.add(index, taskToAdd);
-		return listOfPersons.toArray(new TestTask[listOfPersons.size()]);
+		List<TestTask> listOfTasks = asList(tasks);
+		listOfTasks.add(index, taskToAdd);
+		return listOfTasks.toArray(new TestTask[listOfTasks.size()]);
 	}
 
 	private static <T> List<T> asList(T[] objs) {

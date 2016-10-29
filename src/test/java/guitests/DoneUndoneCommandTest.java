@@ -72,7 +72,7 @@ public class DoneUndoneCommandTest extends TaskBookGuiTest {
         TestTask[] expectedRemainder = doTask(targetIndexOneIndexed, currentList, DoneFlag.DONE);
         commandBox.runCommand("done " + targetIndexOneIndexed);
 
-        //confirm the list now contains all previous tasks except the deleted person
+        //confirm the list now contains all previous tasks except the deleted task
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
@@ -94,7 +94,7 @@ public class DoneUndoneCommandTest extends TaskBookGuiTest {
         TestTask[] expectedRemainder = doTask(targetIndexOneIndexed, currentList, DoneFlag.NOT_DONE);
         commandBox.runCommand("undone " + targetIndexOneIndexed);
 
-        //confirm the list now contains all previous persons except the deleted person
+        //confirm the list now contains all previous tasks except the deleted task
         assertTrue(taskListPanel.isListMatching(expectedRemainder));
 
         //confirm the result message is correct
@@ -114,7 +114,7 @@ public class DoneUndoneCommandTest extends TaskBookGuiTest {
         } catch (IllegalValueException e) {
             assert(false);
         }
-        //expectedRemainder = TestUtil.addPersonsToList(expectedRemainder, taskToDo);
+        //expectedRemainder = TestUtil.addTasksToList(expectedRemainder, taskToDo);
         expectedRemainder = TestUtil.addTaskToListIndex(expectedRemainder, taskToDo, targetIndexOneIndexed - 1);
         return expectedRemainder;
     }
