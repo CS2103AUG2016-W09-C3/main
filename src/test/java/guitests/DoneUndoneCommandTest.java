@@ -18,7 +18,7 @@ import seedu.address.testutil.TestUtil;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.DoneCommand.MESSAGE_SUCCESS;
 
-public class DoneUndoneCommandTest extends AddressBookGuiTest {
+public class DoneUndoneCommandTest extends TaskBookGuiTest {
 
 
     @Test

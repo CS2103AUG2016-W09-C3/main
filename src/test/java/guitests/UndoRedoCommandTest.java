@@ -12,7 +12,7 @@ import seedu.address.model.StatesManager;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
-public class UndoRedoCommandTest extends AddressBookGuiTest {
+public class UndoRedoCommandTest extends TaskBookGuiTest {
 
     @Test
     public void addUndoRedo() {

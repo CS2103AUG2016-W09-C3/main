@@ -17,7 +17,7 @@ import seedu.address.testutil.TestDatedTask;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
-public class RescheduleCommandTest extends AddressBookGuiTest {
+public class RescheduleCommandTest extends TaskBookGuiTest {
 	
 	@Test
 	public void reschedule_minutes(){

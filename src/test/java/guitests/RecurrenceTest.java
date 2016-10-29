@@ -14,7 +14,7 @@ import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
 
-public class RecurrenceTest extends AddressBookGuiTest {
+public class RecurrenceTest extends TaskBookGuiTest {
     
     @Test
     // Updating recurrence

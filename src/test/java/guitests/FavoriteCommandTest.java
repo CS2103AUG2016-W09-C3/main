@@ -9,7 +9,7 @@ import seedu.address.logic.commands.FavoriteCommand;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
-public class FavoriteCommandTest extends AddressBookGuiTest  {
+public class FavoriteCommandTest extends TaskBookGuiTest  {
 
 
     private final String INVALID_MESSAGE = "Invalid command format! \n" + FavoriteCommand.MESSAGE_USAGE;

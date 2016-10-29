@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * A GUI Test class for TaskBook.
  */
-public abstract class AddressBookGuiTest {
+public abstract class TaskBookGuiTest {
 
     /* The TestName Rule makes the current test name available inside test methods */
     @Rule

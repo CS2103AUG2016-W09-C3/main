@@ -23,7 +23,7 @@ import seedu.address.testutil.TestDatedTask;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
-public class EditCommandTest extends AddressBookGuiTest {
+public class EditCommandTest extends TaskBookGuiTest {
     
     @Test
     public void edit_nonDatedTask(){
