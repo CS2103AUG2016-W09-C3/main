@@ -14,27 +14,32 @@ public class PresetCard extends UiPart{
 
     private static final String FXML = "PresetListCard.fxml";
     private static final TaskStyleMapping styler = TaskPropertyMapping.getInstance();
-    
+
     @FXML
     private HBox cardPane;
+    @FXML
+    private Label presetIndex;
     @FXML
     private Label description;
 
     private CommandPreset commandPreset;
-
+    private int index;
+    
     public PresetCard(){
 
     }
 
-    public static PresetCard load(CommandPreset commandPreset){
+    public static PresetCard load(CommandPreset commandPreset, int index){
         PresetCard card = new PresetCard();
         card.commandPreset = commandPreset;
+        card.index = index;
         return UiPartLoader.loadUiPart(card);
     }
 
     @FXML
     public void initialize() {
         description.setText(commandPreset.getDescription());
+        presetIndex.setText(index + ". ");
     }
     
     public HBox getLayout() {
