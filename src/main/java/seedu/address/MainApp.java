@@ -197,7 +197,7 @@ public class MainApp extends Application {
         String oldFilePath = config.getTaskBookFilePath();
         try {
             storage.setTaskBookFilePath(event.filePath);
-            storage.saveTaskBook(model.getAddressBook());
+            storage.saveTaskBook(model.getTaskBook());
             config.setTaskBookFilePath(event.filePath);
             ConfigUtil.saveConfig(config, config.getConfigFilePath());
         } catch (IOException e) {
