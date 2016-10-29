@@ -62,7 +62,7 @@ public class XmlTaskBookStorage implements TaskBookStorage {
 
         File file = new File(filePath);
         FileUtil.createIfMissing(file);
-        XmlFileStorage.saveDataToFile(file, new XmlSerializableAddressBook(taskBook));
+        XmlFileStorage.saveDataToFile(file, new XmlSerializableTaskBook(taskBook));
     }
 
     @Override
