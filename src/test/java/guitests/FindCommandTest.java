@@ -23,12 +23,29 @@ public class FindCommandTest extends TaskBookGuiTest {
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); //no results
     }
+
+    @Test
+    public void find_byName(){
+        assertFindResult("find Meier s/name", td.danielLunch);
+    }
+    
+    @Test
+    public void find_byDate(){
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        assertFindResult("find 17-11-2016 s/date", td.dinnerDate);
+    }
+    
+    @Test
+    public void find_byInformation(){
+        assertFindResult("find loan s/information", td.lorryMaintainance);
+    }
     //@@author
     @Test
     public void find_invalidCommand_fail() {
         commandBox.runCommand("findgeorge");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
+    
 
     private void assertFindResult(String command, TestTask... expectedHits ) {
         commandBox.runCommand(command);

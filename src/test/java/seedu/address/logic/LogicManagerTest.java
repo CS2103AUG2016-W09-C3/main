@@ -347,7 +347,7 @@ public class LogicManagerTest {
         List<Task> expectedList = fourTasks;
         helper.addToModel(model, fourTasks);
 
-        assertCommandBehavior("find KEY s/n",
+        assertCommandBehavior("find KEY s/name",
                 Command.getMessageForTaskListShownSummary(expectedList.size()),
                 expectedAB,
                 expectedList);
