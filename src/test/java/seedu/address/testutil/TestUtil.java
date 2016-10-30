@@ -403,10 +403,11 @@ public class TestUtil {
 		return card.isSameTask(task);
 	}
 	
+	// @@author A0140155U
     public static boolean compareCardAndPreset(PresetCardHandle card, CommandPreset preset) {
         return card.isSamePreset(preset);
     }
-
+    // @@author
 	public static Tag[] getTagList(String tags) {
 
 		if (tags.equals("")) {
