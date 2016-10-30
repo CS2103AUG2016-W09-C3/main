@@ -49,8 +49,8 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        String newLength = length;
-        if(length.equals("-1")){
+        String newLength = setLength(length, datetime, endDatetime);
+        /*if(length.equals("-1")){
             if(endDatetime.equals("-1")){
                 newLength = Length.NO_INTERVAL;
             } else {
@@ -67,7 +67,7 @@ public class AddCommand extends Command {
             if(!endDatetime.equals("-1")){
                 throw new IllegalValueException(MESSAGE_LENGTH_ENDDATE_CONFLICT);
             }
-        }
+        }*/
         this.toAdd = (Task) new DatedTask(
                 new Name(name),
                 new DateTime(datetime),
@@ -78,6 +78,28 @@ public class AddCommand extends Command {
                 new DoneFlag(doneFlag),
                 new UniqueTagList(tagSet)
         );
+    }
+    
+    private String setLength(String length, String datetime, String endDatetime) throws IllegalValueException{
+        if(length.equals("-1")){
+            if(endDatetime.equals("-1")){
+                return Length.NO_INTERVAL;
+            } else {
+                LocalDateTime startDate = DateParser.parseDate(datetime);
+                LocalDateTime endDate = DateParser.parseDate(endDatetime);
+                long hourDifference = ChronoUnit.HOURS.between(startDate, endDate);
+                if(hourDifference >= 24){
+                    return Long.toString(TimeUnit.HOURS.toDays(hourDifference)) + "d";
+                } else {
+                    return hourDifference + "h";
+                }
+            }
+        } else {
+            if(!endDatetime.equals("-1")){
+                throw new IllegalValueException(MESSAGE_LENGTH_ENDDATE_CONFLICT);
+            }
+            return length;
+        }
     }
 
     public AddCommand(String name, String priority, String information, String doneFlag, Set<String> tagsFromArgs) 

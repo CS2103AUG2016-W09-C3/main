@@ -42,7 +42,6 @@ public class Task implements ReadOnlyTask {
      * Default constructor for DatedTask subclass, should not be used.
      */
     protected Task(){
-        ;
     }
 
     @Override

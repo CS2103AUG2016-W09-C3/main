@@ -235,47 +235,103 @@ public class ModelManager extends ComponentManager implements Model {
         }
         
         /**
-         * Tests if task is within the date range if specified, is with the correct DoneFlag status if specified 
+         * Tests if task is within the date range if specified, and with the correct DoneFlag status if specified 
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            if(!doneStatus.equalsIgnoreCase("all")){
+            /*if(!doneStatus.equalsIgnoreCase("all")){
                 if(!doneStatus.equalsIgnoreCase(task.getDoneFlag().toString())){
                     return false;
                 }
+            }*/
+            if(!checkDoneFlagSame(task)){
+                return false;
             }
             
             if(!dateRange.isEmpty()){
-                if(!task.isDated()){
+//                if(!task.isDated()){
+//                    return false;
+//                } else {
+//                    ReadOnlyDatedTask datedTask = (DatedTask) task;
+//                    LocalDateTime currentTaskDateTime = datedTask.getDateTime().getDateTime();
+//                    try {
+//                        LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
+//                        if(currentTaskDateTime.isBefore(startDateTime)){
+//                            return false;
+//                        }
+//                    } catch (IllegalValueException e1) {
+//                        System.out.println("Start date and time given is not a valid string");
+//                        e1.printStackTrace();
+//                    }
+//                    try {
+//                        LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end"));
+//                        if(currentTaskDateTime.isAfter(endDateTime)){
+//                            return false;
+//                        }
+//                    } catch (IllegalValueException e) {
+//                        System.out.println("End date and time given is not a valid string");
+//                        e.printStackTrace();
+//                    }
+//                }
+                if(!checkWithinDateRange(task)){
                     return false;
-                } else {
-                    ReadOnlyDatedTask datedTask = (DatedTask) task;
-                    LocalDateTime currentTaskDateTime = datedTask.getDateTime().getDateTime();
-                    try {
-                        LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
-                        if(currentTaskDateTime.isBefore(startDateTime)){
-                            return false;
-                        }
-                    } catch (IllegalValueException e1) {
-                        System.out.println("Start date and time given is not a valid string");
-                        e1.printStackTrace();
-                    }
-                    try {
-                        LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end"));
-                        if(currentTaskDateTime.isAfter(endDateTime)){
-                            return false;
-                        }
-                    } catch (IllegalValueException e) {
-                        System.out.println("End date and time given is not a valid string");
-                        e.printStackTrace();
-                    }
                 }
             }
             
             return true;
         }
+        private boolean checkWithinDateRange(ReadOnlyTask task){
+            if(!task.isDated()){
+                return false;
+            } else {
+                ReadOnlyDatedTask datedTask = (DatedTask) task;
+                LocalDateTime currentTaskDateTime = datedTask.getDateTime().getDateTime();
+                if(!checkAfterStartDate(datedTask, currentTaskDateTime)){
+                    return false;
+                }
+                if(!checkBeforeEndDate(datedTask, currentTaskDateTime)){
+                    return false;
+                }
+            }
+            return true;
+        }
         
+        private boolean checkAfterStartDate(ReadOnlyDatedTask task, LocalDateTime currentTaskDateTime){
+            try {
+                LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
+                if(currentTaskDateTime.isBefore(startDateTime)){
+                    return false;
+                }
+            } catch (IllegalValueException e1) {
+                System.out.println("Start date and time given is not a valid string");
+                e1.printStackTrace();
+                return false;
+            }
+            return true;
+        }
         
+        private boolean checkBeforeEndDate(ReadOnlyDatedTask task, LocalDateTime currentTaskDateTime){
+            try{
+                LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end"));
+                if(currentTaskDateTime.isAfter(endDateTime)){
+                    return false;
+                } 
+            } catch (IllegalValueException e2){
+                System.out.println("End date and time given is not a valid string");
+                e2.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+        
+        private boolean checkDoneFlagSame(ReadOnlyTask task){
+            if(!doneStatus.equalsIgnoreCase("all")){
+                if(!doneStatus.equalsIgnoreCase(task.getDoneFlag().toString())){
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
     private class FindQualifier implements Qualifier {
