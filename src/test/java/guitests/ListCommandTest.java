@@ -10,15 +10,23 @@ import java.util.Collections;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.task.DoneFlag;
 import seedu.address.testutil.TestDatedTask;
 import seedu.address.testutil.TestTask;
 
 public class ListCommandTest extends TaskBookGuiTest{
     
+    //Invalid sort attribute
+    @Test
+    public void listInvalidSortAttribute(){
+        String command = "list s/age";
+        commandBox.runCommand(command);
+        assertResultMessage(ListCommand.SORT_MESSAGE_USAGE);
+    }
     //Test to list all tasks.
     @Test
-    public void list_allTask(){
+    public void listAllTask(){
         TestTask[] allTaskList = td.getTypicalTasks();
         String command = "list df/all";
         commandBox.runCommand(command);
@@ -27,7 +35,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list all tasks in reverse order.
     @Test
-    public void list_allTask_reverse(){
+    public void listAllTaskReverseOrder(){
         TestTask[] initialList = td.getTypicalTasks();
         String command = "list df/all rev/";
         TestTask[] finalList = new TestTask[initialList.length];
@@ -40,7 +48,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list only done tasks.
     @Test
-    public void list_doneTask(){
+    public void listOnlyDoneTask(){
         TestTask[] initialList = td.getTypicalTasks();
         ArrayList<String> commands = new ArrayList<String>();
         commands.add("done 3");
@@ -66,7 +74,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list only tasks that are not done.
     @Test
-    public void list_undoneTask(){
+    public void listOnlyUndoneTask(){
         TestTask[] initialList = td.getTypicalTasks();
         ArrayList<String> assistingCommands = new ArrayList<String>();
         assistingCommands.add("done 3");
@@ -86,7 +94,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list all tasks sorted in alphabetical order.
     @Test
-    public void list_allTask_alphabetical(){
+    public void listAllTaskSortedAlphabetically(){
         TestTask[] initialList = td.getTypicalTasks();
         TestTask[] finalList = new TestTask[initialList.length];
         //manual sorting
@@ -104,7 +112,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list all undone tasks, sorted from highest to lowest priority.
     @Test
-    public void list_undoneTask_priority(){
+    public void listUndoneTaskSortedByPriority(){
         TestTask[] initialList = td.getTypicalTasks();
         ArrayList<String> assistingCommands = new ArrayList<String>();
         String command = "list df/not done s/priority";
@@ -125,7 +133,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list all done tasks within specific period, should have no done tasks in this period.
     @Test
-    public void list_doneTask_daterange_none(){
+    public void listDoneTaskWithinDaterange_mixedListOfDatedAndNonDatedTask_noTaskInDaterange(){
         commandBox.runCommand(td.lectureToAttend.getAddCommand());
         commandBox.runCommand(td.meetNathan.getAddCommand());
         commandBox.runCommand(td.cuttingHair.getAddCommand());
@@ -138,7 +146,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list all done tasks within a specific period, should have one done task within this period.
     @Test
-    public void list_doneTask_daterange_one(){
+    public void listDoneTaskWithinDaterange_mixedListOfDatedAndNonDatedTask_oneTaskInDaterange(){
         commandBox.runCommand(td.lectureToAttend.getAddCommand());
         commandBox.runCommand(td.meetNathan.getAddCommand());
         commandBox.runCommand(td.cuttingHair.getAddCommand());
