@@ -242,56 +242,47 @@ public class Parser {
     }
     //@@author
     
-    //@@author A0139046E
-    /**
-     * Parses arguments in the context of the edit task command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareEdit(String args) {
-    	ParsedCommand command = new CommandParser(args);
-    	if(!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS)){
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
-        }
-    	try {
-    		return new EditCommand(
-                        Integer.parseInt(command.getValuesAsString()),
-                        command.getParamOrDefault("n", ""),
-                        command.getParamOrDefault("d", "-1"),
-                        command.getParamOrDefault("l", Length.NO_INTERVAL),
-                        command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
-                        command.getParamOrDefault("p", ""),
-                        command.getParamOrDefault("i", ""),
-                        DoneFlag.NOT_DONE,
-                        getTagsFromArgs(command.getAllParams("t"))
-                );
-        } catch (IllegalValueException ive){
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-    //@@author
-    
-    //@@author A0139046E
-    /**
-     * Parses arguments in the context of the reschedule task command.
-     *
-     * @param args full command args string
-     * @return the prepared command
-     */
-    private Command prepareReschedule(ParsedCommand command){
-    	if(!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS) || !command.hasValueAtIndex(1)){
-            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE));
-        }
-    	try {
-    		return new RescheduleCommand(
-                        Integer.parseInt(command.getValue()),
-                        command.getValue(1));
-        } catch (IllegalValueException ive){
-            return new IncorrectCommand(ive.getMessage());
-        }
-    }
-    //@author
+	// @@author A0139046E
+	/**
+	 * Parses arguments in the context of the edit task command.
+	 *
+	 * @param args full command args string
+	 * @return the prepared command
+	 */
+	private Command prepareEdit(String args) {
+		ParsedCommand command = new CommandParser(args);
+		if (!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS)) {
+			return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+		}
+		try {
+			return new EditCommand(Integer.parseInt(command.getValuesAsString()), command.getParamOrDefault("n", ""),
+					command.getParamOrDefault("d", "-1"), command.getParamOrDefault("l", Length.NO_INTERVAL),
+					command.getParamOrDefault("r", Recurrance.NO_INTERVAL), command.getParamOrDefault("p", ""),
+					command.getParamOrDefault("i", ""), DoneFlag.NOT_DONE, getTagsFromArgs(command.getAllParams("t")));
+		} catch (IllegalValueException ive) {
+			return new IncorrectCommand(ive.getMessage());
+		}
+	}
+	// @@author
+
+	// @@author A0139046E
+	/**
+	 * Parses arguments in the context of the reschedule task command.
+	 *
+	 * @param args full command args string
+	 * @return the prepared command
+	 */
+	private Command prepareReschedule(ParsedCommand command) {
+		if (!command.hasValue() || !command.hasParams(EditCommand.REQUIRED_PARAMS) || !command.hasValueAtIndex(1)) {
+			return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE));
+		}
+		try {
+			return new RescheduleCommand(Integer.parseInt(command.getValue()), command.getValue(1));
+		} catch (IllegalValueException ive) {
+			return new IncorrectCommand(ive.getMessage());
+		}
+	}
+	// @@author
 
     /**
      * Parses arguments in the context of the select task command.
