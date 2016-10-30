@@ -151,7 +151,7 @@ public class ModelManager extends ComponentManager implements Model {
     //@@author A0139121R
     @Override
     public void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope){
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, searchScope)));
+        updateFilteredTaskList(new PredicateExpression(new FindQualifier(keywords, searchScope)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
@@ -278,24 +278,24 @@ public class ModelManager extends ComponentManager implements Model {
         
     }
 
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+    private class FindQualifier implements Qualifier {
+        private Set<String> findKeyWords;
         private HashSet<String> searchScope;
 
-        NameQualifier(Set<String> nameKeyWords, HashSet<String> searchScope) {
-            this.nameKeyWords = nameKeyWords;
+        FindQualifier(Set<String> findKeyWords, HashSet<String> searchScope) {
+            this.findKeyWords = findKeyWords;
             this.searchScope = searchScope;
         }
         /**
-         * Tests if task contains any of the keywords in nameKeyWords in the possible specified searchScope of "name" "information" 
-         * and "date"(date and time).
+         * Tests if task contains any of the keywords in findKeyWords in the possible specified searchScope of "name" "information" 
+         * and "tag".
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
+            return findKeyWords.stream()
                     .filter(keyword -> (this.searchScope.contains("name") && StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
                             || (this.searchScope.contains("information") && StringUtil.containsIgnoreCase(task.getInformation().fullInformation, keyword))
-                            || (this.searchScope.contains("date") && task.isDated() && StringUtil.containsIgnoreCase(((DatedTask) task).getDateTime().toString(), keyword))
+                            || (this.searchScope.contains("tag") && task.getTags().containsStringAsTag(keyword))
                             )
                     .findAny()//finds first one
                     .isPresent();//check if null
@@ -303,7 +303,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "name=" + String.join(", ", findKeyWords);
         }
     }
     
