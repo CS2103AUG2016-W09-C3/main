@@ -3,7 +3,9 @@ package seedu.address.model.tag;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.CollectionUtil;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.exceptions.DuplicateDataException;
+import seedu.address.commons.exceptions.IllegalValueException;
 
 import java.util.*;
 
@@ -105,6 +107,21 @@ public class UniqueTagList implements Iterable<Tag> {
         assert toCheck != null;
         return internalList.contains(toCheck);
     }
+    
+    //@@author A0139121R
+    /**
+     * Returns true if the list contains an equivalent Tag with same string as the given string.
+     */
+    public boolean containsStringAsTag(String toCheck){
+        String toCheckTagFormat = '[' + toCheck + ']';
+        for(Tag t : internalList){
+            if(StringUtil.containsIgnoreCase(t.toString(), toCheckTagFormat)){
+                return true;
+            }
+        }
+        return false; 
+    }
+    //@@author
 
     /**
      * Adds a Tag to the list.

@@ -17,14 +17,13 @@ public class FindCommand extends Command {
     
     public static final String[] REQUIRED_PARAMS = {};
     public static final String[] POSSIBLE_PARAMS = {"s"};
-    public static final HashSet<String> defaultSearchScope = new HashSet<String>(Arrays.asList("name", "information", "date"));
-    public static final HashSet<String> ALL_POSSIBLE_PARAMS = new HashSet<String>(Arrays.asList("name", "information", "date"));
+    public static final HashSet<String> defaultSearchScope = new HashSet<String>(Arrays.asList("name", "information", "tag"));
+    public static final HashSet<String> ALL_POSSIBLE_PARAMS = new HashSet<String>(Arrays.asList("name", "information", "tag"));
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all tasks whose names contain any of "
             + "the specified keywords (case-insensitive) from the specified attributes and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS] [s/information s/name s/date]...\n"
-            + "Example: " + COMMAND_WORD + " Meeting 01-01-2016 14:30 s/name s/date \n"
-            + "Take note s/d here means to search within time and date in the format dd-MM-yyyy HH:mm";
+            + "Parameters: KEYWORD [MORE_KEYWORDS] [s/information s/name s/tag]...\n"
+            + "Example: " + COMMAND_WORD + " Meeting 01-01-2016 14:30 s/name s/tag \n";
 
     private final Set<String> keywords;
     private HashSet<String> searchScope;
