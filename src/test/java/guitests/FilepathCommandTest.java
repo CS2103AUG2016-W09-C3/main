@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import org.junit.Test;
 
 import seedu.address.logic.commands.FilepathCommand;
+import seedu.address.testutil.TestUtil;
 
 public class FilepathCommandTest extends TaskBookGuiTest {
 
@@ -39,5 +40,34 @@ public class FilepathCommandTest extends TaskBookGuiTest {
         assert(matcher.matches() == result);
     }
 
+    @Test
+    public void noParam() {
+        commandBox.runCommand("filepath");
+        assertResultMessage(FilepathCommand.MESSAGE_INVALID_PATH);
+    }
+
+    @Test
+    public void wrongParam() {
+        commandBox.runCommand("filepath hello");
+        assertResultMessage(FilepathCommand.MESSAGE_INVALID_PATH);
+    }
+    
+    @Test
+    public void simplePath() {
+        String filePath = TestUtil.getFilePathInSandboxFolder("data.xml");
+        assertFilePathChange(filePath);
+    }
+    
+    @Test
+    public void complexPath() {
+        String filePath = TestUtil.getFilePathInSandboxFolder("data/data/data.xml");
+        assertFilePathChange(filePath);
+    }
+
+    private void assertFilePathChange(String filePath) {
+        commandBox.runCommand("filepath " + filePath);
+        assertEquals(testApp.getSaveFilePath(), filePath);
+    }
+    
 }
 //@@author

@@ -64,7 +64,11 @@ public class TestApp extends MainApp {
     public void start(Stage primaryStage) {
         ui.start(primaryStage);
     }
-
+    // @@author A0140155U
+    public String getSaveFilePath(){
+        return config.getTaskBookFilePath();
+    }
+    // @@author
     public static void main(String[] args) {
         launch(args);
     }
