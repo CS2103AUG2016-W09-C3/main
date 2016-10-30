@@ -37,7 +37,6 @@ public class CommandParserTest {
     public void multipleValues() {
         ParsedCommand command = new CommandParser("value1 value2 value3");
         assertValue(command, 0, "value1");
-        assertValue(command, 0, "value1");
         assertValue(command, 1, "value2");
         assertValue(command, 2, "value3");
     }
