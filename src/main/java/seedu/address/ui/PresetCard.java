@@ -4,7 +4,9 @@ package seedu.address.ui;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import seedu.address.model.CommandPreset;
 import seedu.address.model.task.ReadOnlyDatedTask;
@@ -21,6 +23,8 @@ public class PresetCard extends UiPart{
     private Label presetIndex;
     @FXML
     private Label description;
+    @FXML
+    private Tooltip tooltip;
 
     private CommandPreset commandPreset;
     private int index;
@@ -40,6 +44,7 @@ public class PresetCard extends UiPart{
     public void initialize() {
         description.setText(commandPreset.getDescription());
         presetIndex.setText(index + ". ");
+        tooltip.setText(commandPreset.getCommand());
     }
     
     public HBox getLayout() {
