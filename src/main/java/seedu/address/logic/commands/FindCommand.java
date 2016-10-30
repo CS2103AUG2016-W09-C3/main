@@ -24,7 +24,7 @@ public class FindCommand extends Command {
             + "the specified keywords (case-insensitive) from the specified attributes and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS] [s/information s/name s/date]...\n"
             + "Example: " + COMMAND_WORD + " Meeting 01-01-2016 14:30 s/name s/date \n"
-            + "Take note s/d here means to search within time and date in the format dd-MM-yyyy HH:mm";
+            + "Take note s/d here means to search within time and date in the format MM-dd-yyyy HH:mm";
 
     private final Set<String> keywords;
     private HashSet<String> searchScope;
