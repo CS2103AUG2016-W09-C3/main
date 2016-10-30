@@ -23,7 +23,7 @@
 
                     <children>
                         <HBox>
-                        	<Label fx:id="presetIndex" styleClass="cell_big_label" text="\$index" />
+                        	<Label minWidth="20.0" fx:id="presetIndex" styleClass="cell_big_label" text="\$index" />
                         	<Label fx:id="description" styleClass="cell_big_label" text="\$description">
 	                        	<tooltip>
 					                <Tooltip styleClass="tooltip" fx:id="tooltip" text="\$tooltip"/>
