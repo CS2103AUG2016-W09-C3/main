@@ -24,7 +24,11 @@
                     <children>
                         <HBox>
                         	<Label fx:id="presetIndex" styleClass="cell_big_label" text="\$index" />
-                        	<Label fx:id="description" styleClass="cell_big_label" text="\$description" />
+                        	<Label fx:id="description" styleClass="cell_big_label" text="\$description">
+	                        	<tooltip>
+					                <Tooltip styleClass="tooltip" fx:id="tooltip" text="\$tooltip"/>
+					            </tooltip>
+                        	</Label>
                         </HBox>
                     </children>
                 </VBox>
