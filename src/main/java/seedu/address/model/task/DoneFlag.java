@@ -25,7 +25,6 @@ public class DoneFlag {
         assert value != null;
         value = value.trim();
         if(!isValidFlag(value)){
-            
             throw new IllegalValueException(MESSAGE_FLAG_CONSTRAINTS);
         }
         done = value;

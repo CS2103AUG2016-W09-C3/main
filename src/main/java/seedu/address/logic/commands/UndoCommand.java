@@ -29,7 +29,6 @@ public class UndoCommand extends Command {
         } catch (StateException e) {
             return new CommandResult(e.getMessage());
         }
-
     }
 
     @Override
