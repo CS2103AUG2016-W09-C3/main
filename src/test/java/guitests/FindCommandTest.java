@@ -30,9 +30,8 @@ public class FindCommandTest extends TaskBookGuiTest {
     }
     
     @Test
-    public void find_byDate(){
-        commandBox.runCommand(td.dinnerDate.getAddCommand());
-        assertFindResult("find 17-11-2016 s/date", td.dinnerDate);
+    public void find_byTag(){
+        assertFindResult("find boss s/tag", td.aliceMeeting);
     }
     
     @Test
