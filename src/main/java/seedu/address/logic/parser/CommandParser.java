@@ -89,7 +89,6 @@ public class CommandParser implements ParsedCommand{
             if(isParamToken(token)){
                 // New param, flush the param value, add the old param and start over
                 addParam(currentParam, currentParamValue.toString());
-                
                 int paramDelimIndex = token.indexOf(PARAM_DELIMITER);
                 currentParam = token.substring(0, paramDelimIndex).toLowerCase();
                 currentParamValue = new StringBuilder();
@@ -182,7 +181,7 @@ public class CommandParser implements ParsedCommand{
     }
 
     /**
-     * Get all values.
+     * Get all values as an arraylist.
      */
     @Override
     public ArrayList<String> getAllValues(){
@@ -192,7 +191,7 @@ public class CommandParser implements ParsedCommand{
     
 
     /**
-     * Get all params.
+     * Get all params as an arraylist.
      */
     @Override
     public ArrayList<String> getParamList(){
