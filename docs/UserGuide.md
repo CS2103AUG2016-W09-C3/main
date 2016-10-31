@@ -196,6 +196,7 @@ Format: `delete INDEX`
 Sometimes you just have to start fresh. Remove everything in your task list with one command.<br>
 Format: `clear`
 
+<!-- @@author A0139046E -->
 ---
 
 ### Editing a task: `edit`
@@ -237,13 +238,15 @@ Format: `reschedule INDEX INTERVAL`
 > * This reschedules the task at the specified `INDEX`.  <br>
     The index refers to the index number shown in the most recent listing.<br>
     The index **must be a positive integer** `1`, `2`, `3`, ... <br>
-> * For interval, use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
+> * For interval, use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
 > * Negative numbers are not supported. To reschedule to an earlier time, consider using `edit` instead.
  
 **Example**
 > * You need to get some homework done, but you just got back from school and you need a break. Simply find your homework task, then run the following command: <br>
 >   `find homework`<br> 
     `reschedule 1 1h`
+
+<!-- @@author -->
 
 <!-- @@author A0140155U -->
 ---
