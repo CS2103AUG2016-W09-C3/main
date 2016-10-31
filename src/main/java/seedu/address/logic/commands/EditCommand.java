@@ -75,6 +75,7 @@ public class EditCommand extends Command {
 			return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
 		}
 		taskToEdit = lastShownList.get(targetIndex - 1);
+		setDoneFlag();
 		boolean isDated = taskToEdit.isDated();
 		if (isDated) {
 			copyDatedTask(lastShownList);
@@ -173,6 +174,15 @@ public class EditCommand extends Command {
 			tagList.setTags(taskToEdit.getTags());
 		} else {
 			tagList = new UniqueTagList(tagSet);
+		}
+	}
+
+	/**
+	 * Set DoneFlag for done task
+	 */
+	private void setDoneFlag() {
+		if (taskToEdit.getDoneFlag().isDone()) {
+			this.doneFlag = DoneFlag.DONE;
 		}
 	}
 
