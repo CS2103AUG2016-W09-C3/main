@@ -96,18 +96,19 @@ The help command provides you with a detailed explanation of the available comma
 ---
 
 ### Adding a task: `add`
-Format: `add TASK_NAME [d/DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
+Format: `add TASK_NAME [d/DATE_TIME de/END_DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
 
 ToDoIt compiles your tasks for the day efficiently with a simple line of text. The `add` command adds your tasks to the to do list, allowing you to view them any time you want.
 
 **Options**
 > 1. `d/` Date and time: Specifies the start date and time of a task. Please refer to the Date Specifications section for accepted formats.
-> 2. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
-> 3. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval. 
-> 4. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
-> 5. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
-> 6. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
-> 7. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
+> 2. `de/` End date and time: Specifies the end date and time of the task. Please refer to the Date Specifications section for the accepted formats. This parameter should not be used in conjunction with `l/`.
+> 3. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. This parameter should not be used together with `de/`.
+> 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval. 
+> 5. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
+> 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
+> 7. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
+> 8. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
 
 **Notes**
 > * A task can be dated (has time, date, length), or floating. A floating task is one without any specified date, time and length which can be done at a flexible timing.<br> 
@@ -129,7 +130,7 @@ Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 > 1. `ds/` Date start: If a start date is specified, program will only display tasks after this date. If the option is used without a specified date, it will use today's date.
 > 2. `de/` Date end: If an end date is specified, program will only display tasks before this date. If the option is used without a specified date, , it will use today's date.
 > 3. `s/` Sort by: Sorts the tasks in the order specified (`date`, `time`, `alphabetical`, `priority`).
-> 4. `df/` Done tasks: If this flag is specified, tasks that are marked done will be shown.
+> 4. `df/` Done tasks: If this flag is specified, tasks that are marked done will be shown. The available done flags are "done", "not done" and "all".
 > 5. `rev/` Reverse: If this flag is specified, tasks will be listed in reverse order after sorting.
 
 **Notes**
@@ -149,7 +150,7 @@ ToDoIt searches and finds the tasks you need, while filtering out the clutter. K
 Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 
 **Options**
-> 1. `s/` Scope: If you only want to search a task's name or description, specify which areas you want to search here (`n` : name, `d` : desc, `i` : information). By default, it searches in all three areas.
+> 1. `s/` Scope: If you only want to search a task's specific attribute, specify which attributes you want to search here (`name` : name, `tag` : tag, `information` : information). By default, it searches in all three areas.
 
 **Notes**
 > * The search is not case sensitive. e.g `stuff` will match `Stuff`<br> 
@@ -157,11 +158,12 @@ Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 > * Only full words will be matched e.g. `Work` will not match `Workout`<br> 
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).<br>
     e.g. `Stuff` will match `Do stuff`<br>
-> * You can specify more than one search scope (`s/n s/d`). All areas specified will be searched.
+> * You can specify more than one search scope (`s/name s/information`). All areas specified will be searched.
+> * If no search scope parameter is provided, all attributes (name, information, tag) are searched by default
 
 **Example**
 > * You remember naming a task `meeting`, and you want to look for it. However, you don't want to bring up unnecessary tasks so you search for task names only. <br>
->   `find meeting s/n`<br>
+>   `find meeting s/name`<br>
 > * You want to find all tasks that relate to your family. <br>
 >   `find brother sister mother father family`
 
@@ -327,7 +329,7 @@ Format: `exit`
 
 Command | Format  
 -------- | :-------- 
-Add | `add TASK_NAME [d/DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
+Add | `add TASK_NAME [d/DATE_TIME de/END_DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
 Edit | `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` 
 Clear | `clear`
 Delete | `delete INDEX`
