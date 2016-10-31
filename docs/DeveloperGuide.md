@@ -84,7 +84,7 @@ Each of the four components
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
+<img src="images/logic_diagram v3.png" width="800"><br>
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
@@ -106,7 +106,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-<img src="images/UiClassDiagram.png" width="800"><br>
+<img src="images/ui_diagram V3.png" width="800"><br>
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
@@ -126,7 +126,7 @@ The `UI` component,
 
 ### Logic component
 
-<img src="images/LogicClassDiagram.png" width="800"><br>
+<img src="images/logic_diagram v3.png" width="800"><br>
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
@@ -141,7 +141,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ### Model component
 
-<img src="images/model_diagram.png" width="800"><br>
+<img src="images/model diagram v3.png" width="800"><br>
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
