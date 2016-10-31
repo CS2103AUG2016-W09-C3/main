@@ -124,27 +124,25 @@ public class UniqueTaskList implements Iterable<Task> {
 
         for (int i = 0; i < size; i++) {
             Task recurringTask = internalList.get(i);
-            if (!recurringTask.isDated()) {
-                // Not dated, so should not have recurring task
-                continue;
-            } else {
+            if (recurringTask.isDated()) {
                 ReadOnlyDatedTask task = (ReadOnlyDatedTask) recurringTask;
                 Recurrance recurrence = task.getRecurrance();
-                if (recurrence.toString().equals(recurrence.NO_INTERVAL)) {
-                    // No recurring inputs
-                    continue;
-                } else {
+                if (!recurrence.toString().equals(recurrence.NO_INTERVAL)) {
                     // Set DoneFlag to NOT_DONE if it is DONE
-                    if (task.getDoneFlag().isDone()) {
-                        // setDateAndTime and DONE_FLAG to correct task
-                        try {
-                            updateTask(i, task, recurrence);
-                        } catch (IllegalValueException e) {
-                            // Should never happen
-                            System.out.println("This should not happen! Please notify a programmer");
-                        }
-                    }
+                    setDoneFlagOnDatedTask(i, task, recurrence);
                 }
+            }
+        }
+    }
+
+    private void setDoneFlagOnDatedTask(int i, ReadOnlyDatedTask task, Recurrance recurrence) {
+        if (task.getDoneFlag().isDone()) {
+            // setDateAndTime and DONE_FLAG to correct task
+            try {
+                updateTask(i, task, recurrence);
+            } catch (IllegalValueException e) {
+                // Should never happen
+                System.out.println("This should not happen! Please notify a programmer");
             }
         }
     }

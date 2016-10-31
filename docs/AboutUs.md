@@ -66,7 +66,7 @@ Role: Developer <br>
 * Aspects/tools in charge of: Documentation<br>
 * Features implemented:
    * [Recurrence Feature] (https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#adding-a-task-add)<br>
-* Code written: [[Functional code](Insert link here)] [[Test code](Insert link here)] [[Docs](Insert link here)]<br>
+* Code written: [[Functional code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/main/A0139947L.md)] [[Test code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/test/A0139947L.md)] [[Docs](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/docs/A0139947L.md)]<br>
 * Other major contributions:
   * Added support for different aliases for priority and recurrence when Adding and Editing tasks
 
