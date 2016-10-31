@@ -21,15 +21,21 @@ public class Priority {
     private static HashMap<String, String> listOfPriorities = new HashMap<>();
     
     private enum acceptedPriority{
-        VERYHIGH(5), HIGH(4), MEDIUM(3), LOW(2), VERYLOW(1);
+        VERYHIGH(5, "Very high"), HIGH(4, "High"), MEDIUM(3, "Medium"), LOW(2, "Low"), VERYLOW(1, "Very low");
         
-        private int enumPriority;
+        private final int enumPriority;
+        private final String displayedAlias;
         
-        private acceptedPriority(int value){
+        private acceptedPriority(int value, String displayedAlias){
             this.enumPriority = value;
+            this.displayedAlias = displayedAlias;
         }
         public int getEnumPriority(){
             return enumPriority;
+        }
+        
+        public String getDisplayedAlias(){
+            return displayedAlias;
         }
         
         public static boolean Contains(String test){
@@ -52,7 +58,13 @@ public class Priority {
         listOfPriorities.put("VL", "VERYLOW");
     }
     //@@author
+    
+    
     //@@author A0139121R
+    public String getDisplayedAlias(){
+        return priority.getDisplayedAlias();
+    }
+    
     public int getEnumPriority(){
         return priority.getEnumPriority();
     }

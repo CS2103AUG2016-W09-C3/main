@@ -57,7 +57,7 @@ public class TaskCard extends UiPart{
     public void initialize() {
         name.setText(task.getName().fullName);
         id.setText(Integer.toString(displayedIndex));
-        setOrNullText(priority, "Priority: ", task.getPriority().toString());
+        setOrNullText(priority, "Priority: ", task.getPriority().getDisplayedAlias());
         setOrNullText(information, "Info: ", task.getInformation().toString());
         setOrNullText(done, task.getDoneFlag().toString());
         if(task.isDated()){
