@@ -39,6 +39,15 @@ public class StatesManager implements States{
 
 
     public TaskBookState loadPreviousState() throws StateException{
+        checkHasPreviousState();
+        // Note: Unlike loadNextState(), return current state command, but previous state data.
+        String commandString = getCurrentState().getCommand();
+        currentState--;
+        return new TaskBookState(getCurrentState().getState(), commandString);
+    }
+
+
+    private void checkHasPreviousState() throws StateException {
         if(currentState == 0){
             assert !states.isEmpty();
             if(states.get(0).getCommand().equals(TaskBookState.INITIAL_STATE)){
@@ -49,19 +58,20 @@ public class StatesManager implements States{
                 throw new StateException(MESSAGE_MAX_STATES_EXCEEDED);
             }
         }
-        // Note: Unlike loadNextState(), return current state command, but previous state data.
-        String commandString = getCurrentState().getCommand();
-        currentState--;
-        return new TaskBookState(getCurrentState().getState(), commandString);
     }
 
     public TaskBookState loadNextState() throws StateException{
-        if(currentState == states.size() - 1){
-            throw new StateException(MESSAGE_NO_NEXT_STATE);
-        }
+        checkHasNextState();
         // Note: Unlike loadNextState(), return current state command and data.
         currentState++;
         return getCurrentState();
+    }
+
+
+    private void checkHasNextState() throws StateException {
+        if(currentState == states.size() - 1){
+            throw new StateException(MESSAGE_NO_NEXT_STATE);
+        }
     }
 
     private TaskBookState getCurrentState() {

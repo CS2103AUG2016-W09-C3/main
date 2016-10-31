@@ -25,10 +25,10 @@ public class RecurrenceTest extends TaskBookGuiTest {
         commandBox.runCommand(td.meetingToAttend.getAddCommand());
         commandBox.runCommand("done 7");
         
-        DateTime testCase7 = td.csFinalExam.getDateTime();
+        DateTime csFinalExamToAdd = td.csFinalExam.getDateTime();
         tasks.updateRecurringTasks();
         
-        assertFalse(tasks.getUniqueTaskList().getInternalList().get(6).equals(td.csFinalExam) && !td.csFinalExam.getDateTime().equals(testCase7));
+        assertFalse(tasks.getUniqueTaskList().getInternalList().get(6).equals(td.csFinalExam) && !td.csFinalExam.getDateTime().equals(csFinalExamToAdd));
         assertRecurringSuccess(tasks);
     }
     
@@ -43,9 +43,9 @@ public class RecurrenceTest extends TaskBookGuiTest {
         
         commandBox.runCommand("done 7");
         
-        DateTime testCase7 = td.csFinalExam.getDateTime();
+        DateTime csFinalExamToAdd = td.csFinalExam.getDateTime();
 
-        assertFalse(!tasks.getUniqueTaskList().getInternalList().get(6).equals(td.csFinalExam) && !td.csFinalExam.getDateTime().equals(testCase7));   
+        assertFalse(!tasks.getUniqueTaskList().getInternalList().get(6).equals(td.csFinalExam) && !td.csFinalExam.getDateTime().equals(csFinalExamToAdd));   
         assertRecurringSuccess(tasks);
     }
 
