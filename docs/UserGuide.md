@@ -146,7 +146,7 @@ Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 ---
 
 ### Finding all tasks containing a keyword: `find`
-ToDoIt searches and finds the tasks you need, while filtering out the clutter. Keep your mind focused on what's important.<br>
+ToDoIt searches and finds the tasks you need, while filtering out the clutter. Keep your mind focused on what is important.<br>
 Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 
 **Options**
@@ -170,7 +170,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 ---
   
 ### Deleting a task : `delete`
-Some say that cancelled plans are the introvert's source of joy. Simply remove tasks you don't need with a simple command.<br>
+Some say that cancelled plans are the introvert's source of joy. Simply remove tasks you do not need with a simple command.<br>
 Format: `delete INDEX`
 
 **Notes**
@@ -197,7 +197,7 @@ Format: `clear`
 ---
 
 ### Editing a task: `edit`
-You never know when things change. Life is unpredictable. ToDoIt knows this, and lets you adapt to the erratic changes you may have in your schedule. Modify your tasks with a simple command.<br>
+You never know when things change. Life is unpredictable. ToDoIt knows this, and allows you to adapt to the erratic changes you may have in your schedule. Modify your tasks with a simple command.<br>
 Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` 
 
 **Options**
@@ -226,7 +226,7 @@ Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY
 ---
   
 ### Rescheduling a task: `reschedule`
-ToDoIt doesn't expect you to be the perfect worker. Sometimes you're too busy or tired to do a task. If you're not feeling up to it right now, simply reschedule it for another day.<br>
+ToDoIt does not expect you to be the perfect worker. Sometimes you are too busy or tired to do a task. If you are not feeling up to it right now, simply reschedule it for another day.<br>
 Format: `reschedule INDEX INTERVAL` 
 
 **Notes**
@@ -261,7 +261,7 @@ Format: `done INDEX`
 ---
   
 ### Mark a task as done : `undone`
-Thought you were done, but actually there was one little thing that you forgot to do? No worries, we've all been there. Use this simple command to mark done tasks as undone. Don't worry, ToDoIt won't mock.<br>
+Thought you were done, but actually there was one little thing that you forgot to do? No worries, we have all been there. Use this simple command to mark done tasks as not done. Do not worry, ToDoIt will not mock you.<br>
 Format: `undone INDEX`
 
 **Notes**
@@ -271,7 +271,7 @@ Format: `undone INDEX`
  
 **Example**
 > * You accidentally miscounted and marked the wrong task as done. Simply revert it with the following command: <br>
->   `done 3 //whoops!`<br> 
+>   `done 3 (mistake)`<br> 
     `undone 3`
 
 ---
@@ -286,7 +286,7 @@ Format: `undo`
 ---
   
 ### Redo a command : `redo`
-Made a mistake while undoing your mistake? Well... it's a good thing ToDoIt doesn't judge. Redo your `undo` commands with this simple command.<br>
+Made a mistake while undoing your mistake? Redo your `undo` commands with this simple command.<br>
 Format: `redo`
 
 ---
