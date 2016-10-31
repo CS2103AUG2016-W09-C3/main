@@ -241,6 +241,7 @@ Format: `reschedule INDEX INTERVAL`
 >   `find homework`<br> 
     `reschedule 1 1h`
 
+<!-- @@author A0140155U -->
 ---
   
 ### Mark a task as done : `done`
@@ -289,6 +290,59 @@ Format: `undo`
 Made a mistake while undoing your mistake? Redo your `undo` commands with this simple command.<br>
 Format: `redo`
 
+---
+
+### Changing filepath : `filepath`
+Always on the go? So is ToDoIt. Move your saved files quickly with this command.<br>
+Format: `filepath FILEPATH`
+
+**Notes**
+> * The saved file refers to an .xml file on your drive that stores saved task data.
+> * The `FILEPATH` must be a valid file path on your drive that ends with .xml. Some examples include `file.xml`, `data/file.xml` or `C:/data/file.xml`.
+ 
+**Example**
+> * Your current file is stored at data\addressbook.xml. You want to move your saved file from data\addressbook.xml to data\todoit.xml. Simply run the command<br>
+>   `filepath data\todoit.xml`
+
+---
+
+### Mark as favorite: `favorite`
+In any task, efficiency is key. Save yourself from typing the same command over and over again by creating a command preset.<br>
+Format: `favorite DESCRIPTION c/COMMAND`
+
+**Options**
+> 1. `c/` Command: The command associated with the preset.
+
+**Notes**
+> * The preset will be added to the preset panel on the left side of the screen. Clicking on the preset will run the specified command.
+> * The command can be any executable command (e.g. `list`, `add`, `clear`, `undo`).
+
+
+**Example**
+> * find yourself constantly having to list only done tasks, so you decide to create a preset for it:<br>
+>   `favorite List only done tasks c/list df/done`<br>
+> * This adds a new preset named ‘List only done tasks’ to the preset panel. <br>
+
+---
+  
+### Unfavorite: `unfavorite`
+You can’t work with too many saved presets cluttering up the sidebar. Use this command to remove your saved presets.<br>
+Format: `unfavorite INDEX`
+
+**Options**
+> 1. `c/` Command: The command associated with the preset.
+
+**Notes**
+> * This marks task at the specified `INDEX` as undone. <br>
+    The index refers to the index number shown on the preset listing.<br>
+    The index **must be a positive integer** `1`, `2`, `3`, ...<br>
+
+
+**Example**
+> * Having added the preset previously, you’ve now changed your mind. Assuming the preset is numbered 8, remove it by running the following command:<br>
+>   `unfavorite 8`<br>
+
+<!-- @@author -->
 ---
 
 ### Exiting the program : `exit`
