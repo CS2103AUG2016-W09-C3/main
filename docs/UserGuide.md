@@ -44,7 +44,7 @@
 
 ## Features
 
-<img src="images/prototype_labelled.png" width="600"><br>
+<img src="images/prototype_ui_labelled.png" width="600"><br>
 
 Ensure you've followed the quick start guide to downloading this program. Simply double click the app to run it. As you can see, the prototype User Interface will be shown above.
 
@@ -53,7 +53,7 @@ When the program is started, you will see 4 controls:
 1. The command box. This is where commands are entered. Simply type the command you want to execute, and press enter to execute it.
 2. The result summary. Once a command is entered, relevant information will be logged in this box. You can view it to ensure the command has been executed correctly.
 3. The task box. This displays the tasks you have entered. Tasks retrieved from the `list` or `find` command will also be reflected here.
-4. The Google Calendar Window. Tasks entered will be automatically synced to your google calendar. Disclaimer: This is still a work in progress, and may not be in the final release.
+4. The presets window. Favorite command stores custom commands here, users can click on the presets to run the stored commands. Unfavorite command can be used to remove custom stored commands here.
 
 ###Command Format
 * Each command consists of a command word (such as find, or help), followed by additional options. An option is a word or character followed by a forward slash (e.g. a/, ds/ etc.).
@@ -215,6 +215,7 @@ Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY
 > 3. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
 > 4. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
 <!-- @@author -->
+<!-- @@author A0139046E -->
 > 5. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
 > 6. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
 > 7. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
@@ -272,7 +273,7 @@ Format: `done INDEX`
 
 ---
   
-### Mark a task as done : `undone`
+### Mark a task as undone : `undone`
 Thought you were done, but actually there was one little thing that you forgot to do? No worries, we have all been there. Use this simple command to mark done tasks as not done. Do not worry, ToDoIt will not mock you.<br>
 Format: `undone INDEX`
 
@@ -337,7 +338,7 @@ Format: `favorite DESCRIPTION c/COMMAND`
 ---
   
 ### Unfavorite: `unfavorite`
-You can’t work with too many saved presets cluttering up the sidebar. Use this command to remove your saved presets.<br>
+You can’t work with too many saved presets cluttering up the presets panel. Use this command to remove your saved presets.<br>
 Format: `unfavorite INDEX`
 
 **Options**
@@ -405,5 +406,8 @@ Reschedule | `reschedule INDEX INTERVAL`
 Find | `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 Undo | `undo`
 Redo | `redo`
+Filepath | `filepath FILEPATH`
+Favorite | `favorite c/COMMAND`
+Unfavorite | `unfavorite INDEX`
 Help | `help`
 Exit | `exit`
