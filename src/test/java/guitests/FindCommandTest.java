@@ -6,7 +6,7 @@ import seedu.address.testutil.TestTask;
 
 import static org.junit.Assert.assertTrue;
 
-public class FindCommandTest extends AddressBookGuiTest {
+public class FindCommandTest extends TaskBookGuiTest {
     //@@author A0139121R
     @Test
     public void find_nonEmptyList() {
@@ -23,12 +23,28 @@ public class FindCommandTest extends AddressBookGuiTest {
         commandBox.runCommand("clear");
         assertFindResult("find Jean"); //no results
     }
+
+    @Test
+    public void find_byName(){
+        assertFindResult("find Meier s/name", td.danielLunch);
+    }
+    
+    @Test
+    public void find_byTag(){
+        assertFindResult("find boss s/tag", td.aliceMeeting);
+    }
+    
+    @Test
+    public void find_byInformation(){
+        assertFindResult("find loan s/information", td.lorryMaintainance);
+    }
     //@@author
     @Test
     public void find_invalidCommand_fail() {
         commandBox.runCommand("findgeorge");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }
+    
 
     private void assertFindResult(String command, TestTask... expectedHits ) {
         commandBox.runCommand(command);

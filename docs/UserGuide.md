@@ -44,7 +44,7 @@
 
 ## Features
 
-<img src="images/prototype_labelled.png" width="600"><br>
+<img src="images/prototype_ui_labelled.png" width="600"><br>
 
 Ensure you've followed the quick start guide to downloading this program. Simply double click the app to run it. As you can see, the prototype User Interface will be shown above.
 
@@ -53,7 +53,7 @@ When the program is started, you will see 4 controls:
 1. The command box. This is where commands are entered. Simply type the command you want to execute, and press enter to execute it.
 2. The result summary. Once a command is entered, relevant information will be logged in this box. You can view it to ensure the command has been executed correctly.
 3. The task box. This displays the tasks you have entered. Tasks retrieved from the `list` or `find` command will also be reflected here.
-4. The Google Calendar Window. Tasks entered will be automatically synced to your google calendar. Disclaimer: This is still a work in progress, and may not be in the final release.
+4. The presets window. Favorite command stores custom commands here, users can click on the presets to run the stored commands. Unfavorite command can be used to remove custom stored commands here.
 
 ###Command Format
 * Each command consists of a command word (such as find, or help), followed by additional options. An option is a word or character followed by a forward slash (e.g. a/, ds/ etc.).
@@ -95,19 +95,24 @@ The help command provides you with a detailed explanation of the available comma
 
 ---
 
+<!-- @@author A0139121R -->
 ### Adding a task: `add`
-Format: `add TASK_NAME [d/DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
+Format: `add TASK_NAME [d/DATE_TIME de/END_DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
 
 ToDoIt compiles your tasks for the day efficiently with a simple line of text. The `add` command adds your tasks to the to do list, allowing you to view them any time you want.
 
 **Options**
 > 1. `d/` Date and time: Specifies the start date and time of a task. Please refer to the Date Specifications section for accepted formats.
-> 2. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
-> 3. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval. 
-> 4. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
-> 5. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
-> 6. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
-> 7. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
+> 2. `de/` End date and time: Specifies the end date and time of the task. Please refer to the Date Specifications section for the accepted formats. This parameter should not be used in conjunction with `l/`.
+<!-- @@author A0139947L -->
+> 3. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval. This parameter should not be used together with `de/`.
+> 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval. 
+> 5. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
+<!-- @@author -->
+<!-- @@author A0139121R -->
+> 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
+> 7. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
+> 8. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
 
 **Notes**
 > * A task can be dated (has time, date, length), or floating. A floating task is one without any specified date, time and length which can be done at a flexible timing.<br> 
@@ -119,8 +124,10 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 >   `add CS2101 Lecture h/7th Oct 2pm l/2hr r/1w p/low t/got-webcast` <br>
 >   This will add a CS2101 Lecture task which recurs every week starting with 2pm on 7th Oct, marks it as low priority and tags it with the `got-webcast` tag.
 
----
+<!-- @@author -->
 
+---
+<!-- @@author A0139121R -->
 ### Listing tasks : `list`
 ToDoIt displays your tasks easily with a simple command. The tasks to list can be customized to your liking simply with a few keywords.<br>
 Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
@@ -129,7 +136,7 @@ Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 > 1. `ds/` Date start: If a start date is specified, program will only display tasks after this date. If the option is used without a specified date, it will use today's date.
 > 2. `de/` Date end: If an end date is specified, program will only display tasks before this date. If the option is used without a specified date, , it will use today's date.
 > 3. `s/` Sort by: Sorts the tasks in the order specified (`date`, `time`, `alphabetical`, `priority`).
-> 4. `df/` Done tasks: If this flag is specified, tasks that are marked done will be shown.
+> 4. `df/` Done tasks: If this flag is specified, tasks that are marked done will be shown. The available done flags are "done", "not done" and "all".
 > 5. `rev/` Reverse: If this flag is specified, tasks will be listed in reverse order after sorting.
 
 **Notes**
@@ -145,11 +152,11 @@ Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 ---
 
 ### Finding all tasks containing a keyword: `find`
-ToDoIt searches and finds the tasks you need, while filtering out the clutter. Keep your mind focused on what's important.<br>
+ToDoIt searches and finds the tasks you need, while filtering out the clutter. Keep your mind focused on what is important.<br>
 Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 
 **Options**
-> 1. `s/` Scope: If you only want to search a task's name or description, specify which areas you want to search here (`n` : name, `d` : desc, `i` : information). By default, it searches in all three areas.
+> 1. `s/` Scope: If you only want to search a task's specific attribute, specify which attributes you want to search here (`name` : name, `tag` : tag, `information` : information). By default, it searches in all three areas.
 
 **Notes**
 > * The search is not case sensitive. e.g `stuff` will match `Stuff`<br> 
@@ -157,18 +164,19 @@ Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 > * Only full words will be matched e.g. `Work` will not match `Workout`<br> 
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).<br>
     e.g. `Stuff` will match `Do stuff`<br>
-> * You can specify more than one search scope (`s/n s/d`). All areas specified will be searched.
+> * You can specify more than one search scope (`s/name s/information`). All areas specified will be searched.
+> * If no search scope parameter is provided, all attributes (name, information, tag) are searched by default
 
 **Example**
 > * You remember naming a task `meeting`, and you want to look for it. However, you don't want to bring up unnecessary tasks so you search for task names only. <br>
->   `find meeting s/n`<br>
+>   `find meeting s/name`<br>
 > * You want to find all tasks that relate to your family. <br>
 >   `find brother sister mother father family`
-
+<!-- @@author -->
 ---
   
 ### Deleting a task : `delete`
-Some say that cancelled plans are the introvert's source of joy. Simply remove tasks you don't need with a simple command.<br>
+Some say that cancelled plans are the introvert's source of joy. Simply remove tasks you do not need with a simple command.<br>
 Format: `delete INDEX`
 
 **Notes**
@@ -192,18 +200,22 @@ Format: `delete INDEX`
 Sometimes you just have to start fresh. Remove everything in your task list with one command.<br>
 Format: `clear`
 
+<!-- @@author A0139046E -->
 ---
 
 ### Editing a task: `edit`
-You never know when things change. Life is unpredictable. ToDoIt knows this, and lets you adapt to the erratic changes you may have in your schedule. Modify your tasks with a simple command.<br>
+You never know when things change. Life is unpredictable. ToDoIt knows this, and allows you to adapt to the erratic changes you may have in your schedule. Modify your tasks with a simple command.<br>
 Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` 
 
 **Options**
 > 1. `n/` Name: The new name of the task.
 > 1. `d/` Date and time: Specifies the start date and time of a task. Please refer to the Date Specifications section for what formats are accepted.
-> 2. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
+<!-- @@author A0139947L -->
+> 2. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
 > 3. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
 > 4. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
+<!-- @@author -->
+<!-- @@author A0139046E -->
 > 5. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
 > 6. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
 > 7. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
@@ -224,14 +236,14 @@ Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY
 ---
   
 ### Rescheduling a task: `reschedule`
-ToDoIt doesn't expect you to be the perfect worker. Sometimes you're too busy or tired to do a task. If you're not feeling up to it right now, simply reschedule it for another day.<br>
+ToDoIt does not expect you to be the perfect worker. Sometimes you are too busy or tired to do a task. If you are not feeling up to it right now, simply reschedule it for another day.<br>
 Format: `reschedule INDEX INTERVAL` 
 
 **Notes**
 > * This reschedules the task at the specified `INDEX`.  <br>
     The index refers to the index number shown in the most recent listing.<br>
     The index **must be a positive integer** `1`, `2`, `3`, ... <br>
-> * For interval, use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`
+> * For interval, use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
 > * Negative numbers are not supported. To reschedule to an earlier time, consider using `edit` instead.
  
 **Example**
@@ -239,6 +251,9 @@ Format: `reschedule INDEX INTERVAL`
 >   `find homework`<br> 
     `reschedule 1 1h`
 
+<!-- @@author -->
+
+<!-- @@author A0140155U -->
 ---
   
 ### Mark a task as done : `done`
@@ -258,8 +273,8 @@ Format: `done INDEX`
 
 ---
   
-### Mark a task as done : `undone`
-Thought you were done, but actually there was one little thing that you forgot to do? No worries, we've all been there. Use this simple command to mark done tasks as undone. Don't worry, ToDoIt won't mock.<br>
+### Mark a task as undone : `undone`
+Thought you were done, but actually there was one little thing that you forgot to do? No worries, we have all been there. Use this simple command to mark done tasks as not done. Do not worry, ToDoIt will not mock you.<br>
 Format: `undone INDEX`
 
 **Notes**
@@ -269,7 +284,7 @@ Format: `undone INDEX`
  
 **Example**
 > * You accidentally miscounted and marked the wrong task as done. Simply revert it with the following command: <br>
->   `done 3 //whoops!`<br> 
+>   `done 3 (mistake)`<br> 
     `undone 3`
 
 ---
@@ -284,9 +299,62 @@ Format: `undo`
 ---
   
 ### Redo a command : `redo`
-Made a mistake while undoing your mistake? Well... it's a good thing ToDoIt doesn't judge. Redo your `undo` commands with this simple command.<br>
+Made a mistake while undoing your mistake? Redo your `undo` commands with this simple command.<br>
 Format: `redo`
 
+---
+
+### Changing filepath : `filepath`
+Always on the go? So is ToDoIt. Move your saved files quickly with this command.<br>
+Format: `filepath FILEPATH`
+
+**Notes**
+> * The saved file refers to an .xml file on your drive that stores saved task data.
+> * The `FILEPATH` must be a valid file path on your drive that ends with .xml. Some examples include `file.xml`, `data/file.xml` or `C:/data/file.xml`.
+ 
+**Example**
+> * Your current file is stored at data\addressbook.xml. You want to move your saved file from data\addressbook.xml to data\todoit.xml. Simply run the command<br>
+>   `filepath data\todoit.xml`
+
+---
+
+### Mark as favorite: `favorite`
+In any task, efficiency is key. Save yourself from typing the same command over and over again by creating a command preset.<br>
+Format: `favorite DESCRIPTION c/COMMAND`
+
+**Options**
+> 1. `c/` Command: The command associated with the preset.
+
+**Notes**
+> * The preset will be added to the preset panel on the left side of the screen. Clicking on the preset will run the specified command.
+> * The command can be any executable command (e.g. `list`, `add`, `clear`, `undo`).
+
+
+**Example**
+> * find yourself constantly having to list only done tasks, so you decide to create a preset for it:<br>
+>   `favorite List only done tasks c/list df/done`<br>
+> * This adds a new preset named ‘List only done tasks’ to the preset panel. <br>
+
+---
+  
+### Unfavorite: `unfavorite`
+You can’t work with too many saved presets cluttering up the presets panel. Use this command to remove your saved presets.<br>
+Format: `unfavorite INDEX`
+
+**Options**
+> 1. `c/` Command: The command associated with the preset.
+
+**Notes**
+> * This marks task at the specified `INDEX` as undone. <br>
+    The index refers to the index number shown on the preset listing.<br>
+    The index **must be a positive integer** `1`, `2`, `3`, ...<br>
+
+
+**Example**
+> * Having added the preset previously, you’ve now changed your mind. Assuming the preset is numbered 8, remove it by running the following command:<br>
+>   `unfavorite 8`<br>
+
+<!-- @@author -->
 ---
 
 ### Exiting the program : `exit`
@@ -308,7 +376,7 @@ Format: `exit`
        
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with 
-       the file that contains the data of your previous Address Book folder.<br>
+       the file that contains the data of your previous Task Book folder.<br>
        <br>
        
 **Q**: How do I uninstall ToDoIt?<br>
@@ -327,7 +395,7 @@ Format: `exit`
 
 Command | Format  
 -------- | :-------- 
-Add | `add TASK_NAME [d/DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
+Add | `add TASK_NAME [d/DATE_TIME de/END_DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
 Edit | `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` 
 Clear | `clear`
 Delete | `delete INDEX`
@@ -338,5 +406,8 @@ Reschedule | `reschedule INDEX INTERVAL`
 Find | `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 Undo | `undo`
 Redo | `redo`
+Filepath | `filepath FILEPATH`
+Favorite | `favorite c/COMMAND`
+Unfavorite | `unfavorite INDEX`
 Help | `help`
 Exit | `exit`

@@ -1,16 +1,16 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.TaskBook;
 
 /**
- * Clears the address book.
+ * Clears the task book.
  */
 public class ClearCommand extends Command {
 
     public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "Address book has been cleared!";
+    public static final String MESSAGE_SUCCESS = "Task book has been cleared!";
     //@@author A0139121R
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears the task list completely. Parameter: clear\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Clears the task book completely. Parameter: clear\n"
             + "Parameter should not contain anything else other than clear\n"
             + "Example: " + COMMAND_WORD;
     //@@author
@@ -20,7 +20,7 @@ public class ClearCommand extends Command {
     @Override
     public CommandResult execute() {
         assert model != null;
-        model.resetData(AddressBook.getEmptyAddressBook());
+        model.resetData(TaskBook.getEmptyTaskBook());
         return new CommandResult(MESSAGE_SUCCESS);
     }
     

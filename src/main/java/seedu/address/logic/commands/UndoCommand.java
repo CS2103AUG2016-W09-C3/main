@@ -5,7 +5,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.exceptions.StateException;
 
 /**
- * Adds a tasks to the address book.
+ * Adds a tasks to the task book.
  */
 public class UndoCommand extends Command {
 
@@ -29,7 +29,6 @@ public class UndoCommand extends Command {
         } catch (StateException e) {
             return new CommandResult(e.getMessage());
         }
-
     }
 
     @Override

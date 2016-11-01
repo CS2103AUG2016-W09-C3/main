@@ -84,14 +84,14 @@ Each of the four components
 
 For example, the `Logic` component (see the class diagram given below) defines it's API in the `Logic.java`
 interface and exposes its functionality using the `LogicManager.java` class.<br>
-<img src="images/LogicClassDiagram.png" width="800"><br>
+<img src="images/logic_diagram v3.png" width="800"><br>
 
 The _Sequence Diagram_ below shows how the components interact for the scenario where the user issues the
 command `delete 1`.
 
 <img src="images\sd_for_delete_task.png" width="800">
 
->Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed,
+>Note how the `Model` simply raises a `TaskBookChangedEvent` when the Task Book data are changed,
  instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates
@@ -106,7 +106,7 @@ The sections below give more details of each component.
 
 ### UI component
 
-<img src="images/UiClassDiagram.png" width="800"><br>
+<img src="images/ui_diagram V3.png" width="800"><br>
 
 **API** : [`Ui.java`](../src/main/java/seedu/address/ui/Ui.java)
 
@@ -126,7 +126,7 @@ The `UI` component,
 
 ### Logic component
 
-<img src="images/LogicClassDiagram.png" width="800"><br>
+<img src="images/logic_diagram v3.png" width="800"><br>
 
 **API** : [`Logic.java`](../src/main/java/seedu/address/logic/Logic.java)
 
@@ -139,18 +139,20 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  API call.<br>
 <img src="images/delete_task_sequence_diagram.jpg" width="800"><br>
 
+<!-- @@author A0139121R -->
 ### Model component
 
-<img src="images/model_diagram.png" width="800"><br>
+<img src="images/model diagram v3.png" width="800"><br>
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
 The `Model`,
 * stores a `UserPref` object that represents the user's preferences.
-* stores the Address Book data.
+* stores the Task Book data.
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+<!-- @@author -->
 
 ### Storage component
 
@@ -160,11 +162,11 @@ The `Model`,
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
-* can save the Address Book data in xml format and read it back.
+* can save the Task Book data in xml format and read it back.
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.TaskBook.commons` package.
 
 ## Implementation
 
@@ -258,7 +260,7 @@ Here are the steps to create a new release.
    
 ### Managing Dependencies
 
-A project often depends on third-party libraries. For example, Address Book depends on the
+A project often depends on third-party libraries. For example, Task Book depends on the
 [Jackson library](http://wiki.fasterxml.com/JacksonHome) for XML parsing. Managing these _dependencies_
 can be automated using Gradle. For example, Gradle can download the dependencies automatically, which
 is better than these alternatives.<br>
@@ -303,20 +305,20 @@ object with the following methods:
 
 ToDoIt allows the user to undo and redo commands with `undo` and `redo`.
 
-#### AddressBookState
+#### TaskBookState
 
-This is accomplished by storing different states of the addressbook, using `AddressBookState`. `AddressBookState` is a class that is used solely to wrap two variables:
+This is accomplished by storing different states of the taskbook, using `TaskBookState`. `TaskBookState` is a class that is used solely to wrap two variables:
 
-* `state`: An `AddressBook` object that stores the state of the to do list.
+* `state`: A `TaskBook` object that stores the state of the to do list.
 * `command`: A string that stores the command that is used to get to this state. This is solely used for displaying purposes.
 
 #### StatesManager
 
 States are stored and managed using the StatesManager class, which offers the following API:
 
-* `saveState(AddressBookState newState)`: Saves the provided `AdressBookState`
-* `loadPreviousState()`: Loads and returns the previous `AdressBookState`. Throws an error if there isn't one
-* `loadNextState()`: Loads and returns the next `AdressBookState`. Throws an error if there isn't one
+* `saveState(TaskBookState newState)`: Saves the provided `TaskBookState`
+* `loadPreviousState()`: Loads and returns the previous `TaskBookState`. Throws an error if there isn't one
+* `loadNextState()`: Loads and returns the next `TaskBookState`. Throws an error if there isn't one
 
 The `ModelManager` has a `StatesManager` object, which handles the state of the to do list as it changes. It calls either `loadPreviousState()` or `loadNextState()` and refreshes the to do list with the state's data.
 
@@ -324,7 +326,7 @@ The `ModelManager` has a `StatesManager` object, which handles the state of the 
 
 The StateManager has two variables to keep track of states:
 
-* `states`: An arraylist of `AddressBook` state which stores the state.
+* `states`: An arraylist of `TaskBook` state which stores the state.
 * `currentState`: An integer to keep track of the current state (the one displayed to the user). It stores the index of the current state in `states`.
 
 The `states` array and the `currentState` always function such that `states[currentState - 1]`, `states[currentState]`, `states[currentState + 1]` always store the previous, current and next state respectively, assuming the states exist.
@@ -333,9 +335,9 @@ When the program is started, the ModelManager saves the init state using `saveSt
 
 #### Adding a state
 
-When commands are run, a new `AddressBookState` is created and saved onto the stack using `saveState`. The `AddressBookState` stores the new state of the `AddressBook` object, and the command string that was used.
+When commands are run, a new `TaskBookState` is created and saved onto the stack using `saveState`. The `TaskBookState` stores the new state of the `TaskBook` object, and the command string that was used.
 
-The `currentState` is incremented, so it now points to the new `AddressBookState`.
+The `currentState` is incremented, so it now points to the new `TaskBookState`.
 
 This is how the `StateManager` might look like after 3 commands, and the contents of the `states` list:
 
@@ -345,12 +347,12 @@ This is how the `StateManager` might look like after 3 commands, and the content
 
 <img src="images/state1.png" width="400"><br>
 
-Index|AddressBookState|Command
+Index|TaskBookState|Command
 -----|----------------|-------
-0|[AddressBook 0]|`Initial State`
-1|[AddressBook 1]|`add Meeting`
-2|[AddressBook 2]|`done 5`
-**3**|**[AddressBook 3]**|**`edit 1 i/Due today`**
+0|[TaskBook 0]|`Initial State`
+1|[TaskBook 1]|`add Meeting`
+2|[TaskBook 2]|`done 5`
+**3**|**[TaskBook 3]**|**`edit 1 i/Due today`**
 
 If a 4th command is run, this is what it would look like:
 
@@ -358,13 +360,13 @@ If a 4th command is run, this is what it would look like:
 
 <img src="images/state2.png" width="400"><br>
 
-Index|AddressBookState|Command
+Index|TaskBookState|Command
 -----|----------------|-------
-0|[AddressBook 0]|`Initial State`
-1|[AddressBook 1]|`add Meeting`
-2|[AddressBook 2]|`done 5`
-3|[AddressBook 3]|`edit 1 i/Due today`
-**4**|**[AddressBook 4]**|**`clear`**
+0|[TaskBook 0]|`Initial State`
+1|[TaskBook 1]|`add Meeting`
+2|[TaskBook 2]|`done 5`
+3|[TaskBook 3]|`edit 1 i/Due today`
+**4**|**[TaskBook 4]**|**`clear`**
 
 #### Undoing
 
@@ -376,15 +378,15 @@ The `ModelManager` calls `loadPreviousState()`, and the StatesManager handles th
 
 <img src="images/state3.png" width="400"><br>
 
-Index|AddressBookState|Command
+Index|TaskBookState|Command
 -----|----------------|-------
-0|[AddressBook 0]|`Initial State`
-1|[AddressBook 1]|`add Meeting`
-2|[AddressBook 2]|`done 5`
-**3**|**[AddressBook 3]**|**`edit 1 i/Due today`**
-4|[AddressBook 4]|`clear`
+0|[TaskBook 0]|`Initial State`
+1|[TaskBook 1]|`add Meeting`
+2|[TaskBook 2]|`done 5`
+**3**|**[TaskBook 3]**|**`edit 1 i/Due today`**
+4|[TaskBook 4]|`clear`
 
-`return AddressBookState([AddressBook 3], "clear")`
+`return TaskBookState([TaskBook 3], "clear")`
 
 Note that only the `currentState` is updated.
 
@@ -396,15 +398,15 @@ The `redo` command is similar to `undo`, except `loadNextState()` is called inst
 
 <img src="images/state2.png" width="400"><br>
 
-Index|AddressBookState|Command
+Index|TaskBookState|Command
 -----|----------------|-------
-0|[AddressBook 0]|`Initial State`
-1|[AddressBook 1]|`add Meeting`
-2|[AddressBook 2]|`done 5`
-3|[AddressBook 3]|`edit 1 i/Due today`
-**4**|**[AddressBook 4]**|**`clear`**
+0|[TaskBook 0]|`Initial State`
+1|[TaskBook 1]|`add Meeting`
+2|[TaskBook 2]|`done 5`
+3|[TaskBook 3]|`edit 1 i/Due today`
+**4**|**[TaskBook 4]**|**`clear`**
 
-`return AddressBookState([AddressBook 4], "clear")`
+`return TaskBookState([TaskBook 4], "clear")`
 
 It's important to note that `loadPreviousState()` returns the previous state's (3) state, but the current state's (4) command, while `loadNextState()` returns the current state's (4) command and data. This is needed for displaying the command result message.
 
@@ -414,25 +416,25 @@ When a new command is run, and a state is saved, but the `currentState` points t
 
 <img src="images/state3.png" width="400"><br>
 
-Index|AddressBookState|Command
+Index|TaskBookState|Command
 -----|----------------|-------
-0|[AddressBook 0]|`Initial State`
-1|[AddressBook 1]|`add Meeting`
-2|[AddressBook 2]|`done 5`
-**3**|**[AddressBook 3]**|**`edit 1 i/Due today`**
-4|[AddressBook 4]|`clear`
+0|[TaskBook 0]|`Initial State`
+1|[TaskBook 1]|`add Meeting`
+2|[TaskBook 2]|`done 5`
+**3**|**[TaskBook 3]**|**`edit 1 i/Due today`**
+4|[TaskBook 4]|`clear`
 
 > `done 7`
 
 <img src="images/state4.png" width="400"><br>
 
-Index|AddressBookState|Command
+Index|TaskBookState|Command
 -----|----------------|-------
-0|[AddressBook 0]|`Initial State`
-1|[AddressBook 1]|`add Meeting`
-2|[AddressBook 2]|`done 5`
-3|[AddressBook 3]|`edit 1 i/Due today`
-**4**|**[AddressBook 5]**|**`done 7`**
+0|[TaskBook 0]|`Initial State`
+1|[TaskBook 1]|`add Meeting`
+2|[TaskBook 2]|`done 5`
+3|[TaskBook 3]|`edit 1 i/Due today`
+**4**|**[TaskBook 5]**|**`done 7`**
 
 #### Other concerns
 
@@ -471,6 +473,8 @@ Priority | As a ... | I want to ... | So that I can...
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `ToDoIt` and the **Actor** is the `user`, unless specified otherwise)
+
+<!-- @@author A0139121R -->
 #### Use case: Add task
 
 **MSS**
@@ -486,6 +490,8 @@ Use case ends.
 
 > 2a1. ToDoIt shows an error message <br>
   Use case ends
+<!-- @@author -->
+<!-- @@author A0139046E -->
 
 #### Use case: Delete task
 
@@ -549,6 +555,7 @@ Use case ends.
 >3a1. ToDoIt shows an error message <br>
  Use case ends
 
+<!-- @@author A0139121R -->
 #### Use case: Find task
 
 **MSS**
@@ -566,6 +573,7 @@ Use case ends.
 
 >Use case ends
 
+<!-- @@author A0139046E -->
 #### Use case: Done
 
 **MSS**
@@ -606,6 +614,7 @@ Use case ends.
 >3a1. ToDoIt shows an error message <br>
  Use case ends
 
+<!-- @@author A0139121R -->
 #### Use case: List tasks
 
 **MSS**

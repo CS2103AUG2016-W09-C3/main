@@ -24,7 +24,12 @@ public class DateParser {
      * Parses a date time from a string using natty.
      */
     public static LocalDateTime parseDate(String dateString) throws IllegalValueException{
-        return getDateTime(parseNatty(dateString));
+        DateGroup dateGroup = parseNatty(dateString);
+        LocalDateTime parsedDate = getDateTime(dateGroup);
+        if(!searchDateTree(dateGroup, TIME_STRING)){
+            parsedDate = parsedDate.withHour(0).withMinute(0).withSecond(0).withNano(0);
+        }
+        return parsedDate;
     }
     
     /*
@@ -84,6 +89,9 @@ public class DateParser {
      * Parses a date using natty.
      */
     private static DateGroup parseNatty(String dateString) throws IllegalValueException{
+        if(dateString == null){
+            throw new IllegalValueException("Missing date parameter.");
+        }
         List<DateGroup> dates = nattyParser.parse(dateString);
         if(dates.isEmpty() || dates.get(0).getDates().isEmpty()){
             throw new IllegalValueException("Date not parsable.");

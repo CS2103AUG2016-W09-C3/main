@@ -12,32 +12,32 @@ import seedu.address.model.StatesManager;
 import seedu.address.testutil.TestTask;
 import seedu.address.testutil.TestUtil;
 
-public class UndoRedoCommandTest extends AddressBookGuiTest {
+public class UndoRedoCommandTest extends TaskBookGuiTest {
 
     @Test
     public void addUndoRedo() {
-        //add one person
+        //add one task
         TestTask[] initialList = td.getTypicalTasks();
-        TestTask personToAdd = td.nieceBirthdayMeal;
-        TestTask[] finalList = TestUtil.addTasksToList(initialList, personToAdd);
-        assertUndoRedo(initialList, finalList, new String[] {personToAdd.getAddCommand()});
+        TestTask taskToAdd = td.nieceBirthdayMeal;
+        TestTask[] finalList = TestUtil.addTasksToList(initialList, taskToAdd);
+        assertUndoRedo(initialList, finalList, new String[] {taskToAdd.getAddCommand()});
     }
 
     @Test
     public void addUndoRedoMultiple() {
-        //add one person
+        //add one task
         TestTask[] initialList = td.getTypicalTasks();
-        TestTask personToAdd = td.nieceBirthdayMeal;
-        TestTask personToAdd2 = td.cuttingHair;
-        TestTask personToAdd3 = td.lectureToAttend;
-        TestTask[] finalList = TestUtil.addTasksToList(initialList, personToAdd, personToAdd2, personToAdd3);
+        TestTask taskToAdd = td.nieceBirthdayMeal;
+        TestTask taskToAdd2 = td.cuttingHair;
+        TestTask taskToAdd3 = td.lectureToAttend;
+        TestTask[] finalList = TestUtil.addTasksToList(initialList, taskToAdd, taskToAdd2, taskToAdd3);
         assertUndoRedo(initialList, finalList, 
-                new String[] {personToAdd.getAddCommand(), personToAdd2.getAddCommand(), personToAdd3.getAddCommand()});
+                new String[] {taskToAdd.getAddCommand(), taskToAdd2.getAddCommand(), taskToAdd3.getAddCommand()});
     }
     
     @Test
     public void clearUndoRedo() {
-        //add one person
+        //add one task
         TestTask[] initialList = td.getTypicalTasks();
         TestTask[] finalList = {};
         assertUndoRedo(initialList, finalList, new String[] {"clear"});

@@ -8,13 +8,13 @@ import seedu.address.commons.exceptions.StateException;
  */
 public interface States {
     /** Saves a state to the state list. */
-    public void saveState(AddressBookState newState);
+    public void saveState(TaskBookState newState);
     
     /** Loads the previous state. */
-    public AddressBookState loadPreviousState() throws StateException;
+    public TaskBookState loadPreviousState() throws StateException;
 
     /** Loads the next state. */
-    public AddressBookState loadNextState() throws StateException;
+    public TaskBookState loadNextState() throws StateException;
     
 }
 //@@author

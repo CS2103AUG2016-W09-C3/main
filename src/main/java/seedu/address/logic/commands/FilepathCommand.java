@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 /**
- * Changes the filepath of the address book.
+ * Changes the filepath of the task book.
  */
 public class FilepathCommand extends Command {
 
@@ -20,11 +20,11 @@ public class FilepathCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Changes the filepath. "
             + "Parameter: FILEPATH"
             + "Parameter should be a valid file name, ending in .xml."
-            + "Examples: addressbook.xml, data\\addressbook.xml, C:\\data\\addressbook.xml";
+            + "Examples: taskbook.xml, data\\taskbook.xml, C:\\data\\taskbook.xml";
 
     public static final String MESSAGE_SUCCESS = "File path changed to %1$s";
     public static final String MESSAGE_INVALID_PATH = "Invalid file path. Parameter should be a valid file name, ending in .xml.\n" + 
-                                                    "Examples: addressbook.xml, data\\addressbook.xml, C:\\data\\addressbook.xml";
+                                                    "Examples: taskbook.xml, data\\taskbook.xml, C:\\data\\taskbook.xml";
 
     private final String filePath;
 

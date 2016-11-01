@@ -13,7 +13,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
- * Adds a tasks to the address book.
+ * Adds a tasks to the task book.
  */
 public class AddCommand extends Command {
 
@@ -24,7 +24,7 @@ public class AddCommand extends Command {
     
     public static final String[] DATED_TASK_PARAMS = {"d"};
     
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task book. "
             + "Parameters: NAME [d/DATE,TIME l/LENGTH de/END_DATE,END_TIME] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...\n"
             + "Parameters should not contain '/'s."
             + "Parameters should not contain both length and end date\n"
@@ -32,7 +32,7 @@ public class AddCommand extends Command {
             + " Meet John d/2pm next thurs l/2h r/1d p/medium i/Meeting for lunch";
 
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
-    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
     public static final String MESSAGE_LENGTH_ENDDATE_CONFLICT = "Length and end datetime cannot be both filled.";
 
     private final Task toAdd;
@@ -49,8 +49,8 @@ public class AddCommand extends Command {
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
-        String newLength = length;
-        if(length.equals("-1")){
+        String newLength = setLength(length, datetime, endDatetime);
+        /*if(length.equals("-1")){
             if(endDatetime.equals("-1")){
                 newLength = Length.NO_INTERVAL;
             } else {
@@ -67,7 +67,7 @@ public class AddCommand extends Command {
             if(!endDatetime.equals("-1")){
                 throw new IllegalValueException(MESSAGE_LENGTH_ENDDATE_CONFLICT);
             }
-        }
+        }*/
         this.toAdd = (Task) new DatedTask(
                 new Name(name),
                 new DateTime(datetime),
@@ -78,6 +78,28 @@ public class AddCommand extends Command {
                 new DoneFlag(doneFlag),
                 new UniqueTagList(tagSet)
         );
+    }
+    
+    private String setLength(String length, String datetime, String endDatetime) throws IllegalValueException{
+        if(length.equals("-1")){
+            if(endDatetime.equals("-1")){
+                return Length.NO_INTERVAL;
+            } else {
+                LocalDateTime startDate = DateParser.parseDate(datetime);
+                LocalDateTime endDate = DateParser.parseDate(endDatetime);
+                long hourDifference = ChronoUnit.HOURS.between(startDate, endDate);
+                if(hourDifference >= 24){
+                    return Long.toString(TimeUnit.HOURS.toDays(hourDifference)) + "d";
+                } else {
+                    return hourDifference + "h";
+                }
+            }
+        } else {
+            if(!endDatetime.equals("-1")){
+                throw new IllegalValueException(MESSAGE_LENGTH_ENDDATE_CONFLICT);
+            }
+            return length;
+        }
     }
 
     public AddCommand(String name, String priority, String information, String doneFlag, Set<String> tagsFromArgs) 

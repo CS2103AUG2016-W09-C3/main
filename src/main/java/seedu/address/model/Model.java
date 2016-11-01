@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import seedu.address.commons.core.UnmodifiableObservableList;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.exceptions.StateException;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.ReadOnlyTask;
@@ -16,10 +17,10 @@ import java.util.Set;
  */
 public interface Model {
     /** Clears existing backing model and replaces with the provided new data. */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyTaskBook newData);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the TaskBook */
+    ReadOnlyTaskBook getTaskBook();
 
     /** Deletes the given task. */
     void deleteTask(ReadOnlyTask target) throws UniqueTaskList.TaskNotFoundException;
@@ -53,12 +54,20 @@ public interface Model {
     /** Updates the filter of the filtered task list to show not done tasks*/
     void updateFilteredListToShowDone();
     //@@author
+    // @@author A0140155U
     /** Loads the previous state. Returns the command attached to the state to be printed. */
     String loadPreviousState() throws StateException;
 
     /** Loads the next state. Returns the command attached to the state to be printed. */
     String loadNextState() throws StateException;
-
+    
+    /** Raises event to change file path of data */
     void changeFilePath(String filePath);
 
+    /** Adds a command preset to the current list */
+    void addPreset(CommandPreset commandPreset);
+
+    /** Removes a command preset to the current list. Returns the description of the removed preset to be printed. */
+    String removePreset(int index) throws IllegalValueException;
+    // @@author
 }

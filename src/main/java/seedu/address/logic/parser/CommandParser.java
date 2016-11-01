@@ -30,8 +30,10 @@ public class CommandParser implements ParsedCommand{
     private ArrayList<String> values = new ArrayList<>();
     // Param name -> list of param values
     private HashMap<String, ArrayList<String>> params = new HashMap<>();
+    private final String command;
     
     public CommandParser(String command){
+        this.command = command;
         loadFromString(command);
     }
     
@@ -44,20 +46,25 @@ public class CommandParser implements ParsedCommand{
         }
         String[] splitted = command.split(COMMAND_DELIMITER);
         
-        int index = 0;
         // Find all values
-        index = loadValues(splitted, index);
+        int firstParamIndex = loadValues(splitted);
         // Find all params
-        loadParams(splitted, index);
+        loadParams(splitted, firstParamIndex);
         
     }
 
     /**
      * Loads values from command.
      * Returns the index of the first param in the command.
+     * 
+     * i.e.
+     * ["value1", "value2", "value3", "p1/param1", "p1/param1a", "p2/param2"]
+     * Loads values = ["value1", "value2", "value3"] 
+     * return 3
      */
-    private int loadValues(String[] splitted, int index) {
+    private int loadValues(String[] splitted) {
         // Load string tokens until we encounter a param token
+        int index = 0;
         while(index < splitted.length && !isParamToken(splitted[index])){
             values.add(splitted[index]);
             index++;
@@ -67,18 +74,21 @@ public class CommandParser implements ParsedCommand{
 
     /**
      * Loads params from command.
+     * 
+     * i.e.
+     * ["value1", "value2", "value3", "p1/param1", "p1/param1a", "p2/param2"], firstParamIndex = 3
+     * Loads params = {p1 : ["param1", "param1a"], p2 : ["param2"]} 
      */
-    private void loadParams(String[] splitted, int index) {
+    private void loadParams(String[] splitted, int firstParamIndex) {
         // This stores the param name
         String currentParam = null;
         // This stores the param value
         StringBuilder currentParamValue = new StringBuilder();
-        for(int i = index; i < splitted.length; i++){
+        for(int i = firstParamIndex; i < splitted.length; i++){
             String token = splitted[i];
             if(isParamToken(token)){
                 // New param, flush the param value, add the old param and start over
                 addParam(currentParam, currentParamValue.toString());
-                
                 int paramDelimIndex = token.indexOf(PARAM_DELIMITER);
                 currentParam = token.substring(0, paramDelimIndex).toLowerCase();
                 currentParamValue = new StringBuilder();
@@ -171,7 +181,7 @@ public class CommandParser implements ParsedCommand{
     }
 
     /**
-     * Get all values.
+     * Get all values as an arraylist.
      */
     @Override
     public ArrayList<String> getAllValues(){
@@ -181,7 +191,7 @@ public class CommandParser implements ParsedCommand{
     
 
     /**
-     * Get all params.
+     * Get all params as an arraylist.
      */
     @Override
     public ArrayList<String> getParamList(){
@@ -248,6 +258,10 @@ public class CommandParser implements ParsedCommand{
             }
         }
         return false;
+    }
+    
+    public String getCommand(){
+        return command;
     }
 }
 //@@author

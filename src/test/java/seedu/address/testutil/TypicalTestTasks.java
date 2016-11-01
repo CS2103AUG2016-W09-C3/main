@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.TaskBook;
 import seedu.address.model.task.*;
 
 /**
@@ -46,6 +46,7 @@ public class TypicalTestTasks {
             surveyResults = new TaskBuilder().withName("Collate customer survey results").withDoneFlag("Not done").
                     withInformation("As soon as possible").withPriority("VeryHigh").build();
             
+            //@@author A0139947L
             //Manually added (dated)
             lectureToAttend = new DatedTaskBuilder().withName("Attend CS2103T lecture").withDoneFlag("Not done").withDateTime("10-10-2016 1400")
                     .withLength("2h").withRecurrance("5d").withPriority("low").withInformation("There is webcast if you do not attend").build();
@@ -64,14 +65,14 @@ public class TypicalTestTasks {
             
             csFinalExam = new DatedTaskBuilder().withName("CS2103T Finals").withDoneFlag("Not done").withDateTime("11-28-2016 1800")
                     .withLength("2h").withRecurrance("1d").withPriority("high").withInformation("At MPSH").build();
-            
+            //@@author
         } catch (IllegalValueException e) {
             e.printStackTrace();
             assert false : "not possible";
         }
     }
 
-    public static void loadAddressBookWithSampleData(AddressBook ab) {
+    public static void loadTaskBookWithSampleData(TaskBook ab) {
 
         try {
             ab.addTask(new Task(aliceMeeting));
@@ -91,13 +92,15 @@ public class TypicalTestTasks {
                                 danielLunch, fetchElle, researchPaper, mumLunch};
     }
 
+    //@@author A0139947L
     public TestTask[] getTypicalDatedTask() {
         return new TestTask[] {lectureToAttend, meetNathan, cuttingHair, dinnerDate, meetingToAttend, csFinalExam};
     }
+    //@@author
 
-    public AddressBook getTypicalAddressBook(){
-        AddressBook ab = new AddressBook();
-        loadAddressBookWithSampleData(ab);
+    public TaskBook getTypicalTaskBook(){
+        TaskBook ab = new TaskBook();
+        loadTaskBookWithSampleData(ab);
         return ab;
     }
 }

@@ -10,15 +10,11 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Guarantees: immutable; is valid as declared in {@link #isValidLength(String)}
  */
 public class DateTime {
-    
-    public static final String MESSAGE_INFORMATION_CONSTRAINTS = "Date should be in DDMMYYYY or DDMM format,"
-            + " Time should be in HHMM format, in 24h time." +
-    " Also, check if your date and time inputs are valid.";
-    
-    public static final DateTimeFormatter DATE_DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+    public static final DateTimeFormatter DATE_DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("MM-dd-yyyy HH:mm");
     public static final String PARAM_NOT_SPECIFIED = "-1";
 
-    public final LocalDateTime datetime;
+    private final LocalDateTime datetime;
     
     /**
      * Validates given date and time.
@@ -70,4 +66,7 @@ public class DateTime {
         return this.datetime.hashCode();
     }
     
+    public LocalDateTime getDateTime(){
+        return datetime;
+    }
 }

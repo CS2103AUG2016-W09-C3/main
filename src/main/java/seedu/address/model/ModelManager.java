@@ -13,8 +13,9 @@ import seedu.address.model.task.ReadOnlyTask;
 import seedu.address.model.task.UniqueTaskList;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
 import seedu.address.model.task.CustomTaskComparator;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.TaskBookChangedEvent;
 import seedu.address.commons.events.model.FilePathChangedEvent;
+import seedu.address.commons.events.model.PresetChangedEvent;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.exceptions.StateException;
 import seedu.address.commons.core.ComponentManager;
@@ -29,64 +30,67 @@ import java.util.logging.Logger;
 import edu.emory.mathcs.backport.java.util.Collections;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the task book data.
  * All changes to any model should be synchronized.
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final TaskBook taskBook;
     private final FilteredList<Task> filteredTasks;
     // @@author A0140155U
     private final States states;
+    private final UserPrefs userPrefs;
     // @@author
     /**
-     * Initializes a ModelManager with the given AddressBook
-     * AddressBook and its variables should not be null
+     * Initializes a ModelManager with the given TaskBook
+     * TaskBook and its variables should not be null
      */
-    public ModelManager(AddressBook src, UserPrefs userPrefs) {
+    public ModelManager(TaskBook src, UserPrefs userPrefs) {
         super();
         assert src != null;
         assert userPrefs != null;
 
-        logger.fine("Initializing with address book: " + src + " and user prefs " + userPrefs);
+        logger.fine("Initializing with task book: " + src + " and user prefs " + userPrefs);
 
-        addressBook = new AddressBook(src);
-        filteredTasks = new FilteredList<>(addressBook.getTasks());
+        taskBook = new TaskBook(src);
+        filteredTasks = new FilteredList<>(taskBook.getTasks());
         // @@author A0140155U
-        states = new StatesManager(new AddressBookState(addressBook));
+        states = new StatesManager(new TaskBookState(taskBook));
+        this.userPrefs = userPrefs;
         // @@author
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new TaskBook(), new UserPrefs());
     }
 
-    public ModelManager(ReadOnlyAddressBook initialData, UserPrefs userPrefs) {
-        addressBook = new AddressBook(initialData);
+    public ModelManager(ReadOnlyTaskBook initialData, UserPrefs userPrefs) {
+        taskBook = new TaskBook(initialData);
         //@@author A0139947L
-        addressBook.updateRecurringTasks();
+        taskBook.updateRecurringTasks();
         //@@author
-        filteredTasks = new FilteredList<>(addressBook.getTasks());
+        filteredTasks = new FilteredList<>(taskBook.getTasks());
         // @@author A0140155U
-        states = new StatesManager(new AddressBookState(addressBook));
+        states = new StatesManager(new TaskBookState(taskBook));
+        this.userPrefs = userPrefs;
         // @@author
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
-        addressBook.resetData(newData);
-        indicateAddressBookChanged();
+    public void resetData(ReadOnlyTaskBook newData) {
+        taskBook.resetData(newData);
+        indicateTaskBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public ReadOnlyTaskBook getTaskBook() {
+        return taskBook;
     }
 
     /** Raises an event to indicate the model has changed */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(addressBook));
+    private void indicateTaskBookChanged() {
+        raise(new TaskBookChangedEvent(taskBook));
     }
 
     // @@author A0140155U
@@ -99,23 +103,37 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public synchronized void deleteTask(ReadOnlyTask target) throws TaskNotFoundException {
-        addressBook.removeTask(target);
-        indicateAddressBookChanged();
+        taskBook.removeTask(target);
+        indicateTaskBookChanged();
     }
 
     @Override
     public synchronized void addTask(Task task) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTask(task);
+        taskBook.addTask(task);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTaskBookChanged();
+    }
+
+    // @@author A0140155U
+    @Override
+    public void addPreset(CommandPreset commandPreset) {
+        userPrefs.addPreset(commandPreset);
+        raise(new PresetChangedEvent(userPrefs));
     }
     
+    @Override
+    public String removePreset(int index) throws IllegalValueException {
+        String removedCommandDesc = userPrefs.removePreset(index);
+        raise(new PresetChangedEvent(userPrefs));
+        return removedCommandDesc;
+    }
+    // @@author
     //@@author A0139046E
     @Override
     public synchronized void addTaskToIndex(Task task, int index) throws UniqueTaskList.DuplicateTaskException {
-        addressBook.addTaskToIndex(task, index);
+        taskBook.addTaskToIndex(task, index);
         updateFilteredListToShowAll();
-        indicateAddressBookChanged();
+        indicateTaskBookChanged();
     }
     //@@author
 
@@ -130,16 +148,16 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredListToShowAll() {
         filteredTasks.setPredicate(null);
     }
-
+    //@@author A0139121R
     @Override
     public void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope){
-        updateFilteredTaskList(new PredicateExpression(new NameQualifier(keywords, searchScope)));
+        updateFilteredTaskList(new PredicateExpression(new FindQualifier(keywords, searchScope)));
     }
 
     private void updateFilteredTaskList(Expression expression) {
         filteredTasks.setPredicate(expression::satisfies);
     }
-    //@@author A0139121R
+    
     @Override
     public void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse){
         sortList(sortByAttribute, reverse);
@@ -170,7 +188,7 @@ public class ModelManager extends ComponentManager implements Model {
     //========== Inner classes/interfaces used for sorting ====================================================
     
     private void sortList(ArrayList<String> sortByAttribute, boolean reverse){
-        addressBook.sortTasks(sortByAttribute, reverse);
+        taskBook.sortTasks(sortByAttribute, reverse);
         
     }
     //@@author
@@ -217,67 +235,123 @@ public class ModelManager extends ComponentManager implements Model {
         }
         
         /**
-         * Tests if task is within the date range if specified, is with the correct DoneFlag status if specified 
+         * Tests if task is within the date range if specified, and with the correct DoneFlag status if specified 
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            if(!doneStatus.equalsIgnoreCase("all")){
+            /*if(!doneStatus.equalsIgnoreCase("all")){
                 if(!doneStatus.equalsIgnoreCase(task.getDoneFlag().toString())){
                     return false;
                 }
+            }*/
+            if(!checkDoneFlagSame(task)){
+                return false;
             }
             
             if(!dateRange.isEmpty()){
-                if(!task.isDated()){
+//                if(!task.isDated()){
+//                    return false;
+//                } else {
+//                    ReadOnlyDatedTask datedTask = (DatedTask) task;
+//                    LocalDateTime currentTaskDateTime = datedTask.getDateTime().getDateTime();
+//                    try {
+//                        LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
+//                        if(currentTaskDateTime.isBefore(startDateTime)){
+//                            return false;
+//                        }
+//                    } catch (IllegalValueException e1) {
+//                        System.out.println("Start date and time given is not a valid string");
+//                        e1.printStackTrace();
+//                    }
+//                    try {
+//                        LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end"));
+//                        if(currentTaskDateTime.isAfter(endDateTime)){
+//                            return false;
+//                        }
+//                    } catch (IllegalValueException e) {
+//                        System.out.println("End date and time given is not a valid string");
+//                        e.printStackTrace();
+//                    }
+//                }
+                if(!checkWithinDateRange(task)){
                     return false;
-                } else {
-                    ReadOnlyDatedTask datedTask = (DatedTask) task;
-                    LocalDateTime currentTaskDateTime = datedTask.getDateTime().datetime;
-                    try {
-                        LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start")).minusDays(1);
-                        if(currentTaskDateTime.isBefore(startDateTime)){
-                            return false;
-                        }
-                    } catch (IllegalValueException e1) {
-                        System.out.println("Start date and time given is not a valid string");
-                        e1.printStackTrace();
-                    }
-                    try {
-                        LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end")).plusDays(1);
-                        if(currentTaskDateTime.isAfter(endDateTime)){
-                            return false;
-                        }
-                    } catch (IllegalValueException e) {
-                        System.out.println("End date and time given is not a valid string");
-                        e.printStackTrace();
-                    }
                 }
             }
             
             return true;
         }
+        private boolean checkWithinDateRange(ReadOnlyTask task){
+            if(!task.isDated()){
+                return false;
+            } else {
+                ReadOnlyDatedTask datedTask = (DatedTask) task;
+                LocalDateTime currentTaskDateTime = datedTask.getDateTime().getDateTime();
+                if(!checkAfterStartDate(datedTask, currentTaskDateTime)){
+                    return false;
+                }
+                if(!checkBeforeEndDate(datedTask, currentTaskDateTime)){
+                    return false;
+                }
+            }
+            return true;
+        }
         
+        private boolean checkAfterStartDate(ReadOnlyDatedTask task, LocalDateTime currentTaskDateTime){
+            try {
+                LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
+                if(currentTaskDateTime.isBefore(startDateTime)){
+                    return false;
+                }
+            } catch (IllegalValueException e1) {
+                System.out.println("Start date and time given is not a valid string");
+                e1.printStackTrace();
+                return false;
+            }
+            return true;
+        }
         
+        private boolean checkBeforeEndDate(ReadOnlyDatedTask task, LocalDateTime currentTaskDateTime){
+            try{
+                LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end"));
+                if(currentTaskDateTime.isAfter(endDateTime)){
+                    return false;
+                } 
+            } catch (IllegalValueException e2){
+                System.out.println("End date and time given is not a valid string");
+                e2.printStackTrace();
+                return false;
+            }
+            return true;
+        }
+        
+        private boolean checkDoneFlagSame(ReadOnlyTask task){
+            if(!doneStatus.equalsIgnoreCase("all")){
+                if(!doneStatus.equalsIgnoreCase(task.getDoneFlag().toString())){
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 
-    private class NameQualifier implements Qualifier {
-        private Set<String> nameKeyWords;
+    private class FindQualifier implements Qualifier {
+        private Set<String> findKeyWords;
         private HashSet<String> searchScope;
 
-        NameQualifier(Set<String> nameKeyWords, HashSet<String> searchScope) {
-            this.nameKeyWords = nameKeyWords;
+        FindQualifier(Set<String> findKeyWords, HashSet<String> searchScope) {
+            this.findKeyWords = findKeyWords;
             this.searchScope = searchScope;
         }
         /**
-         * Tests if task contains any of the keywords in nameKeyWords in the possible specified searchScope of "n"(name) "i"(information) 
-         * and "d"(date and time).
+         * Tests if task contains any of the keywords in findKeyWords in the possible specified searchScope of "name" "information" 
+         * and "tag".
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            return nameKeyWords.stream()
-                    .filter(keyword -> (this.searchScope.contains("n") && StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
-                            || (this.searchScope.contains("i") && StringUtil.containsIgnoreCase(task.getInformation().fullInformation, keyword))
-                            || (this.searchScope.contains("d") && task.isDated() && StringUtil.containsIgnoreCase(((DatedTask) task).getDateTime().toString(), keyword))
+            return findKeyWords.stream()
+                    .filter(keyword -> (this.searchScope.contains("name") && StringUtil.containsIgnoreCase(task.getName().fullName, keyword))
+                            || (this.searchScope.contains("information") && StringUtil.containsIgnoreCase(task.getInformation().fullInformation, keyword))
+                            || (this.searchScope.contains("tag") && task.getTags().containsStringAsTag(keyword))
                             )
                     .findAny()//finds first one
                     .isPresent();//check if null
@@ -285,7 +359,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         @Override
         public String toString() {
-            return "name=" + String.join(", ", nameKeyWords);
+            return "name=" + String.join(", ", findKeyWords);
         }
     }
     
@@ -328,7 +402,7 @@ public class ModelManager extends ComponentManager implements Model {
     // @@author A0140155U
     @Override
     public void saveState(String commandText) {
-        states.saveState(new AddressBookState(addressBook, commandText));
+        states.saveState(new TaskBookState(taskBook, commandText));
     }
 
     @Override
@@ -341,10 +415,12 @@ public class ModelManager extends ComponentManager implements Model {
         return loadState(states.loadNextState());
     }
     
-    private String loadState(AddressBookState newState) {
-        addressBook.resetData(newState.getState());
-        indicateAddressBookChanged();
+    private String loadState(TaskBookState newState) {
+        taskBook.resetData(newState.getState());
+        indicateTaskBookChanged();
         return newState.getCommand();
     }
     // @@author
+
+
 }

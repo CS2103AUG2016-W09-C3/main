@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- @@author A0140155U -->
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.net.URL?>
+<HBox id="presetCard" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <GridPane HBox.hgrow="ALWAYS" >
+            <columnConstraints>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="150.0" />
+            </columnConstraints>
+            <children>
+                <VBox alignment="CENTER_LEFT" maxHeight="150.0" minHeight="0" GridPane.columnIndex="0">
+                    <stylesheets>
+                        <URL value="@DarkTheme.css" />
+                        <URL value="@Extensions.css" />
+                    </stylesheets>
+                    <padding>
+                        <Insets bottom="5" left="15" right="5" top="5" />
+                    </padding>
+
+                    <children>
+                        <HBox>
+                        	<Label minWidth="30.0" fx:id="presetIndex" styleClass="cell_big_label" text="\$index" />
+                        	<Label fx:id="description" styleClass="cell_big_label" text="\$description">
+	                        	<tooltip>
+					                <Tooltip styleClass="tooltip" fx:id="tooltip" text="\$tooltip"/>
+					            </tooltip>
+                        	</Label>
+                        </HBox>
+                    </children>
+                </VBox>
+            </children>
+        </GridPane>
+    </children>
+</HBox>

@@ -7,6 +7,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import seedu.address.commons.events.ui.CommandPresetSelectedEvent;
 import seedu.address.commons.events.ui.IncorrectCommandAttemptedEvent;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.*;
@@ -81,7 +82,15 @@ public class CommandBox extends UiPart {
         logger.info("Result: " + mostRecentResult.feedbackToUser);
     }
 
-
+    // @@author A0140155U
+    @Subscribe
+    private void handleCommandPresetSelected(CommandPresetSelectedEvent event){
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,"Selected command preset: " + event.getCommand()));
+        commandTextField.setText(event.getCommand());
+        handleCommandInputChanged();
+        commandTextField.setText(event.getCommand());
+    }
+    // @@author
     /**
      * Sets the command box style to indicate a correct command.
      */
