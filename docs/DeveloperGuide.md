@@ -139,6 +139,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
  API call.<br>
 <img src="images/delete_task_sequence_diagram.jpg" width="800"><br>
 
+<!-- @@author A0139121R -->
 ### Model component
 
 <img src="images/model diagram v3.png" width="800"><br>
@@ -151,6 +152,7 @@ The `Model`,
 * exposes a `UnmodifiableObservableList<ReadOnlyPerson>` that can be 'observed' e.g. the UI can be bound to this list
   so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
+<!-- @@author -->
 
 ### Storage component
 
@@ -471,6 +473,8 @@ Priority | As a ... | I want to ... | So that I can...
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `ToDoIt` and the **Actor** is the `user`, unless specified otherwise)
+
+<!-- @@author A0139121R -->
 #### Use case: Add task
 
 **MSS**
@@ -486,6 +490,8 @@ Use case ends.
 
 > 2a1. ToDoIt shows an error message <br>
   Use case ends
+<!-- @@author -->
+<!-- @@author A0139046E -->
 
 #### Use case: Delete task
 
@@ -549,6 +555,7 @@ Use case ends.
 >3a1. ToDoIt shows an error message <br>
  Use case ends
 
+<!-- @@author A0139121R -->
 #### Use case: Find task
 
 **MSS**
@@ -566,6 +573,7 @@ Use case ends.
 
 >Use case ends
 
+<!-- @@author A0139046E -->
 #### Use case: Done
 
 **MSS**
@@ -606,6 +614,7 @@ Use case ends.
 >3a1. ToDoIt shows an error message <br>
  Use case ends
 
+<!-- @@author A0139121R -->
 #### Use case: List tasks
 
 **MSS**

@@ -95,6 +95,7 @@ The help command provides you with a detailed explanation of the available comma
 
 ---
 
+<!-- @@author A0139121R -->
 ### Adding a task: `add`
 Format: `add TASK_NAME [d/DATE_TIME de/END_DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
 
@@ -108,6 +109,7 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 > 4. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval. 
 > 5. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
 <!-- @@author -->
+<!-- @@author A0139121R -->
 > 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
 > 7. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
 > 8. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
@@ -122,8 +124,10 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 >   `add CS2101 Lecture h/7th Oct 2pm l/2hr r/1w p/low t/got-webcast` <br>
 >   This will add a CS2101 Lecture task which recurs every week starting with 2pm on 7th Oct, marks it as low priority and tags it with the `got-webcast` tag.
 
----
+<!-- @@author -->
 
+---
+<!-- @@author A0139121R -->
 ### Listing tasks : `list`
 ToDoIt displays your tasks easily with a simple command. The tasks to list can be customized to your liking simply with a few keywords.<br>
 Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
@@ -168,7 +172,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 >   `find meeting s/name`<br>
 > * You want to find all tasks that relate to your family. <br>
 >   `find brother sister mother father family`
-
+<!-- @@author -->
 ---
   
 ### Deleting a task : `delete`
