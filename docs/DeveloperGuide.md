@@ -142,7 +142,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 <!-- @@author A0139121R -->
 ### Model component
 
-<img src="images/model diagram v3.png" width="800"><br>
+<img src="images/model diagram v4.png" width="800"><br>
 
 **API** : [`Model.java`](../src/main/java/seedu/address/model/Model.java)
 
