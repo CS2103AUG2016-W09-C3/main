@@ -25,7 +25,7 @@ public class AddCommand extends Command {
     public static final String[] DATED_TASK_PARAMS = {"d"};
     
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task book. "
-            + "Parameters: NAME [d/DATE,TIME l/LENGTH de/END_DATE,END_TIME] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...\n"
+            + "Parameters: NAME [d/DATE,TIME l/LENGTH de/END_DATE,END_TIME] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...\n"
             + "Parameters should not contain '/'s."
             + "Parameters should not contain both length and end date\n"
             + "Example: " + COMMAND_WORD
@@ -50,24 +50,6 @@ public class AddCommand extends Command {
             tagSet.add(new Tag(tagName));
         }
         String newLength = setLength(length, datetime, endDatetime);
-        /*if(length.equals("-1")){
-            if(endDatetime.equals("-1")){
-                newLength = Length.NO_INTERVAL;
-            } else {
-                LocalDateTime startDate = DateParser.parseDate(datetime);
-                LocalDateTime endDate = DateParser.parseDate(endDatetime);
-                long hourDifference = ChronoUnit.HOURS.between(startDate, endDate);
-                if(hourDifference >= 24){
-                    newLength = Long.toString(TimeUnit.HOURS.toDays(hourDifference)) + "d";
-                } else {
-                    newLength = hourDifference + "h";
-                }
-            }
-        } else {
-            if(!endDatetime.equals("-1")){
-                throw new IllegalValueException(MESSAGE_LENGTH_ENDDATE_CONFLICT);
-            }
-        }*/
         this.toAdd = (Task) new DatedTask(
                 new Name(name),
                 new DateTime(datetime),
