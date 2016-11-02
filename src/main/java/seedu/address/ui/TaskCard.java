@@ -17,7 +17,9 @@ public class TaskCard extends UiPart{
     private HBox taskPane;
 
     @FXML
-    private VBox light;
+    private VBox idLight;
+    @FXML
+    private VBox taskContainer;
     
     @FXML
     private Label name;
@@ -55,6 +57,12 @@ public class TaskCard extends UiPart{
     // @@author A0140155U
     @FXML
     public void initialize() {
+        initTexts();
+        removeUnnecessaryLabels();
+        style();
+    }
+
+    private void initTexts() {
         name.setText(task.getName().fullName);
         id.setText(Integer.toString(displayedIndex));
         setOrNullText(priority, "Priority: ", task.getPriority().getDisplayedAlias());
@@ -72,8 +80,6 @@ public class TaskCard extends UiPart{
             setOrNullText(recurrance, "");
         }
         tags.setText(task.tagsString());
-        removeUnnecessaryLabels();
-        style();
     }
 
     public void setOrNullText(Label label, String value){
@@ -89,8 +95,7 @@ public class TaskCard extends UiPart{
     }
     
     public void removeUnnecessaryLabels(){
-        VBox sub = ((VBox) (datetime.getParent()));
-        sub.getChildren().removeIf(lbl -> lbl instanceof Label && ((Label) lbl).getText().equals(""));
+        taskContainer.getChildren().removeIf(lbl -> lbl instanceof Label && ((Label) lbl).getText().equals(""));
     }
     
     public void style(){
@@ -99,7 +104,7 @@ public class TaskCard extends UiPart{
         styleString.append(styler.getLightPriorityColour(task.getPriority().toString()));
         // Style based on done
         styleString.append(styler.getLightDoneColour(task.getDoneFlag().toString()));
-        light.setStyle(styleString.toString());
+        idLight.setStyle(styleString.toString());
         //styleString = new StringBuilder();
         //styleString.append(styler.getCardDoneColour(task.getDoneFlag().toString()));
         //taskPane.setStyle(styleString.toString());
