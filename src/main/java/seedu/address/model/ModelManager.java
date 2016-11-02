@@ -239,40 +239,11 @@ public class ModelManager extends ComponentManager implements Model {
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            /*if(!doneStatus.equalsIgnoreCase("all")){
-                if(!doneStatus.equalsIgnoreCase(task.getDoneFlag().toString())){
-                    return false;
-                }
-            }*/
             if(!checkDoneFlagSame(task)){
                 return false;
             }
             
             if(!dateRange.isEmpty()){
-//                if(!task.isDated()){
-//                    return false;
-//                } else {
-//                    ReadOnlyDatedTask datedTask = (DatedTask) task;
-//                    LocalDateTime currentTaskDateTime = datedTask.getDateTime().getDateTime();
-//                    try {
-//                        LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
-//                        if(currentTaskDateTime.isBefore(startDateTime)){
-//                            return false;
-//                        }
-//                    } catch (IllegalValueException e1) {
-//                        System.out.println("Start date and time given is not a valid string");
-//                        e1.printStackTrace();
-//                    }
-//                    try {
-//                        LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end"));
-//                        if(currentTaskDateTime.isAfter(endDateTime)){
-//                            return false;
-//                        }
-//                    } catch (IllegalValueException e) {
-//                        System.out.println("End date and time given is not a valid string");
-//                        e.printStackTrace();
-//                    }
-//                }
                 if(!checkWithinDateRange(task)){
                     return false;
                 }
