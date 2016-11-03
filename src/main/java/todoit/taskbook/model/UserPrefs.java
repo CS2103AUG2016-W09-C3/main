@@ -54,7 +54,7 @@ public class UserPrefs {
     }
 
     // @@author A0140155U
-    public ObservableList<CommandPreset> getCommandPresets(){
+    public ObservableList<CommandPreset> initCommandPresets(){
         // Initialize internalList after JSON has been loaded
         internalList = FXCollections.observableArrayList(commandPresets);
         return internalList;
