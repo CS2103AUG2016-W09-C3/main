@@ -17,7 +17,7 @@ import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
 import seedu.address.model.task.ReadOnlyDatedTask;
 import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Recurrance;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.Task;
 import seedu.address.model.task.UniqueTaskList.DuplicateTaskException;
 import seedu.address.model.task.UniqueTaskList.TaskNotFoundException;
@@ -86,11 +86,11 @@ public class EditCommand extends Command {
 		try {
 			if (isDated) {
 				this.toAdd = new DatedTask(new Name(name), new DateTime(datetime, oldDatetime), new Length(length),
-						new Recurrance(recurring), new Priority(priority), new Information(information),
+						new Recurrence(recurring), new Priority(priority), new Information(information),
 						new DoneFlag(doneFlag), new UniqueTagList(tagList));
 			} else if (typeChange) {
 				this.toAdd = new DatedTask(new Name(name), new DateTime(datetime), new Length(length),
-						new Recurrance(recurring), new Priority(priority), new Information(information),
+						new Recurrence(recurring), new Priority(priority), new Information(information),
 						new DoneFlag(doneFlag), new UniqueTagList(tagList));
 			} else {
 				if (checkHasDatedParams()) {
@@ -129,7 +129,7 @@ public class EditCommand extends Command {
 	 * Check has dated params
 	 */
 	private boolean checkHasDatedParams() {
-		if (!(this.length.equals(Length.NO_INTERVAL)) && !(this.recurring.equals(Recurrance.NO_INTERVAL))) {
+		if (!(this.length.equals(Length.NO_INTERVAL)) && !(this.recurring.equals(Recurrence.NO_INTERVAL))) {
 			return true;
 		}
 		return false;
@@ -148,8 +148,8 @@ public class EditCommand extends Command {
 		if (this.length.equals(Length.NO_INTERVAL)) {
 			this.length = datedTaskToEdit.getLength().toString();
 		}
-		if (this.recurring.equals(Recurrance.NO_INTERVAL)) {
-			this.recurring = datedTaskToEdit.getRecurrance().toString();
+		if (this.recurring.equals(Recurrence.NO_INTERVAL)) {
+			this.recurring = datedTaskToEdit.getRecurrence().toString();
 		}
 	}
 

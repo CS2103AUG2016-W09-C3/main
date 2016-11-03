@@ -17,7 +17,7 @@ import seedu.address.model.task.Information;
 import seedu.address.model.task.Length;
 import seedu.address.model.task.Name;
 import seedu.address.model.task.Priority;
-import seedu.address.model.task.Recurrance;
+import seedu.address.model.task.Recurrence;
 import seedu.address.model.task.TimeInterval;
 import seedu.address.testutil.TestDatedTask;
 import seedu.address.testutil.TestTask;
@@ -163,18 +163,18 @@ public class EditCommandTest extends TaskBookGuiTest {
         TestTask target = list[index-1];
         
         ParsedCommand command = new CommandParser(args);
-        String name, datetime, length, recurrance, priority, information;
+        String name, datetime, length, recurrence, priority, information;
         name = command.getParamOrDefault("n", "");
         datetime = command.getParamOrDefault("d", "-1");
         length = command.getParamOrDefault("l", "-1");
-        recurrance = command.getParamOrDefault("r", Recurrance.NO_INTERVAL);
+        recurrence = command.getParamOrDefault("r", Recurrence.NO_INTERVAL);
         priority = command.getParamOrDefault("p", "");
         information = command.getParamOrDefault("i", "");
         
         TestTask[] expected = TestUtil.removeTaskFromList(list, index);
         
         try {
-            expected = testEdit(target, name, datetime, length, recurrance, priority, information, expected, index);
+            expected = testEdit(target, name, datetime, length, recurrence, priority, information, expected, index);
         } catch (IllegalValueException e) {
             assert(false);
         }
@@ -182,7 +182,7 @@ public class EditCommandTest extends TaskBookGuiTest {
     }
 
     // Helper method to testEdit in doEdit(String args, TestTask[] list)
-    private TestTask[] testEdit(TestTask target, String name, String datetime, String length, String recurrance,
+    private TestTask[] testEdit(TestTask target, String name, String datetime, String length, String recurrence,
             String priority, String information, TestTask[] expected, int index) throws IllegalValueException {
         boolean isChanged = false;
         
@@ -198,8 +198,8 @@ public class EditCommandTest extends TaskBookGuiTest {
         	((TestDatedTask) target).setLength(new Length(length));
         }
         
-        if (!recurrance.equals(Recurrance.NO_INTERVAL)){
-            ((TestDatedTask) target).setRecurrance(new Recurrance(recurrance));
+        if (!recurrence.equals(Recurrence.NO_INTERVAL)){
+            ((TestDatedTask) target).setRecurrence(new Recurrence(recurrence));
         }
         
         if (!priority.equals("")){

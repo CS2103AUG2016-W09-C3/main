@@ -67,7 +67,7 @@ public class RescheduleCommand extends Command {
 		}
 
 		this.toAdd = new DatedTask(taskToReschedule.getName(), toBeEdited, taskToReschedule.getLength(),
-				taskToReschedule.getRecurrance(), taskToReschedule.getPriority(), taskToReschedule.getInformation(),
+				taskToReschedule.getRecurrence(), taskToReschedule.getPriority(), taskToReschedule.getInformation(),
 				taskToReschedule.getDoneFlag(), taskToReschedule.getTags());
 
 		try {

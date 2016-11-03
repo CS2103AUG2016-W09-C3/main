@@ -54,7 +54,7 @@ public class AddCommand extends Command {
                 new Name(name),
                 new DateTime(datetime),
                 new Length(newLength),
-                new Recurrance(recurring),
+                new Recurrence(recurring),
                 new Priority(priority),
                 new Information(information),
                 new DoneFlag(doneFlag),

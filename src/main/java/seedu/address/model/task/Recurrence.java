@@ -7,7 +7,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
  * Functions as a wrapper for TimeInterval
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
-public class Recurrance {
+public class Recurrence {
 
     public final TimeInterval timeInterval;
     public final static String NO_INTERVAL = "";
@@ -18,7 +18,7 @@ public class Recurrance {
      *
      * @throws IllegalValueException if given information string is invalid.
      */
-    public Recurrance(String interval) throws IllegalValueException {
+    public Recurrence(String interval) throws IllegalValueException {
         assert interval != null;
         interval = interval.trim();
         
@@ -43,8 +43,8 @@ public class Recurrance {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Recurrance // instanceof handles nulls
-                && this.timeInterval.equals(((Recurrance) other).timeInterval)); // state check
+                || (other instanceof Recurrence // instanceof handles nulls
+                && this.timeInterval.equals(((Recurrence) other).timeInterval)); // state check
     }
 
     @Override

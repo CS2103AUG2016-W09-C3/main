@@ -46,7 +46,7 @@ public class Length {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Recurrance // instanceof handles nulls
+                || (other instanceof Recurrence // instanceof handles nulls
                 && this.timeInterval.equals(((Length) other).timeInterval)); // state check
     }
 

@@ -8,7 +8,7 @@ import seedu.address.model.task.*;
 /**
  * A utility class to help with building DatedTask objects. Example usage: <br>
  * {@code TestDatedTask testDatedTask = new DatedTaskBuilder().withName("Attend CS2103T lecture").withDoneFlag("Not done").withDateTime("10-10-2016 1400")
- *                  .withLength("2h").withRecurrance("5d").withPriority("low").withInformation("There is webcast if you do not attend").build();}
+ *                  .withLength("2h").withRecurrence("5d").withPriority("low").withInformation("There is webcast if you do not attend").build();}
  */
 public class DatedTaskBuilder {
 
@@ -55,8 +55,8 @@ public class DatedTaskBuilder {
 		return this;
 	}
 
-	public DatedTaskBuilder withRecurrance(String recurrance) throws IllegalValueException {
-		this.datedTask.setRecurrance(new Recurrance(recurrance));
+	public DatedTaskBuilder withRecurrence(String recurrence) throws IllegalValueException {
+		this.datedTask.setRecurrence(new Recurrence(recurrence));
 		return this;
 	}
 

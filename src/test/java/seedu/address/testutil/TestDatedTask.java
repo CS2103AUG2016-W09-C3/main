@@ -12,7 +12,7 @@ public class TestDatedTask extends TestTask implements ReadOnlyDatedTask {
 
 	private Length length;
 	private DateTime dateTime;
-	private Recurrance recurrance;
+	private Recurrence recurrence;
 	private String dateTimeString;
 	private UniqueTagList tags;
 
@@ -28,8 +28,8 @@ public class TestDatedTask extends TestTask implements ReadOnlyDatedTask {
 		this.dateTime = dateTime;
 	}
 
-	public void setRecurrance(Recurrance recurrance) {
-		this.recurrance = recurrance;
+	public void setRecurrence(Recurrence recurrence) {
+		this.recurrence = recurrence;
 	}
 
 	public void setDateTimeString(String dateTimeString) {
@@ -61,8 +61,8 @@ public class TestDatedTask extends TestTask implements ReadOnlyDatedTask {
 	}
 
 	@Override
-	public Recurrance getRecurrance() {
-		return this.recurrance;
+	public Recurrence getRecurrence() {
+		return this.recurrence;
 	}
 
 	public String getDateTimeString() {
@@ -74,7 +74,7 @@ public class TestDatedTask extends TestTask implements ReadOnlyDatedTask {
 		sb.append("add " + this.getName().fullName + " ");
 		sb.append("d/" + this.getDateTimeString() + " ");
 		sb.append("l/" + this.getLength().toString() + " ");
-		sb.append("r/" + this.getRecurrance().toString() + " ");
+		sb.append("r/" + this.getRecurrence().toString() + " ");
 		sb.append("p/" + this.getPriority().toString() + " ");
 		sb.append("i/" + this.getInformation().toString() + " ");
 		this.getTags().getInternalList().stream().forEach(s -> sb.append("t/" + s.tagName + " "));

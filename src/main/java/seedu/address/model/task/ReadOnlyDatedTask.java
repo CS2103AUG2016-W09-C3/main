@@ -9,7 +9,7 @@ public interface ReadOnlyDatedTask extends ReadOnlyTask {
     DateTime getDateTime();
     DateTime getDateTimeEnd();
     Length getLength();
-    Recurrance getRecurrance();
+    Recurrence getRecurrence();
     
     /**
      * Returns true if both have the same state. (interfaces cannot override .equals)
@@ -25,7 +25,7 @@ public interface ReadOnlyDatedTask extends ReadOnlyTask {
                 && other.getDoneFlag().equals(this.getDoneFlag())
                 && ((ReadOnlyDatedTask) other).getDateTime().equals(this.getDateTime())
                 && ((ReadOnlyDatedTask) other).getLength().equals(this.getLength())
-                && ((ReadOnlyDatedTask) other).getRecurrance().equals(this.getRecurrance()));
+                && ((ReadOnlyDatedTask) other).getRecurrence().equals(this.getRecurrence()));
     }
     
     /**
@@ -39,8 +39,8 @@ public interface ReadOnlyDatedTask extends ReadOnlyTask {
                 .append(getDateTime())
                 .append(" Length: ")
                 .append(getLength())
-                .append(" Recurrance: ")
-                .append(getRecurrance())
+                .append(" Recurrence: ")
+                .append(getRecurrence())
                 .append(" Priority: ")
                 .append(getPriority())
                 .append(" Information: ")
