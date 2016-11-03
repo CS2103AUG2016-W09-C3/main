@@ -16,7 +16,7 @@ public class PresetChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "number of presets: " + data.commandPresets.size();
+        return "number of presets: " + data.getNumPresets();
     }
 }
 //@@author

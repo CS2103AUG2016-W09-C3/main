@@ -4,7 +4,7 @@ package todoit.taskbook.commons.events.ui;
 import todoit.taskbook.commons.events.BaseEvent;
 
 /**
- * Indicates a request to jump to the list of tasks
+ * Indicates a request to jump to the list of presets
  */
 public class JumpToPresetRequestEvent extends BaseEvent {
 

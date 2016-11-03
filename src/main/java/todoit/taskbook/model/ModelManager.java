@@ -131,6 +131,9 @@ public class ModelManager extends ComponentManager implements Model {
     
     @Override
     public void selectPreset(int presetIndex) throws IllegalValueException {
+        if(presetIndex < 0 || presetIndex >= userPrefs.getNumPresets()){
+            throw new IllegalValueException("Index out of range.");
+        }
         raise(new JumpToPresetRequestEvent(presetIndex));
     }
     // @@author

@@ -87,12 +87,12 @@ public class FavoriteUnfavoriteCommandTest extends TaskBookGuiTest  {
                 new TestPreset("undo", "Undo"),
                 new TestPreset("redo", "Redo")};
         assertTrue(presetListPanel.isListMatching(expectedPresets));
-        presetListPanel.navigateToPreset("favorite 1");
+        commandBox.runCommand("favorite 1");
         TestTask[] expectedList = {};
         assertTrue(taskListPanel.isListMatching(expectedList));
-        presetListPanel.navigateToPreset("favorite 2");
+        commandBox.runCommand("favorite 2");
         assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
-        presetListPanel.navigateToPreset("favorite 3");
+        commandBox.runCommand("favorite 3");
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
     
