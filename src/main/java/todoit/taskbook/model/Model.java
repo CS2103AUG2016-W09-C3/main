@@ -69,5 +69,10 @@ public interface Model {
 
     /** Removes a command preset to the current list. Returns the description of the removed preset to be printed. */
     String removePreset(int index) throws IllegalValueException;
+
+    /** Selects a command preset from the current list. Returns the description of the selected preset. 
+     * @throws IllegalValueException */
+    void selectPreset(int presetIndex) throws IllegalValueException;
     // @@author
+
 }
