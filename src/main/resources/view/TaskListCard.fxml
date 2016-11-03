@@ -6,7 +6,7 @@
 <?import java.net.URL?>
 <HBox id="taskPane" fx:id="taskPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <VBox id="indexLblContainer" fx:id="light" alignment="CENTER" minWidth="30.0">
+        <VBox id="indexLblContainer" fx:id="idLight" alignment="CENTER" minWidth="30.0">
 				<Label fx:id="id" styleClass="idLabel"></Label>
 		</VBox>
         <GridPane HBox.hgrow="ALWAYS" >
@@ -15,7 +15,7 @@
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
             <children>
-                <VBox alignment="CENTER_LEFT" maxHeight="150.0" minHeight="0" GridPane.columnIndex="0">
+                <VBox fx:id="taskContainer" alignment="CENTER_LEFT" maxHeight="150.0" minHeight="0" GridPane.columnIndex="0">
                     <stylesheets>
                         <URL value="@DarkTheme.css" />
                         <URL value="@Extensions.css" />
