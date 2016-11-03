@@ -5,13 +5,13 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.TaskBook;
-import seedu.address.model.task.DateTime;
-import seedu.address.model.task.ReadOnlyDatedTask;
-import seedu.address.model.task.UniqueTaskList;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import todoit.taskbook.commons.exceptions.IllegalValueException;
+import todoit.taskbook.model.TaskBook;
+import todoit.taskbook.model.task.DateTime;
+import todoit.taskbook.model.task.ReadOnlyDatedTask;
+import todoit.taskbook.model.task.UniqueTaskList;
+import todoit.taskbook.testutil.TestTask;
+import todoit.taskbook.testutil.TestUtil;
 
 
 public class RecurrenceTest extends TaskBookGuiTest {

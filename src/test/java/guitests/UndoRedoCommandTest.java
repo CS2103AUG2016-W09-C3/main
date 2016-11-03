@@ -6,11 +6,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import guitests.guihandles.TaskCardHandle;
-import seedu.address.commons.core.Messages;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.StatesManager;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import todoit.taskbook.commons.core.Messages;
+import todoit.taskbook.logic.commands.AddCommand;
+import todoit.taskbook.model.StatesManager;
+import todoit.taskbook.testutil.TestTask;
+import todoit.taskbook.testutil.TestUtil;
 
 public class UndoRedoCommandTest extends TaskBookGuiTest {
 

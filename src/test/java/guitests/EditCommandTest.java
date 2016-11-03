@@ -2,26 +2,26 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.DoneCommand.MESSAGE_SUCCESS;
+import static todoit.taskbook.logic.commands.DoneCommand.MESSAGE_SUCCESS;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.parser.CommandParser;
-import seedu.address.logic.parser.ParsedCommand;
-import seedu.address.model.task.DateTime;
-import seedu.address.model.task.Information;
-import seedu.address.model.task.Length;
-import seedu.address.model.task.Name;
-import seedu.address.model.task.Priority;
-import seedu.address.model.task.Recurrence;
-import seedu.address.model.task.TimeInterval;
-import seedu.address.testutil.TestDatedTask;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+import todoit.taskbook.commons.core.Messages;
+import todoit.taskbook.commons.exceptions.IllegalValueException;
+import todoit.taskbook.logic.commands.EditCommand;
+import todoit.taskbook.logic.commands.FindCommand;
+import todoit.taskbook.logic.parser.CommandParser;
+import todoit.taskbook.logic.parser.ParsedCommand;
+import todoit.taskbook.model.task.DateTime;
+import todoit.taskbook.model.task.Information;
+import todoit.taskbook.model.task.Length;
+import todoit.taskbook.model.task.Name;
+import todoit.taskbook.model.task.Priority;
+import todoit.taskbook.model.task.Recurrence;
+import todoit.taskbook.model.task.TimeInterval;
+import todoit.taskbook.testutil.TestDatedTask;
+import todoit.taskbook.testutil.TestTask;
+import todoit.taskbook.testutil.TestUtil;
 
 public class EditCommandTest extends TaskBookGuiTest {
     

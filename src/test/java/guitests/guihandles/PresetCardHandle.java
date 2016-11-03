@@ -4,8 +4,8 @@ package guitests.guihandles;
 import guitests.GuiRobot;
 import javafx.scene.Node;
 import javafx.stage.Stage;
-import seedu.address.model.CommandPreset;
-import seedu.address.model.task.ReadOnlyTask;
+import todoit.taskbook.model.CommandPreset;
+import todoit.taskbook.model.task.ReadOnlyTask;
 
 /**
  * Provides a handle to a task card in the task list panel.
