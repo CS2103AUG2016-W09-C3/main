@@ -4,8 +4,6 @@ package guitests;
 import guitests.guihandles.TaskCardHandle;
 import org.junit.Test;
 
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
 import todoit.taskbook.commons.core.Messages;
 import todoit.taskbook.commons.exceptions.IllegalValueException;
 import todoit.taskbook.logic.commands.AddCommand;
@@ -15,6 +13,8 @@ import todoit.taskbook.model.task.DoneFlag;
 import todoit.taskbook.model.task.ReadOnlyDatedTask;
 import todoit.taskbook.model.task.ReadOnlyTask;
 import todoit.taskbook.model.task.Task;
+import todoit.taskbook.testutil.TestTask;
+import todoit.taskbook.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
 import static todoit.taskbook.logic.commands.DoneCommand.MESSAGE_SUCCESS;

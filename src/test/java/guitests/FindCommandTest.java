@@ -2,8 +2,8 @@ package guitests;
 
 import org.junit.Test;
 
-import seedu.address.testutil.TestTask;
 import todoit.taskbook.commons.core.Messages;
+import todoit.taskbook.testutil.TestTask;
 
 import static org.junit.Assert.assertTrue;
 

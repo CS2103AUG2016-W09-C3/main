@@ -6,9 +6,6 @@ import static todoit.taskbook.logic.commands.DoneCommand.MESSAGE_SUCCESS;
 
 import org.junit.Test;
 
-import seedu.address.testutil.TestDatedTask;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
 import todoit.taskbook.commons.core.Messages;
 import todoit.taskbook.commons.exceptions.IllegalValueException;
 import todoit.taskbook.logic.commands.EditCommand;
@@ -22,6 +19,9 @@ import todoit.taskbook.model.task.Name;
 import todoit.taskbook.model.task.Priority;
 import todoit.taskbook.model.task.Recurrence;
 import todoit.taskbook.model.task.TimeInterval;
+import todoit.taskbook.testutil.TestDatedTask;
+import todoit.taskbook.testutil.TestTask;
+import todoit.taskbook.testutil.TestUtil;
 
 public class EditCommandTest extends TaskBookGuiTest {
     

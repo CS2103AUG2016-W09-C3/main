@@ -5,11 +5,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import seedu.address.testutil.TestPreset;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
 import todoit.taskbook.logic.commands.FavoriteCommand;
 import todoit.taskbook.logic.commands.UnfavoriteCommand;
+import todoit.taskbook.testutil.TestPreset;
+import todoit.taskbook.testutil.TestTask;
+import todoit.taskbook.testutil.TestUtil;
 
 public class FavoriteUnfavoriteCommandTest extends TaskBookGuiTest  {
 

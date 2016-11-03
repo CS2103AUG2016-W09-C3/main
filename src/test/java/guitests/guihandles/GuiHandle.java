@@ -7,7 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import seedu.address.TestApp;
+import todoit.taskbook.TestApp;
 import todoit.taskbook.commons.core.LogsCenter;
 
 import java.util.logging.Logger;

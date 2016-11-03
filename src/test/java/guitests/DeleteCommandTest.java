@@ -1,8 +1,9 @@
 package guitests;
 
 import org.junit.Test;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+
+import todoit.taskbook.testutil.TestTask;
+import todoit.taskbook.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
 import static todoit.taskbook.logic.commands.DeleteCommand.MESSAGE_DELETE_TASK_SUCCESS;
