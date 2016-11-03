@@ -7,8 +7,8 @@ import java.util.regex.Matcher;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.FilepathCommand;
 import seedu.address.testutil.TestUtil;
+import todoit.taskbook.logic.commands.FilepathCommand;
 
 public class FilepathCommandTest extends TaskBookGuiTest {
 

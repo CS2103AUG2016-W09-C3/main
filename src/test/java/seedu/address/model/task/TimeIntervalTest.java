@@ -5,7 +5,8 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
+import todoit.taskbook.commons.exceptions.IllegalValueException;
+import todoit.taskbook.model.task.TimeInterval;
 
 public class TimeIntervalTest {
 

@@ -1,7 +1,7 @@
 // @@author A0140155U
 package seedu.address.testutil;
 
-import seedu.address.model.CommandPreset;
+import todoit.taskbook.model.CommandPreset;
 
 public class TestPreset extends CommandPreset{
 

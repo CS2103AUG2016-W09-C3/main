@@ -7,7 +7,9 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
+import todoit.taskbook.commons.exceptions.IllegalValueException;
+import todoit.taskbook.logic.parser.CommandParser;
+import todoit.taskbook.logic.parser.ParsedCommand;
 
 public class CommandParserTest {
 

@@ -1,9 +1,9 @@
 //@@author A0139046E
 package seedu.address.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.*;
+import todoit.taskbook.commons.exceptions.IllegalValueException;
+import todoit.taskbook.model.tag.UniqueTagList;
+import todoit.taskbook.model.task.*;
 
 /**
  * A mutable dated task object. For testing only.

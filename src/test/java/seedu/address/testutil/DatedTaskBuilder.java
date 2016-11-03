@@ -1,9 +1,9 @@
 //@@author A0139046E
 package seedu.address.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.*;
+import todoit.taskbook.commons.exceptions.IllegalValueException;
+import todoit.taskbook.model.tag.Tag;
+import todoit.taskbook.model.task.*;
 
 /**
  * A utility class to help with building DatedTask objects. Example usage: <br>

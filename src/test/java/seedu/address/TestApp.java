@@ -2,12 +2,13 @@ package seedu.address;
 
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import seedu.address.commons.core.Config;
-import seedu.address.commons.core.GuiSettings;
-import seedu.address.model.ReadOnlyTaskBook;
-import seedu.address.model.UserPrefs;
-import seedu.address.storage.XmlSerializableTaskBook;
 import seedu.address.testutil.TestUtil;
+import todoit.taskbook.MainApp;
+import todoit.taskbook.commons.core.Config;
+import todoit.taskbook.commons.core.GuiSettings;
+import todoit.taskbook.model.ReadOnlyTaskBook;
+import todoit.taskbook.model.UserPrefs;
+import todoit.taskbook.storage.XmlSerializableTaskBook;
 
 import java.util.function.Supplier;
 

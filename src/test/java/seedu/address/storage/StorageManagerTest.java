@@ -5,12 +5,17 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import seedu.address.commons.events.model.TaskBookChangedEvent;
-import seedu.address.commons.events.storage.DataSavingExceptionEvent;
-import seedu.address.model.TaskBook;
-import seedu.address.model.ReadOnlyTaskBook;
-import seedu.address.model.UserPrefs;
+
 import seedu.address.testutil.TypicalTestTasks;
+import todoit.taskbook.commons.events.model.TaskBookChangedEvent;
+import todoit.taskbook.commons.events.storage.DataSavingExceptionEvent;
+import todoit.taskbook.model.ReadOnlyTaskBook;
+import todoit.taskbook.model.TaskBook;
+import todoit.taskbook.model.UserPrefs;
+import todoit.taskbook.storage.JsonUserPrefsStorage;
+import todoit.taskbook.storage.Storage;
+import todoit.taskbook.storage.StorageManager;
+import todoit.taskbook.storage.XmlTaskBookStorage;
 import seedu.address.testutil.EventsCollector;
 
 import java.io.IOException;

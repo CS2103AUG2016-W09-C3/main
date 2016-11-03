@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.task.Task;
-import seedu.address.model.task.UniqueTaskList;
-import seedu.address.model.TaskBook;
+import todoit.taskbook.commons.exceptions.IllegalValueException;
+import todoit.taskbook.model.TaskBook;
+import todoit.taskbook.model.tag.Tag;
+import todoit.taskbook.model.task.Task;
+import todoit.taskbook.model.task.UniqueTaskList;
 
 /**
  * A utility class to help with building TaskBook objects.

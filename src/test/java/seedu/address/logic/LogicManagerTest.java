@@ -1,24 +1,28 @@
 package seedu.address.logic;
 
 import com.google.common.eventbus.Subscribe;
+
+import todoit.taskbook.commons.core.EventsCenter;
+import todoit.taskbook.commons.events.model.TaskBookChangedEvent;
+import todoit.taskbook.commons.events.ui.JumpToListRequestEvent;
+import todoit.taskbook.commons.events.ui.ShowHelpRequestEvent;
+import todoit.taskbook.logic.Logic;
+import todoit.taskbook.logic.LogicManager;
+import todoit.taskbook.logic.commands.*;
+import todoit.taskbook.model.Model;
+import todoit.taskbook.model.ModelManager;
+import todoit.taskbook.model.ReadOnlyTaskBook;
+import todoit.taskbook.model.TaskBook;
+import todoit.taskbook.model.tag.Tag;
+import todoit.taskbook.model.tag.UniqueTagList;
+import todoit.taskbook.model.task.*;
+import todoit.taskbook.storage.StorageManager;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import seedu.address.commons.core.EventsCenter;
-import seedu.address.logic.commands.*;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
-import seedu.address.commons.events.ui.ShowHelpRequestEvent;
-import seedu.address.commons.events.model.TaskBookChangedEvent;
-import seedu.address.model.TaskBook;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.ReadOnlyTaskBook;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.UniqueTagList;
-import seedu.address.model.task.*;
-import seedu.address.storage.StorageManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,7 +31,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.commons.core.Messages.*;
+import static todoit.taskbook.commons.core.Messages.*;
 
 public class LogicManagerTest {
 
