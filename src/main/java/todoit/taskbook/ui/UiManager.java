@@ -12,6 +12,7 @@ import todoit.taskbook.commons.core.Config;
 import todoit.taskbook.commons.core.LogsCenter;
 import todoit.taskbook.commons.events.storage.DataSavingExceptionEvent;
 import todoit.taskbook.commons.events.ui.JumpToListRequestEvent;
+import todoit.taskbook.commons.events.ui.JumpToPresetRequestEvent;
 import todoit.taskbook.commons.events.ui.ShowHelpRequestEvent;
 import todoit.taskbook.commons.events.ui.TaskPanelSelectionChangedEvent;
 import todoit.taskbook.commons.util.StringUtil;
@@ -116,6 +117,14 @@ public class UiManager extends ComponentManager implements Ui {
         mainWindow.getTaskListPanel().scrollTo(event.targetIndex);
     }
 
+    // @@author A0140155U
+    @Subscribe
+    private void handleJumpToPresetRequestEvent(JumpToPresetRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        mainWindow.getPresetListPanel().scrollTo(event.targetIndex);
+    }
+    // @@author
+    
     @Subscribe
     private void handleTaskPanelSelectionChangedEvent(TaskPanelSelectionChangedEvent event){
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
