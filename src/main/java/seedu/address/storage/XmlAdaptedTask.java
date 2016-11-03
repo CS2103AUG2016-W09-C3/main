@@ -25,7 +25,7 @@ public class XmlAdaptedTask {
     @XmlElement
     private String length;
     @XmlElement
-    private String recurrance;
+    private String recurrence;
     @XmlElement
     private String done;
 
@@ -62,7 +62,7 @@ public class XmlAdaptedTask {
             ReadOnlyDatedTask datedSource = (ReadOnlyDatedTask) source;
             dateTime = datedSource.getDateTime().toString();
             length = datedSource.getLength().toString();
-            recurrance = datedSource.getRecurrance().toString();
+            recurrence = datedSource.getRecurrence().toString();
         }
     }
 
@@ -84,8 +84,8 @@ public class XmlAdaptedTask {
         if(isDated){
             final DateTime dateTime = new DateTime(this.dateTime, true);
             final Length length = new Length(this.length);
-            final Recurrance recurrance = new Recurrance(this.recurrance);
-            return new DatedTask(name, dateTime, length, recurrance, priority, information, done, tags);
+            final Recurrence recurrence = new Recurrence(this.recurrence);
+            return new DatedTask(name, dateTime, length, recurrence, priority, information, done, tags);
         }else{
             return new Task(name, priority, information, done, tags);
         }

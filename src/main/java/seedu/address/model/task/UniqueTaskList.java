@@ -126,7 +126,7 @@ public class UniqueTaskList implements Iterable<Task> {
             Task recurringTask = internalList.get(i);
             if (recurringTask.isDated()) {
                 ReadOnlyDatedTask task = (ReadOnlyDatedTask) recurringTask;
-                Recurrance recurrence = task.getRecurrance();
+                Recurrence recurrence = task.getRecurrence();
                 if (!recurrence.toString().equals(recurrence.NO_INTERVAL)) {
                     // Set DoneFlag to NOT_DONE if it is DONE
                     setDoneFlagOnDatedTask(i, task, recurrence);
@@ -135,7 +135,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
     }
 
-    private void setDoneFlagOnDatedTask(int i, ReadOnlyDatedTask task, Recurrance recurrence) {
+    private void setDoneFlagOnDatedTask(int i, ReadOnlyDatedTask task, Recurrence recurrence) {
         if (task.getDoneFlag().isDone()) {
             // setDateAndTime and DONE_FLAG to correct task
             try {
@@ -147,7 +147,7 @@ public class UniqueTaskList implements Iterable<Task> {
         }
     }
 
-    private void updateTask(int i, ReadOnlyDatedTask task, Recurrance recurrence) throws IllegalValueException {
+    private void updateTask(int i, ReadOnlyDatedTask task, Recurrence recurrence) throws IllegalValueException {
         DoneFlag newFlag;
         newFlag = new DoneFlag(DoneFlag.NOT_DONE);
 
@@ -161,7 +161,7 @@ public class UniqueTaskList implements Iterable<Task> {
         
         Task toAdd = null;
         toAdd = new DatedTask(task.getName(), latestDateTime, task.getLength(),
-                task.getRecurrance(), task.getPriority(), task.getInformation(), newFlag,
+                task.getRecurrence(), task.getPriority(), task.getInformation(), newFlag,
                 task.getTags());
         
         internalList.remove(i);

@@ -37,7 +37,7 @@
                         <Label fx:id="information" styleClass="cell_small_label" text="\$information" />
                         <Label fx:id="datetime" styleClass="cell_small_label" text="\$datetime" />
                         <Label fx:id="length" styleClass="cell_small_label" text="\$length" />
-                        <Label fx:id="recurrance" styleClass="cell_small_label" text="\$recurrance" />
+                        <Label fx:id="recurrence" styleClass="cell_small_label" text="\$recurrence" />
                     </children>
                 </VBox>
             </children>

@@ -14,7 +14,7 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
     
     private DateTime dateTime;
     private Length length;
-    private Recurrance recurrance;
+    private Recurrence recurrence;
     
     private UniqueTagList tags;
     
@@ -28,13 +28,13 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
     /**
      * Every field must be present and not null.
      */
-    public DatedTask(Name name, DateTime time, Length length, Recurrance recurring, Priority priority,
+    public DatedTask(Name name, DateTime time, Length length, Recurrence recurring, Priority priority,
             Information information, DoneFlag doneFlag, UniqueTagList uniqueTagList) {
         super(name, priority, information, doneFlag, uniqueTagList);
         assert !CollectionUtil.isAnyNull(recurring, time, length);
         this.dateTime = time;
         this.length = length;
-        this.recurrance = recurring;
+        this.recurrence = recurring;
     }
     
     /**
@@ -42,7 +42,7 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
      */
     public DatedTask(ReadOnlyDatedTask source) {
         this(source.getName(), source.getDateTime(), source.getLength(), 
-             source.getRecurrance(), source.getPriority(), source.getInformation(), source.getDoneFlag(), source.getTags());
+             source.getRecurrence(), source.getPriority(), source.getInformation(), source.getDoneFlag(), source.getTags());
     }
     
     public DateTime getDateTime(){
@@ -66,8 +66,8 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
         return this.length;
     }
 
-    public Recurrance getRecurrance() {
-        return this.recurrance;
+    public Recurrence getRecurrence() {
+        return this.recurrence;
     }
 
     @Override
@@ -81,7 +81,7 @@ public class DatedTask extends Task implements ReadOnlyDatedTask {
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
         return Objects.hash(this.name, this.dateTime, this.length, 
-                            this.recurrance, this.priority, this.information, tags);
+                            this.recurrence, this.priority, this.information, tags);
     }
 
 }

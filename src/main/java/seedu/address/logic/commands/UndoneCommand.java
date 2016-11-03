@@ -67,7 +67,7 @@ public class UndoneCommand extends Command {
             }else{
                 ReadOnlyDatedTask datedTaskToDelete = (ReadOnlyDatedTask) taskToDelete;
                 toAdd = new DatedTask(datedTaskToDelete.getName(), datedTaskToDelete.getDateTime(),
-                        datedTaskToDelete.getLength(), datedTaskToDelete.getRecurrance(),
+                        datedTaskToDelete.getLength(), datedTaskToDelete.getRecurrence(),
                         datedTaskToDelete.getPriority(), datedTaskToDelete.getInformation(), 
                         newFlag, datedTaskToDelete.getTags());
             }

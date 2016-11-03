@@ -34,7 +34,7 @@ public class TaskCard extends UiPart{
     @FXML
     private Label length;
     @FXML
-    private Label recurrance;
+    private Label recurrence;
     @FXML
     private Label tags;
 
@@ -65,11 +65,11 @@ public class TaskCard extends UiPart{
             setOrNullText(datetime, "Date: ",
                     datedTask.getDateTime().toString() + (datedTask.hasValidLength() ? " - " + datedTask.getDateTimeEnd().toString() : ""));
             setOrNullText(length, "");
-            setOrNullText(recurrance, "Repeat every ", datedTask.getRecurrance().toString());
+            setOrNullText(recurrence, "Repeat every ", datedTask.getRecurrence().toString());
         }else{
             setOrNullText(datetime, "");
             setOrNullText(length, "");
-            setOrNullText(recurrance, "");
+            setOrNullText(recurrence, "");
         }
         tags.setText(task.tagsString());
         removeUnnecessaryLabels();

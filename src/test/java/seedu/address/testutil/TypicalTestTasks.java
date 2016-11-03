@@ -49,22 +49,22 @@ public class TypicalTestTasks {
             //@@author A0139947L
             //Manually added (dated)
             lectureToAttend = new DatedTaskBuilder().withName("Attend CS2103T lecture").withDoneFlag("Not done").withDateTime("10-10-2016 1400")
-                    .withLength("2h").withRecurrance("5d").withPriority("low").withInformation("There is webcast if you do not attend").build();
+                    .withLength("2h").withRecurrence("5d").withPriority("low").withInformation("There is webcast if you do not attend").build();
             
             meetNathan = new DatedTaskBuilder().withName("Meet Nathan for dinner").withDoneFlag("Not done").withDateTime("11-25-2016 1800")
-                    .withLength("3h").withRecurrance("3d").withPriority("medium").withInformation("Meeting nathan to catch up").build();
+                    .withLength("3h").withRecurrence("3d").withPriority("medium").withInformation("Meeting nathan to catch up").build();
             
             cuttingHair = new DatedTaskBuilder().withName("Cut hair").withDoneFlag("Not done").withDateTime("11-10-2016 0900")
-                    .withLength("1h").withRecurrance("6d").withPriority("medium").withInformation("Cut hair so your hair will not be long").build();
+                    .withLength("1h").withRecurrence("6d").withPriority("medium").withInformation("Cut hair so your hair will not be long").build();
             
             dinnerDate = new DatedTaskBuilder().withName("Dinner date").withDoneFlag("Not done").withDateTime("11-17-2016 1900")
-                    .withLength("2h").withRecurrance("5d").withPriority("medium").withInformation("Nice dinner at restuarant").build();
+                    .withLength("2h").withRecurrence("5d").withPriority("medium").withInformation("Nice dinner at restuarant").build();
             
             meetingToAttend = new DatedTaskBuilder().withName("Meeting with CS2101 tutor").withDoneFlag("Not done").withDateTime("10-30-2016 1000")
-                    .withLength("2h").withRecurrance("3d").withPriority("high").withInformation("At COM2").build();
+                    .withLength("2h").withRecurrence("3d").withPriority("high").withInformation("At COM2").build();
             
             csFinalExam = new DatedTaskBuilder().withName("CS2103T Finals").withDoneFlag("Not done").withDateTime("11-28-2016 1800")
-                    .withLength("2h").withRecurrance("1d").withPriority("high").withInformation("At MPSH").build();
+                    .withLength("2h").withRecurrence("1d").withPriority("high").withInformation("At MPSH").build();
             //@@author
         } catch (IllegalValueException e) {
             e.printStackTrace();

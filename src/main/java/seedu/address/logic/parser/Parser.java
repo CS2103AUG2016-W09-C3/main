@@ -4,7 +4,7 @@ import seedu.address.logic.commands.*;
 import seedu.address.model.task.DateParser;
 import seedu.address.model.task.DoneFlag;
 import seedu.address.model.task.Length;
-import seedu.address.model.task.Recurrance;
+import seedu.address.model.task.Recurrence;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.exceptions.IllegalValueException;
 
@@ -176,7 +176,7 @@ public class Parser {
                         command.getParamOrDefault("d", "-1"),
                         command.getParamOrDefault("l", "-1"),
                         command.getParamOrDefault("de", "-1"),
-                        command.getParamOrDefault("r", Recurrance.NO_INTERVAL),
+                        command.getParamOrDefault("r", Recurrence.NO_INTERVAL),
                         command.getParamOrDefault("p", "medium"),
                         command.getParamOrDefault("i", ""),
                         DoneFlag.NOT_DONE,
@@ -257,7 +257,7 @@ public class Parser {
 		try {
 			return new EditCommand(Integer.parseInt(command.getValuesAsString()), command.getParamOrDefault("n", ""),
 					command.getParamOrDefault("d", "-1"), command.getParamOrDefault("l", Length.NO_INTERVAL),
-					command.getParamOrDefault("r", Recurrance.NO_INTERVAL), command.getParamOrDefault("p", ""),
+					command.getParamOrDefault("r", Recurrence.NO_INTERVAL), command.getParamOrDefault("p", ""),
 					command.getParamOrDefault("i", ""), DoneFlag.NOT_DONE, getTagsFromArgs(command.getAllParams("t")));
 		} catch (IllegalValueException ive) {
 			return new IncorrectCommand(ive.getMessage());
