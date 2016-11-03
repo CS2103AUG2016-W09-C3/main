@@ -118,7 +118,7 @@ public class MainWindow extends UiPart {
 
     void fillInnerParts() {
         // @@author A0140155U
-        presetListPanel = PresetListPanel.load(primaryStage, getPresetListPlaceholder(), userPrefs.getCommandPresets());
+        presetListPanel = PresetListPanel.load(primaryStage, getPresetListPlaceholder(), userPrefs.initCommandPresets());
         // @@author
         taskListPanel = TaskListPanel.load(primaryStage, getTaskListPlaceholder(), logic.getFilteredTaskList());
         resultDisplay = ResultDisplay.load(primaryStage, getResultDisplayPlaceholder());

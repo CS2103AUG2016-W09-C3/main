@@ -348,14 +348,23 @@ public class Parser {
      */
     private Command prepareFavorite(ParsedCommand command) {
         try{
-            if(!command.hasValue() || !command.hasParams(FavoriteCommand.REQUIRED_PARAMS)){
+            if(!command.hasValue()){
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
             }
-            
-            // Work around because the command might have tokens which can be recognized by ParsedCommand as params.
-            int paramIndex = command.getCommand().indexOf(" c/");
-            String favCommand = command.getCommand().substring(paramIndex + 3, command.getCommand().length());
-            return new FavoriteCommand(favCommand, command.getValuesAsString());
+            if(command.hasParams(FavoriteCommand.REQUIRED_PARAMS)){
+                // Add a new favorite
+                // Work around because the command might have tokens which can be recognized by ParsedCommand as params.
+                int paramIndex = command.getCommand().indexOf(" c/");
+                String favCommand = command.getCommand().substring(paramIndex + 3, command.getCommand().length());
+                return new FavoriteCommand(favCommand, command.getValuesAsString());
+            }else{
+                // Select a favorite
+                Optional<Integer> index = parseIndex(command.getValue());
+                if(!index.isPresent()){
+                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
+                }
+                return new FavSelectCommand(index.get() - 1); // Convert to 0 index
+            }
         }catch(IllegalValueException ex){
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));

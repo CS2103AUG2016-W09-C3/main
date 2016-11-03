@@ -19,7 +19,7 @@ public class UserPrefs {
     // @@author A0140155U
     
     // This list stores the list of command presets, which are serialized to preferences.json
-    public ArrayList<CommandPreset> commandPresets = new ArrayList<>();
+    private ArrayList<CommandPreset> commandPresets = new ArrayList<>();
     
     // This list stores an observable list of command presets, which the cards in the PresetListPanel are binded to.
     @JsonIgnore 
@@ -54,7 +54,7 @@ public class UserPrefs {
     }
 
     // @@author A0140155U
-    public ObservableList<CommandPreset> getCommandPresets(){
+    public ObservableList<CommandPreset> initCommandPresets(){
         // Initialize internalList after JSON has been loaded
         internalList = FXCollections.observableArrayList(commandPresets);
         return internalList;
@@ -99,6 +99,10 @@ public class UserPrefs {
         commandPresets.remove(index);
         internalList.remove(index);
         return removedCommandDesc;
+    }
+    
+    public int getNumPresets(){
+        return commandPresets.size();
     }
     // @@author
 

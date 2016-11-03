@@ -48,6 +48,17 @@ public class FavoriteUnfavoriteCommandTest extends TaskBookGuiTest  {
         TestTask[] expectedList = TestUtil.addTasksToList(td.getTypicalTasks(), personToAdd);
         assertTrue(taskListPanel.isListMatching(expectedList));
     }
+
+    @Test
+    public void favorite_select_command() {
+        TestTask personToAdd = td.nieceBirthdayMeal;
+        commandBox.runCommand("favorite Add c/" + personToAdd.getAddCommand());
+        TestPreset[] expectedPresets = {new TestPreset(personToAdd.getAddCommand(), "Add")};
+        assertTrue(presetListPanel.isListMatching(expectedPresets));
+        commandBox.runCommand("favorite 1");
+        TestTask[] expectedList = TestUtil.addTasksToList(td.getTypicalTasks(), personToAdd);
+        assertTrue(taskListPanel.isListMatching(expectedList));
+    }
     
     @Test
     public void favorite_multipleCommands() {
@@ -68,11 +79,37 @@ public class FavoriteUnfavoriteCommandTest extends TaskBookGuiTest  {
     }
     
     @Test
+    public void favorite_select_multipleCommands() {
+        commandBox.runCommand("favorite Clear c/clear");
+        commandBox.runCommand("favorite Undo c/undo");
+        commandBox.runCommand("favorite Redo c/redo");
+        TestPreset[] expectedPresets = {new TestPreset("clear", "Clear"),
+                new TestPreset("undo", "Undo"),
+                new TestPreset("redo", "Redo")};
+        assertTrue(presetListPanel.isListMatching(expectedPresets));
+        commandBox.runCommand("favorite 1");
+        TestTask[] expectedList = {};
+        assertTrue(taskListPanel.isListMatching(expectedList));
+        commandBox.runCommand("favorite 2");
+        assertTrue(taskListPanel.isListMatching(td.getTypicalTasks()));
+        commandBox.runCommand("favorite 3");
+        assertTrue(taskListPanel.isListMatching(expectedList));
+    }
+    
+    @Test
     public void favorite_invalid() {
         commandBox.runCommand("favorite c/no desc");
         assertResultMessage(INVALID_MESSAGE_FAV);
         commandBox.runCommand("favorite no command");
         assertResultMessage(INVALID_MESSAGE_FAV);
+        commandBox.runCommand("favorite");
+        assertResultMessage(INVALID_MESSAGE_FAV);
+    }
+    
+    @Test
+    public void favorite_select_invalid() {
+        commandBox.runCommand("favorite 100");
+        assertResultMessage(OUT_OF_RANGE_MESSAGE);
     }
     
     @Test

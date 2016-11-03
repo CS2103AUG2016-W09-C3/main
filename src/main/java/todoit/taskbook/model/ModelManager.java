@@ -7,6 +7,7 @@ import todoit.taskbook.commons.core.UnmodifiableObservableList;
 import todoit.taskbook.commons.events.model.FilePathChangedEvent;
 import todoit.taskbook.commons.events.model.PresetChangedEvent;
 import todoit.taskbook.commons.events.model.TaskBookChangedEvent;
+import todoit.taskbook.commons.events.ui.JumpToPresetRequestEvent;
 import todoit.taskbook.commons.exceptions.IllegalValueException;
 import todoit.taskbook.commons.exceptions.StateException;
 import todoit.taskbook.commons.util.StringUtil;
@@ -126,6 +127,14 @@ public class ModelManager extends ComponentManager implements Model {
         String removedCommandDesc = userPrefs.removePreset(index);
         raise(new PresetChangedEvent(userPrefs));
         return removedCommandDesc;
+    }
+    
+    @Override
+    public void selectPreset(int presetIndex) throws IllegalValueException {
+        if(presetIndex < 0 || presetIndex >= userPrefs.getNumPresets()){
+            throw new IllegalValueException("Index out of range.");
+        }
+        raise(new JumpToPresetRequestEvent(presetIndex));
     }
     // @@author
     //@@author A0139046E
