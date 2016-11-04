@@ -120,8 +120,6 @@ public class EditCommandTest extends TaskBookGuiTest {
         assertEditSuccess(command, listToEdit);
     }
     
-    
-    // PROBLEM WITH THIS
     @Test
     public void editCommand_invalidTimeIntervalRecurrence_UnknownCommandFormat(){
         // Check if edit function throws unknown command properly (recurrence)
