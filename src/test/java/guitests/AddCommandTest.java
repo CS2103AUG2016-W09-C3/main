@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 public class AddCommandTest extends TaskBookGuiTest {
     //@@author A0139121R
     @Test
-    public void add() {
+    public void add_integrationTest_allCommandsWorkAsExpected() {
         //add one task
         TestTask[] currentList = td.getTypicalTasks();
         TestTask taskToAdd = td.nieceBirthdayMeal;

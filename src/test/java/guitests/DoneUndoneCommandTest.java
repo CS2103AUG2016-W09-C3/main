@@ -23,62 +23,62 @@ public class DoneUndoneCommandTest extends TaskBookGuiTest {
 
 
     @Test
-    public void doneFirstTask() {
+    public void done_firstTask_taskMarkedDone() {
         assertDoneSuccess(1, td.getTypicalTasks());
     }
     
     @Test
-    public void doneLastTask() {
+    public void done_lastTask_taskMarkedDone() {
         assertDoneSuccess(td.getTypicalTasks().length, td.getTypicalTasks());
     }
     
     @Test
-    public void doneMiddleTask() {
+    public void done_middleTask_taskMarkedDone() {
         assertDoneSuccess(td.getTypicalTasks().length / 2, td.getTypicalTasks());
     }
     
     @Test
-    public void doneDoneTask() {
+    public void done_alreadyDoneTask_displayErrorMessage() {
         commandBox.runCommand("done 1");
         commandBox.runCommand("done 1");
         assertResultMessage("Task is already done.");
     }
     
     @Test
-    public void doneInvalidTask() {
+    public void done_outOfRangeIndex_displayErrorMessage() {
         commandBox.runCommand("done " + td.getTypicalTasks().length + 1);
         assertResultMessage("The task index provided is invalid");
     }
     
     @Test
-    public void undoneFirstTask() {
+    public void undone_firstTask_taskMarkedUndone() {
         int targetIndex = 1;
         commandBox.runCommand("done " + targetIndex);
         assertUndoneSuccess(targetIndex, td.getTypicalTasks());
     }
     
     @Test
-    public void undoneMiddleTask() {
+    public void undone_middleTask_taskMarkedUndone() {
         int targetIndex = td.getTypicalTasks().length / 2;
         commandBox.runCommand("done " + targetIndex);
         assertUndoneSuccess(targetIndex, td.getTypicalTasks());
     }
     
     @Test
-    public void undoneLastTask() {
+    public void undone_lastTask_taskMarkedUndone() {
         int targetIndex = td.getTypicalTasks().length;
         commandBox.runCommand("done " + targetIndex);
         assertUndoneSuccess(targetIndex, td.getTypicalTasks());
     }
 
     @Test
-    public void undoneUndoneTask() {
+    public void undone_alreadyUndoneTask_displayErrorMessage() {
         commandBox.runCommand("undone 1");
         assertResultMessage("Task is already undone.");
     }
 
     @Test
-    public void undoneInvalidTask() {
+    public void undone_outOfRangeIndex_displayErrorMessage() {
         commandBox.runCommand("undone " + td.getTypicalTasks().length + 1);
         assertResultMessage("The task index provided is invalid");
     }

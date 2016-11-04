@@ -11,7 +11,7 @@ import todoit.taskbook.model.task.TimeInterval;
 public class TimeIntervalTest {
 
     @Test
-    public void checkValidIntervals() {
+    public void timeInterval_validIntervals_parsedSuccessfully() {
         try {
             TimeInterval t;
             t = new TimeInterval("10m");
@@ -53,10 +53,13 @@ public class TimeIntervalTest {
     }
     
     @Test
-    public void checkInvalidIntervals() {
+    public void timeInterval_invalidIntervals_failToParse() {
         checkInvalidInterval("1");
+        checkInvalidInterval("h");
         checkInvalidInterval("1 h");
         checkInvalidInterval("0.5h");
+        checkInvalidInterval("");
+        checkInvalidInterval("time interval");
     }
     
     private void checkInvalidInterval(String invalidInterval){
