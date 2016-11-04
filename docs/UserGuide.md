@@ -8,16 +8,18 @@
 
 ## About
 
-   Always forgetting what to do? Have difficulties managing your hectic timetable? If you want to plan your day efficiently, then we have got just the app just for you, ToDoIt!<br>
+   Always forgetting what to do? Have difficulties in managing your hectic timetable? If you want to plan your day efficiently, then we have just the app for you!<br>
    <br>
    ToDoIt is a task manager that keeps your daily activities in check. 
-   It will notify you of the upcoming activities for the day or the week.<br>
+   It will notify you of all your upcoming activities for the day or the week.<br>
    <br>
    ToDoIt has a simple command-line based interface which caters to people who are more comfortable with typing instead of navigating complex user interfaces. However that is not to say ToDoIt is not for beginners, the interface is simple and commands are intuitive; beginners can start using it immediately.<br>
    <br>
-   ToDoIt has a simple command-line based interface which caters to people who are more comfortable with typing instead of navigating complex user interfaces. However that is not to say ToDoIt is not for beginners, the interface is simple and commands are intuitive; beginners can start using it immediately.<br>
+   Unlike other complex task managers, ToDoIt is a minimalistic task manager where all your tasks can be managed effortlessly with just one command. In addition, it can function as a calendar to help you keep track of your schedule.<br>
    <br>
-   This user guide aims to describe how you, as a user, can use ToDoIt to accomplish various tasks.<br>
+   ToDoIt has a simple command-line based interface which caters to people who are more comfortable with typing instead of navigating complex user interface. However, that is not to say ToDoIt is only for advanced users. With a simple interface and intuitive commands, beginners can also use the application with ease.<br>
+   <br>
+   This user guide will demonstrate the various commands that ToDoIt has to offer, so that you, as a user, can manage your daily activities.<br>
    <br>
    Are you ready? Let's get started!<br>
 
@@ -48,19 +50,19 @@
 
 Ensure you've followed the quick start guide to downloading this program. Simply double click the app to run it. As you can see, the prototype User Interface will be shown above.
 
-When the program is started, you will see 4 controls:
+When the program is started, you will see the following:
 
 1. The command box. This is where commands are entered. Simply type the command you want to execute, and press enter to execute it.
 2. The result summary. Once a command is entered, relevant information will be logged in this box. You can view it to ensure the command has been executed correctly.
-3. The task box. This displays the tasks you have entered. Tasks retrieved from the `list` or `find` command will also be reflected here.
-4. The presets window. Favorite command stores custom commands here, users can click on the presets to run the stored commands. Unfavorite command can be used to remove custom stored commands here.
+3. The task panel. This displays the tasks you have entered. Tasks retrieved from the `list` or `find` command will also be reflected here.
+4. The presets panel. This displays a list of presets specified by the user. Clicking on one of them will run the corresponding command. 
 
 ###Command Format
-* Each command consists of a command word (such as find, or help), followed by additional options. An option is a word or character followed by a forward slash (e.g. a/, ds/ etc.).
+* Each command consists of a command word (such as find, or help), followed by additional options. An option is a word or character followed by a forward slash (e.g. p/, d/, etc).
 * An option may require additional data, specified after the forward slash (e.g. desc/Go to Work). `UPPER_CASE` words in the format describe the data to input.
-* Options in `SQUARE_BRACKETS`"[]" are optional.
+* Options in `SQUARE_BRACKETS`"[ ]" are optional.
 * Options with `...` after them can be specified multiple times (e.g. `t/Work t/School t/CS2103`).
-* The order of options to specify for each command is fixed.
+* The order of options to specify for each command is not fixed after the task name. For example, `add Go to school p/high i/Tutorial class` is the same as `add Go to school i/Tutorial class p/high`. 
 
 <!-- @@author A0140155U -->
 
@@ -112,17 +114,18 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 <!-- @@author A0139121R -->
 > 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
 > 7. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
-> 8. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
+> 8. `t/` Tags: Specifies tags for this task. Tags allow you to group tasks logically by assigning them a similar tag.
 
 **Notes**
 > * A task can be dated (has time, date, length), or floating. A floating task is one without any specified date, time and length which can be done at a flexible timing.<br> 
 > * If a task is dated (d/ option specified) but length is not specified, the duration defaults to 1 hour.<br> 
-> * Tasks can have any number of tags (including 0). Simply repeat the t/ option (e.g. `t/work t/school t/CS2103`).
-
+> * Tasks can have any number of tags (including 0). Simply repeat the t/ option (e.g. `t/work t/school t/CS2103`).<br>
+> * End date and time should not be used in conjunction with length.
+ 
 **Example**
 > * You have a CS2101 Lecture weekly, starting from 7th Oct at 2pm. However, the lecture is webcasted so you don't always have to attend, thus making it low priority. You simply have to run: <br>
->   `add CS2101 Lecture h/7th Oct 2pm l/2hr r/1w p/low t/got-webcast` <br>
->   This will add a CS2101 Lecture task which recurs every week starting with 2pm on 7th Oct, marks it as low priority and tags it with the `got-webcast` tag.
+>   `add CS2101 Lecture h/7th Oct 2pm l/2hr r/1w p/low t/webcast` <br>
+>   This will add a CS2101 Lecture task which recurs every week starting with 2pm on 7th Oct, marks it as low priority and tags it with the `webcast` tag.
 
 <!-- @@author -->
 
@@ -130,13 +133,13 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 <!-- @@author A0139121R -->
 ### Listing tasks : `list`
 ToDoIt displays your tasks easily with a simple command. The tasks to list can be customized to your liking simply with a few keywords.<br>
-Format: `list [ds/DATE_START] [ds/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
+Format: `list [ds/DATE_START] [de/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 
 **Options**
 > 1. `ds/` Date start: If a start date is specified, program will only display tasks after this date. If the option is used without a specified date, it will use today's date.
 > 2. `de/` Date end: If an end date is specified, program will only display tasks before this date. If the option is used without a specified date, , it will use today's date.
-> 3. `s/` Sort by: Sorts the tasks in the order specified (`date`, `time`, `alphabetical`, `priority`).
-> 4. `df/` Done tasks: If this flag is specified, tasks that are marked done will be shown. The available done flags are "done", "not done" and "all".
+> 3. `s/` Sort by: Sorts the tasks in the order specified (`date` and `time`, `alphabetical`, `priority`).
+> 4. `df/` Done status: Use this flag to specify, by done status, which tasks to show. The available done flags are "done", "not done" and "all".
 > 5. `rev/` Reverse: If this flag is specified, tasks will be listed in reverse order after sorting.
 
 **Notes**
@@ -156,10 +159,10 @@ ToDoIt searches and finds the tasks you need, while filtering out the clutter. K
 Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 
 **Options**
-> 1. `s/` Scope: If you only want to search a task's specific attribute, specify which attributes you want to search here (`name` : name, `tag` : tag, `information` : information). By default, it searches in all three areas.
+> 1. `s/` Scope: If you only want to search a task's name or description, specify which attributes you want to search here (`name` : name, `tag` : tag, `information` : information). By default, it searches in all three areas if no attribute is specified.
 
 **Notes**
-> * The search is not case sensitive. e.g `stuff` will match `Stuff`<br> 
+> * The search is not case sensitive. e.g `stuff` will match `STUFF`<br> 
 > * The order of the keywords does not matter. e.g. `Do stuff` will match `Stuff do`<br> 
 > * Only full words will be matched e.g. `Work` will not match `Workout`<br> 
 > * Tasks matching at least one keyword will be returned (i.e. `OR` search).<br>
@@ -197,28 +200,26 @@ Format: `delete INDEX`
 ---
 
 ### Clear all tasks : `clear`
-Sometimes you just have to start fresh. Remove everything in your task list with one command.<br>
+Sometimes you just have to start afresh. Remove everything in your task list with one command.<br>
 Format: `clear`
 
 <!-- @@author A0139046E -->
 ---
 
 ### Editing a task: `edit`
-You never know when things change. Life is unpredictable. ToDoIt knows this, and allows you to adapt to the erratic changes you may have in your schedule. Modify your tasks with a simple command.<br>
+You will never know when things might change. Life is unpredictable. ToDoIt knows this, and lets you adapt to the erratic changes you may have in your schedule. Modify your tasks with a simple command.<br>
 Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` 
 
 **Options**
-> 1. `n/` Name: The new name of the task.
-> 1. `d/` Date and time: Specifies the start date and time of a task. Please refer to the Date Specifications section for what formats are accepted.
+> 1. `n/` Name: Edits the name of the task.
+> 2. `d/` Date and time: Edits the start date and time of a task. Please refer to the Date Specifications section for what formats are accepted.
 <!-- @@author A0139947L -->
-> 2. `l/` Length: Specifies the length of time. Defaults to 1 hour if time and date are specified, but length is not specified. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
-> 3. `r/` Recur: Specifies an interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
-> 4. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
+> 3. `l/` Length: Edits the length of time. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
+> 4. `r/` Recur: Edits the interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
+> 5. `p/` Priority: Edits the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
 <!-- @@author -->
-<!-- @@author A0139046E -->
-> 5. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
-> 6. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
-> 7. `t/` Tags: Specifies tags that are tagged to this task. Tags allow you to group tasks logically by assigning them a similar tag.
+> 6. `i/` Information: Edits information of this task.
+> 7. `t/` Tags: Edits tags that are tagged with the task.
 
 **Notes**
 > * This edits the task at the specified `INDEX`. <br>
@@ -232,11 +233,13 @@ Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY
 > * Your boss just changed the date of a meeting on the 3rd October to the 2nd. Simply find your meeting task, then run the following command: <br>
 >   `find meeting`<br> 
     `edit 1 d/2nd Oct`
-
+<!-- @@author -->
 ---
-  
+
+<!-- @@author A0139046E -->  
+
 ### Rescheduling a task: `reschedule`
-ToDoIt does not expect you to be the perfect worker. Sometimes you are too busy or tired to do a task. If you are not feeling up to it right now, simply reschedule it for another day.<br>
+ToDoIt does not expect you to be the perfect worker. When you do not feel up to the task right now, simply reschedule it to another time.<br>
 Format: `reschedule INDEX INTERVAL` 
 
 **Notes**
@@ -274,7 +277,7 @@ Format: `done INDEX`
 ---
   
 ### Mark a task as undone : `undone`
-Thought you were done, but actually there was one little thing that you forgot to do? No worries, we have all been there. Use this simple command to mark done tasks as not done. Do not worry, ToDoIt will not mock you.<br>
+Thought you were done, but there is one little thing that you forgot to do? No worries, we have all been there. Use this simple command to mark done tasks as not done. <br>
 Format: `undone INDEX`
 
 **Notes**
