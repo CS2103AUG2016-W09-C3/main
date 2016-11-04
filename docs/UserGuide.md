@@ -362,8 +362,10 @@ ToDoIt is sad to see you go.<br>
 Format: `exit`  
 
 <!-- @@author A0139947L -->
-### Taking in different aliases:
+## Taking in different aliases:
 ToDoIt also takes in different aliases for both time and priority. Instead of typing the respective command, it also recognises the aliases in the tables below.
+
+The aliases below work for `add`, `edit`, `reschedule`, or any command that requires the input or change or time/date/priority.
 
 Command (Date & Time) | Aliases
 -------- | :-----------
