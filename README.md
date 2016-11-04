@@ -5,7 +5,7 @@
 
 <img src="docs/images/ui.png" width="800"><br>
 
-Always forgetting what to do? If you would like to plan your day efficiently, then we have got just the app just for you, ToDoIt!<br>
+Always forgetting what to do? If you would like to plan your day efficiently, then we have just the app for you, ToDoIt!<br>
 <br>
 ToDoIt is a task manager that keeps your daily activities in check. 
 It will notify you what is the upcoming activities for the day or the week.<br>
