@@ -19,7 +19,20 @@ public class FileUtil {
             createFile(file);
         }
     }
+    
+    /**
+     * Deletes a file
+     * 
+     * @return true if file is deleted, false if file doesn't exist
+     */
+    public static boolean deleteFile(File file) throws IOException {
+        if (!file.exists()) {
+            return false;
+        }
 
+        return file.delete();
+    }
+    
     /**
      * Creates a file if it does not exist along with its missing parent directories
      *
