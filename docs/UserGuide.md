@@ -85,14 +85,15 @@ http://natty.joestelmach.com/doc.jsp
 <!-- @@author -->
 ---
 
+<!-- @@author A0139947L -->
 ### Viewing help : `help`
 Format: `help`
 
-The help command provides you with a detailed explanation of the available commands within the program.
+The help command links you to our User Guide to provide you with detailed explaination on how to use ToDoIt.
 
 **Notes**
-> * Help is also shown if you enter an incorrect command e.g. `abcd`
-
+> * Help is also shown if you enter an incorrect command (e.g. `abcd`)
+<!-- @@author -->
 ---
 
 <!-- @@author A0139121R -->
@@ -357,12 +358,9 @@ Format: `unfavorite INDEX`
 <!-- @@author -->
 ---
 
-### Exiting the program: `exit`
-ToDoIt is sad to see you go.<br>
-Format: `exit`  
-
 <!-- @@author A0139947L -->
-## Taking in different aliases:
+
+### Taking in different aliases:
 ToDoIt also takes in different aliases for both time and priority. Instead of typing the respective command, it also recognises the aliases in the tables below.
 
 The aliases below work for `add`, `edit`, `reschedule`, or any command that requires the input or change or time/date/priority.
@@ -381,6 +379,10 @@ high | h
 medium | m
 low | l
 verylow | vl
+
+### Exiting the program: `exit`
+ToDoIt is sad to see you go.<br>
+Format: `exit`  
 <!-- @@author -->
 
 <!-- @@author A0139121R -->
