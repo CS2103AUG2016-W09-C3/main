@@ -92,8 +92,9 @@ Format: `help`
 The help command links you to our User Guide to provide you with detailed explaination on how to use ToDoIt.
 
 **Notes**
-> * Help is also shown if you enter an incorrect command (e.g. `abcd`)
+> * Help is also shown if you enter an incorrect command e.g. `abcd`
 <!-- @@author -->
+
 ---
 
 <!-- @@author A0139121R -->
@@ -174,6 +175,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 > * You want to find all tasks that relate to your family. <br>
 >   `find brother sister mother father family`
 <!-- @@author -->
+
 ---
   
 ### Deleting a task : `delete`
@@ -380,10 +382,14 @@ medium | m
 low | l
 verylow | vl
 
+---
+
 ### Exiting the program: `exit`
 ToDoIt is sad to see you go.<br>
 Format: `exit`  
 <!-- @@author -->
+
+---
 
 <!-- @@author A0139121R -->
 ## FAQ
