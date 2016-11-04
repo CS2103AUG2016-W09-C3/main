@@ -357,11 +357,30 @@ Format: `unfavorite INDEX`
 <!-- @@author -->
 ---
 
-### Exiting the program : `exit`
+### Exiting the program: `exit`
 ToDoIt is sad to see you go.<br>
 Format: `exit`  
 
----
+<!-- @@author A0139947L -->
+### Taking in different aliases:
+ToDoIt also takes in different aliases for both time and priority. Instead of typing the respective command, it also recognises the aliases in the tables below.
+
+Command (Date & Time) | Aliases
+-------- | :-----------
+m (minutes) | min, mins
+h (hours) | hr, hrs
+d (days) | day, days
+w (weeks) | week, weeks
+
+Command (Priority) | Aliases
+-------- | :-----------
+veryhigh | vh
+high | h
+medium | m
+low | l
+verylow | vl
+<!-- @@author -->
+
 <!-- @@author A0139121R -->
 ## FAQ
 
@@ -391,6 +410,8 @@ Format: `exit`
 
 <!-- @@author -->
 
+<!-- @@author A0139947L -->
+
 ## Command Summary
 
 Command | Format  
@@ -411,3 +432,4 @@ Favorite | `favorite c/COMMAND` (add a favorite)<br>`favorite INDEX` (select a f
 Unfavorite | `unfavorite INDEX`
 Help | `help`
 Exit | `exit`
+<!-- @@author -->
