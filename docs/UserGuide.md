@@ -112,9 +112,8 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 > 5. `p/` Priority: Specifies the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
 <!-- @@author -->
 <!-- @@author A0139121R -->
-> 6. `a/` Autoschedule: If flag is specified, the task will be automatically scheduled to a free slot. If a time, date and length is specified, this flag is ignored.
-> 7. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
-> 8. `t/` Tags: Specifies tags for this task. Tags allow you to group tasks logically by assigning them a similar tag.
+> 6. `i/` Information: Information to be tagged to this task. Put any extra details you want here.
+> 7. `t/` Tags: Specifies tags for this task. Tags allow you to group tasks logically by assigning them a similar tag.
 
 **Notes**
 > * A task can be dated (has time, date, length), or floating. A floating task is one without any specified date, time and length which can be done at a flexible timing.<br> 
@@ -131,6 +130,7 @@ ToDoIt compiles your tasks for the day efficiently with a simple line of text. T
 
 ---
 <!-- @@author A0139121R -->
+
 ### Listing tasks : `list`
 ToDoIt displays your tasks easily with a simple command. The tasks to list can be customized to your liking simply with a few keywords.<br>
 Format: `list [ds/DATE_START] [de/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
