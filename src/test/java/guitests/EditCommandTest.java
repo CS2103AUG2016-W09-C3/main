@@ -158,6 +158,19 @@ public class EditCommandTest extends TaskBookGuiTest {
     }
     
     @Test
+    public void editCommand_changingTagsOnTasks_Success(){
+        // Check if program is able to edit all tasks in sequence
+        TestTask[] listToEdit = td.getTypicalTasks();
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        TestTask datedTaskToAdd = td.dinnerDate;
+        
+        String command = "edit 1 t/boss";
+        TestTask[] finalList = TestUtil.addTasksToList(listToEdit, datedTaskToAdd);
+        
+        assertEditSuccess(command, finalList);
+    }
+    
+    @Test
     public void editCommand_priorityAlias_Success(){
         // Check if edit function is able to take in aliases for recurrence
         TestTask[] listToEdit = td.getTypicalTasks();

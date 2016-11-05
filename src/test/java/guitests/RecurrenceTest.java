@@ -1,18 +1,9 @@
 //@@author A0139947L
 package guitests;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import todoit.taskbook.commons.exceptions.IllegalValueException;
 import todoit.taskbook.model.TaskBook;
-import todoit.taskbook.model.task.DateTime;
-import todoit.taskbook.model.task.ReadOnlyDatedTask;
-import todoit.taskbook.model.task.UniqueTaskList;
-import todoit.taskbook.testutil.TestTask;
-import todoit.taskbook.testutil.TestUtil;
-
 
 public class RecurrenceTest extends TaskBookGuiTest {
     
