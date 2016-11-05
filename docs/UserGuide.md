@@ -87,13 +87,15 @@ http://natty.joestelmach.com/doc.jsp
 <!-- @@author -->
 ---
 
+<!-- @@author A0139947L -->
 ### Viewing help : `help`
 Format: `help`
 
-The help command provides you with a detailed explanation of the available commands within the program.
+The help command links you to our User Guide to provide you with detailed explaination on how to use ToDoIt.
 
 **Notes**
 > * Help is also shown if you enter an incorrect command e.g. `abcd`
+<!-- @@author -->
 
 ---
 
@@ -176,6 +178,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 > * You want to find all tasks that relate to your family. <br>
 >   `find brother sister mother father family`
 <!-- @@author -->
+
 ---
   
 ### Deleting a task : `delete`
@@ -360,11 +363,37 @@ Format: `unfavorite INDEX`
 <!-- @@author -->
 ---
 
-### Exiting the program : `exit`
-ToDoIt is sad to see you go.<br>
-Format: `exit`  
+<!-- @@author A0139947L -->
+
+### Taking in different aliases:
+ToDoIt also takes in different aliases for both time and priority. Instead of typing the respective command, it also recognises the aliases in the tables below.
+
+The aliases below work for `add`, `edit`, `reschedule`, or any command that requires the input or change or time/date/priority.
+
+Command (Date & Time) | Aliases
+-------- | :-----------
+m (minutes) | min, mins
+h (hours) | hr, hrs
+d (days) | day, days
+w (weeks) | week, weeks
+
+Command (Priority) | Aliases
+-------- | :-----------
+veryhigh | vh
+high | h
+medium | m
+low | l
+verylow | vl
 
 ---
+
+### Exiting the program: `exit`
+ToDoIt is sad to see you go.<br>
+Format: `exit`  
+<!-- @@author -->
+
+---
+
 <!-- @@author A0139121R -->
 ## FAQ
 
@@ -394,6 +423,8 @@ Format: `exit`
 
 <!-- @@author -->
 
+<!-- @@author A0139947L -->
+
 ## Command Summary
 
 Command | Format  
@@ -414,3 +445,4 @@ Favorite | `favorite c/COMMAND` (add a favorite)<br>`favorite INDEX` (select a f
 Unfavorite | `unfavorite INDEX`
 Help | `help`
 Exit | `exit`
+<!-- @@author -->
