@@ -34,8 +34,6 @@ public class TaskCard extends UiPart{
     @FXML
     private Label datetime;
     @FXML
-    private Label length;
-    @FXML
     private Label recurrence;
     @FXML
     private Label tags;
@@ -58,53 +56,48 @@ public class TaskCard extends UiPart{
     @FXML
     public void initialize() {
         initTexts();
-        removeUnnecessaryLabels();
         style();
     }
 
     private void initTexts() {
         name.setText(task.getName().fullName);
         id.setText(Integer.toString(displayedIndex));
-        setOrNullText(priority, "Priority: ", task.getPriority().getDisplayedAlias());
-        setOrNullText(information, "Info: ", task.getInformation().toString());
-        setOrNullText(done, task.getDoneFlag().toString());
+        setOrDelete(priority, "Priority: ", task.getPriority().getDisplayedAlias());
+        setOrDelete(information, "Info: ", task.getInformation().toString());
+        setOrDelete(done, "", task.getDoneFlag().toString());
         if(task.isDated()){
             ReadOnlyDatedTask datedTask = (ReadOnlyDatedTask) task;
-            setOrNullText(datetime, "Date: ",
+            setOrDelete(datetime, "Date: ",
                     datedTask.getDateTime().toString() + (datedTask.hasValidLength() ? " - " + datedTask.getDateTimeEnd().toString() : ""));
-            setOrNullText(length, "");
-            setOrNullText(recurrence, "Repeat every ", datedTask.getRecurrence().toString());
+            setOrDelete(recurrence, "Repeat every ", datedTask.getRecurrence().toString());
         }else{
-            setOrNullText(datetime, "");
-            setOrNullText(length, "");
-            setOrNullText(recurrence, "");
+            deleteLabel(datetime);
+            deleteLabel(recurrence);
         }
         tags.setText(task.tagsString());
     }
-
-    public void setOrNullText(Label label, String value){
-        setOrNullText(label, "", value);
-    }
     
-    public void setOrNullText(Label label, String prefix, String value){
+    private void setOrDelete(Label label, String prefix, String value){
         if(value.equals("")){
-            label.setText("");
+            deleteLabel(label);
         }else{
             label.setText(prefix + value);
         }
     }
     
-    public void removeUnnecessaryLabels(){
-        taskContainer.getChildren().removeIf(lbl -> lbl instanceof Label && ((Label) lbl).getText().equals(""));
+    private void deleteLabel(Label label){
+        taskContainer.getChildren().remove(label);
     }
     
-    public void style(){
+    private void style(){
         StringBuilder styleString = new StringBuilder();
         // Style based on property
         styleString.append(styler.getLightPriorityColour(task.getPriority().toString()));
         // Style based on done
         styleString.append(styler.getLightDoneColour(task.getDoneFlag().toString()));
         idLight.setStyle(styleString.toString());
+        
+        // Style based on done
         //styleString = new StringBuilder();
         //styleString.append(styler.getCardDoneColour(task.getDoneFlag().toString()));
         //taskPane.setStyle(styleString.toString());

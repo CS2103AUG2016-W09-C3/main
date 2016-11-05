@@ -32,11 +32,10 @@
                                 <Label fx:id="tags" styleClass="cell_small_label" text="\$tags" />
                             </children>
                         </HBox>
-                        <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
                         <Label fx:id="done" styleClass="cell_small_label" text="\$done" />
+                        <Label fx:id="priority" styleClass="cell_small_label" text="\$priority" />
                         <Label fx:id="information" styleClass="cell_small_label" text="\$information" />
                         <Label fx:id="datetime" styleClass="cell_small_label" text="\$datetime" />
-                        <Label fx:id="length" styleClass="cell_small_label" text="\$length" />
                         <Label fx:id="recurrence" styleClass="cell_small_label" text="\$recurrence" />
                     </children>
                 </VBox>
