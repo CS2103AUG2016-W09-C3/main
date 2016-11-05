@@ -26,6 +26,7 @@ public class DateParser {
     public static LocalDateTime parseDate(String dateString) throws IllegalValueException{
         DateGroup dateGroup = parseNatty(dateString);
         LocalDateTime parsedDate = getDateTime(dateGroup);
+        // Default to midnight if time is not specifed.
         if(!searchDateTree(dateGroup, TIME_STRING)){
             parsedDate = parsedDate.withHour(0).withMinute(0).withSecond(0).withNano(0);
         }
