@@ -109,6 +109,10 @@ public class UserPrefs {
         return commandPresets.size();
     }
 
+    public void clearPresets(){
+        commandPresets.clear();
+    }
+    
     private void loadDefaultPresets() {
         commandPresets.clear();
         commandPresets.add(new CommandPreset("list", "List all undone"));
