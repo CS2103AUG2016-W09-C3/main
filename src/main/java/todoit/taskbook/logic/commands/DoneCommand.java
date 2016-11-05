@@ -70,7 +70,7 @@ public class DoneCommand extends Command {
                         newFlag, datedTaskToDelete.getTags());
             }
             model.deleteTask(taskToDelete);
-            model.addTaskToIndex(toAdd, targetIndex - 1);
+            model.addTaskToIndex(toAdd, targetIndex);
         } catch (DuplicateTaskException e) {
             assert false : "Can't add a duplicate task.";
             return new CommandResult(MESSAGE_EXCEPTION);
