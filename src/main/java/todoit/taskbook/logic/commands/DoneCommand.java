@@ -35,11 +35,6 @@ public class DoneCommand extends Command {
 
     private final int targetIndex;
 
-    /**
-     * Convenience constructor using raw values for adding 
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
     public DoneCommand(int targetIndex) throws IllegalValueException {
         this.targetIndex = targetIndex;
     }
