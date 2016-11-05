@@ -46,6 +46,7 @@ public class UserPrefs {
     }
 
     public UserPrefs(){
+        loadDefaultPresets();
         this.setGuiSettings(500, 500, 0, 0);
     }
 
@@ -55,9 +56,6 @@ public class UserPrefs {
 
     // @@author A0140155U
     public ObservableList<CommandPreset> initCommandPresets(){
-        if(commandPresets.isEmpty()){
-            loadDefaultPresets();
-        }
         // Initialize internalList after JSON has been loaded
         internalList = FXCollections.observableArrayList(commandPresets);
         return internalList;
