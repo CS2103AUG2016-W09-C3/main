@@ -6,6 +6,9 @@ import todoit.taskbook.commons.exceptions.IllegalValueException;
 /**
  * Represents a Task's length.
  * Functions as a wrapper for TimeInterval
+ * 
+ * A task can have no length, in which case hasInterval will be set to false,
+ * and timeInterval will be given a dummy value.
  */
 public class Length {
 
