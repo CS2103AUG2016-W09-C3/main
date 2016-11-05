@@ -30,10 +30,10 @@ public class UserPrefs {
      * 
      * One is used to display on the panel and the other is used to save to a JSON file.
      * 
-     * Ideally I'd use just one list, but PresetListPanel can only bind to ObservableList, and
-     * ObservableList cannot be serialized to JSON.
+     * The problem is PresetListPanel can only bind to ObservableList,
+     * and ObservableList cannot be serialized to JSON.
      * 
-     * So, I used separate lists. A bit hacky, but I didn't really have a choice...
+     * So, separate lists have to be used.
      */
     
     // @@author
@@ -55,10 +55,14 @@ public class UserPrefs {
 
     // @@author A0140155U
     public ObservableList<CommandPreset> initCommandPresets(){
+        if(commandPresets.isEmpty()){
+            loadDefaultPresets();
+        }
         // Initialize internalList after JSON has been loaded
         internalList = FXCollections.observableArrayList(commandPresets);
         return internalList;
     }
+    
     // @@author
     @Override
     public boolean equals(Object other) {
@@ -103,6 +107,18 @@ public class UserPrefs {
     
     public int getNumPresets(){
         return commandPresets.size();
+    }
+
+    private void loadDefaultPresets() {
+        commandPresets.clear();
+        commandPresets.add(new CommandPreset("list", "List all undone"));
+        commandPresets.add(new CommandPreset("list df/all", "List all done and undone"));
+        commandPresets.add(new CommandPreset("list ds/today 12:00 am de/tomorrow 12:00 am", "List all today"));
+        commandPresets.add(new CommandPreset("list ds/today 12:00 am de/3 days from now 12:00 am", "List all in next 3 days"));
+        commandPresets.add(new CommandPreset("list ds/last monday 12:00 am de/next monday 12:00 am", "List all in this week"));
+        commandPresets.add(new CommandPreset("list s/date", "List sorted by date"));
+        commandPresets.add(new CommandPreset("list s/name", "List sorted by name"));
+        commandPresets.add(new CommandPreset("list s/priority", "List sorted by priority"));
     }
     // @@author
 
