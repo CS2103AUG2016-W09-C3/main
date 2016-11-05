@@ -77,8 +77,7 @@ public interface ParsedCommand {
     //@@author
     // @@author A0140155U
     /**
-     * Check if command has value at the particular index
-     * Useful for checking if the command is valid.
+     * Check if command has any unnecessary params, given a list of valid params
      */
     boolean hasUnnecessaryParams(String[] possibleParams);
     
