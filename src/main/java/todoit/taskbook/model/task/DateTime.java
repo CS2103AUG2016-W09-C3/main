@@ -7,7 +7,6 @@ import java.time.format.DateTimeFormatter;
 import todoit.taskbook.commons.exceptions.IllegalValueException;
 /**
  * Represents a DatedTask's date and time in the task book.
- * Guarantees: immutable; is valid as declared in {@link #isValidLength(String)}
  */
 public class DateTime {
 
@@ -25,18 +24,22 @@ public class DateTime {
         this(dateString, false);
     }
 
-
+    
     public DateTime(String dateString, boolean fromXML) throws IllegalValueException {
         assert dateString != null;
         dateString = dateString.trim();
         if(fromXML){
+            // Date comes from XML
             datetime = LocalDateTime.parse(dateString, DATE_DISPLAY_FORMATTER);
         }else{
+            // Date comes from input
             datetime = DateParser.parseDate(dateString);
         }
     }
 
-    
+    /**
+     * Used by the edit command.
+     */
     public DateTime(String dateString, DateTime oldDatetime) throws IllegalValueException {
         assert dateString != null;
         assert oldDatetime != null;
