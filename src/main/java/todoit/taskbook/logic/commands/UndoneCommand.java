@@ -35,11 +35,6 @@ public class UndoneCommand extends Command {
 
     private final int targetIndex;
 
-    /**
-     * Convenience constructor using raw values for adding 
-     *
-     * @throws IllegalValueException if any of the raw values are invalid
-     */
     public UndoneCommand(int targetIndex) throws IllegalValueException {
         this.targetIndex = targetIndex;
     }
@@ -48,16 +43,19 @@ public class UndoneCommand extends Command {
     public CommandResult execute() {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
 
-        if (lastShownList.size() < targetIndex) {
+        // Check for out of range
+        if (targetIndex >= lastShownList.size() || targetIndex < 0) {
             indicateAttemptToExecuteIncorrectCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
 
-        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        // Get task
+        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex);
         if(!taskToDelete.getDoneFlag().isDone()){
             return new CommandResult(MESSAGE_ALREADY_UNDONE_TASK);
         }
-        
+
+        // Modify task
         Task toAdd = null;
         try {
             DoneFlag newFlag = new DoneFlag(DoneFlag.NOT_DONE);
@@ -72,7 +70,7 @@ public class UndoneCommand extends Command {
                         newFlag, datedTaskToDelete.getTags());
             }
             model.deleteTask(taskToDelete);
-            model.addTaskToIndex(toAdd, targetIndex - 1);
+            model.addTaskToIndex(toAdd, targetIndex);
         } catch (DuplicateTaskException e) {
             assert false : "Can't add a duplicate task.";
             return new CommandResult(MESSAGE_EXCEPTION);

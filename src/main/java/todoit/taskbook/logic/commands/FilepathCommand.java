@@ -49,7 +49,7 @@ public class FilepathCommand extends Command {
             return new CommandResult(MESSAGE_MISSING_EXTENSION);
         }
         
-        if(!tryCreateFile(filePath)){
+        if(!canCreateFile(filePath)){
             return new CommandResult(MESSAGE_CANNOT_WRITE);
         }
         
@@ -61,7 +61,7 @@ public class FilepathCommand extends Command {
     /*
      * Checks if a file can be created at specified path by creating a file.
      */
-    private boolean tryCreateFile(String path){
+    private boolean canCreateFile(String path){
         try{
             File file = new File(path);
             

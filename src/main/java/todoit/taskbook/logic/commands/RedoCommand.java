@@ -5,7 +5,7 @@ import todoit.taskbook.commons.exceptions.IllegalValueException;
 import todoit.taskbook.commons.exceptions.StateException;
 
 /**
- * Adds a tasks to the task book.
+ * Redoes an undone command
  */
 public class RedoCommand extends Command {
 
