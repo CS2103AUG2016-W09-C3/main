@@ -27,9 +27,9 @@ public class CommandParser implements ParsedCommand{
      */
     
     // List of values
-    private ArrayList<String> values = new ArrayList<>();
+    private final ArrayList<String> values = new ArrayList<>();
     // Param name -> list of param values
-    private HashMap<String, ArrayList<String>> params = new HashMap<>();
+    private final HashMap<String, ArrayList<String>> params = new HashMap<>();
     private final String command;
     
     public CommandParser(String command){
@@ -89,6 +89,7 @@ public class CommandParser implements ParsedCommand{
             if(isParamToken(token)){
                 // New param, flush the param value, add the old param and start over
                 addParam(currentParam, currentParamValue.toString());
+                // token is in the form param/paramValue
                 int paramDelimIndex = token.indexOf(PARAM_DELIMITER);
                 currentParam = token.substring(0, paramDelimIndex).toLowerCase();
                 currentParamValue = new StringBuilder();
@@ -174,7 +175,7 @@ public class CommandParser implements ParsedCommand{
      */
     @Override
     public String getValue(int index) throws IllegalValueException {
-        if(index >= values.size()){
+        if(index < 0 || index >= values.size()){
             throw new IllegalValueException(String.format(VALUE_OUT_OF_BOUNDS_MESSAGE, index));
         }
         return values.get(index);
@@ -244,16 +245,19 @@ public class CommandParser implements ParsedCommand{
     @Override
     public boolean hasUnnecessaryParams(String[] possibleParams) {
         for(String param : params.keySet()){
-            if(!matchingParam(param.toLowerCase(), possibleParams)){
+            if(!isValidParam(param.toLowerCase(), possibleParams)){
                 return true;
             }
         }
         return false;
     }
     
-    private boolean matchingParam(String param, String[] possibleParams){
+    /**
+     * Checks if a param in the parsed command is in a specified list of valid params
+     */
+    private boolean isValidParam(String givenParam, String[] possibleParams){
         for(String possibleParam : possibleParams){
-            if(param.toLowerCase().matches(possibleParam)){
+            if(givenParam.toLowerCase().matches(possibleParam)){
                 return true;
             }
         }
