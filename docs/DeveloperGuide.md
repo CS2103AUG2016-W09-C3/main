@@ -556,6 +556,7 @@ Use case ends.
  Use case ends
 
 <!-- @@author A0139121R -->
+
 #### Use case: Find task
 
 **MSS**
@@ -631,9 +632,73 @@ Use case ends.
 
 3a. The given time frame or specified order is invalid
 
->ToDoIt shows an error message <br>
+>3a1. ToDoIt shows an error message <br>
  Use case ends
  
+<!-- @@author -->
+
+<!-- @@author A0139046E -->
+
+#### Use case: Favorite
+
+**MSS**
+
+1. User requests to favorite a command
+2. ToDoIt adds the favorited command into the presets panel <br>
+Use case ends.
+
+**Extensions**
+
+1a. Invalid command to favorite
+
+> 1a1. ToDoIt shows an error message <br>
+  Use case ends
+ 
+#### Use case: Unfavorite
+
+**MSS**
+
+1. User requests to unfavorite a command
+2. ToDoIt removes the unfavorited command from the presets panel <br>
+Use case ends.
+
+**Extensions**
+
+1a. The given index is invalid
+
+> 1a1. ToDoIt shows an error message <br>
+  Use case ends.
+
+#### Use case: Undo/Redo
+
+**MSS**
+
+1. User requests to undo/redo to the previous state
+2. ToDoIt moves current state to the previous state <br>
+Use case ends.
+
+**Extensions**
+
+1a. The user uses `undo` more than 10 times consecutively
+
+> 1a1. ToDoIt shows an error message that he has reached the maximum undo limit <br>
+  Use case ends.
+
+#### Use case: Filepath
+
+**MSS**
+
+1. User requests to change the filepath
+2. ToDoIt copies his current task data in the current file to the desired file path
+Use case ends.
+
+**Extensions**
+
+1a. Filepath is not a valid .xml file
+
+> 1a1. ToDoIt shows an error message <br>
+  Use case ends
+  
 <!-- @@author -->
 
 <!-- @@author A0139947L -->
