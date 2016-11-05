@@ -50,10 +50,8 @@
                   </AnchorPane>
                </children>
             </VBox>
-            <!-- @@author -->
          </items>
       </SplitPane>
       <AnchorPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
-      <!-- @@author A0140155U -->
    </children>
 </VBox>
