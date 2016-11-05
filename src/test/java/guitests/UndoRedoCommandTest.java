@@ -15,7 +15,18 @@ import todoit.taskbook.testutil.TestUtil;
 public class UndoRedoCommandTest extends TaskBookGuiTest {
 
     @Test
-    public void addUndoRedo() {
+    public void undo_addCommand_undoSuccessful() {
+        //add one task
+        TestTask[] initialList = td.getTypicalTasks();
+        TestTask taskToAdd = td.nieceBirthdayMeal;
+        TestTask[] finalList = TestUtil.addTasksToList(initialList, taskToAdd);
+        assertTrue(taskListPanel.isListMatching(initialList));
+        commandBox.runCommand(taskToAdd.getAddCommand());
+        assertTrue(taskListPanel.isListMatching(finalList));
+    }
+    
+    @Test
+    public void undoredo_addCommand_allStatesMatch() {
         //add one task
         TestTask[] initialList = td.getTypicalTasks();
         TestTask taskToAdd = td.nieceBirthdayMeal;
@@ -24,7 +35,7 @@ public class UndoRedoCommandTest extends TaskBookGuiTest {
     }
 
     @Test
-    public void addUndoRedoMultiple() {
+    public void undoredo_multipleCommands_allStatesMatch() {
         //add one task
         TestTask[] initialList = td.getTypicalTasks();
         TestTask taskToAdd = td.nieceBirthdayMeal;
@@ -36,7 +47,7 @@ public class UndoRedoCommandTest extends TaskBookGuiTest {
     }
     
     @Test
-    public void clearUndoRedo() {
+    public void undoredo_clearCommand_allStatesMatch() {
         //add one task
         TestTask[] initialList = td.getTypicalTasks();
         TestTask[] finalList = {};
@@ -44,19 +55,19 @@ public class UndoRedoCommandTest extends TaskBookGuiTest {
     }
     
     @Test
-    public void noUndo() {
+    public void undo_noPrevState_displayErrorMessage() {
         commandBox.runCommand("undo");
         assertResultMessage(StatesManager.MESSAGE_NO_PREV_STATE);
     }
 
     @Test
-    public void noRedo() {
+    public void redo_noNextState_displayErrorMessage() {
         commandBox.runCommand("redo");
         assertResultMessage(StatesManager.MESSAGE_NO_NEXT_STATE);
     }
     
     @Test
-    public void nonStateCommands() {
+    public void undo_nonStateCommands_displayErrorMessage() {
         commandBox.runCommand("select 1");
         commandBox.runCommand("find lunch");
         commandBox.runCommand("list");
@@ -64,6 +75,11 @@ public class UndoRedoCommandTest extends TaskBookGuiTest {
         assertResultMessage(StatesManager.MESSAGE_NO_PREV_STATE);
     }
     
+    /*
+     * Takes in the initial task list, a list of commands, and the final task list after all commands have been executed.
+     * Does the following:
+     * Initial ---Execute all---> Final ---Undo all---> Initial ---Redo all---> Final
+     */
     private void assertUndoRedo(TestTask[] initialList, TestTask[] finalList, String... commands) {
         assertTrue(taskListPanel.isListMatching(initialList));
         for(int i = 0; i < commands.length; i++){

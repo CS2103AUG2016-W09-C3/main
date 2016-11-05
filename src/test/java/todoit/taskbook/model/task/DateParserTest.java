@@ -16,7 +16,7 @@ public class DateParserTest {
     public static final DateTimeFormatter DATE_DISPLAY_FORMATTER = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
     
     @Test
-    public void checkSimpleDates() {
+    public void parseDate_differentDateFormats_parsedSuccessfully() {
         LocalDateTime datetime = parseDate("01-01-2015 15:00");
         try {
             assertEquals(datetime, DateParser.parseDate("01-01-2015 15:00"));
@@ -32,7 +32,7 @@ public class DateParserTest {
     }
     
     @Test
-    public void editTime() {
+    public void editDate_timeFormats_onlyTimeChanged() {
         LocalDateTime datetime = parseDate("01-01-2015 15:00");
         LocalDateTime newDatetime = parseDate("01-01-2015 17:00");
         try {
@@ -44,7 +44,7 @@ public class DateParserTest {
     }
     
     @Test
-    public void editDate() {
+    public void editDate_dateFormats_onlyDateChanged() {
         LocalDateTime datetime = parseDate("01-01-2015 15:00");
         LocalDateTime newDatetime = parseDate("03-03-2015 15:00");
         try {
@@ -56,7 +56,7 @@ public class DateParserTest {
     }
     
     @Test
-    public void editDateTime() {
+    public void editDate_dateTimeFormats_timeAndDateChanged() {
         LocalDateTime datetime = parseDate("01-01-2015 15:00");
         LocalDateTime newDatetime = parseDate("03-03-2015 17:00");
         try {
@@ -68,7 +68,7 @@ public class DateParserTest {
     }
 
     @Test
-    public void timeNotSpecified() {
+    public void parseDate_timeNotSpecified_defaultsTo0000() {
         LocalDateTime datetime = parseDate("01-01-2015 00:00");
         try {
             assertEquals(datetime, DateParser.parseDate("01-01-2015"));
