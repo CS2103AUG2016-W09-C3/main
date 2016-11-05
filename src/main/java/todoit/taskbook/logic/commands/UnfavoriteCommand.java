@@ -25,7 +25,7 @@ public class UnfavoriteCommand extends Command {
 
     public UnfavoriteCommand(int index)
             throws IllegalValueException {
-        this.index = index - 1;
+        this.index = index;
     }
 
 

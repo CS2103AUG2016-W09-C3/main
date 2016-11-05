@@ -354,8 +354,9 @@ public class Parser {
             if(command.hasParams(FavoriteCommand.POSSIBLE_PARAMS)){
                 // Add a new favorite
                 // Work around because the command might have tokens which can be recognized by ParsedCommand as params.
-                int paramIndex = command.getCommand().indexOf(" c/");
-                String favCommand = command.getCommand().substring(paramIndex + 3, command.getCommand().length());
+                String commandDelim = " c/";
+                int paramIndex = command.getCommand().indexOf(commandDelim);
+                String favCommand = command.getCommand().substring(paramIndex + commandDelim.length(), command.getCommand().length());
                 return new FavoriteCommand(favCommand, command.getValuesAsString());
             }else{
                 // Select a favorite
@@ -379,7 +380,7 @@ public class Parser {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnfavoriteCommand.MESSAGE_USAGE));
             }
 
-            return new UnfavoriteCommand(index.get());
+            return new UnfavoriteCommand(index.get() - 1); // Convert to 0 index
         }catch(IllegalValueException ex){
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UnfavoriteCommand.MESSAGE_USAGE));
