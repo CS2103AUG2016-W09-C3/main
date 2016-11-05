@@ -47,16 +47,20 @@ public class DoneCommand extends Command {
     @Override
     public CommandResult execute() {
         UnmodifiableObservableList<ReadOnlyTask> lastShownList = model.getFilteredTaskList();
-
-        if (lastShownList.size() < targetIndex) {
+        
+        // Check for out of range
+        if (targetIndex >= lastShownList.size() || targetIndex < 0) {
             indicateAttemptToExecuteIncorrectCommand();
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }
-
-        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex - 1);
+        
+        // Get task
+        ReadOnlyTask taskToDelete = lastShownList.get(targetIndex);
         if(taskToDelete.getDoneFlag().isDone()){
             return new CommandResult(MESSAGE_ALREADY_DONE_TASK);
         }
+        
+        // Modify task
         Task toAdd = null;
         try {
             DoneFlag newFlag = new DoneFlag(DoneFlag.DONE);
@@ -72,7 +76,6 @@ public class DoneCommand extends Command {
             }
             model.deleteTask(taskToDelete);
             model.addTaskToIndex(toAdd, targetIndex - 1);
-            //model.addTask(toAdd);
         } catch (DuplicateTaskException e) {
             assert false : "Can't add a duplicate task.";
             return new CommandResult(MESSAGE_EXCEPTION);
