@@ -14,7 +14,7 @@ public class FavoriteCommand extends Command {
 
     public static final String COMMAND_WORD = "favorite";
 
-    public static final String[] REQUIRED_PARAMS = {"c"};
+    public static final String[] REQUIRED_PARAMS = {};
     public static final String[] POSSIBLE_PARAMS = {"c"};
     
     

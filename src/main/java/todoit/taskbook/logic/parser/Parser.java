@@ -351,7 +351,7 @@ public class Parser {
             if(!command.hasValue()){
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
             }
-            if(command.hasParams(FavoriteCommand.REQUIRED_PARAMS)){
+            if(command.hasParams(FavoriteCommand.POSSIBLE_PARAMS)){
                 // Add a new favorite
                 // Work around because the command might have tokens which can be recognized by ParsedCommand as params.
                 int paramIndex = command.getCommand().indexOf(" c/");
