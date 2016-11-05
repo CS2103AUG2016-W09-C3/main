@@ -17,7 +17,7 @@ import todoit.taskbook.testutil.TestUtil;
 public class RescheduleCommandTest extends TaskBookGuiTest {
 
 	@Test
-	public void reschedule_minutes() {
+	public void reschedule_minutes_rescheduledSuccess() {
 		commandBox.runCommand(td.dinnerDate.getAddCommand());
 		commandBox.runCommand(td.csFinalExam.getAddCommand());
 		commandBox.runCommand(td.meetingToAttend.getAddCommand());
@@ -31,7 +31,7 @@ public class RescheduleCommandTest extends TaskBookGuiTest {
 	}
 
 	@Test
-	public void reschedule_days() {
+	public void reschedule_days_rescheduledSuccess() {
 		commandBox.runCommand(td.dinnerDate.getAddCommand());
 		commandBox.runCommand(td.csFinalExam.getAddCommand());
 		commandBox.runCommand(td.meetingToAttend.getAddCommand());
@@ -45,7 +45,7 @@ public class RescheduleCommandTest extends TaskBookGuiTest {
 	}
 
 	@Test
-	public void reschedule_week() {
+	public void reschedule_week_rescheduledSuccess() {
 		commandBox.runCommand(td.dinnerDate.getAddCommand());
 		commandBox.runCommand(td.csFinalExam.getAddCommand());
 		commandBox.runCommand(td.meetingToAttend.getAddCommand());
@@ -59,24 +59,35 @@ public class RescheduleCommandTest extends TaskBookGuiTest {
 	}
 
 	@Test
-	public void reschedule_notDatedTask() {
+	public void reschedule_minutesDifferentAliases_rescheduledSuccess() {
 		commandBox.runCommand(td.dinnerDate.getAddCommand());
+		commandBox.runCommand(td.csFinalExam.getAddCommand());
+		TestTask[] initialList = td.getTypicalTasks();
+		TestTask datedTaskToAdd = td.dinnerDate;
+		TestTask datedTaskToAdd2 = td.csFinalExam;
+		TestTask[] finalList = TestUtil.addTasksToList(initialList, datedTaskToAdd, datedTaskToAdd2);
+		String command = "reschedule 8 30mins";
+		assertRescheduleSuccess(command, finalList);
+	}
+
+	@Test
+	public void reschedule_nonDatedTask_displayNotDatedTaskMsg() {
+		commandBox.runCommand(td.nieceBirthdayMeal.getAddCommand());
 		String command = "reschedule 1 5d";
 		commandBox.runCommand(command);
 		assertResultMessage(String.format(RescheduleCommand.MESSAGE_TASK_NOT_DATED));
 	}
 
 	@Test
-	public void reschedule_invalidCommandFormat() {
+	public void reschedule_invalidCommandFormat_displayInvalidCommandMsg() {
 		commandBox.runCommand(td.csFinalExam.getAddCommand());
-		commandBox.runCommand(td.meetingToAttend.getAddCommand());
 		String command = "reschedule";
 		commandBox.runCommand(command);
 		assertResultMessage(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, RescheduleCommand.MESSAGE_USAGE));
 	}
 
 	@Test
-	public void reschedule_invalidTimeInterval() {
+	public void reschedule_invalidTimeInterval_displayInvalidTimeIntervalMsg() {
 		commandBox.runCommand(td.csFinalExam.getAddCommand());
 		commandBox.runCommand(td.meetingToAttend.getAddCommand());
 		String command = "reschedule 8 10dd";
@@ -85,7 +96,7 @@ public class RescheduleCommandTest extends TaskBookGuiTest {
 	}
 
 	@Test
-	public void reschedule_invalidIndex() {
+	public void reschedule_invalidIndex_displayInvalidIndexMsg() {
 		commandBox.runCommand(td.csFinalExam.getAddCommand());
 		String command = "reschedule 10 20d";
 		commandBox.runCommand(command);
