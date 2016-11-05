@@ -31,6 +31,18 @@ public class RescheduleCommandTest extends TaskBookGuiTest {
 	}
 
 	@Test
+	public void reschedule_hours_rescheduledSuccess() {
+		commandBox.runCommand(td.dinnerDate.getAddCommand());
+		commandBox.runCommand(td.csFinalExam.getAddCommand());
+		TestTask[] initialList = td.getTypicalTasks();
+		TestTask datedTaskToAdd = td.dinnerDate;
+		TestTask datedTaskToAdd2 = td.csFinalExam;
+		TestTask[] finalList = TestUtil.addTasksToList(initialList, datedTaskToAdd, datedTaskToAdd2);
+		String command = "reschedule 8 2h";
+		assertRescheduleSuccess(command, finalList);
+	}
+
+	@Test
 	public void reschedule_days_rescheduledSuccess() {
 		commandBox.runCommand(td.dinnerDate.getAddCommand());
 		commandBox.runCommand(td.csFinalExam.getAddCommand());
