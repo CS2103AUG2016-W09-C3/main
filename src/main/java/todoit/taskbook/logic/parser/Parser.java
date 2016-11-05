@@ -336,7 +336,7 @@ public class Parser {
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoneCommand.MESSAGE_USAGE));
             }
 
-            return new UndoneCommand(index.get()); // Convert to 0 index
+            return new UndoneCommand(index.get() - 1); // Convert to 0 index
         }catch(IllegalValueException ex){
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, UndoneCommand.MESSAGE_USAGE));
