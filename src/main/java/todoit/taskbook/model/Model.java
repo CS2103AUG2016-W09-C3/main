@@ -45,13 +45,13 @@ public interface Model {
     /** Updates the filter of the filtered task list to filter by the given keywords*/
     void updateFilteredTaskList(Set<String> keywords, HashSet<String> searchScope);
     
-    /** Sorts the filter of the filtered task list to */
+    /** Sorts the filter of the filtered task list to order tasks in list to user specifications from list command*/
     void updateSortTaskList(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse);
     
     /** Updates the filter of the filtered task list to show not done tasks*/
     void updateFilteredListToShowUndone();
     
-    /** Updates the filter of the filtered task list to show not done tasks*/
+    /** Updates the filter of the filtered task list to show done tasks*/
     void updateFilteredListToShowDone();
     //@@author
     // @@author A0140155U
