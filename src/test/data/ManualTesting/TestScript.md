@@ -2,10 +2,10 @@
 
 ## Load command
 
-Double click the jar to start the program.
-Enter `filepath <xml filepath>` to switch to the file path
-Close the program
-Overwrite the xml at the saved filepath with the new data
+Double click the jar to start the program.<br>
+Enter `filepath <xml filepath>` to switch to the file path<br>
+Close the program<br>
+Overwrite the xml at the saved filepath with the new data<br>
 Reopen the program
 
 ## Help
@@ -46,45 +46,45 @@ Add tasks to the addressbook.
 
 ### 3 Types of dated tasks
 
-`add Do work d/tmr 8pm l/3h`
-`add Tuition d/5pm de/7pm`
+`add Do work d/tmr 8pm l/3h`<br>
+`add Tuition d/5pm de/7pm`<br>
 `add Go to school d/tmr 5pm`
 
 > Add tasks with Start date + length, start date + end date, start date only.
 
 ### Flexible order of params
 
-`add Interview d/today 2pm l/1h r/7d p/high i/Bring documents t/school`
+`add Interview d/today 2pm l/1h r/7d p/high i/Bring documents t/school`<br>
 `add Interview 2 p/high i/Bring documents t/school d/today 2pm l/1h r/7d`
 
 > Order of params don't matter
 
 ### No duplicate tasks
 
-`add Go to the gym d/today 2pm l/1h r/7d p/high i/Bring towel t/exercise`
+`add Go to the gym d/today 2pm l/1h r/7d p/high i/Bring towel t/exercise`<br>
 `add Go to the gym d/today 2pm l/1h r/7d p/high i/Bring towel t/exercise`
 
 > Cannot add same task twice
 
 ### Different aliases for params
 
-`add Go to school d/today 8am p/vl l/3h`
+`add Go to school d/today 8am p/vl l/3h`<br>
 `add Go to work d/today 9am p/verylow l/3hr`
 
 > Same values added
 
 ### Flexible date parsing
 
-`add Task 1 d/today 2pm`
-`add Task 2 d/11-05-2016 3:00pm`
-`add Task 3 d/November 5th Noon`
+`add Task 1 d/today 2pm`<br>
+`add Task 2 d/11-05-2016 3:00pm`<br>
+`add Task 3 d/November 5th Noon`<br>
 `add Task 4 d/Next thursday 1700h`
 
 > Different methods of parsing dates
 
 ### Recurrence
 
-`add Go for piano lessons d/yesterday 6pm l/1h r/1w`
+`add Go for piano lessons d/yesterday 6pm l/1h r/1w`<br>
 `done <index>`
 
 > Close the program, and reopen. Date shifts back by one week
@@ -93,29 +93,29 @@ Add tasks to the addressbook.
 
 ### Basic param editing
 
-`add Dinner`
-`edit <index> i/New info`
-`edit <index> n/New name`
-`edit <index> p/High`
-`edit <index> d/today 6pm`
-`edit <index> l/2h`
-`edit <index> r/1d`
+`add Dinner`<br>
+`edit <index> i/New info`<br>
+`edit <index> n/New name`<br>
+`edit <index> p/High`<br>
+`edit <index> d/today 6pm`<br>
+`edit <index> l/2h`<br>
+`edit <index> r/1d`<br>
 `edit <index> t/tag`
 
 > Corresponding info edited
 
 ### Converting to dated task
 
-`add Watch a movie`
+`add Watch a movie`<br>
 `edit <index> d/today 2pm l/2h`
 
 > Task becomes dated task
 
 ### Field sensitive editing
 
-`add Buy groceries d/today 2pm`
-`edit <index> d/3pm`
-`edit <index> d/tmr`
+`add Buy groceries d/today 2pm`<br>
+`edit <index> d/3pm`<br>
+`edit <index> d/tmr`<br>
 `edit <index> d/today 2pm`
 
 > Editing with only a time field modifies only the time field and not the day field, vice versa for day. Editing with both fields changes the entire date.
@@ -142,7 +142,7 @@ Add tasks to the addressbook.
 
 ### Already done
 
-`done 1`
+`done 1`<br>
 `done 1`
 
 > Displays error
@@ -155,7 +155,7 @@ Add tasks to the addressbook.
 
 ### Already undone
 
-`undone 1`
+`undone 1`<br>
 `undone 1`
 
 > Displays error
@@ -166,8 +166,8 @@ Add tasks to the addressbook.
 
 `filepath newfile.xml`
 
-> File changed to newfile.xml in same folder
-> New xml file created with data
+> File changed to newfile.xml in same folder<br>
+> New xml file created with data<br>
 > Config.json updated
 
 ### Nested file path
@@ -186,16 +186,16 @@ Add tasks to the addressbook.
 
 ### Find all tasks
 
-`add Read a book`
-`add Buy school materials i/book`
-`add Visit the hotel t/book`
+`add Read a book`<br>
+`add Buy school materials i/book`<br>
+`add Visit the hotel t/book`<br>
 `find book`
 
 > Searches name, tags, info
 
 ### Find specific scope
 
-`find book s/information`
+`find book s/information`<br>
 `find book s/information s/name`
 
 > Searches in one or more categories
@@ -210,24 +210,24 @@ Add tasks to the addressbook.
 
 ### List in date range
 
-`list ds/15th November`
-`list de/15th November`
+`list ds/15th November`<br>
+`list de/15th November`<br>
 `list ds/10th November de/20th November`
 
 > List all tasks in range. One ended and two ended searches supported
 
 ### List by done undone
 
-`list df/all`
-`list df/done`
+`list df/all`<br>
+`list df/done`<br>
 `list df/not done`
 
 > Lists all done and undone tasks, all done tasks, all undone tasks respectively
 
 ### Sort list
 
-`list s/name`
-`list s/date`
+`list s/name`<br>
+`list s/date`<br>
 `list s/priority`
 
 > Lists all tasks sorted by name, date or priority
@@ -254,14 +254,14 @@ Add tasks to the addressbook.
 
 ### Reschedule task
 
-`add Finish project d/tmr 7pm l/2h`
+`add Finish project d/tmr 7pm l/2h`<br>
 `reschedule <index> 2h`
 
 > Reschedules task by 2 hours
 
 ### Reschedule non-dated task
 
-`add Finish presentation`
+`add Finish presentation`<br>
 `reschedule <index> 2h`
 
 > Gives an error
@@ -270,31 +270,31 @@ Add tasks to the addressbook.
 
 ### Undo
 
-`add Task d/today 3pm`
-`edit <index> i/Hello`
-`done <index>`
-`undone <index>`
-`reschedule <index> 1d`
-`delete <index>`
-`clear`
-`undo`
-`undo`
-`undo`
-`undo`
-`undo`
-`undo`
+`add Task d/today 3pm`<br>
+`edit <index> i/Hello`<br>
+`done <index>`<br>
+`undone <index>`<br>
+`reschedule <index> 1d`<br>
+`delete <index>`<br>
+`clear`<br>
+`undo`<br>
+`undo`<br>
+`undo`<br>
+`undo`<br>
+`undo`<br>
+`undo`<br>
 `undo`
 
 > All undoable commands
 
 ### Redo
 
-`redo`
-`redo`
-`redo`
-`redo`
-`redo`
-`redo`
+`redo`<br>
+`redo`<br>
+`redo`<br>
+`redo`<br>
+`redo`<br>
+`redo`<br>
 `redo`
 
 > Redoes all undos
@@ -333,24 +333,24 @@ Hover over any favorite in the favorites panel
 
 ### Favorite different commands
 
-`favorite Find work tasks c/find work`
-`favorite Undo c/undo`
-`favorite Redo c/redo`
+`favorite Find work tasks c/find work`<br>
+`favorite Undo c/undo`<br>
+`favorite Redo c/redo`<br>
 `favorite Clear c/clear`
 
 > Any command (except the favorite and unfavorite command) can be favorited
 
 ### Saved favorites
 
-Close program
+Close program<br>
 Open program
 
 > Favorites are saved in preferences.json
 
 ### Default favorites
 
-Close program
-Delete preferences.json
+Close program<br>
+Delete preferences.json<br>
 Open program
 
 > Favorites are reset to the default
