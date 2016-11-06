@@ -9,24 +9,24 @@ import java.util.Collections;
 
 import org.junit.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.ListCommand;
-import seedu.address.model.task.DoneFlag;
-import seedu.address.testutil.TestDatedTask;
-import seedu.address.testutil.TestTask;
+import todoit.taskbook.commons.exceptions.IllegalValueException;
+import todoit.taskbook.logic.commands.ListCommand;
+import todoit.taskbook.model.task.DoneFlag;
+import todoit.taskbook.testutil.TestDatedTask;
+import todoit.taskbook.testutil.TestTask;
 
 public class ListCommandTest extends TaskBookGuiTest{
     
     //Invalid sort attribute
     @Test
-    public void listInvalidSortAttribute(){
+    public void list_invalidSortAttribute_displayErrorMessage(){
         String command = "list s/age";
         commandBox.runCommand(command);
         assertResultMessage(ListCommand.SORT_MESSAGE_USAGE);
     }
     //Test to list all tasks.
     @Test
-    public void listAllTask(){
+    public void list_allDoneAndUndoneTasks_listsAllTasks(){
         TestTask[] allTaskList = td.getTypicalTasks();
         String command = "list df/all";
         commandBox.runCommand(command);
@@ -35,7 +35,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list all tasks in reverse order.
     @Test
-    public void listAllTaskReverseOrder(){
+    public void list_allDoneAndUndoneTasksReversed_listsAllTasksReversed(){
         TestTask[] initialList = td.getTypicalTasks();
         String command = "list df/all rev/";
         TestTask[] finalList = new TestTask[initialList.length];
@@ -48,7 +48,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list only done tasks.
     @Test
-    public void listOnlyDoneTask(){
+    public void list_onlyDoneTasks_listsOnlyDoneTasks(){
         TestTask[] initialList = td.getTypicalTasks();
         ArrayList<String> commands = new ArrayList<String>();
         commands.add("done 3");
@@ -74,7 +74,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list only tasks that are not done.
     @Test
-    public void listOnlyUndoneTask(){
+    public void list_onlyUndoneTasks_listsOnlyUndoneTasks(){
         TestTask[] initialList = td.getTypicalTasks();
         ArrayList<String> assistingCommands = new ArrayList<String>();
         assistingCommands.add("done 3");
@@ -94,7 +94,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list all tasks sorted in alphabetical order.
     @Test
-    public void listAllTaskSortedAlphabetically(){
+    public void list_tasksSortedAlphabetically_listsTasksSortedAlphabetically(){
         TestTask[] initialList = td.getTypicalTasks();
         TestTask[] finalList = new TestTask[initialList.length];
         //manual sorting
@@ -112,7 +112,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list all undone tasks, sorted from highest to lowest priority.
     @Test
-    public void listUndoneTaskSortedByPriority(){
+    public void list_undoneSortedByPriority_listsUndoneSortedByPriority(){
         TestTask[] initialList = td.getTypicalTasks();
         ArrayList<String> assistingCommands = new ArrayList<String>();
         String command = "list df/not done s/priority";
@@ -133,7 +133,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list all done tasks within specific period, should have no done tasks in this period.
     @Test
-    public void listDoneTaskWithinDaterange_mixedListOfDatedAndNonDatedTask_noTaskInDaterange(){
+    public void list_doneTasksWithinDaterange_noTaskInDaterange(){
         commandBox.runCommand(td.lectureToAttend.getAddCommand());
         commandBox.runCommand(td.meetNathan.getAddCommand());
         commandBox.runCommand(td.cuttingHair.getAddCommand());
@@ -146,7 +146,7 @@ public class ListCommandTest extends TaskBookGuiTest{
     
     //Test to list all done tasks within a specific period, should have one done task within this period.
     @Test
-    public void listDoneTaskWithinDaterange_mixedListOfDatedAndNonDatedTask_oneTaskInDaterange(){
+    public void list_doneTasksWithinDaterange_oneTaskInDaterange(){
         commandBox.runCommand(td.lectureToAttend.getAddCommand());
         commandBox.runCommand(td.meetNathan.getAddCommand());
         commandBox.runCommand(td.cuttingHair.getAddCommand());
@@ -160,6 +160,31 @@ public class ListCommandTest extends TaskBookGuiTest{
         } catch (IllegalValueException e) {
             e.printStackTrace();
         }
+        commandBox.runCommand(command);
+        assertTrue(taskListPanel.isListMatching(finalList));
+    }
+    
+    //Test to list all tasks, in sorted order by date, after start date and time with no end date and time specified.
+    @Test
+    public void list_daterangeFilterListStartDateOnlySortByDate_twoTasksInDaterange(){
+        String command = "list df/all ds/11-10-2016 0900 s/date";
+        commandBox.runCommand(td.lectureToAttend.getAddCommand());
+        commandBox.runCommand(td.meetNathan.getAddCommand());
+        commandBox.runCommand(td.cuttingHair.getAddCommand());
+        TestDatedTask[] finalList = {td.cuttingHair, td.meetNathan};
+        commandBox.runCommand(command);
+        assertTrue(taskListPanel.isListMatching(finalList));
+    }
+    
+    //Test to list all tasks, in reverse sorted order by date, with only end date and time specified(all task before this end date and time).
+    @Test
+    public void list_daterangeFilterListEndDateOnlyReverseSortByDate_threeTasksInDaterange(){
+        String command = "list df/all de/11-17-2016 1900 s/date rev/";
+        commandBox.runCommand(td.lectureToAttend.getAddCommand());
+        commandBox.runCommand(td.cuttingHair.getAddCommand());
+        commandBox.runCommand(td.meetNathan.getAddCommand());
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        TestDatedTask[] finalList = {td.dinnerDate, td.cuttingHair, td.lectureToAttend};
         commandBox.runCommand(command);
         assertTrue(taskListPanel.isListMatching(finalList));
     }

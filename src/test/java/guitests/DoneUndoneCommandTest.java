@@ -3,81 +3,82 @@ package guitests;
 
 import guitests.guihandles.TaskCardHandle;
 import org.junit.Test;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.DoneCommand;
-import seedu.address.model.task.DatedTask;
-import seedu.address.model.task.DoneFlag;
-import seedu.address.model.task.ReadOnlyDatedTask;
-import seedu.address.model.task.ReadOnlyTask;
-import seedu.address.model.task.Task;
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
+
+import todoit.taskbook.commons.core.Messages;
+import todoit.taskbook.commons.exceptions.IllegalValueException;
+import todoit.taskbook.logic.commands.AddCommand;
+import todoit.taskbook.logic.commands.DoneCommand;
+import todoit.taskbook.model.task.DatedTask;
+import todoit.taskbook.model.task.DoneFlag;
+import todoit.taskbook.model.task.ReadOnlyDatedTask;
+import todoit.taskbook.model.task.ReadOnlyTask;
+import todoit.taskbook.model.task.Task;
+import todoit.taskbook.testutil.TestTask;
+import todoit.taskbook.testutil.TestUtil;
 
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.DoneCommand.MESSAGE_SUCCESS;
+import static todoit.taskbook.logic.commands.DoneCommand.MESSAGE_SUCCESS;
 
 public class DoneUndoneCommandTest extends TaskBookGuiTest {
 
 
     @Test
-    public void doneFirstTask() {
+    public void done_firstTask_taskMarkedDone() {
         assertDoneSuccess(1, td.getTypicalTasks());
     }
     
     @Test
-    public void doneLastTask() {
+    public void done_lastTask_taskMarkedDone() {
         assertDoneSuccess(td.getTypicalTasks().length, td.getTypicalTasks());
     }
     
     @Test
-    public void doneMiddleTask() {
+    public void done_middleTask_taskMarkedDone() {
         assertDoneSuccess(td.getTypicalTasks().length / 2, td.getTypicalTasks());
     }
     
     @Test
-    public void doneDoneTask() {
+    public void done_alreadyDoneTask_displayErrorMessage() {
         commandBox.runCommand("done 1");
         commandBox.runCommand("done 1");
         assertResultMessage("Task is already done.");
     }
     
     @Test
-    public void doneInvalidTask() {
+    public void done_outOfRangeIndex_displayErrorMessage() {
         commandBox.runCommand("done " + td.getTypicalTasks().length + 1);
         assertResultMessage("The task index provided is invalid");
     }
     
     @Test
-    public void undoneFirstTask() {
+    public void undone_firstTask_taskMarkedUndone() {
         int targetIndex = 1;
         commandBox.runCommand("done " + targetIndex);
         assertUndoneSuccess(targetIndex, td.getTypicalTasks());
     }
     
     @Test
-    public void undoneMiddleTask() {
+    public void undone_middleTask_taskMarkedUndone() {
         int targetIndex = td.getTypicalTasks().length / 2;
         commandBox.runCommand("done " + targetIndex);
         assertUndoneSuccess(targetIndex, td.getTypicalTasks());
     }
     
     @Test
-    public void undoneLastTask() {
+    public void undone_lastTask_taskMarkedUndone() {
         int targetIndex = td.getTypicalTasks().length;
         commandBox.runCommand("done " + targetIndex);
         assertUndoneSuccess(targetIndex, td.getTypicalTasks());
     }
 
     @Test
-    public void undoneUndoneTask() {
+    public void undone_alreadyUndoneTask_displayErrorMessage() {
         commandBox.runCommand("undone 1");
         assertResultMessage("Task is already undone.");
     }
 
     @Test
-    public void undoneInvalidTask() {
+    public void undone_outOfRangeIndex_displayErrorMessage() {
         commandBox.runCommand("undone " + td.getTypicalTasks().length + 1);
         assertResultMessage("The task index provided is invalid");
     }

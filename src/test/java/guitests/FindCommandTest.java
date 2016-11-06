@@ -1,16 +1,16 @@
 package guitests;
 
 import org.junit.Test;
-import seedu.address.commons.core.Messages;
-import seedu.address.testutil.TestTask;
+
+import todoit.taskbook.commons.core.Messages;
+import todoit.taskbook.testutil.TestTask;
 
 import static org.junit.Assert.assertTrue;
 
 public class FindCommandTest extends TaskBookGuiTest {
     //@@author A0139121R
     @Test
-    public void find_nonEmptyList() {
-        assertFindResult("find Mark"); //no results
+    public void find_afterDelete_deletedTaskNotDisplayed() {
         assertFindResult("find Meier", td.breadShopping, td.danielLunch); //multiple results
 
         //find after deleting one result
@@ -19,28 +19,33 @@ public class FindCommandTest extends TaskBookGuiTest {
     }
 
     @Test
-    public void find_emptyList(){
+    public void find_nonexistantString_noResults() {
+        assertFindResult("find Mark");
+    }
+    
+    @Test
+    public void find_emptyTasklist_noResults(){
         commandBox.runCommand("clear");
-        assertFindResult("find Jean"); //no results
+        assertFindResult("find Jean");
     }
 
     @Test
-    public void find_byName(){
+    public void find_byName_oneResult(){
         assertFindResult("find Meier s/name", td.danielLunch);
     }
     
     @Test
-    public void find_byTag(){
+    public void find_byTag_oneResult(){
         assertFindResult("find boss s/tag", td.aliceMeeting);
     }
     
     @Test
-    public void find_byInformation(){
+    public void find_byInformation_oneResult(){
         assertFindResult("find loan s/information", td.lorryMaintainance);
     }
     //@@author
     @Test
-    public void find_invalidCommand_fail() {
+    public void find_invalidCommand_displayErrorMessage() {
         commandBox.runCommand("findgeorge");
         assertResultMessage(Messages.MESSAGE_UNKNOWN_COMMAND);
     }

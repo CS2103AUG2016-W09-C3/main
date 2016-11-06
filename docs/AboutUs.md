@@ -4,8 +4,8 @@ We are a team based in the [School of Computing, National University of Singapor
 
 ## Project Team
 
-#### [Damith C. Rajapakse](http://www.comp.nus.edu.sg/~damithch) <br>
-<img src="images/DamithRajapakse.jpg" width="150"><br>
+#### Si Junke Ashley <br>
+<img src="images/A0131496A.jpg" width="150"><br>
 **Role**: Project Advisor
 
 -----
@@ -35,6 +35,7 @@ Role: Developer <br>
 * Features implemented:
    * [Undo/Redo command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#undo-a-command--undo)
    * [Done/Undone command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#mark-a-task-as-done--done)
+   * [Favorite/Unfavorite command](https://github.com/CS2103AUG2016-W09-C3/main/blob/final-release/docs/UserGuide.md#mark-as-favorite-favorite)
    * [Filepath command](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#changing-filepath--filepath)<br>
 * Code written: [[functional code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/maind/A0140155U.md)][[test code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/test/A0140155U.md)][[docs](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/docs/A0140155U.md)]<br>
 * Other major contributions:
@@ -63,12 +64,12 @@ Role: Developer <br>
 <img src="images/ShaunChee.JPG" width="150"><br>
  Role: Developer <br>
 * Components in charge of: [UI](https://github.com/CS2103AUG2016-W09-C3/main/tree/master/src/main/java/seedu/address/ui)<br>
-* Aspects/tools in charge of: Documentation<br>
+* Aspects/tools in charge of: Testing, documentation<br>
 * Features implemented:
    * [Recurrence Feature] (https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#adding-a-task-add)<br>
 * Code written: [[Functional code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/main/A0139947L.md)] [[Test code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/test/A0139947L.md)] [[Docs](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/docs/A0139947L.md)]<br>
 * Other major contributions:
-  * Added support for different aliases for priority and recurrence when Adding and Editing tasks
+  * Added support for different aliases for priority and recurrence when Adding and Editing tasks [[#92](https://github.com/CS2103AUG2016-W09-C3/main/pull/92)]
 
 # Contributors
 

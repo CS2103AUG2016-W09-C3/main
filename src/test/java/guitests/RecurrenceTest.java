@@ -1,51 +1,28 @@
 //@@author A0139947L
 package guitests;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.TaskBook;
-import seedu.address.model.task.DateTime;
-import seedu.address.model.task.ReadOnlyDatedTask;
-import seedu.address.model.task.UniqueTaskList;
-import seedu.address.testutil.TestTask;
-import seedu.address.testutil.TestUtil;
-
+import todoit.taskbook.model.TaskBook;
 
 public class RecurrenceTest extends TaskBookGuiTest {
     
     @Test
     // Updating recurrence
-    public void checkRecurrenceDone() {
+    public void recurrence_checkRecurrenceOnStartUp_Success() {
         TaskBook tasks = getInitialData();
+        commandBox.runCommand("done 1");
         
-        commandBox.runCommand(td.dinnerDate.getAddCommand());
-        commandBox.runCommand(td.meetingToAttend.getAddCommand());
-        commandBox.runCommand("done 7");
-        
-        DateTime csFinalExamToAdd = td.csFinalExam.getDateTime();
         tasks.updateRecurringTasks();
-        
-        assertFalse(tasks.getUniqueTaskList().getInternalList().get(6).equals(td.csFinalExam) && !td.csFinalExam.getDateTime().equals(csFinalExamToAdd));
         assertRecurringSuccess(tasks);
     }
     
     @Test
     // Without updating recurrence
-    public void checkRecurrenceFalse() {
+    public void recurrence_checkRecurrenceOnStartUp_Fail() {
         TaskBook tasks = getInitialData();
-        
-        commandBox.runCommand(td.dinnerDate.getAddCommand());
-        commandBox.runCommand(td.csFinalExam.getAddCommand());
-        commandBox.runCommand(td.meetingToAttend.getAddCommand());
-        
-        commandBox.runCommand("done 7");
-        
-        DateTime csFinalExamToAdd = td.csFinalExam.getDateTime();
-
-        assertFalse(!tasks.getUniqueTaskList().getInternalList().get(6).equals(td.csFinalExam) && !td.csFinalExam.getDateTime().equals(csFinalExamToAdd));   
+        commandBox.runCommand("done 1");
+  
         assertRecurringSuccess(tasks);
     }
 
