@@ -101,7 +101,7 @@ The help command links you to our User Guide to provide you with detailed explai
 
 <!-- @@author A0139121R -->
 ### Adding a task: `add`
-Format: `add TASK_NAME [d/DATE_TIME de/END_DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
+Format: `add TASK_NAME [d/DATE_TIME de/END_DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...`
 
 ToDoIt compiles your tasks for the day efficiently with a simple line of text. The `add` command adds your tasks to the to do list, allowing you to view them any time you want.
 
@@ -321,14 +321,14 @@ Format: `filepath FILEPATH`
 > * The `FILEPATH` must be a valid file path on your drive that ends with .xml. Some examples include `file.xml`, `data/file.xml` or `C:/data/file.xml`.
  
 **Example**
-> * Your current file is stored at data\addressbook.xml. You want to move your saved file from data\addressbook.xml to data\todoit.xml. Simply run the command<br>
+> * Your current file is stored at data\taskbook.xml. You want to move your saved file from data\taskbook.xml to data\todoit.xml. Simply run the command<br>
 >   `filepath data\todoit.xml`
 
 ---
 
 ### Mark as favorite: `favorite`
 In any task, efficiency is key. Save yourself from typing the same command over and over again by creating a command preset.<br>
-Format: `favorite DESCRIPTION c/COMMAND`
+Format: `favorite DESCRIPTION c/COMMAND` or `favorite INDEX`
 
 **Options**
 > 1. `c/` Command: The command associated with the preset.
@@ -431,7 +431,7 @@ Format: `exit`
 
 Command | Format  
 -------- | :-------- 
-Add | `add TASK_NAME [d/DATE_TIME de/END_DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [a/] [i/INFORMATION] [t/TAG]...`
+Add | `add TASK_NAME [d/DATE_TIME de/END_DATE_TIME l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...`
 Edit | `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...` 
 Clear | `clear`
 Delete | `delete INDEX`
