@@ -36,6 +36,9 @@ public class AddCommand extends Command {
     public static final String MESSAGE_LENGTH_ENDDATE_CONFLICT = "Length and end datetime cannot be both filled.";
 
     private final Task toAdd;
+    
+    private final int MINUTES_IN_DAY = 24 * 60;
+    private final int MINUTES_IN_HOUR = 60;
 
     /**
      * Convenience constructor using raw values for adding 
@@ -69,8 +72,9 @@ public class AddCommand extends Command {
             } else {
                 LocalDateTime startDate = DateParser.parseDate(datetime);
                 LocalDateTime endDate = DateParser.parseDate(endDatetime);
-                long hourDifference = ChronoUnit.HOURS.between(startDate, endDate);
-                String finalTimeDifference = getDifferenceString(hourDifference);
+                //long hourDifference = ChronoUnit.HOURS.between(startDate, endDate);
+                long minuteDifference = ChronoUnit.MINUTES.between(startDate, endDate);
+                String finalTimeDifference = getDifferenceString(minuteDifference);
                 return finalTimeDifference;
             }
         } else {
@@ -82,11 +86,13 @@ public class AddCommand extends Command {
         }
     }
     
-    private String getDifferenceString(long hourDifference){
-        if(hourDifference >= 24){
-            return Long.toString(TimeUnit.HOURS.toDays(hourDifference)) + "d";
+    private String getDifferenceString(long minuteDifference){
+        if(minuteDifference >= MINUTES_IN_DAY){
+            return Long.toString(TimeUnit.MINUTES.toDays(minuteDifference)) + "d";
+        } else if(minuteDifference >= 3 * MINUTES_IN_HOUR){
+            return Long.toString(TimeUnit.MINUTES.toHours(minuteDifference)) + "h";
         } else {
-            return hourDifference + "h";
+            return minuteDifference + "m";
         }
     }
 
