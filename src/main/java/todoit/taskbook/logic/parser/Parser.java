@@ -137,7 +137,6 @@ public class Parser {
             }
             
             if(command.hasParams(ListCommand.SORT_PARAM)){
-                //sortByAttribute = new ArrayList<String>(Arrays.asList(command.getParam("s").split(" ")));
                 sortByAttribute = command.getAllParams("s");
             }
             if(command.hasParams(ListCommand.REVERSE_PARAM)){
