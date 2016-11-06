@@ -4,10 +4,6 @@ package guitests;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-
-import guitests.guihandles.TaskCardHandle;
-import todoit.taskbook.commons.core.Messages;
-import todoit.taskbook.logic.commands.AddCommand;
 import todoit.taskbook.model.StatesManager;
 import todoit.taskbook.testutil.TestTask;
 import todoit.taskbook.testutil.TestUtil;
