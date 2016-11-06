@@ -15,6 +15,7 @@ public class Length {
     private final TimeInterval timeInterval;
     public final static String NO_INTERVAL = "";
     public final static String DEFAULT_INTERVAL = "1h";
+    public final static String PARAM_NOT_SPECIFIED = "-1";
     private boolean hasInterval = true;
     /**
      * Stores given interval. Validation of interval is done by TimeInterval class.

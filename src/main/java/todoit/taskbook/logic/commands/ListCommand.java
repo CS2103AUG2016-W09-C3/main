@@ -40,7 +40,16 @@ public class ListCommand extends Command {
     
     public ListCommand() {}
     
-    public ListCommand(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse) throws IllegalValueException {
+    /**
+     * ListCommand constructor
+     * @param dateRange To list tasks that falls within this dateRange.
+     * @param sortByAttribute Attributes to sort tasks by, will be passed to custom task comparator.
+     * @param doneStatus To only list tasks with this doneStatus
+     * @param reverse If specified, reverses the order of the final sorted list.
+     * @throws IllegalValueException
+     */
+    public ListCommand(HashMap<String, String> dateRange, ArrayList<String> sortByAttribute, String doneStatus, boolean reverse) 
+            throws IllegalValueException {
         assert dateRange != null : "dateRange given is a null object";
         assert sortByAttribute != null : "sortByAttribute given is a null object";
         for(String sortAttribute : sortByAttribute){
@@ -56,13 +65,8 @@ public class ListCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if(dateRange.isEmpty() && sortByAttribute.isEmpty() && doneStatus.equalsIgnoreCase("Not done") && !reverse){
-            model.updateFilteredListToShowUndone();
-            return new CommandResult(MESSAGE_SUCCESS);
-        } else {
-            model.updateSortTaskList(dateRange, sortByAttribute, doneStatus, reverse);
-            return new CommandResult(MESSAGE_SUCCESS);
-        }
+        model.updateSortTaskList(dateRange, sortByAttribute, doneStatus, reverse);
+        return new CommandResult(MESSAGE_SUCCESS);
     }
     
     @Override
