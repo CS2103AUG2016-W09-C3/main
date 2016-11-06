@@ -70,17 +70,22 @@ public class AddCommand extends Command {
                 LocalDateTime startDate = DateParser.parseDate(datetime);
                 LocalDateTime endDate = DateParser.parseDate(endDatetime);
                 long hourDifference = ChronoUnit.HOURS.between(startDate, endDate);
-                if(hourDifference >= 24){
-                    return Long.toString(TimeUnit.HOURS.toDays(hourDifference)) + "d";
-                } else {
-                    return hourDifference + "h";
-                }
+                String finalTimeDifference = getDifferenceString(hourDifference);
+                return finalTimeDifference;
             }
         } else {
             if(!endDatetime.equals("-1")){
                 throw new IllegalValueException(MESSAGE_LENGTH_ENDDATE_CONFLICT);
             }
             return length;
+        }
+    }
+    
+    private String getDifferenceString(long hourDifference){
+        if(hourDifference >= 24){
+            return Long.toString(TimeUnit.HOURS.toDays(hourDifference)) + "d";
+        } else {
+            return hourDifference + "h";
         }
     }
 
