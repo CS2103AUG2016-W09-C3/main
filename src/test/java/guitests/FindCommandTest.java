@@ -20,13 +20,13 @@ public class FindCommandTest extends TaskBookGuiTest {
 
     @Test
     public void find_nonexistantString_noResults() {
-        assertFindResult("find Mark"); //no results
+        assertFindResult("find Mark");
     }
     
     @Test
     public void find_emptyTasklist_noResults(){
         commandBox.runCommand("clear");
-        assertFindResult("find Jean"); //no results
+        assertFindResult("find Jean");
     }
 
     @Test

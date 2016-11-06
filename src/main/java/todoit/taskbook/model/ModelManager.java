@@ -117,7 +117,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0140155U
     @Override
-    public void addPreset(CommandPreset commandPreset) {
+    public void addPreset(CommandPreset commandPreset) throws IllegalValueException {
         userPrefs.addPreset(commandPreset);
         raise(new PresetChangedEvent(userPrefs));
     }
@@ -136,6 +136,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         raise(new JumpToPresetRequestEvent(presetIndex));
     }
+    
     // @@author
     //@@author A0139046E
     @Override
@@ -233,6 +234,11 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
     //@@author A0139121R
+    /**
+     * SortQualifier is used by list command to sort the displayed list to user.
+     * SortQualifier checks if task has the specified done flag.
+     * SortQualifier checks if task belongs within the specified date range if task has a date.
+     */
     private class SortQualifier implements Qualifier{
         private HashMap<String, String> dateRange;
         private ArrayList<String> sortByAttribute;
@@ -252,10 +258,8 @@ public class ModelManager extends ComponentManager implements Model {
                 return false;
             }
             
-            if(!dateRange.isEmpty()){
-                if(!checkWithinDateRange(task)){
-                    return false;
-                }
+            if(!dateRange.isEmpty() && !checkWithinDateRange(task)){
+                return false;
             }
             
             return true;
@@ -278,6 +282,9 @@ public class ModelManager extends ComponentManager implements Model {
         
         private boolean checkAfterStartDate(ReadOnlyDatedTask task, LocalDateTime currentTaskDateTime){
             try {
+                if(dateRange.get("start") == null){
+                    return true;
+                }
                 LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
                 if(currentTaskDateTime.isBefore(startDateTime)){
                     return false;
@@ -292,6 +299,9 @@ public class ModelManager extends ComponentManager implements Model {
         
         private boolean checkBeforeEndDate(ReadOnlyDatedTask task, LocalDateTime currentTaskDateTime){
             try{
+                if(dateRange.get("end") == null){
+                    return true;
+                }
                 LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end"));
                 if(currentTaskDateTime.isAfter(endDateTime)){
                     return false;
@@ -305,15 +315,13 @@ public class ModelManager extends ComponentManager implements Model {
         }
         
         private boolean checkDoneFlagSame(ReadOnlyTask task){
-            if(!doneStatus.equalsIgnoreCase("all")){
-                if(!doneStatus.equalsIgnoreCase(task.getDoneFlag().toString())){
-                    return false;
-                }
-            }
-            return true;
+            return doneStatus.equalsIgnoreCase("all") || doneStatus.equalsIgnoreCase(task.getDoneFlag().toString());
         }
     }
-
+    
+    /**
+     * FindQualifier checks if any of the keywords given is in any of the specified attributes in the tasks.
+     */
     private class FindQualifier implements Qualifier {
         private Set<String> findKeyWords;
         private HashSet<String> searchScope;
@@ -352,11 +360,7 @@ public class ModelManager extends ComponentManager implements Model {
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            if(task.getDoneFlag().isDone()){
-                return false;
-            } else {
-                return true;
-            }
+            return !task.getDoneFlag().isDone();
         }
 
     }
@@ -370,11 +374,7 @@ public class ModelManager extends ComponentManager implements Model {
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            if(task.getDoneFlag().isDone()){
-                return true;
-            } else {
-                return false;
-            }
+            return task.getDoneFlag().isDone();
         }
 
     }
@@ -401,6 +401,7 @@ public class ModelManager extends ComponentManager implements Model {
         return newState.getCommand();
     }
     // @@author
+
 
 
 }

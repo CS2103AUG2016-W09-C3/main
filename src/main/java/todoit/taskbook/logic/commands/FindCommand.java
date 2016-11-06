@@ -27,7 +27,13 @@ public class FindCommand extends Command {
 
     private final Set<String> keywords;
     private HashSet<String> searchScope;
-
+    
+    /**
+     * FindCommand constructor
+     * @param keywords Keywords to find.
+     * @param searchScope Attributes of tasks to find keywords, if none specified name, information and tag are searched by default.
+     * @throws IllegalValueException
+     */
     public FindCommand(Set<String> keywords, HashSet<String> searchScope) throws IllegalValueException{
         if (keywords.isEmpty()){
             throw new IllegalValueException(MESSAGE_USAGE);

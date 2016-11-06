@@ -1,0 +1,883 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<taskbook>
+    <tasks>
+        <name>Go out with colleague at mall</name>
+        <priority>LOW</priority>
+        <information></information>
+        <dateTime>11-09-2016 13:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with friends</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a talk</name>
+        <priority>LOW</priority>
+        <information></information>
+        <dateTime>12-14-2016 17:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to work</name>
+        <priority>LOW</priority>
+        <information></information>
+        <done>Done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with parents at the mall</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>11-08-2016 11:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with girlfriend at the mrt</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <dateTime>12-25-2016 17:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Spend time with parents at the club</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to the library</name>
+        <priority>VERYHIGH</priority>
+        <information>Be happy</information>
+        <dateTime>12-06-2016 14:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Do work with mom</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <dateTime>12-14-2016 18:00</dateTime>
+        <length>2h</length>
+        <recurrence>3w</recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Watch a movie with kids</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet people</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <dateTime>12-20-2016 18:00</dateTime>
+        <length>3h</length>
+        <recurrence>1w</recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a meal with dad at the club</name>
+        <priority>LOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a talk</name>
+        <priority>VERYHIGH</priority>
+        <information>Keep your mouth shut</information>
+        <dateTime>12-18-2016 20:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to the mall</name>
+        <priority>VERYLOW</priority>
+        <information>Don't talk too much</information>
+        <dateTime>12-21-2016 09:00</dateTime>
+        <length>2h</length>
+        <recurrence></recurrence>
+        <done>Done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Do work with parents</name>
+        <priority>VERYHIGH</priority>
+        <information>Rest well</information>
+        <dateTime>12-07-2016 20:00</dateTime>
+        <length>2h</length>
+        <recurrence></recurrence>
+        <done>Done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Do homework</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>11-06-2016 19:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Do work</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>11-18-2016 12:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to school</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a talk</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Go out</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <dateTime>12-20-2016 16:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet people at work</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to the shopping center</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <dateTime>12-16-2016 17:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to the club</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <dateTime>12-19-2016 12:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Do homework at the shopping center</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with girlfriend at the mall</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <dateTime>12-04-2016 20:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Have fun</name>
+        <priority>LOW</priority>
+        <information>Be happy</information>
+        <done>Done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Have fun at home</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <dateTime>12-14-2016 10:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with colleague at mall</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a talk at the club</name>
+        <priority>LOW</priority>
+        <information>Dress nicely</information>
+        <dateTime>12-22-2016 17:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet people at work</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <dateTime>11-21-2016 19:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Spend time with colleague at the mrt</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <done>Done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Buy stuff with colleague at the mall</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>12-12-2016 16:00</dateTime>
+        <length>3h</length>
+        <recurrence>3w</recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with brother at the mall</name>
+        <priority>VERYLOW</priority>
+        <information>Drive</information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet people at home</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <dateTime>11-28-2016 19:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet people at their house</name>
+        <priority>HIGH</priority>
+        <information>Drive</information>
+        <dateTime>11-14-2016 16:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a talk</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <done>Done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Go out with kids</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>11-13-2016 19:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with friends at the library</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <dateTime>12-23-2016 18:00</dateTime>
+        <length>2h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet people</name>
+        <priority>VERYHIGH</priority>
+        <information>Bring phone</information>
+        <dateTime>12-17-2016 18:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to work</name>
+        <priority>LOW</priority>
+        <information></information>
+        <dateTime>12-13-2016 09:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Do homework with sister</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to the gym</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <done>Done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to the club</name>
+        <priority>HIGH</priority>
+        <information>Bring a gift</information>
+        <dateTime>12-21-2016 16:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to home</name>
+        <priority>MEDIUM</priority>
+        <information>Dress nicely</information>
+        <done>Done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with girlfriend at school</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with grandparents</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>11-26-2016 19:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Do homework</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Go out at the shopping center</name>
+        <priority>LOW</priority>
+        <information></information>
+        <dateTime>12-24-2016 09:00</dateTime>
+        <length>2h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with mom at their house</name>
+        <priority>LOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Have fun with brother at the gym</name>
+        <priority>VERYLOW</priority>
+        <information>Drive</information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Go out with friends at mall</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <dateTime>12-20-2016 14:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet people at the gym</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <dateTime>11-18-2016 10:00</dateTime>
+        <length>1h</length>
+        <recurrence>3d</recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to the gym</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a meal at their house</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Have fun at the club</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>12-02-2016 19:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to mall</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with brother at the mrt</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <dateTime>12-28-2016 09:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with kids</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <dateTime>11-10-2016 10:00</dateTime>
+        <length>3h</length>
+        <recurrence>4w</recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go out with brother</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Watch a movie with dad</name>
+        <priority>VERYHIGH</priority>
+        <information>Keep your mouth shut</information>
+        <dateTime>12-05-2016 09:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a talk with boyfriend</name>
+        <priority>HIGH</priority>
+        <information>Be early</information>
+        <dateTime>12-29-2016 12:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Watch a movie</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <done>Done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Do homework with sister</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <dateTime>11-07-2016 13:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with boyfriend at work</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with girlfriend at the club</name>
+        <priority>HIGH</priority>
+        <information>Don't talk too much</information>
+        <dateTime>12-17-2016 09:00</dateTime>
+        <length>2h</length>
+        <recurrence></recurrence>
+        <done>Done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a meal at mall</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Spend time with grandparents at mall</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>12-01-2016 12:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Buy stuff with brother</name>
+        <priority>LOW</priority>
+        <information></information>
+        <dateTime>12-09-2016 13:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Watch a movie with sister at work</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <dateTime>11-20-2016 18:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a talk with friends</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <dateTime>11-29-2016 17:00</dateTime>
+        <length>1h</length>
+        <recurrence>1w</recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with grandparents</name>
+        <priority>LOW</priority>
+        <information></information>
+        <dateTime>12-01-2016 18:00</dateTime>
+        <length>4h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Buy stuff</name>
+        <priority>VERYHIGH</priority>
+        <information>Bring phone</information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meeting with grandparents</name>
+        <priority>VERYLOW</priority>
+        <information>Dress nicely</information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to the gym</name>
+        <priority>HIGH</priority>
+        <information>Important</information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Go out with mom</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <dateTime>11-29-2016 10:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with sister at home</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>11-12-2016 09:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Buy stuff</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <dateTime>12-20-2016 14:00</dateTime>
+        <length>2h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with kids</name>
+        <priority>VERYHIGH</priority>
+        <information>Don't forget</information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with friends</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <dateTime>12-19-2016 13:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go to work</name>
+        <priority>LOW</priority>
+        <information></information>
+        <dateTime>12-20-2016 20:00</dateTime>
+        <length>2h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Spend time</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <dateTime>12-19-2016 11:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with grandparents</name>
+        <priority>HIGH</priority>
+        <information>Rest well</information>
+        <dateTime>12-01-2016 15:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with mom at work</name>
+        <priority>LOW</priority>
+        <information>Bring phone</information>
+        <done>Done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Have fun at their house</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Buy stuff at work</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with dad</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <dateTime>11-22-2016 13:00</dateTime>
+        <length>2h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with parents at the shopping center</name>
+        <priority>VERYLOW</priority>
+        <information></information>
+        <dateTime>11-22-2016 10:00</dateTime>
+        <length>1h</length>
+        <recurrence>1w</recurrence>
+        <done>Done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with grandparents</name>
+        <priority>LOW</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with dad at the library</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Go out with parents</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <dateTime>12-24-2016 11:00</dateTime>
+        <length>3h</length>
+        <recurrence>6d</recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet with boyfriend at their house</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>12-13-2016 19:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Buy stuff with parents</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <dateTime>11-15-2016 11:00</dateTime>
+        <length>3h</length>
+        <recurrence>2d</recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a talk at the mrt</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>12-22-2016 18:00</dateTime>
+        <length>1h</length>
+        <recurrence></recurrence>
+        <done>Done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Buy stuff with girlfriend at the mrt</name>
+        <priority>LOW</priority>
+        <information>Drive</information>
+        <dateTime>11-17-2016 19:00</dateTime>
+        <length>2h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go out with colleague</name>
+        <priority>MEDIUM</priority>
+        <information>Keep your mouth shut</information>
+        <dateTime>12-21-2016 10:00</dateTime>
+        <length>3h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meeting with parents at the mall</name>
+        <priority>HIGH</priority>
+        <information></information>
+        <dateTime>11-11-2016 09:00</dateTime>
+        <length>2h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Go out at their house</name>
+        <priority>HIGH</priority>
+        <information>Bring money</information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Have a meal with girlfriend at home</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <dateTime>12-28-2016 12:00</dateTime>
+        <length>2h</length>
+        <recurrence></recurrence>
+        <done>Not done</done>
+        <isDated>true</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet people</name>
+        <priority>VERYHIGH</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+    <tasks>
+        <name>Meet people</name>
+        <priority>MEDIUM</priority>
+        <information></information>
+        <done>Not done</done>
+        <isDated>false</isDated>
+    </tasks>
+</taskbook>

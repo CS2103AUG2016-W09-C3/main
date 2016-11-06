@@ -87,13 +87,15 @@ http://natty.joestelmach.com/doc.jsp
 <!-- @@author -->
 ---
 
+<!-- @@author A0139947L -->
 ### Viewing help : `help`
 Format: `help`
 
-The help command provides you with a detailed explanation of the available commands within the program.
+The help command links you to our User Guide to provide you with detailed explaination on how to use ToDoIt.
 
 **Notes**
 > * Help is also shown if you enter an incorrect command e.g. `abcd`
+<!-- @@author -->
 
 ---
 
@@ -136,8 +138,8 @@ ToDoIt displays your tasks easily with a simple command. The tasks to list can b
 Format: `list [ds/DATE_START] [de/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 
 **Options**
-> 1. `ds/` Date start: If a start date is specified, program will only display tasks after this date. If the option is used without a specified date, it will use today's date.
-> 2. `de/` Date end: If an end date is specified, program will only display tasks before this date. If the option is used without a specified date, , it will use today's date.
+> 1. `ds/` Date start: If a start date is specified, program will only display tasks after this date.
+> 2. `de/` Date end: If an end date is specified, program will only display tasks before this date.
 > 3. `s/` Sort by: Sorts the tasks in the order specified (`date` and `time`, `alphabetical`, `priority`).
 > 4. `df/` Done status: Use this flag to specify, by done status, which tasks to show. The available done flags are "done", "not done" and "all".
 > 5. `rev/` Reverse: If this flag is specified, tasks will be listed in reverse order after sorting.
@@ -148,9 +150,9 @@ Format: `list [ds/DATE_START] [de/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 
 **Example**
 > * You want to view all upcoming tasks ordered by date, so you know what needs to be done. <br>
->   `list ds/ s/date`
+>   `list ds/today s/date`
 > * You want to see all the tasks you have completed in the past year, to celebrate what you've done with your life. <br>
->   `list ds/1st Jan 2016 de/ df/done`
+>   `list ds/1st Jan 2016 de/today df/done`
 
 ---
 
@@ -176,6 +178,7 @@ Format: `find KEYWORD [MORE_KEYWORDS] [s/SCOPE]...`
 > * You want to find all tasks that relate to your family. <br>
 >   `find brother sister mother father family`
 <!-- @@author -->
+
 ---
   
 ### Deleting a task : `delete`
@@ -218,6 +221,7 @@ Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY
 > 4. `r/` Recur: Edits the interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
 > 5. `p/` Priority: Edits the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
 <!-- @@author -->
+<!-- @@author A0139046E -->
 > 6. `i/` Information: Edits information of this task.
 > 7. `t/` Tags: Edits tags that are tagged with the task.
 
@@ -234,6 +238,7 @@ Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY
 >   `find meeting`<br> 
     `edit 1 d/2nd Oct`
 <!-- @@author -->
+
 ---
 
 <!-- @@author A0139046E -->  
@@ -360,11 +365,37 @@ Format: `unfavorite INDEX`
 <!-- @@author -->
 ---
 
-### Exiting the program : `exit`
-ToDoIt is sad to see you go.<br>
-Format: `exit`  
+<!-- @@author A0139947L -->
+
+### Taking in different aliases:
+ToDoIt also takes in different aliases for both time and priority. Instead of typing the respective command, it also recognises the aliases in the tables below.
+
+The aliases below work for `add`, `edit`, `reschedule`, or any command that requires the input or change or time/date/priority.
+
+Command (Date & Time) | Aliases
+-------- | :-----------
+m (minutes) | min, mins
+h (hours) | hr, hrs
+d (days) | day, days
+w (weeks) | week, weeks
+
+Command (Priority) | Aliases
+-------- | :-----------
+veryhigh | vh
+high | h
+medium | m
+low | l
+verylow | vl
 
 ---
+
+### Exiting the program: `exit`
+ToDoIt is sad to see you go.<br>
+Format: `exit`  
+<!-- @@author -->
+
+---
+
 <!-- @@author A0139121R -->
 ## FAQ
 
@@ -394,6 +425,8 @@ Format: `exit`
 
 <!-- @@author -->
 
+<!-- @@author A0139947L -->
+
 ## Command Summary
 
 Command | Format  
@@ -414,3 +447,4 @@ Favorite | `favorite c/COMMAND` (add a favorite)<br>`favorite INDEX` (select a f
 Unfavorite | `unfavorite INDEX`
 Help | `help`
 Exit | `exit`
+<!-- @@author -->

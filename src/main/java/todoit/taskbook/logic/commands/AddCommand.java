@@ -23,6 +23,7 @@ public class AddCommand extends Command {
     public static final String[] POSSIBLE_PARAMS = {"d", "l", "de", "r", "p", "i", "t"};
     
     public static final String[] DATED_TASK_PARAMS = {"d"};
+    public static final String[] FLOATING_TASK_PARAMS = {"p", "i", "t"};
     
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task book. "
             + "Parameters: NAME [d/DATE,TIME l/LENGTH de/END_DATE,END_TIME] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...\n"
@@ -34,8 +35,14 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
     public static final String MESSAGE_LENGTH_ENDDATE_CONFLICT = "Length and end datetime cannot be both filled.";
+    public static final String MESSAGE_FLOATING_TASK_INVALID_PARAMETERS = "Please use valid parameters for floating task.\n"
+            + "Floating task parameters should not include length or end date and time field.\n"
+            + "Floating task should only have any combination of name, priority, information and tag fields present.";
 
     private final Task toAdd;
+    
+    private final int MINUTES_IN_DAY = 24 * 60;
+    private final int MINUTES_IN_HOUR = 60;
 
     /**
      * Convenience constructor using raw values for adding 
@@ -69,18 +76,27 @@ public class AddCommand extends Command {
             } else {
                 LocalDateTime startDate = DateParser.parseDate(datetime);
                 LocalDateTime endDate = DateParser.parseDate(endDatetime);
-                long hourDifference = ChronoUnit.HOURS.between(startDate, endDate);
-                if(hourDifference >= 24){
-                    return Long.toString(TimeUnit.HOURS.toDays(hourDifference)) + "d";
-                } else {
-                    return hourDifference + "h";
-                }
+                //long hourDifference = ChronoUnit.HOURS.between(startDate, endDate);
+                long minuteDifference = ChronoUnit.MINUTES.between(startDate, endDate);
+                String finalTimeDifference = getDifferenceString(minuteDifference);
+                return finalTimeDifference;
             }
         } else {
             if(!endDatetime.equals("-1")){
+                //cannot have both length and endDateTime parameter specified by user.
                 throw new IllegalValueException(MESSAGE_LENGTH_ENDDATE_CONFLICT);
             }
             return length;
+        }
+    }
+    
+    private String getDifferenceString(long minuteDifference){
+        if(minuteDifference >= MINUTES_IN_DAY){
+            return Long.toString(TimeUnit.MINUTES.toDays(minuteDifference)) + "d";
+        } else if(minuteDifference >= 3 * MINUTES_IN_HOUR){
+            return Long.toString(TimeUnit.MINUTES.toHours(minuteDifference)) + "h";
+        } else {
+            return minuteDifference + "m";
         }
     }
 

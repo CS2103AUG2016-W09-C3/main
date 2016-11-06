@@ -18,6 +18,8 @@ public class Priority {
     public static final String MESSAGE_PRIORITY_CONSTRAINTS = "Task priority should either veryhigh, high, medium, low or verylow.\n"
                                                             + "It is case insensitive.\n" + "You may also type in vh/h/m/l/vl in that respective order.";
     
+    public static final String DEFAULT_VALUE = "medium";
+    
     private static HashMap<String, String> listOfPriorities = new HashMap<>();
     
     private enum acceptedPriority{
@@ -59,12 +61,11 @@ public class Priority {
     }
     //@@author
     
-    
-    //@@author A0139121R
     public String getDisplayedAlias(){
         return priority.getDisplayedAlias();
     }
     
+    //@@author A0139121R
     public int getEnumPriority(){
         return priority.getEnumPriority();
     }

@@ -14,6 +14,8 @@ public class Information {
 
     public static final String INFORMATION_VALIDATION_REGEX = "[^/]*";
     
+    public static final String PARAM_NOT_SPECIFIED = "";
+    
     public final String fullInformation;
     
     /**
