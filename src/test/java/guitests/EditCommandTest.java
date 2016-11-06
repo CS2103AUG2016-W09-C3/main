@@ -2,14 +2,11 @@
 package guitests;
 
 import static org.junit.Assert.assertTrue;
-import static todoit.taskbook.logic.commands.DoneCommand.MESSAGE_SUCCESS;
-
 import org.junit.Test;
 
 import todoit.taskbook.commons.core.Messages;
 import todoit.taskbook.commons.exceptions.IllegalValueException;
 import todoit.taskbook.logic.commands.EditCommand;
-import todoit.taskbook.logic.commands.FindCommand;
 import todoit.taskbook.logic.parser.CommandParser;
 import todoit.taskbook.logic.parser.ParsedCommand;
 import todoit.taskbook.model.task.DateTime;

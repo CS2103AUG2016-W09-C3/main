@@ -2,7 +2,6 @@
 package todoit.taskbook.logic.commands;
 
 import todoit.taskbook.commons.exceptions.IllegalValueException;
-import todoit.taskbook.model.CommandPreset;
 
 /**
  * Adds a favorite command to the preset list.
