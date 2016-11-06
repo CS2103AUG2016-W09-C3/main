@@ -59,12 +59,11 @@ public class Priority {
     }
     //@@author
     
-    
-    //@@author A0139121R
     public String getDisplayedAlias(){
         return priority.getDisplayedAlias();
     }
     
+    //@@author A0139121R
     public int getEnumPriority(){
         return priority.getEnumPriority();
     }
