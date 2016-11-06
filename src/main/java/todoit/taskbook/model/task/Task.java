@@ -12,7 +12,6 @@ import todoit.taskbook.model.tag.UniqueTagList;
  */
 public class Task implements ReadOnlyTask {
 
-    
     protected Name name;
     protected Priority priority;
     protected Information information;
