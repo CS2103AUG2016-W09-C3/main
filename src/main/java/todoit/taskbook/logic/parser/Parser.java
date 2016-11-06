@@ -122,7 +122,7 @@ public class Parser {
      * Parses arguments in the context of the list command.
      * 
      * @param command
-     * @return
+     * @return list command
      */
     private Command prepareList(ParsedCommand command) {
         HashMap<String, String> dateRange = new HashMap<String, String>();
