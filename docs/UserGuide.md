@@ -152,7 +152,7 @@ Format: `list [ds/DATE_START] [de/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 > * You want to view all upcoming tasks ordered by date, so you know what needs to be done. <br>
 >   `list ds/today s/date`
 > * You want to see all the tasks you have completed in the past year, to celebrate what you've done with your life. <br>
->   `list ds/1st Jan 2016 df/done`
+>   `list ds/1st Jan 2016 de/today df/done`
 
 ---
 
