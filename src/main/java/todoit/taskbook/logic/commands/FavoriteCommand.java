@@ -14,10 +14,18 @@ public class FavoriteCommand extends Command {
 
     public static final String COMMAND_WORD = "favorite";
 
+    /*
+     * Commands modifying the favorite panel are banned because it is possible to create an infinite loop:
+     * 
+     * favorite Loop 1 c/favorite 2
+     * favorite Loop 2 c/favorite 1
+     * 
+     */
+    public static final String[] BANNED_COMMANDS = {"favorite", "unfavorite"};
     public static final String[] REQUIRED_PARAMS = {};
     public static final String[] POSSIBLE_PARAMS = {"c"};
     
-    
+    public static final String MESSAGE_BANNED_COMMAND = "You may not add the 'favorite' or 'unfavorite' command as a preset.";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a favorite command to the preset list.\n"
             + "Parameters: DESCRIPTION c/COMMAND\n"
             + "Example: " + COMMAND_WORD
@@ -34,18 +42,31 @@ public class FavoriteCommand extends Command {
 
     public FavoriteCommand(String command, String description)
             throws IllegalValueException {
-        this.commandPreset = new CommandPreset(command, description);
+        assert command != null;
+        assert description != null;
+        this.commandPreset = new CommandPreset(command.trim().toLowerCase(), description);
     }
 
 
     @Override
     public CommandResult execute() {
+        if(isBannedCommand(commandPreset.getCommand())){
+            return new CommandResult(MESSAGE_BANNED_COMMAND);
+        }
         assert model != null;
         model.addPreset(commandPreset);
         return new CommandResult(String.format(MESSAGE_SUCCESS, commandPreset.getCommand()));
 
     }
-
+    
+    private boolean isBannedCommand(String command){
+        for(String bannedCommand : BANNED_COMMANDS){
+            if(command.startsWith(bannedCommand)){
+                return true;
+            }
+        }
+        return false;
+    }
     @Override
     public boolean createsNewState() {
         return false;
