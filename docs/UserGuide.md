@@ -221,6 +221,7 @@ Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY
 > 4. `r/` Recur: Edits the interval for recurring task, if any. Use a number followed by a time interval (`m`, `h`, `d`, `w`, for minutes, hours, days, weeks respectively), e.g. `6d`, `1w`. You may also use `hr`, `hrs`, `day`, `days`, `week` and `weeks` for their respective interval.
 > 5. `p/` Priority: Edits the priority of a task (`veryhigh`, `high`, `medium` `low`, `verylow`). You may also use `vh`, `h`, `m`, `l` or `vl` for their respective priorities.
 <!-- @@author -->
+<!-- @@author A0139046E -->
 > 6. `i/` Information: Edits information of this task.
 > 7. `t/` Tags: Edits tags that are tagged with the task.
 
@@ -237,6 +238,7 @@ Format: `edit INDEX [n/TASK_NAME] [d/DATE_TIME] [l/LENGTH] [r/RECUR] [p/PRIORITY
 >   `find meeting`<br> 
     `edit 1 d/2nd Oct`
 <!-- @@author -->
+
 ---
 
 <!-- @@author A0139046E -->  
