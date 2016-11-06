@@ -233,6 +233,11 @@ public class ModelManager extends ComponentManager implements Model {
         String toString();
     }
     //@@author A0139121R
+    /**
+     * SortQualifier is used by list command to sort the displayed list to user.
+     * SortQualifier checks if task has the specified done flag.
+     * SortQualifier checks if task belongs within the specified date range if task has a date.
+     */
     private class SortQualifier implements Qualifier{
         private HashMap<String, String> dateRange;
         private ArrayList<String> sortByAttribute;
@@ -313,7 +318,10 @@ public class ModelManager extends ComponentManager implements Model {
             return true;
         }
     }
-
+    
+    /**
+     * FindQualifier checks if any of the keywords given is in any of the specified attributes in the tasks.
+     */
     private class FindQualifier implements Qualifier {
         private Set<String> findKeyWords;
         private HashSet<String> searchScope;
