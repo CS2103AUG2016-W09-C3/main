@@ -185,6 +185,9 @@ public class Parser {
                         getTagsFromArgs(command.getAllParams("t"))
                 );
             } else {
+                if(command.hasUnnecessaryParams(AddCommand.FLOATING_TASK_PARAMS)){
+                    throw new IllegalValueException(AddCommand.MESSAGE_FLOATING_TASK_INVALID_PARAMETERS);
+                }
                 return new AddCommand(
                         command.getValuesAsString(),
                         command.getParamOrDefault("p", Priority.DEFAULT_VALUE),
