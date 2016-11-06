@@ -257,10 +257,8 @@ public class ModelManager extends ComponentManager implements Model {
                 return false;
             }
             
-            if(!dateRange.isEmpty()){
-                if(!checkWithinDateRange(task)){
-                    return false;
-                }
+            if(!dateRange.isEmpty() && !checkWithinDateRange(task)){
+                return false;
             }
             
             return true;
@@ -316,12 +314,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         
         private boolean checkDoneFlagSame(ReadOnlyTask task){
-            if(!doneStatus.equalsIgnoreCase("all")){
-                if(!doneStatus.equalsIgnoreCase(task.getDoneFlag().toString())){
-                    return false;
-                }
-            }
-            return true;
+            return doneStatus.equalsIgnoreCase("all") || doneStatus.equalsIgnoreCase(task.getDoneFlag().toString());
         }
     }
     
