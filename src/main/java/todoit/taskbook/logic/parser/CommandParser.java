@@ -3,7 +3,6 @@ package todoit.taskbook.logic.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import todoit.taskbook.commons.exceptions.IllegalValueException;
 

@@ -3,14 +3,6 @@ package todoit.taskbook.logic.commands;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.InvalidPathException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import todoit.taskbook.commons.exceptions.IllegalValueException;
 import todoit.taskbook.commons.util.FileUtil;
 /**
  * Changes the filepath of the task book.

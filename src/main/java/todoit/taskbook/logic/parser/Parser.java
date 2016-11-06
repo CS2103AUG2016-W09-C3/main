@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 import todoit.taskbook.commons.exceptions.IllegalValueException;
 import todoit.taskbook.commons.util.StringUtil;
 import todoit.taskbook.logic.commands.*;
-import todoit.taskbook.model.task.DateParser;
 import todoit.taskbook.model.task.DateTime;
 import todoit.taskbook.model.task.DoneFlag;
 import todoit.taskbook.model.task.Information;
@@ -32,16 +31,7 @@ public class Parser {
 
     private static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
-    /*
-    Deprecated
-    
-    private static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
-            Pattern.compile("(?<name>[^/]+)"
-                    + " (?<isPhonePrivate>p?)p/(?<phone>[^/]+)"
-                    + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
-                    + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
-                    + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
-    */
+
     public Parser() {}
 
     /**
@@ -72,14 +62,12 @@ public class Parser {
             return prepareDelete(arguments);
 
         case ClearCommand.COMMAND_WORD:
-            //return new ClearCommand();
             return prepareClear(command);
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(command);
 
         case ListCommand.COMMAND_WORD:
-            //return new ListCommand();
             return prepareList(command);
             
         case EditCommand.COMMAND_WORD:
