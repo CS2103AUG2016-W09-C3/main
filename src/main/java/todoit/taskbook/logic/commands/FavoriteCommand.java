@@ -44,7 +44,7 @@ public class FavoriteCommand extends Command {
             throws IllegalValueException {
         assert command != null;
         assert description != null;
-        this.commandPreset = new CommandPreset(command.trim().toLowerCase(), description);
+        this.commandPreset = new CommandPreset(command, description);
     }
 
 
@@ -61,7 +61,7 @@ public class FavoriteCommand extends Command {
     
     private boolean isBannedCommand(String command){
         for(String bannedCommand : BANNED_COMMANDS){
-            if(command.startsWith(bannedCommand)){
+            if(command.trim().toLowerCase().startsWith(bannedCommand)){
                 return true;
             }
         }
