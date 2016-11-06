@@ -28,7 +28,7 @@ Open user guide. Can also access by clicking on toolbar > help
 
 ## Add
 
-Add tasks to the addressbook.
+Add tasks to the taskbook.
 
 ### Invalid format
 
@@ -106,7 +106,7 @@ Add tasks to the addressbook.
 `add Dinner`<br>
 `edit <index> i/New info`<br>
 `edit <index> n/New name`<br>
-`edit <index> p/High`<br>
+`edit <index> p/high`<br>
 `edit <index> d/today 6pm`<br>
 `edit <index> l/2h`<br>
 `edit <index> r/1d`<br>
@@ -129,6 +129,20 @@ Add tasks to the addressbook.
 `edit <index> d/today 2pm`
 
 > Editing with only a time field modifies only the time field and not the day field, vice versa for day. Editing with both fields changes the entire date.
+
+### All params editing
+
+`add Go for class`<br>
+`edit <index> n/Go for tutorial d/today 2pm r/1w p/high i/Do tutorial t/school`
+
+> Task becomes a dated task with all possible params edited. 
+
+### Flexible order of params
+
+`add Go school`<br>
+`edit <index> i/Exam d/tmr 4pm n/Go exam hall t/school p/vh`
+
+> Able to edit task in any order of params.
 
 ## Delete
 
@@ -265,9 +279,12 @@ Add tasks to the addressbook.
 ### Reschedule task
 
 `add Finish project d/tmr 7pm l/2h`<br>
-`reschedule <index> 2h`
+`reschedule <index> 30m`<br>
+`reschedule <index> 2h`<br>
+`reschedule <index> 1d`<br>
+`reschedule <index> 1w`
 
-> Reschedules task by 2 hours
+> Task rescheduled correspondingly. 
 
 ### Reschedule non-dated task
 
