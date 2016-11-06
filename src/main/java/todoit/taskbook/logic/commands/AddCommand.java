@@ -75,6 +75,7 @@ public class AddCommand extends Command {
             }
         } else {
             if(!endDatetime.equals("-1")){
+                //cannot have both length and endDateTime parameter specified by user.
                 throw new IllegalValueException(MESSAGE_LENGTH_ENDDATE_CONFLICT);
             }
             return length;
