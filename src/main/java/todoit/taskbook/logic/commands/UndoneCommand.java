@@ -1,14 +1,9 @@
 // @@author A0140155U
 package todoit.taskbook.logic.commands;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import todoit.taskbook.commons.core.Messages;
 import todoit.taskbook.commons.core.UnmodifiableObservableList;
 import todoit.taskbook.commons.exceptions.IllegalValueException;
-import todoit.taskbook.model.tag.Tag;
-import todoit.taskbook.model.tag.UniqueTagList;
 import todoit.taskbook.model.task.*;
 import todoit.taskbook.model.task.UniqueTaskList.DuplicateTaskException;
 import todoit.taskbook.model.task.UniqueTaskList.TaskNotFoundException;

@@ -63,12 +63,12 @@ Role: Developer <br>
 <img src="images/ShaunChee.JPG" width="150"><br>
  Role: Developer <br>
 * Components in charge of: [UI](https://github.com/CS2103AUG2016-W09-C3/main/tree/master/src/main/java/seedu/address/ui)<br>
-* Aspects/tools in charge of: Documentation<br>
+* Aspects/tools in charge of: Testing, documentation<br>
 * Features implemented:
    * [Recurrence Feature] (https://github.com/CS2103AUG2016-W09-C3/main/blob/master/docs/UserGuide.md#adding-a-task-add)<br>
 * Code written: [[Functional code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/main/A0139947L.md)] [[Test code](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/test/A0139947L.md)] [[Docs](https://github.com/CS2103AUG2016-W09-C3/main/blob/master/collated/docs/A0139947L.md)]<br>
 * Other major contributions:
-  * Added support for different aliases for priority and recurrence when Adding and Editing tasks
+  * Added support for different aliases for priority and recurrence when Adding and Editing tasks [[#92](https://github.com/CS2103AUG2016-W09-C3/main/pull/92)]
 
 # Contributors
 

@@ -2,7 +2,6 @@
 package todoit.taskbook.commons.events.model;
 
 import todoit.taskbook.commons.events.BaseEvent;
-import todoit.taskbook.model.ReadOnlyTaskBook;
 import todoit.taskbook.model.UserPrefs;
 
 /** Indicates the TaskBook in the model has changed*/
