@@ -117,7 +117,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     // @@author A0140155U
     @Override
-    public void addPreset(CommandPreset commandPreset) {
+    public void addPreset(CommandPreset commandPreset) throws IllegalValueException {
         userPrefs.addPreset(commandPreset);
         raise(new PresetChangedEvent(userPrefs));
     }
@@ -136,6 +136,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
         raise(new JumpToPresetRequestEvent(presetIndex));
     }
+    
     // @@author
     //@@author A0139046E
     @Override
@@ -400,6 +401,7 @@ public class ModelManager extends ComponentManager implements Model {
         return newState.getCommand();
     }
     // @@author
+
 
 
 }

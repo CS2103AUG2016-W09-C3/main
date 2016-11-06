@@ -17,6 +17,7 @@ public class FavoriteUnfavoriteCommandTest extends TaskBookGuiTest  {
     private final String INVALID_MESSAGE_FAV = "Invalid command format! \n" + FavoriteCommand.MESSAGE_USAGE;
     private final String INVALID_MESSAGE_UNFAV = "Invalid command format! \n" + UnfavoriteCommand.MESSAGE_USAGE;
     private final String OUT_OF_RANGE_MESSAGE = "Index out of range.";
+    private final String BANNED_COMMAND_MESSAGE = "You may not add the 'favorite' or 'unfavorite' command as a preset.";
     
     /*
      * Navigated: navigateToPreset is called to select it
@@ -108,6 +109,18 @@ public class FavoriteUnfavoriteCommandTest extends TaskBookGuiTest  {
         assertResultMessage(INVALID_MESSAGE_FAV);
         commandBox.runCommand("favorite");
         assertResultMessage(INVALID_MESSAGE_FAV);
+    }
+
+    @Test
+    public void favorite_bannedCommands_displayBannedMessage() {
+        commandBox.runCommand("favorite Favorite c/favorite 1");
+        assertResultMessage(BANNED_COMMAND_MESSAGE);
+        commandBox.runCommand("favorite Favorite c/FAVORITE 1");
+        assertResultMessage(BANNED_COMMAND_MESSAGE);
+        commandBox.runCommand("favorite Favorite c/   favorite 1");
+        assertResultMessage(BANNED_COMMAND_MESSAGE);
+        commandBox.runCommand("favorite Favorite c/unfavorite 1");
+        assertResultMessage(BANNED_COMMAND_MESSAGE);
     }
     
     @Test

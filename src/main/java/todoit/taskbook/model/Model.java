@@ -65,7 +65,7 @@ public interface Model {
     void changeFilePath(String filePath);
 
     /** Adds a command preset to the current list */
-    void addPreset(CommandPreset commandPreset);
+    void addPreset(CommandPreset commandPreset) throws IllegalValueException;
 
     /** Removes a command preset to the current list. Returns the description of the removed preset to be printed. */
     String removePreset(int index) throws IllegalValueException;
@@ -74,5 +74,6 @@ public interface Model {
      * @throws IllegalValueException */
     void selectPreset(int presetIndex) throws IllegalValueException;
     // @@author
+    
 
 }
