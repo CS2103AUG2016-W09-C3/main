@@ -1,6 +1,6 @@
 # Manual Testing
 
-## Load command
+## Load data
 
 Double click the jar to start the program.<br>
 Enter `filepath <xml filepath>` to switch to the file path<br>
