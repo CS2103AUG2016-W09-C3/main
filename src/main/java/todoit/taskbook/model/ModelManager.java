@@ -366,11 +366,7 @@ public class ModelManager extends ComponentManager implements Model {
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            if(task.getDoneFlag().isDone()){
-                return false;
-            } else {
-                return true;
-            }
+            return !task.getDoneFlag().isDone();
         }
 
     }
@@ -384,11 +380,7 @@ public class ModelManager extends ComponentManager implements Model {
          */
         @Override
         public boolean run(ReadOnlyTask task) {
-            if(task.getDoneFlag().isDone()){
-                return true;
-            } else {
-                return false;
-            }
+            return task.getDoneFlag().isDone();
         }
 
     }
