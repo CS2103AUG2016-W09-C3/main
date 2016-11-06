@@ -13,15 +13,7 @@ import todoit.taskbook.model.CommandPreset;
 public class FavoriteCommand extends Command {
 
     public static final String COMMAND_WORD = "favorite";
-
-    /*
-     * Commands modifying the favorite panel are banned because it is possible to create an infinite loop:
-     * 
-     * favorite Loop 1 c/favorite 2
-     * favorite Loop 2 c/favorite 1
-     * 
-     */
-    public static final String[] BANNED_COMMANDS = {"favorite", "unfavorite"};
+    
     public static final String[] REQUIRED_PARAMS = {};
     public static final String[] POSSIBLE_PARAMS = {"c"};
     
@@ -50,23 +42,16 @@ public class FavoriteCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        if(isBannedCommand(commandPreset.getCommand())){
+        assert model != null;
+        try{
+            model.addPreset(commandPreset);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, commandPreset.getCommand()));
+        }catch (IllegalValueException ex){
             return new CommandResult(MESSAGE_BANNED_COMMAND);
         }
-        assert model != null;
-        model.addPreset(commandPreset);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, commandPreset.getCommand()));
 
     }
     
-    private boolean isBannedCommand(String command){
-        for(String bannedCommand : BANNED_COMMANDS){
-            if(command.trim().toLowerCase().startsWith(bannedCommand)){
-                return true;
-            }
-        }
-        return false;
-    }
     @Override
     public boolean createsNewState() {
         return false;

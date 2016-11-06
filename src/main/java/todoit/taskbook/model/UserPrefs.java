@@ -18,6 +18,15 @@ public class UserPrefs {
     public GuiSettings guiSettings;
     // @@author A0140155U
     
+    /*
+     * Commands modifying the favorite panel are banned because it is possible to create an infinite loop:
+     * 
+     * favorite Loop 1 c/favorite 2
+     * favorite Loop 2 c/favorite 1
+     * 
+     */
+    public static final String[] BANNED_PRESET_COMMANDS = {"favorite", "unfavorite"};
+    
     // This list stores the list of command presets, which are serialized to preferences.json
     private ArrayList<CommandPreset> commandPresets = new ArrayList<>();
     
@@ -57,10 +66,10 @@ public class UserPrefs {
     // @@author A0140155U
     public ObservableList<CommandPreset> initCommandPresets(){
         // Initialize internalList after JSON has been loaded
+        removeBannedPresets();
         internalList = FXCollections.observableArrayList(commandPresets);
         return internalList;
     }
-    
     // @@author
     @Override
     public boolean equals(Object other) {
@@ -87,8 +96,11 @@ public class UserPrefs {
     }
 
     // @@author A0140155U
-    public void addPreset(CommandPreset commandPreset) {
+    public void addPreset(CommandPreset commandPreset) throws IllegalValueException {
         assert commandPreset != null;
+        if(isBannedCommand(commandPreset.getCommand())){
+            throw new IllegalValueException("Cannot add banned command");
+        }
         commandPresets.add(commandPreset);
         internalList.add(commandPreset);
     }
@@ -121,6 +133,19 @@ public class UserPrefs {
         commandPresets.add(new CommandPreset("list s/date", "List sorted by date"));
         commandPresets.add(new CommandPreset("list s/name", "List sorted by name"));
         commandPresets.add(new CommandPreset("list s/priority", "List sorted by priority"));
+    }
+   
+    private void removeBannedPresets() {
+        commandPresets.removeIf(commandPreset -> isBannedCommand(commandPreset.getCommand()));
+    }
+    
+    private boolean isBannedCommand(String command){
+        for(String bannedCommand : BANNED_PRESET_COMMANDS){
+            if(command.trim().toLowerCase().startsWith(bannedCommand)){
+                return true;
+            }
+        }
+        return false;
     }
     // @@author
 
