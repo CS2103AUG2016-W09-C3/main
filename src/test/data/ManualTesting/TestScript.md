@@ -2,11 +2,16 @@
 
 ## Load data
 
+Either:<br>
 Double click the jar to start the program.<br>
 Enter `filepath <xml filepath>` to switch to the file path<br>
 Close the program<br>
 Overwrite the xml at the saved filepath with the new data<br>
 Reopen the program
+---------
+Create a folder in the same folder as the .jar named 'data'<br>
+Copy the xml into the folder and name in taskbook.xml<br>
+Double click the jar to start the program.<br>
 
 ## Help
 
@@ -195,7 +200,7 @@ Add tasks to the addressbook.
 
 ### Find specific scope
 
-`find book s/information`<br>
+`find book s/tag`<br>
 `find book s/information s/name`
 
 > Searches in one or more categories
