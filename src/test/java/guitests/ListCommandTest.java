@@ -163,4 +163,29 @@ public class ListCommandTest extends TaskBookGuiTest{
         commandBox.runCommand(command);
         assertTrue(taskListPanel.isListMatching(finalList));
     }
+    
+    //Test to list all tasks, in sorted order by date, after start date and time with no end date and time specified.
+    @Test
+    public void list_daterangeFilterListStartDateOnlySortByDate_twoTasksInDaterange(){
+        String command = "list df/all ds/11-10-2016 0900 s/date";
+        commandBox.runCommand(td.lectureToAttend.getAddCommand());
+        commandBox.runCommand(td.meetNathan.getAddCommand());
+        commandBox.runCommand(td.cuttingHair.getAddCommand());
+        TestDatedTask[] finalList = {td.cuttingHair, td.meetNathan};
+        commandBox.runCommand(command);
+        assertTrue(taskListPanel.isListMatching(finalList));
+    }
+    
+    //Test to list all tasks, in reverse sorted order by date, with only end date and time specified(all task before this end date and time).
+    @Test
+    public void list_daterangeFilterListEndDateOnlyReverseSortByDate_threeTasksInDaterange(){
+        String command = "list df/all de/11-17-2016 1900 s/date rev/";
+        commandBox.runCommand(td.lectureToAttend.getAddCommand());
+        commandBox.runCommand(td.cuttingHair.getAddCommand());
+        commandBox.runCommand(td.meetNathan.getAddCommand());
+        commandBox.runCommand(td.dinnerDate.getAddCommand());
+        TestDatedTask[] finalList = {td.dinnerDate, td.cuttingHair, td.lectureToAttend};
+        commandBox.runCommand(command);
+        assertTrue(taskListPanel.isListMatching(finalList));
+    }
 }
