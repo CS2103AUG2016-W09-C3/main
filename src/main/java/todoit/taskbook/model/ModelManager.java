@@ -283,6 +283,9 @@ public class ModelManager extends ComponentManager implements Model {
         
         private boolean checkAfterStartDate(ReadOnlyDatedTask task, LocalDateTime currentTaskDateTime){
             try {
+                if(dateRange.get("start") == null){
+                    return true;
+                }
                 LocalDateTime startDateTime = DateParser.parseDate(dateRange.get("start"));
                 if(currentTaskDateTime.isBefore(startDateTime)){
                     return false;
@@ -297,6 +300,9 @@ public class ModelManager extends ComponentManager implements Model {
         
         private boolean checkBeforeEndDate(ReadOnlyDatedTask task, LocalDateTime currentTaskDateTime){
             try{
+                if(dateRange.get("end") == null){
+                    return true;
+                }
                 LocalDateTime endDateTime = DateParser.parseDate(dateRange.get("end"));
                 if(currentTaskDateTime.isAfter(endDateTime)){
                     return false;
