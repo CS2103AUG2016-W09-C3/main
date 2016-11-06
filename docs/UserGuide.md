@@ -138,8 +138,8 @@ ToDoIt displays your tasks easily with a simple command. The tasks to list can b
 Format: `list [ds/DATE_START] [de/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 
 **Options**
-> 1. `ds/` Date start: If a start date is specified, program will only display tasks after this date. If the option is used without a specified date, it will use today's date.
-> 2. `de/` Date end: If an end date is specified, program will only display tasks before this date. If the option is used without a specified date, , it will use today's date.
+> 1. `ds/` Date start: If a start date is specified, program will only display tasks after this date.
+> 2. `de/` Date end: If an end date is specified, program will only display tasks before this date.
 > 3. `s/` Sort by: Sorts the tasks in the order specified (`date` and `time`, `alphabetical`, `priority`).
 > 4. `df/` Done status: Use this flag to specify, by done status, which tasks to show. The available done flags are "done", "not done" and "all".
 > 5. `rev/` Reverse: If this flag is specified, tasks will be listed in reverse order after sorting.
@@ -150,9 +150,9 @@ Format: `list [ds/DATE_START] [de/DATE_END] [s/SORT_BY] [df/DONE_STATUS] [rev/]`
 
 **Example**
 > * You want to view all upcoming tasks ordered by date, so you know what needs to be done. <br>
->   `list ds/ s/date`
+>   `list ds/today s/date`
 > * You want to see all the tasks you have completed in the past year, to celebrate what you've done with your life. <br>
->   `list ds/1st Jan 2016 de/ df/done`
+>   `list ds/1st Jan 2016 de/today df/done`
 
 ---
 

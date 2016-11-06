@@ -23,6 +23,7 @@ public class AddCommand extends Command {
     public static final String[] POSSIBLE_PARAMS = {"d", "l", "de", "r", "p", "i", "t"};
     
     public static final String[] DATED_TASK_PARAMS = {"d"};
+    public static final String[] FLOATING_TASK_PARAMS = {"p", "i", "t"};
     
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a task to the task book. "
             + "Parameters: NAME [d/DATE,TIME l/LENGTH de/END_DATE,END_TIME] [r/RECUR] [p/PRIORITY] [i/INFORMATION] [t/TAG]...\n"
@@ -34,6 +35,9 @@ public class AddCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New task added: %1$s";
     public static final String MESSAGE_DUPLICATE_TASK = "This task already exists in the task book";
     public static final String MESSAGE_LENGTH_ENDDATE_CONFLICT = "Length and end datetime cannot be both filled.";
+    public static final String MESSAGE_FLOATING_TASK_INVALID_PARAMETERS = "Please use valid parameters for floating task.\n"
+            + "Floating task parameters should not include length or end date and time field.\n"
+            + "Floating task should only have any combination of name, priority, information and tag fields present.";
 
     private final Task toAdd;
     
