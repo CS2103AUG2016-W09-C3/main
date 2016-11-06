@@ -10,12 +10,8 @@ import java.util.regex.Pattern;
 import todoit.taskbook.commons.exceptions.IllegalValueException;
 import todoit.taskbook.commons.util.StringUtil;
 import todoit.taskbook.logic.commands.*;
-import todoit.taskbook.model.task.DateParser;
-import todoit.taskbook.model.task.DateTime;
 import todoit.taskbook.model.task.DoneFlag;
-import todoit.taskbook.model.task.Information;
 import todoit.taskbook.model.task.Length;
-import todoit.taskbook.model.task.Priority;
 import todoit.taskbook.model.task.Recurrence;
 
 /**
@@ -125,7 +121,7 @@ public class Parser {
      * Parses arguments in the context of the list command.
      * 
      * @param command
-     * @return list command
+     * @return
      */
     private Command prepareList(ParsedCommand command) {
         HashMap<String, String> dateRange = new HashMap<String, String>();
@@ -140,6 +136,7 @@ public class Parser {
             }
             
             if(command.hasParams(ListCommand.SORT_PARAM)){
+                //sortByAttribute = new ArrayList<String>(Arrays.asList(command.getParam("s").split(" ")));
                 sortByAttribute = command.getAllParams("s");
             }
             if(command.hasParams(ListCommand.REVERSE_PARAM)){
@@ -175,23 +172,20 @@ public class Parser {
             if(command.hasParams(AddCommand.DATED_TASK_PARAMS)){
                 return new AddCommand(
                         command.getValuesAsString(),
-                        command.getParamOrDefault("d", DateTime.PARAM_NOT_SPECIFIED),
-                        command.getParamOrDefault("l", Length.PARAM_NOT_SPECIFIED),
-                        command.getParamOrDefault("de", DateTime.PARAM_NOT_SPECIFIED),
+                        command.getParamOrDefault("d", "-1"),
+                        command.getParamOrDefault("l", "-1"),
+                        command.getParamOrDefault("de", "-1"),
                         command.getParamOrDefault("r", Recurrence.NO_INTERVAL),
-                        command.getParamOrDefault("p", Priority.DEFAULT_VALUE),
-                        command.getParamOrDefault("i", Information.PARAM_NOT_SPECIFIED),
+                        command.getParamOrDefault("p", "medium"),
+                        command.getParamOrDefault("i", ""),
                         DoneFlag.NOT_DONE,
                         getTagsFromArgs(command.getAllParams("t"))
                 );
             } else {
-                if(command.hasUnnecessaryParams(AddCommand.FLOATING_TASK_PARAMS)){
-                    throw new IllegalValueException(AddCommand.MESSAGE_FLOATING_TASK_INVALID_PARAMETERS);
-                }
                 return new AddCommand(
                         command.getValuesAsString(),
-                        command.getParamOrDefault("p", Priority.DEFAULT_VALUE),
-                        command.getParamOrDefault("i", Information.PARAM_NOT_SPECIFIED),
+                        command.getParamOrDefault("p", "medium"),
+                        command.getParamOrDefault("i", ""),
                         DoneFlag.NOT_DONE,
                         getTagsFromArgs(command.getAllParams("t"))
                 );
