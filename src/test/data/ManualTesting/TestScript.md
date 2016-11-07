@@ -34,7 +34,7 @@ Add tasks to the taskbook.
 
 `add`
 
-> Invalid format, shows help
+> Invalid format, shows invalid add command message
 
 ### Add basic task
 
@@ -50,7 +50,7 @@ Add tasks to the taskbook.
 
 ### Add dated task with params
 
-`add Interview p/high i/Bring docu1ments t/school t/attire d/today 2pm l/1h r/7d`
+`add Interview p/high i/Bring documents t/school t/attire d/today 2pm l/1h r/7d`
 
 > Dated Task with all possible params added
 
@@ -60,28 +60,29 @@ Add tasks to the taskbook.
 `add Tuition d/5pm de/7pm`<br>
 `add Go to school d/tmr 5pm`
 
-> Add tasks with Start date + length, start date + end date, start date only.
+> Add tasks with Start date + length, start date + end date, start date only<br>
+> All 3 tasks added
 
 ### Flexible order of params
 
 `add Interview d/today 2pm l/1h r/7d p/high i/Bring documents t/school`<br>
 `add Interview 2 p/high i/Bring documents t/school d/today 2pm l/1h r/7d`
 
-> Order of params don't matter
+> Tasks added regardless or order or params
 
 ### No duplicate tasks
 
 `add Go to the gym d/today 2pm l/1h r/7d p/high i/Bring towel t/exercise`<br>
 `add Go to the gym d/today 2pm l/1h r/7d p/high i/Bring towel t/exercise`
 
-> Cannot add same task twice
+> Cannot add second task because it is a duplicate of the first
 
 ### Different aliases for params
 
 `add Go to school d/today 8am p/vl l/3h`<br>
 `add Go to work d/today 9am p/verylow l/3hr`
 
-> Same values added
+> Both tasks added shows how aliases for values work (specifically priority in this case)
 
 ### Flexible date parsing
 
@@ -90,14 +91,14 @@ Add tasks to the taskbook.
 `add Task 3 d/November 5th Noon`<br>
 `add Task 4 d/Next thursday 1700h`
 
-> Different methods of parsing dates
+> Different ways of parsing dates, all four tasks added
 
 ### Recurrence
 
 `add Go for piano lessons d/yesterday 6pm l/1h r/1w`<br>
 `done <index>`
 
-> Close the program, and reopen. Date shifts back by one week
+> Close the program, and reopen. Date of that task shifts back by one week shows recurrance works
 
 ## Edit
 
@@ -112,7 +113,7 @@ Add tasks to the taskbook.
 `edit <index> r/1d`<br>
 `edit <index> t/tag`
 
-> Corresponding info edited
+> Corresponding task params edited
 
 ### Converting to dated task
 
@@ -142,7 +143,7 @@ Add tasks to the taskbook.
 `add Go school`<br>
 `edit <index> i/Exam d/tmr 4pm n/Go exam hall t/school p/vh`
 
-> Able to edit task in any order of params.
+> Able to edit task in any order of params, information of task is changed
 
 ## Delete
 
@@ -162,27 +163,27 @@ Add tasks to the taskbook.
 
 `done 1`
 
-> Does task at index
+> Task at index 1 marked as done, doneflag changed to done
 
 ### Already done
 
 `done 1`<br>
 `done 1`
 
-> Displays error
+> Displays error because first task on list is already done
 
 ## Undone
 
 `undone 1`
 
-> Undoes task at index
+> Marks the task at index 1 on task list as undone, doneflag changed accordingly
 
 ### Already undone
 
 `undone 1`<br>
 `undone 1`
 
-> Displays error
+> Displays error because task at index 1 is already not done
 
 ## Filepath
 
@@ -215,14 +216,17 @@ Add tasks to the taskbook.
 `add Visit the hotel t/book`<br>
 `find book`
 
-> Searches name, tags, info
+> Searches name, tag and information attributes<br>
+> Shows all 3 because find by default searches all 3 scopes
 
 ### Find specific scope
 
 `find book s/tag`<br>
 `find book s/information s/name`
 
-> Searches in one or more categories
+> Searches in one or more categories<br>
+> First command shows "Visit the hotel" task, search scope is tag<br>
+> Second command shows "Read a book" and "Buy school materials" tasks
 
 ## List
 
@@ -266,13 +270,13 @@ Add tasks to the taskbook.
 
 `list s/name rev/`
 
-> Lists all tasks sorted backwards by name
+> Lists all tasks sorted in reverse order by name
 
 ### Multiple fields
 
 `list ds/1st November de/1st December df/all s/priority rev/`
 
-> Lists all done and undone tasks in the month of november sorted reverse by priority
+> Lists all done and undone tasks in the month of november sorted in reverse order by priority
 
 ## Reschedule
 
@@ -284,14 +288,14 @@ Add tasks to the taskbook.
 `reschedule <index> 1d`<br>
 `reschedule <index> 1w`
 
-> Task rescheduled correspondingly. 
+> Task rescheduled by specified timing 
 
 ### Reschedule non-dated task
 
 `add Finish presentation`<br>
 `reschedule <index> 2h`
 
-> Gives an error
+> Gives an error because non-dated tasks has no date and time to reschedule
 
 ## Undo and Redo
 
@@ -312,7 +316,7 @@ Add tasks to the taskbook.
 `undo`<br>
 `undo`
 
-> All undoable commands
+> Reverted to a previous state each time undo is executed, up to 10 previous states
 
 ### Redo
 
@@ -324,7 +328,7 @@ Add tasks to the taskbook.
 `redo`<br>
 `redo`
 
-> Redoes all undos
+> Redoes all undos from previous example
 
 ## Favorites Panel
 
@@ -338,13 +342,13 @@ Add tasks to the taskbook.
 
 `favorite <index>`
 
-> Runs the command
+> Runs the preset command
 
 ### Click favorites
 
 Click on favorite in favorites panel
 
-> Runs the command
+> Runs the preset command
 
 ### Display favorite command
 
@@ -356,7 +360,7 @@ Hover over any favorite in the favorites panel
 
 `favorite List some tasks c/list ds/1st November de/1st December df/all s/priority rev/`
 
-> Creates new command preset with command that lists all done and undone tasks in the month of november sorted reverse by priority
+> Creates new command preset with command that lists all done and undone tasks in the month of november sorted in reverse order by priority
 
 ### Favorite different commands
 
@@ -365,7 +369,8 @@ Hover over any favorite in the favorites panel
 `favorite Redo c/redo`<br>
 `favorite Clear c/clear`
 
-> Any command (except the favorite and unfavorite command) can be favorited
+> Any command (except the favorite and unfavorite command) can be favorited<br>
+> Favorite command added to preset list for each of the above commands respectively
 
 ### Saved favorites
 
@@ -386,10 +391,10 @@ Open program
 
 `unfavorite <index>`
 
-> Removes favorite from preset
+> Removes favorite from preset list
 
 ## Exit
 
 `exit`
 
-> Goodbye.
+> Goodbye
