@@ -98,7 +98,7 @@ public class Parser {
             return new FilepathCommand(arguments);
 
         case FavoriteCommand.COMMAND_WORD:
-            return prepareFavorite(command);
+            return chooseFavorite(command);
 
         case UnfavoriteCommand.COMMAND_WORD:
             return prepareUnfavorite(command);
@@ -337,34 +337,57 @@ public class Parser {
     }
     
     /**
+     * Chooses the right interpretation of the 'favorite' command
+     * 
+     * If the c/ param is provided, it's a command to add a favorite. If it isn't, it's a command to select a favorite.
+     */
+    private Command chooseFavorite(ParsedCommand command) {
+        if(!command.hasValue()){
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
+        }
+        
+        if(command.hasParams(FavoriteCommand.POSSIBLE_PARAMS)){
+            return prepareFavorite(command);
+        }else{
+            return prepareFavSelect(command);
+        }
+    }
+    
+    /**
      * Parses arguments in the context of the favorite task command.
      */
     private Command prepareFavorite(ParsedCommand command) {
-        try{
-            if(!command.hasValue()){
+        try {
+            // Work around because the command might have tokens which can be recognized by ParsedCommand as params.
+            String commandDelim = " c/";
+            int paramIndex = command.getCommand().indexOf(commandDelim);
+            String favCommand = command.getCommand().substring(paramIndex + commandDelim.length(), command.getCommand().length());
+            return new FavoriteCommand(favCommand, command.getValuesAsString());
+        } catch (IllegalValueException e) {
+            return new IncorrectCommand(
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
+        }
+    }
+    
+    /**
+     * Parses arguments in the context of the favorite select task command.
+     */
+    private Command prepareFavSelect(ParsedCommand command){
+        try {
+            Optional<Integer> index = parseIndex(command.getValue());
+            if(!index.isPresent()){
                 return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
             }
-            if(command.hasParams(FavoriteCommand.POSSIBLE_PARAMS)){
-                // Add a new favorite
-                // Work around because the command might have tokens which can be recognized by ParsedCommand as params.
-                String commandDelim = " c/";
-                int paramIndex = command.getCommand().indexOf(commandDelim);
-                String favCommand = command.getCommand().substring(paramIndex + commandDelim.length(), command.getCommand().length());
-                return new FavoriteCommand(favCommand, command.getValuesAsString());
-            }else{
-                // Select a favorite
-                Optional<Integer> index = parseIndex(command.getValue());
-                if(!index.isPresent()){
-                    return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
-                }
-                return new FavSelectCommand(index.get() - 1); // Convert to 0 index
-            }
-        }catch(IllegalValueException ex){
+            return new FavSelectCommand(index.get() - 1); // Convert to 0 index
+        } catch (IllegalValueException e) {
             return new IncorrectCommand(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, FavoriteCommand.MESSAGE_USAGE));
         }
     }
    
+    /**
+     * Parses arguments in the context of the unfavorite task command.
+     */
     private Command prepareUnfavorite(ParsedCommand command) {
         try{
             Optional<Integer> index = parseIndex(command.getValue());

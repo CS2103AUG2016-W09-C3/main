@@ -58,7 +58,10 @@ public class TaskCard extends UiPart{
         initTexts();
         style();
     }
-
+    
+    /**
+     * Initializes all label texts
+     */
     private void initTexts() {
         name.setText(task.getName().fullName);
         id.setText(Integer.toString(displayedIndex));
@@ -77,6 +80,9 @@ public class TaskCard extends UiPart{
         tags.setText(task.tagsString());
     }
     
+    /**
+     * Sets a label's text, or if there is no text to set, deletes the label from the card
+     */
     private void setOrDelete(Label label, String prefix, String value){
         if(value.equals("")){
             deleteLabel(label);
@@ -89,6 +95,9 @@ public class TaskCard extends UiPart{
         taskContainer.getChildren().remove(label);
     }
     
+    /**
+     * Applies CSS styling to the card
+     */
     private void style(){
         StringBuilder styleString = new StringBuilder();
         // Style based on property
@@ -101,7 +110,6 @@ public class TaskCard extends UiPart{
         //styleString = new StringBuilder();
         //styleString.append(styler.getCardDoneColour(task.getDoneFlag().toString()));
         //taskPane.setStyle(styleString.toString());
-        
     }
     
     // @@author

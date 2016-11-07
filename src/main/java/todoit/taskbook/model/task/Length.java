@@ -27,9 +27,9 @@ public class Length {
         interval = interval.trim();
         
         if(interval.equals(NO_INTERVAL)){
+            // Task has no length. Give it a dummy value
             hasInterval = false;
             interval = DEFAULT_INTERVAL;
-            
         }
         this.timeInterval = new TimeInterval(interval);
     }

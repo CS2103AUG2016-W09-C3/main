@@ -27,11 +27,12 @@ public class DateParser {
         DateGroup dateGroup = parseNatty(dateString);
         LocalDateTime parsedDate = getDateTime(dateGroup);
         // Default to midnight if time is not specifed.
-        if(!searchDateTree(dateGroup, TIME_STRING)){
+        if(!isTimeSpecified(dateGroup)){
             parsedDate = parsedDate.withHour(0).withMinute(0).withSecond(0).withNano(0);
         }
         return parsedDate;
     }
+    
     
     /*
      * Edits a date based on a string parsed using natty.
@@ -45,10 +46,10 @@ public class DateParser {
         DateGroup dateGroup = parseNatty(dateString);
         LocalDateTime parsedDate = getDateTime(dateGroup);
         LocalDateTime newDate = oldDatetime;
-        if(searchDateTree(dateGroup, RELATIVE_DATE_STRING) || searchDateTree(dateGroup, EXPLICIT_DATE_STRING)){
+        if(isDateSpecified(dateGroup)){
             newDate = newDate.withYear(parsedDate.getYear()).withDayOfYear(parsedDate.getDayOfYear());
         }
-        if(searchDateTree(dateGroup, TIME_STRING)){
+        if(isTimeSpecified(dateGroup)){
             newDate = newDate.withHour(parsedDate.getHour()).withMinute(parsedDate.getMinute());
         }
         return newDate;
@@ -69,6 +70,21 @@ public class DateParser {
     }
     //@@author
     // @@author A0140155U
+
+    
+    /*
+     * Checks a parsed date for a time field (e.g. 5pm, 1700h, noon etc)
+     */
+    private static boolean isTimeSpecified(DateGroup dateGroup) {
+        return searchDateTree(dateGroup, TIME_STRING);
+    }
+
+    /*
+     * Checks a parsed date for a date field (e.g. Nov 5th, yesterday, 11-05-2016 etc)
+     */
+    private static boolean isDateSpecified(DateGroup dateGroup) {
+        return searchDateTree(dateGroup, RELATIVE_DATE_STRING) || searchDateTree(dateGroup, EXPLICIT_DATE_STRING);
+    }
     
     /*
      * Searches natty's generated date tree for a string value

@@ -4,7 +4,7 @@ package todoit.taskbook.logic.commands;
 import todoit.taskbook.commons.exceptions.IllegalValueException;
 
 /**
- * Adds a favorite command to the preset list.
+ * Removes a favorite command from the preset list.
  */
 public class UnfavoriteCommand extends Command {
 

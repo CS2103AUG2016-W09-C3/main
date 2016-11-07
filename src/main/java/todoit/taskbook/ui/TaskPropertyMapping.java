@@ -38,8 +38,8 @@ public class TaskPropertyMapping implements TaskStyleMapping{
         
         // Card - Done : Background color
         cardDoneMap = new PropertyMap(PROPERTY_BACKGROUND);
-        cardDoneMap.addTo("Done", "");
-        cardDoneMap.addTo("Not done", "");
+        cardDoneMap.addTo("Done", "#EEEEEE");
+        cardDoneMap.addTo("Not done", "#FFFFFF");
     }
     
     // Singleton

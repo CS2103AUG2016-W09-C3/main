@@ -23,10 +23,7 @@ public class StatesManager implements States{
 
 
     public void saveState(TaskBookState newState){
-        // When a state is saved, all "future states" i.e. states that have been undone are overwritten.
-        while(states.size() - 1 > currentState){
-            states.remove(states.size() - 1);
-        }
+        removeFutureStates();
         
         states.add(newState);
         if(currentState == MAX_STATES){
@@ -37,6 +34,12 @@ public class StatesManager implements States{
         }
     }
 
+    private void removeFutureStates() {
+        // When a state is saved, all "future states" i.e. states that have been undone are overwritten.
+        while(states.size() - 1 > currentState){
+            states.remove(states.size() - 1);
+        }
+    }
 
     public TaskBookState loadPreviousState() throws StateException{
         checkHasPreviousState();
