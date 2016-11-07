@@ -65,8 +65,8 @@ Add tasks to the taskbook.
 
 ### Flexible order of params
 
-`add Interview d/today 2pm l/1h r/7d p/high i/Bring documents t/school`<br>
-`add Interview 2 p/high i/Bring documents t/school d/today 2pm l/1h r/7d`
+`add Interview 2 d/today 2pm l/1h r/7d p/high i/Bring documents t/school`<br>
+`add Interview 3 p/high i/Bring documents t/school d/today 2pm l/1h r/7d`
 
 > Tasks added regardless or order or params
 
