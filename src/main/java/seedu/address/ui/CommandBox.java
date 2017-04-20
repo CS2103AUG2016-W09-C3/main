@@ -76,7 +76,10 @@ public class CommandBox extends UiPart {
          * in the event handling code {@link #handleIncorrectCommandAttempted}
          */
         setStyleToIndicateCorrectCommand();
-        mostRecentResult = logic.execute(previousCommandTest);
+        String splitted[] = previousCommandTest.split("\\|");
+        for(int i = 0; i < splitted.length;i++){
+            mostRecentResult = logic.execute(splitted[i]);
+        }
         resultDisplay.postMessage(mostRecentResult.feedbackToUser);
         logger.info("Result: " + mostRecentResult.feedbackToUser);
     }
